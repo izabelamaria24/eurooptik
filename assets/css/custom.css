@@ -1,0 +1,56 @@
+/* Custom styles for one-page functionality */
+
+/* Portfolio image cursor */
+.portfolio-image {
+    cursor: pointer;
+}
+
+/* Modal styling */
+#portfolioModal .modal-dialog {
+    width: 90%;
+    max-width: 1200px;
+}
+
+#portfolioModal .modal-body {
+    padding: 20px;
+}
+
+#portfolioModalImage {
+    max-height: 80vh;
+    width: auto;
+}
+
+/* Form validation styling */
+.input-error {
+    border-color: #e74c3c !important;
+}
+
+/* Appointment Modal */
+#appointmentModal .modal-dialog {
+    max-width: 600px;
+}
+
+#appointmentResponse {
+    margin-top: 15px;
+}
+
+/* Make portfolio items more interactive */
+.work-item {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.work-item:hover {
+    transform: translateY(-5px);
+}
+
+@media (max-width: 767px) {
+    #portfolioModal .modal-dialog {
+        width: 95%;
+        margin: 10px auto;
+    }
+    
+    #portfolioModalImage {
+        max-height: 70vh;
+    }
+}
