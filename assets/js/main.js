@@ -3,13 +3,13 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
 /* ---------------------------------------------- /*
  * Preloader
  /* ---------------------------------------------- */
-(function(){
-    $(window).on('load', function() {
+(function () {
+    $(window).on('load', function () {
         $('.loader').fadeOut();
         $('.page-loader').delay(350).fadeOut('slow');
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         /* ---------------------------------------------- /*
          * WOW Animation When You Scroll
@@ -25,7 +25,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Scroll top
          /* ---------------------------------------------- */
 
-        $(window).scroll(function() {
+        $(window).scroll(function () {
             if ($(this).scrollTop() > 100) {
                 $('.scroll-up').fadeIn();
             } else {
@@ -33,7 +33,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             }
         });
 
-        $('a[href="#totop"]').click(function() {
+        $('a[href="#totop"]').click(function () {
             $('html, body').animate({ scrollTop: 0 }, 'slow');
             return false;
         });
@@ -44,13 +44,13 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          /* ---------------------------------------------- */
 
         var homeSection = $('.home-section'),
-            navbar      = $('.navbar-custom'),
-            navHeight   = navbar.height(),
-            worksgrid   = $('#works-grid'),
-            width       = Math.max($(window).width(), window.innerWidth),
-            mobileTest  = false;
+            navbar = $('.navbar-custom'),
+            navHeight = navbar.height(),
+            worksgrid = $('#works-grid'),
+            width = Math.max($(window).width(), window.innerWidth),
+            mobileTest = false;
 
-        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             mobileTest = true;
         }
 
@@ -59,13 +59,13 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
         navbarSubmenu(width);
         hoverDropdown(width, mobileTest);
 
-        $(window).resize(function() {
+        $(window).resize(function () {
             var width = Math.max($(window).width(), window.innerWidth);
             buildHomeSection(homeSection);
             hoverDropdown(width, mobileTest);
         });
 
-        $(window).scroll(function() {
+        $(window).scroll(function () {
             effectsHomeSection(homeSection, this);
             navbarAnimation(navbar, homeSection, navHeight);
         });
@@ -75,7 +75,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          /* ---------------------------------------------- */
 
         var module = $('.home-section, .module, .module-small, .side-image');
-        module.each(function(i) {
+        module.each(function (i) {
             if ($(this).attr('data-background')) {
                 $(this).css('background-image', 'url(' + $(this).attr('data-background') + ')');
             }
@@ -109,7 +109,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
                 }
                 if (homeSection.hasClass('home-fade') && ($(scrollTopp).scrollTop() <= homeSHeight)) {
                     var caption = $('.caption-content');
-                    caption.css('opacity', (1 - topScroll/homeSection.height() * 1));
+                    caption.css('opacity', (1 - topScroll / homeSection.height() * 1));
                 }
             }
         }
@@ -118,20 +118,20 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Intro slider setup
          /* ---------------------------------------------- */
 
-        if( $('.hero-slider').length > 0 ) {
-            $('.hero-slider').flexslider( {
+        if ($('.hero-slider').length > 0) {
+            $('.hero-slider').flexslider({
                 animation: "fade",
                 animationSpeed: 1000,
                 animationLoop: true,
                 prevText: '',
                 nextText: '',
-                before: function(slider) {
-                    $('.titan-caption').fadeOut().animate({top:'-80px'},{queue:false, easing: 'swing', duration: 700});
+                before: function (slider) {
+                    $('.titan-caption').fadeOut().animate({ top: '-80px' }, { queue: false, easing: 'swing', duration: 700 });
                     slider.slides.eq(slider.currentSlide).delay(500);
                     slider.slides.eq(slider.animatingTo).delay(500);
                 },
-                after: function(slider) {
-                    $('.titan-caption').fadeIn().animate({top:'0'},{queue:false, easing: 'swing', duration: 700});
+                after: function (slider) {
+                    $('.titan-caption').fadeIn().animate({ top: '0' }, { queue: false, easing: 'swing', duration: 700 });
                 },
                 useCSS: true
             });
@@ -156,7 +156,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
         function navbarAnimation(navbar, homeSection, navHeight) {
             var topScroll = $(window).scrollTop();
             if (navbar.length > 0 && homeSection.length > 0) {
-                if(topScroll >= navHeight) {
+                if (topScroll >= navHeight) {
                     navbar.removeClass('navbar-transparent');
                 } else {
                     navbar.addClass('navbar-transparent');
@@ -170,8 +170,8 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
 
         function navbarSubmenu(width) {
             if (width > 767) {
-                $('.navbar-custom .navbar-nav > li.dropdown').hover(function() {
-                    var MenuLeftOffset  = $('.dropdown-menu', $(this)).offset().left;
+                $('.navbar-custom .navbar-nav > li.dropdown').hover(function () {
+                    var MenuLeftOffset = $('.dropdown-menu', $(this)).offset().left;
                     var Menu1LevelWidth = $('.dropdown-menu', $(this)).width();
                     if (width - MenuLeftOffset < Menu1LevelWidth * 2) {
                         $(this).children('.dropdown-menu').addClass('leftauto');
@@ -199,21 +199,21 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
                 $('.navbar-custom .navbar-nav > li.dropdown, .navbar-custom li.dropdown > ul > li.dropdown').removeClass('open');
                 var delay = 0;
                 var setTimeoutConst;
-                $('.navbar-custom .navbar-nav > li.dropdown, .navbar-custom li.dropdown > ul > li.dropdown').hover(function() {
-                        var $this = $(this);
-                        setTimeoutConst = setTimeout(function() {
-                            $this.addClass('open');
-                            $this.find('.dropdown-toggle').addClass('disabled');
-                        }, delay);
-                    },
-                    function() {
+                $('.navbar-custom .navbar-nav > li.dropdown, .navbar-custom li.dropdown > ul > li.dropdown').hover(function () {
+                    var $this = $(this);
+                    setTimeoutConst = setTimeout(function () {
+                        $this.addClass('open');
+                        $this.find('.dropdown-toggle').addClass('disabled');
+                    }, delay);
+                },
+                    function () {
                         clearTimeout(setTimeoutConst);
                         $(this).removeClass('open');
                         $(this).find('.dropdown-toggle').removeClass('disabled');
                     });
             } else {
                 $('.navbar-custom .navbar-nav > li.dropdown, .navbar-custom li.dropdown > ul > li.dropdown').unbind('mouseenter mouseleave');
-                $('.navbar-custom [data-toggle=dropdown]').not('.binded').addClass('binded').on('click', function(event) {
+                $('.navbar-custom [data-toggle=dropdown]').not('.binded').addClass('binded').on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
                     $(this).parent().siblings().removeClass('open');
@@ -227,8 +227,8 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Navbar collapse on click
          /* ---------------------------------------------- */
 
-        $(document).on('click','.navbar-collapse.in',function(e) {
-            if( $(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle' ) {
+        $(document).on('click', '.navbar-collapse.in', function (e) {
+            if ($(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle') {
                 $(this).collapse('hide');
             }
         });
@@ -248,7 +248,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             gallery: {
                 enabled: true,
                 navigateByImgClick: true,
-                preload: [0,1]
+                preload: [0, 1]
             },
             image: {
                 titleSrc: 'title',
@@ -257,11 +257,12 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
         });
 
 
+
         /* ---------------------------------------------- /*
          * Portfolio
          /* ---------------------------------------------- */
 
-        var worksgrid   = $('#works-grid'),
+        var worksgrid = $('#works-grid'),
             worksgrid_mode;
 
         if (worksgrid.hasClass('works-grid-masonry')) {
@@ -270,14 +271,14 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             worksgrid_mode = 'fitRows';
         }
 
-        worksgrid.imagesLoaded(function() {
+        worksgrid.imagesLoaded(function () {
             worksgrid.isotope({
                 layoutMode: worksgrid_mode,
                 itemSelector: '.work-item'
             });
         });
 
-        $('#filters a').click(function() {
+        $('#filters a').click(function () {
             $('#filters .current').removeClass('current');
             $(this).addClass('current');
             var selector = $(this).attr('data-filter');
@@ -293,31 +294,48 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
 
             return false;
         });
-        
+
         /* ---------------------------------------------- /*
          * Portfolio image click - show in modal
          /* ---------------------------------------------- */
-        
-        $('.portfolio-image').on('click', function(e) {
+
+        $('.portfolio-image').on('click', function (e) {
             e.preventDefault();
             var imageSrc = $(this).attr('src');
             var imageTitle = $(this).data('title');
-            
+
             $('#portfolioModalLabel').text(imageTitle);
             $('#portfolioModalImage').attr('src', imageSrc);
             $('#portfolioModal').modal('show');
         });
 
+        // Initialize Magnific Popup for portfolio items
+        $('.work-item').magnificPopup({
+            delegate: 'a', // child items selector, by clicking on it popup will open
+            type: 'image',
+            gallery: {
+                enabled: false
+            },
+            image: {
+                titleSrc: function (item) {
+                    return item.el.attr('data-caption');
+                }
+            }
+        });
+
+        // Initialize Magnific Popup for portfolio items
+
+
         /* ---------------------------------------------- /*
          * Appointment Form Processing
          /* ---------------------------------------------- */
-        
-        $('#submitAppointment').on('click', function() {
+
+        $('#submitAppointment').on('click', function () {
             var form = $('#appointmentForm');
             var isValid = true;
-            
+
             // Simple validation
-            form.find('[required]').each(function() {
+            form.find('[required]').each(function () {
                 if (!$(this).val()) {
                     isValid = false;
                     $(this).addClass('input-error');
@@ -325,7 +343,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
                     $(this).removeClass('input-error');
                 }
             });
-            
+
             if (isValid) {
                 // This would typically send data to server
                 // For demo purposes we'll just show a success message
@@ -335,12 +353,12 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
                     .addClass('alert-success')
                     .html('Programarea dvs. a fost înregistrată cu succes! Veți primi o confirmare în curând.')
                     .show();
-                
+
                 // In a real application, you would use AJAX to send the form data to the server
                 // And would only show success message after successful response
-                
+
                 // Reset form after short delay
-                setTimeout(function() {
+                setTimeout(function () {
                     form[0].reset();
                 }, 1000);
             } else {
@@ -353,7 +371,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
         });
 
         // Clear error state when field is focused
-        $('#appointmentForm').find('input, select, textarea').on('focus', function() {
+        $('#appointmentForm').find('input, select, textarea').on('focus', function () {
             $(this).removeClass('input-error');
         });
 
@@ -365,7 +383,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
         /* ---------------------------------------------- /*
          * Set minimum date for appointment form
          /* ---------------------------------------------- */
-        
+
         // Set min date on the date picker to today
         if ($("#date").length) {
             var today = new Date();
@@ -379,7 +397,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
         /* ---------------------------------------------- /*
          * Appointment Form Processing
          /* ---------------------------------------------- */
-        
+
         $("#appointmentForm").submit(function (e) {
             e.preventDefault();
             var $ = jQuery;
@@ -393,7 +411,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             $submitButton.text("Se trimite...");
 
             // Simulate AJAX call for demo purposes
-            setTimeout(function() {
+            setTimeout(function () {
                 $formResponse.html('<div class="alert alert-success">Programarea dumneavoastră a fost înregistrată cu succes! Veți primi un email de confirmare în curând.</div>');
                 $submitButton.text(submitText);
                 $('#appointmentForm')[0].reset();
@@ -401,9 +419,9 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
 
             return false;
         });
-        
+
         // Clear error state when field is focused
-        $('#appointmentForm').find('input, select, textarea').on('focus', function() {
+        $('#appointmentForm').find('input, select, textarea').on('focus', function () {
             $(this).removeClass('input-error');
         });
 
@@ -411,8 +429,8 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Testimonials
          /* ---------------------------------------------- */
 
-        if ($('.testimonials-slider').length > 0 ) {
-            $('.testimonials-slider').flexslider( {
+        if ($('.testimonials-slider').length > 0) {
+            $('.testimonials-slider').flexslider({
                 animation: "slide",
                 smoothHeight: true
             });
@@ -423,8 +441,8 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Post Slider
          /* ---------------------------------------------- */
 
-        if ($('.post-images-slider').length > 0 ) {
-            $('.post-images-slider').flexslider( {
+        if ($('.post-images-slider').length > 0) {
+            $('.post-images-slider').flexslider({
                 animation: "slide",
                 smoothHeight: true,
             });
@@ -435,12 +453,12 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Progress bar animations
          /* ---------------------------------------------- */
 
-        $('.progress-bar').each(function(i) {
-            $(this).appear(function() {
+        $('.progress-bar').each(function (i) {
+            $(this).appear(function () {
                 var percent = $(this).attr('aria-valuenow');
-                $(this).animate({'width' : percent + '%'});
-                $(this).find('span').animate({'opacity' : 1}, 900);
-                $(this).find('span').countTo({from: 0, to: percent, speed: 900, refreshInterval: 30});
+                $(this).animate({ 'width': percent + '%' });
+                $(this).find('span').animate({ 'opacity': 1 }, 900);
+                $(this).find('span').countTo({ from: 0, to: percent, speed: 900, refreshInterval: 30 });
             });
         });
 
@@ -449,10 +467,10 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Funfact Count-up
          /* ---------------------------------------------- */
 
-        $('.count-item').each(function(i) {
-            $(this).appear(function() {
+        $('.count-item').each(function (i) {
+            $(this).appear(function () {
                 var number = $(this).find('.count-to').data('countto');
-                $(this).find('.count-to').countTo({from: 0, to: number, speed: 1200, refreshInterval: 30});
+                $(this).find('.count-to').countTo({ from: 0, to: number, speed: 1200, refreshInterval: 30 });
             });
         });
 
@@ -461,11 +479,11 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Youtube video background
          /* ---------------------------------------------- */
 
-        $(function(){
+        $(function () {
             $(".video-player").mb_YTPlayer();
         });
 
-        $('#video-play').click(function(event) {
+        $('#video-play').click(function (event) {
             event.preventDefault();
             if ($(this).hasClass('fa-play')) {
                 $('.video-player').playYTP();
@@ -476,7 +494,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             return false;
         });
 
-        $('#video-volume').click(function(event) {
+        $('#video-volume').click(function (event) {
             event.preventDefault();
             if ($(this).hasClass('fa-volume-off')) {
                 $('.video-player').YTPUnmute();
@@ -492,7 +510,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Owl Carousel
          /* ---------------------------------------------- */
 
-        $('.owl-carousel').each(function(i) {
+        $('.owl-carousel').each(function (i) {
 
             // Check items number
             if ($(this).data('items') > 0) {
@@ -516,7 +534,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             }
 
             // Build carousel
-            $(this).owlCarousel( {
+            $(this).owlCarousel({
                 navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
                 nav: navigation,
                 dots: pagination,
@@ -534,7 +552,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Blog masonry
          /* ---------------------------------------------- */
 
-        $('.post-masonry').imagesLoaded(function() {
+        $('.post-masonry').imagesLoaded(function () {
             $('.post-masonry').masonry();
         });
 
@@ -543,7 +561,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Scroll Animation
          /* ---------------------------------------------- */
 
-        $('.section-scroll').bind('click', function(e) {
+        $('.section-scroll').bind('click', function (e) {
             var anchor = $(this);
             $('html, body').stop().animate({
                 scrollTop: $(anchor.attr('href')).offset().top - 50
@@ -676,13 +694,13 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Subscribe form ajax
          /* ---------------------------------------------- */
 
-        $('#subscription-form').submit(function(e) {
+        $('#subscription-form').submit(function (e) {
 
             e.preventDefault();
-            var $form           = $('#subscription-form');
-            var submit          = $('#subscription-form-submit');
-            var ajaxResponse    = $('#subscription-response');
-            var email           = $('input#semail').val();
+            var $form = $('#subscription-form');
+            var submit = $('#subscription-form-submit');
+            var ajaxResponse = $('#subscription-response');
+            var email = $('input#semail').val();
 
             $.ajax({
                 type: 'POST',
@@ -692,12 +710,12 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
                     email: email
                 },
                 cache: false,
-                beforeSend: function(result) {
+                beforeSend: function (result) {
                     submit.empty();
                     submit.append('<i class="fa fa-cog fa-spin"></i> Wait...');
                 },
-                success: function(result) {
-                    if(result.sendstatus == 1) {
+                success: function (result) {
+                    if (result.sendstatus == 1) {
                         ajaxResponse.html(result.message);
                         $form.fadeOut(500);
                     } else {
@@ -713,7 +731,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Google Map
          /* ---------------------------------------------- */
 
-        if($("#map").length == 0 || typeof google == 'undefined') return;
+        if ($("#map").length == 0 || typeof google == 'undefined') return;
 
         // When the window has finished loading create our google map below
         google.maps.event.addDomListener(window, 'load', init);

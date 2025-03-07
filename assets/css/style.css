@@ -1596,8 +1596,10 @@ Google map
 }
 
 .features-item p {
-  font-size:16px; /* Adjust this value as needed */
-  line-height: 1.5; /* Optional: Adjust line height for better readability */
+  font-size: 16px;
+  /* Adjust this value as needed */
+  line-height: 1.5;
+  /* Optional: Adjust line height for better readability */
 }
 
 .multi-columns-row {
@@ -1630,8 +1632,10 @@ Google map
 }
 
 .alt-features-item p {
-  font-size: 18px; /* Adjust this value as needed */
-  line-height: 1.5; /* Optional: Adjust line height for better readability */
+  font-size: 18px;
+  /* Adjust this value as needed */
+  line-height: 1.5;
+  /* Optional: Adjust line height for better readability */
 }
 
 .alt-features-icon {
@@ -3053,4 +3057,11 @@ Google map
   .works-grid-5 .work-item {
     width: 100%;
   }
+}
+
+.mfp-title {
+  font-size: 18px;
+  /* Adjust the font size as needed */
+  color: #dc1f1f;
+  /* Adjust the color as needed */
 }
