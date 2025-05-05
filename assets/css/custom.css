@@ -44,6 +44,154 @@
     transform: translateY(-5px);
 }
 
+/* Pricing Section Styles */
+
+/* Location button styles */
+.location-buttons {
+    margin-bottom: 20px;
+}
+
+.location-btn {
+    margin: 0 5px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.location-btn.btn-d {
+    background: #111;
+    color: #fff;
+}
+
+.location-prompt {
+    color: #777;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* Price value animation */
+.price-value {
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+/* Add a bit more padding to the pricing section */
+#pricing {
+    padding-bottom: 60px;
+}
+
+/* Ensure consistent height of pricing boxes */
+.price-table {
+    height: 100%;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.price-table:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.price-table .btn {
+    margin-top: auto;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.price-details {
+    flex: 1;
+}
+
+/* Color themes for different pricing tiers */
+.price-table.standard {
+    border-top: 4px solid #2c7a51;
+}
+
+.price-table.standard h4 {
+    color: #2c7a51;
+}
+
+.price-table.standard .borderline {
+    background-color: #2c7a51;
+}
+
+.price-table.standard .btn {
+    background-color: #2c7a51;
+    border-color: #2c7a51;
+}
+
+.price-table.standard .btn:hover {
+    background-color: #fff;
+    color: #2c7a51;
+}
+
+.price-table.complex {
+    border-top: 4px solid #20a9a0;
+}
+
+.price-table.complex h4 {
+    color: #20a9a0;
+}
+
+.price-table.complex .borderline {
+    background-color: #20a9a0;
+}
+
+.price-table.complex .btn {
+    background-color: #20a9a0;
+    border-color: #20a9a0;
+}
+
+.price-table.complex .btn:hover {
+    background-color: #fff;
+    color: #20a9a0;
+}
+
+.price-table.premium {
+    border-top: 4px solid #e75a82;
+}
+
+.price-table.premium h4 {
+    color: #e75a82;
+}
+
+.price-table.premium .borderline {
+    background-color: #e75a82;
+}
+
+.price-table.premium .btn {
+    background-color: #e75a82;
+    border-color: #e75a82;
+}
+
+.price-table.premium .btn:hover {
+    background-color: #fff;
+    color: #e75a82;
+}
+
+/* Make prices stand out more */
+.price .price-value {
+    font-size: 40px;
+}
+
+/* Align all boxes to same height */
+.row.price-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.price-row>[class*="col-"] {
+    display: flex;
+    flex-direction: column;
+}
+
 @media (max-width: 767px) {
     #portfolioModal .modal-dialog {
         width: 95%;
@@ -52,5 +200,19 @@
 
     #portfolioModalImage {
         max-height: 70vh;
+    }
+
+    .location-buttons .btn {
+        display: block;
+        width: 80%;
+        margin: 5px auto;
+    }
+
+    .price-row {
+        display: block;
+    }
+
+    .price-table {
+        min-height: auto;
     }
 }

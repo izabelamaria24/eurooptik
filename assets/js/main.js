@@ -38,6 +38,26 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             return false;
         });
 
+        /* ---------------------------------------------- /*
+         * Location Pricing System
+         /* ---------------------------------------------- */
+
+        $('.location-btn').click(function () {
+            var location = $(this).data('location');
+
+            // Change active state of buttons
+            $('.location-btn').removeClass('btn-d').addClass('btn-border-d');
+            $(this).removeClass('btn-border-d').addClass('btn-d');
+
+            // Hide the prompt when a location is selected
+            $('.location-prompt').fadeOut();
+
+            // Update all price values based on the selected location
+            $('.price-value').each(function () {
+                var price = $(this).data(location);
+                $(this).text(price);
+            });
+        });
 
         /* ---------------------------------------------- /*
          * Initialization General Scripts for all pages
@@ -256,8 +276,6 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             }
         });
 
-
-
         /* ---------------------------------------------- /*
          * Portfolio
          /* ---------------------------------------------- */
@@ -295,23 +313,9 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             return false;
         });
 
-        /* ---------------------------------------------- /*
-         * Portfolio image click - show in modal
-         /* ---------------------------------------------- */
-
-        $('.portfolio-image').on('click', function (e) {
-            e.preventDefault();
-            var imageSrc = $(this).attr('src');
-            var imageTitle = $(this).data('title');
-
-            $('#portfolioModalLabel').text(imageTitle);
-            $('#portfolioModalImage').attr('src', imageSrc);
-            $('#portfolioModal').modal('show');
-        });
-
         // Initialize Magnific Popup for portfolio items
         $('.work-item').magnificPopup({
-            delegate: 'a', // child items selector, by clicking on it popup will open
+            delegate: 'a',
             type: 'image',
             gallery: {
                 enabled: false
@@ -321,63 +325,6 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
                     return item.el.attr('data-caption');
                 }
             }
-        });
-
-        // Initialize Magnific Popup for portfolio items
-
-
-        /* ---------------------------------------------- /*
-         * Appointment Form Processing
-         /* ---------------------------------------------- */
-
-        $('#submitAppointment').on('click', function () {
-            var form = $('#appointmentForm');
-            var isValid = true;
-
-            // Simple validation
-            form.find('[required]').each(function () {
-                if (!$(this).val()) {
-                    isValid = false;
-                    $(this).addClass('input-error');
-                } else {
-                    $(this).removeClass('input-error');
-                }
-            });
-
-            if (isValid) {
-                // This would typically send data to server
-                // For demo purposes we'll just show a success message
-                var responseDiv = $('#appointmentResponse');
-                responseDiv
-                    .removeClass('alert-danger')
-                    .addClass('alert-success')
-                    .html('Programarea dvs. a fost înregistrată cu succes! Veți primi o confirmare în curând.')
-                    .show();
-
-                // In a real application, you would use AJAX to send the form data to the server
-                // And would only show success message after successful response
-
-                // Reset form after short delay
-                setTimeout(function () {
-                    form[0].reset();
-                }, 1000);
-            } else {
-                $('#appointmentResponse')
-                    .removeClass('alert-success')
-                    .addClass('alert-danger')
-                    .html('Vă rugăm să completați toate câmpurile obligatorii.')
-                    .show();
-            }
-        });
-
-        // Clear error state when field is focused
-        $('#appointmentForm').find('input, select, textarea').on('focus', function () {
-            $(this).removeClass('input-error');
-        });
-
-        // Clear response message when modal is closed
-        $('#appointmentModal').on('hidden.bs.modal', function () {
-            $('#appointmentResponse').hide();
         });
 
         /* ---------------------------------------------- /*
@@ -426,44 +373,6 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
         });
 
         /* ---------------------------------------------- /*
-         * Testimonials
-         /* ---------------------------------------------- */
-
-        if ($('.testimonials-slider').length > 0) {
-            $('.testimonials-slider').flexslider({
-                animation: "slide",
-                smoothHeight: true
-            });
-        }
-
-
-        /* ---------------------------------------------- /*
-         * Post Slider
-         /* ---------------------------------------------- */
-
-        if ($('.post-images-slider').length > 0) {
-            $('.post-images-slider').flexslider({
-                animation: "slide",
-                smoothHeight: true,
-            });
-        }
-
-
-        /* ---------------------------------------------- /*
-         * Progress bar animations
-         /* ---------------------------------------------- */
-
-        $('.progress-bar').each(function (i) {
-            $(this).appear(function () {
-                var percent = $(this).attr('aria-valuenow');
-                $(this).animate({ 'width': percent + '%' });
-                $(this).find('span').animate({ 'opacity': 1 }, 900);
-                $(this).find('span').countTo({ from: 0, to: percent, speed: 900, refreshInterval: 30 });
-            });
-        });
-
-
-        /* ---------------------------------------------- /*
          * Funfact Count-up
          /* ---------------------------------------------- */
 
@@ -474,7 +383,6 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             });
         });
 
-
         /* ---------------------------------------------- /*
          * Youtube video background
          /* ---------------------------------------------- */
@@ -482,80 +390,6 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
         $(function () {
             $(".video-player").mb_YTPlayer();
         });
-
-        $('#video-play').click(function (event) {
-            event.preventDefault();
-            if ($(this).hasClass('fa-play')) {
-                $('.video-player').playYTP();
-            } else {
-                $('.video-player').pauseYTP();
-            }
-            $(this).toggleClass('fa-play fa-pause');
-            return false;
-        });
-
-        $('#video-volume').click(function (event) {
-            event.preventDefault();
-            if ($(this).hasClass('fa-volume-off')) {
-                $('.video-player').YTPUnmute();
-            } else {
-                $('.video-player').YTPMute();
-            }
-            $(this).toggleClass('fa-volume-off fa-volume-up');
-            return false;
-        });
-
-
-        /* ---------------------------------------------- /*
-         * Owl Carousel
-         /* ---------------------------------------------- */
-
-        $('.owl-carousel').each(function (i) {
-
-            // Check items number
-            if ($(this).data('items') > 0) {
-                items = $(this).data('items');
-            } else {
-                items = 4;
-            }
-
-            // Check pagination true/false
-            if (($(this).data('pagination') > 0) && ($(this).data('pagination') === true)) {
-                pagination = true;
-            } else {
-                pagination = false;
-            }
-
-            // Check navigation true/false
-            if (($(this).data('navigation') > 0) && ($(this).data('navigation') === true)) {
-                navigation = true;
-            } else {
-                navigation = false;
-            }
-
-            // Build carousel
-            $(this).owlCarousel({
-                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-                nav: navigation,
-                dots: pagination,
-                loop: true,
-                dotsSpeed: 400,
-                items: items,
-                navSpeed: 300,
-                autoplay: 2000
-            });
-
-        });
-
-
-        /* ---------------------------------------------- /*
-         * Blog masonry
-         /* ---------------------------------------------- */
-
-        $('.post-masonry').imagesLoaded(function () {
-            $('.post-masonry').masonry();
-        });
-
 
         /* ---------------------------------------------- /*
          * Scroll Animation
@@ -574,7 +408,6 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          ================================================================*/
 
         $("#contactForm").submit(function (e) {
-
             e.preventDefault();
             var $ = jQuery;
 
@@ -584,397 +417,17 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
                 $cfsubmit = $("#cfsubmit"),
                 cfsubmitText = $cfsubmit.text();
 
-            $cfsubmit.text("Sending...");
+            $cfsubmit.text("Se trimite...");
 
-
-            $.ajax(
-                {
-                    url: formURL,
-                    type: "POST",
-                    data: postData,
-                    success: function (data) {
-                        $cfResponse.html(data);
-                        $cfsubmit.text(cfsubmitText);
-                        $('#contactForm input[name=name]').val('');
-                        $('#contactForm input[name=email]').val('');
-                        $('#contactForm textarea[name=message]').val('');
-                    },
-                    error: function (data) {
-                        alert("Error occurd! Please try again");
-                    }
-                });
+            // Simulate AJAX call for demo purposes
+            setTimeout(function () {
+                $cfResponse.html('<div class="alert alert-success">Mesajul dumneavoastră a fost trimis cu succes! Vă vom contacta în curând.</div>');
+                $cfsubmit.text(cfsubmitText);
+                $('#contactForm')[0].reset();
+            }, 1500);
 
             return false;
-
         });
-
-
-        /*===============================================================
-         Working Request A Call Form
-         ================================================================*/
-
-        $("#requestACall").submit(function (e) {
-
-            e.preventDefault();
-            var $ = jQuery;
-
-            var postData = $(this).serializeArray(),
-                formURL = $(this).attr("action"),
-                $cfResponse = $('#requestFormResponse'),
-                $cfsubmit = $("#racSubmit"),
-                cfsubmitText = $cfsubmit.text();
-
-            $cfsubmit.text("Sending...");
-
-
-            $.ajax(
-                {
-                    url: formURL,
-                    type: "POST",
-                    data: postData,
-                    success: function (data) {
-                        $cfResponse.html(data);
-                        $cfsubmit.text(cfsubmitText);
-                        $('#requestACall input[name=name]').val('');
-                        $('#requestACall input[name=subject]').val('');
-                        $('#requestACall textarea[name=phone]').val('');
-                    },
-                    error: function (data) {
-                        alert("Error occurd! Please try again");
-                    }
-                });
-
-            return false;
-
-        });
-
-
-        /*===============================================================
-         Working Reservation Form
-         ================================================================*/
-
-        $("#reservationForm").submit(function (e) {
-
-            e.preventDefault();
-            var $ = jQuery;
-
-            var postData = $(this).serializeArray(),
-                formURL = $(this).attr("action"),
-                $cfResponse = $('#reservationFormResponse'),
-                $cfsubmit = $("#rfsubmit"),
-                cfsubmitText = $cfsubmit.text();
-
-            $cfsubmit.text("Sending...");
-
-
-            $.ajax(
-                {
-                    url: formURL,
-                    type: "POST",
-                    data: postData,
-                    success: function (data) {
-                        $cfResponse.html(data);
-                        $cfsubmit.text(cfsubmitText);
-                        $('#reservationForm input[name=date]').val('');
-                        $('#reservationForm input[name=time]').val('');
-                        $('#reservationForm textarea[name=people]').val('');
-                        $('#reservationForm textarea[name=email]').val('');
-                    },
-                    error: function (data) {
-                        alert("Error occurd! Please try again");
-                    }
-                });
-
-            return false;
-
-        });
-
-
-        /* ---------------------------------------------- /*
-         * Subscribe form ajax
-         /* ---------------------------------------------- */
-
-        $('#subscription-form').submit(function (e) {
-
-            e.preventDefault();
-            var $form = $('#subscription-form');
-            var submit = $('#subscription-form-submit');
-            var ajaxResponse = $('#subscription-response');
-            var email = $('input#semail').val();
-
-            $.ajax({
-                type: 'POST',
-                url: 'assets/php/subscribe.php',
-                dataType: 'json',
-                data: {
-                    email: email
-                },
-                cache: false,
-                beforeSend: function (result) {
-                    submit.empty();
-                    submit.append('<i class="fa fa-cog fa-spin"></i> Wait...');
-                },
-                success: function (result) {
-                    if (result.sendstatus == 1) {
-                        ajaxResponse.html(result.message);
-                        $form.fadeOut(500);
-                    } else {
-                        ajaxResponse.html(result.message);
-                    }
-                }
-            });
-
-        });
-
-
-        /* ---------------------------------------------- /*
-         * Google Map
-         /* ---------------------------------------------- */
-
-        if ($("#map").length == 0 || typeof google == 'undefined') return;
-
-        // When the window has finished loading create our google map below
-        google.maps.event.addDomListener(window, 'load', init);
-
-        var mkr = new google.maps.LatLng(40.6700, -74.2000);
-        var cntr = (mobileTest) ? mkr : new google.maps.LatLng(40.6700, -73.9400);
-
-        function init() {
-            // Basic options for a simple Google Map
-            // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-            var mapOptions = {
-                // How zoomed in you want the map to start at (always required)
-                zoom: 11,
-                scrollwheel: false,
-                // The latitude and longitude to center the map (always required)
-                center: cntr, // New York
-
-                // How you would like to style the map.
-                // This is where you would paste any style found on Snazzy Maps.
-                styles: [
-                    {
-                        "featureType": "all",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            },
-                            {
-                                "saturation": "-11"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "administrative",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "saturation": "22"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "administrative",
-                        "elementType": "geometry.stroke",
-                        "stylers": [
-                            {
-                                "saturation": "-58"
-                            },
-                            {
-                                "color": "#cfcece"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "administrative",
-                        "elementType": "labels.text",
-                        "stylers": [
-                            {
-                                "color": "#f8f8f8"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "administrative",
-                        "elementType": "labels.text.fill",
-                        "stylers": [
-                            {
-                                "color": "#999999"
-                            },
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "administrative",
-                        "elementType": "labels.text.stroke",
-                        "stylers": [
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "administrative.country",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "color": "#f9f9f9"
-                            },
-                            {
-                                "visibility": "simplified"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "landscape",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "color": "#f2f2f2"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "landscape",
-                        "elementType": "geometry",
-                        "stylers": [
-                            {
-                                "saturation": "-19"
-                            },
-                            {
-                                "lightness": "-2"
-                            },
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "poi",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "saturation": -100
-                            },
-                            {
-                                "lightness": 45
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "simplified"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "road.arterial",
-                        "elementType": "labels.icon",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "transit",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "all",
-                        "stylers": [
-                            {
-                                "color": "#d8e1e5"
-                            },
-                            {
-                                "visibility": "on"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "geometry.fill",
-                        "stylers": [
-                            {
-                                "color": "#dedede"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "labels.text",
-                        "stylers": [
-                            {
-                                "color": "#cbcbcb"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "labels.text.fill",
-                        "stylers": [
-                            {
-                                "color": "#9c9c9c"
-                            }
-                        ]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "labels.text.stroke",
-                        "stylers": [
-                            {
-                                "visibility": "off"
-                            }
-                        ]
-                    }
-                ]
-            };
-
-            // Get the HTML DOM element that will contain your map
-            // We are using a div with id="map" seen below in the <body>
-            var mapElement = document.getElementById('map');
-
-            // Create the Google Map using our element and options defined above
-            var map = new google.maps.Map(mapElement, mapOptions);
-
-            // Let's also add a marker while we're at it
-            var image = new google.maps.MarkerImage('assets/images/map-icon.png',
-                new google.maps.Size(59, 65),
-                new google.maps.Point(0, 0),
-                new google.maps.Point(24, 42)
-            );
-
-            var marker = new google.maps.Marker({
-                position: mkr,
-                icon: image,
-                title: 'Titan',
-                infoWindow: {
-                    content: '<p><strong>Rival</strong><br/>121 Somewhere Ave, Suite 123<br/>P: (123) 456-7890<br/>Australia</p>'
-                },
-                map: map,
-            });
-        }
-
     });
 })(jQuery);
 
