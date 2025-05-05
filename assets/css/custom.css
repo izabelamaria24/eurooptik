@@ -68,6 +68,20 @@
     margin-top: 10px;
 }
 
+/* Location buttons container for better centering */
+.location-buttons-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.location-buttons-container .location-btn {
+    margin: 0 15px 10px;
+    min-width: 120px;
+    padding: 10px 15px;
+}
+
 /* Price value animation */
 .price-value {
     transition: all 0.3s ease;
@@ -192,6 +206,14 @@
     flex-direction: column;
 }
 
+/* Added pricing container styles for mobile centering */
+.pricing-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
 @media (max-width: 767px) {
     #portfolioModal .modal-dialog {
         width: 95%;
@@ -215,4 +237,314 @@
     .price-table {
         min-height: auto;
     }
+
+    /* Enhanced mobile styling for location buttons */
+    .location-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .location-buttons .btn-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .location-btn {
+        display: block;
+        width: 80%;
+        margin: 5px auto;
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+
+    /* Improved mobile location button styling */
+    .location-buttons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .location-buttons-container .location-btn {
+        margin: 0 0 15px;
+        width: 80%;
+        max-width: 250px;
+        padding: 12px 15px;
+        font-size: 16px;
+    }
+
+    /* Remove conflicting styles */
+    .location-buttons .btn {
+        display: none;
+        /* Hide old buttons */
+    }
+
+    /* Better mobile pricing table display */
+    .price-row {
+        display: block;
+    }
+
+    .price-table {
+        min-height: auto;
+        margin-bottom: 25px;
+        padding: 25px 15px;
+    }
+
+    .price-table h4 {
+        font-size: 22px;
+    }
+
+    .price .price-value {
+        font-size: 36px;
+    }
+
+    .price-details {
+        margin: 15px 0;
+    }
+
+    .price-details li {
+        text-align: center;
+        font-size: 16px;
+        padding: 8px 0;
+    }
+
+    .price-table .btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    /* Center align module titles on mobile */
+    #pricing .module-title,
+    #pricing .module-subtitle {
+        text-align: center;
+    }
+
+    /* Improved navbar for mobile */
+    .navbar-custom {
+        padding: 10px 0;
+    }
+
+    .navbar-custom .navbar-brand img {
+        max-height: 60px !important;
+        margin-top: -20px !important;
+    }
+
+    .navbar-custom .navbar-toggle {
+        margin-top: 15px;
+    }
+
+    /* Make navbar menu items larger and more touchable on mobile */
+    .navbar-custom .nav>li>a {
+        padding: 15px 15px;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Improved hero section for mobile */
+    .home-section .titan-caption {
+        width: 90% !important;
+    }
+
+    .home-section .caption-content img {
+        max-width: 80% !important;
+        margin-bottom: -20px !important;
+    }
+
+    .titan-title-size-1 {
+        letter-spacing: 2px !important;
+        font-size: 20px !important;
+    }
+
+    .titan-title-size-2 {
+        letter-spacing: 2px !important;
+        font-size: 18px !important;
+    }
+
+    .titan-title-size-3 {
+        letter-spacing: 3px !important;
+        font-size: 28px !important;
+    }
+
+    /* Action buttons in hero section */
+    .home-section .btn {
+        margin: 5px;
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+
+    /* Portfolio/works section mobile improvements */
+    .filter>li {
+        padding: 0 0 10px;
+        margin: 0 10px;
+        font-size: 13px;
+    }
+
+    /* Team section mobile improvements */
+    .team-item {
+        margin-bottom: 30px;
+    }
+
+    .team-item .team-image {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    /* Contact form mobile improvements */
+    .form-control {
+        height: 40px;
+        font-size: 14px;
+    }
+
+    textarea.form-control {
+        height: 120px;
+    }
+
+    /* Footer mobile improvements */
+    .footer {
+        padding: 15px 0;
+    }
+
+    .footer .copyright,
+    .footer .footer-social-links {
+        text-align: center !important;
+        margin: 10px 0;
+    }
+
+    /* Ensure all pricing tables are centered on mobile */
+    .price-row .col-xs-12 {
+        float: none;
+        margin: 0 auto 30px;
+        max-width: 320px;
+    }
+
+    /* Remove default offset on smaller screens */
+    .price-row .col-sm-offset-3 {
+        margin-left: 0;
+    }
+
+    /* Ensure consistent spacing between pricing tables */
+    .price-table {
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Fix for consultation cards on mobile */
+    #pricing .price-row>div[class*="col-"] {
+        float: none;
+        display: block;
+        width: 90%;
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #pricing .price-table {
+        margin-bottom: 30px;
+    }
+
+    /* Remove all previous price-row rules that might conflict */
+    #pricing-tables .col-xs-12 {
+        padding: 0 10px;
+    }
+
+    /* Make sure the cards are centered on mobile */
+    .pricing-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pricing-container .col-xs-12 {
+        float: none;
+        width: 100%;
+        max-width: 320px;
+        margin-bottom: 30px;
+    }
+}
+
+/* Additional media query for very small devices */
+@media (max-width: 480px) {
+    .location-btn {
+        width: 90%;
+        font-size: 14px;
+    }
+
+    .price-table {
+        padding: 20px 10px;
+    }
+
+    .price-table h4 {
+        font-size: 20px;
+    }
+
+    .price .price-value {
+        font-size: 32px;
+    }
+
+    /* Enhanced mobile services section */
+    .features-item {
+        padding: 15px 10px;
+        margin-bottom: 30px;
+    }
+
+    .features-item .features-icon {
+        font-size: 36px;
+        margin-bottom: 15px;
+    }
+
+    .features-title {
+        font-size: 18px !important;
+        margin: 10px 0;
+    }
+
+    .features-item p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* Enhanced alternative features section */
+    .alt-features-item {
+        margin-bottom: 30px;
+    }
+
+    .alt-features-title {
+        font-size: 17px !important;
+    }
+
+    .alt-features-icon {
+        font-size: 24px;
+    }
+
+    /* Center mobile counts */
+    .count-item {
+        text-align: center;
+    }
+}
+
+/* Improved scroll-up button */
+.scroll-up {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+.scroll-up a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.scroll-up a:hover {
+    background: #000;
 }
