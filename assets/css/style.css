@@ -163,7 +163,7 @@ a,
 .module,
 .module-small {
   position: relative;
-  padding: 140px 0;
+  padding: 80px 0;
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;
@@ -171,15 +171,15 @@ a,
 
 /* Module header */
 .module-small {
-  padding: 70px 0;
+  padding: 40px 0;
 }
 
 .module-extra-small {
-  padding: 25px 0px;
+  padding: 20px 0px;
 }
 
 .module-medium {
-  padding: 75px 0px;
+  padding: 60px 0px;
 }
 
 .holder-w {
@@ -683,7 +683,6 @@ a,
 .btn {
   border-radius: 0;
   font-family: "Roboto Condensed", sans-serif;
-  text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 25px;
   padding: 8px 37px;
@@ -708,24 +707,24 @@ a,
 
 .btn.btn-w {
   background: rgba(255, 255, 255, 0.8);
-  color: #111;
+
 }
 
 .btn.btn-w:hover,
 .btn.btn-w:focus {
   background: white;
-  color: #111;
+
 }
 
 .btn.btn-g {
   background: #e5e5e5;
-  color: #111;
+
 }
 
 .btn.btn-g:hover,
 .btn.btn-g:focus {
   background: #d8d8d8;
-  color: #111;
+  color: #ffffff;
 }
 
 .btn.btn-border-w {
@@ -738,7 +737,7 @@ a,
 .btn.btn-border-w:focus {
   background: #fff;
   border-color: transparent;
-  color: #111;
+  color: #ffffff;
 }
 
 .btn.btn-d {
@@ -847,7 +846,6 @@ a,
 /* Forms common style */
 .form-control {
   font-family: "Roboto Condensed", sans-serif;
-  text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 17px;
   height: 33px;
@@ -934,7 +932,6 @@ blockquote {
 
 .font-alt {
   font-family: "Roboto Condensed", sans-serif;
-  text-transform: uppercase;
   letter-spacing: 2px;
 }
 
@@ -953,19 +950,19 @@ blockquote {
 
 .module-title {
   position: relative;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   text-align: center;
   font-weight: 400;
   font-size: 40px;
   color: #111;
-  margin: 0 0 70px;
+  margin: 0 0 45px;
 }
 
 .module-subtitle {
   text-align: center;
-  font-size: 26px;
-  color: #111;
-  margin-bottom: 60px;
+  font-size: 22px;
+  color: #524c4c;
+  margin-bottom: 30px;
 }
 
 .module-icon {
@@ -1290,7 +1287,6 @@ General Styles - Owlcarousel
   border-radius: 0;
   z-index: 1000;
   font-family: "Roboto Condensed", sans-serif;
-  text-transform: uppercase;
   letter-spacing: 3px;
   font-size: 15px;
   transition: background, padding 0.4s ease-in-out 0s;
@@ -1380,37 +1376,6 @@ General Styles - Owlcarousel
   font-size: 61px;
 }
 
-/* Navbar search
-
-.dropdown-search {
-	position: relative;
-	padding: 5px;
-}
-
-.dropdown-search .form-control {
-	-webkit-border-radius: 0;
-	-moz-border-radius: 0;
-	border-radius: 0;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	font-size: 11px;
-}
-
-.search-btn {
-	position: absolute;
-	background: transparent;
-	border: none;
-	overflow: hidden;
-	top: 50%;
-	right: 1px;
-	width: 42px;
-	height: 40px;
-	line-height: 38px;
-	font-size: 14px;
-	outline: none;
-	color: #999;
-	margin-top: -20px;
-}*/
 /*--------------------------------------------------------------
 	Header
 --------------------------------------------------------------*/
@@ -1424,9 +1389,28 @@ General Styles - Owlcarousel
   background-size: cover;
 }
 
-.titan-title-size-1 {
-  letter-spacing: 4px;
-  font-size: 25px;
+#home_cine_suntem_button {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background-color: #d13775;
+  border: none;
+  border-radius: 30px;
+}
+
+#home_cine_suntem_button:hover {
+  background-color: #ad2e61;
+}
+
+#home_appointment_button {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background-color: #d13775;
+  border: none;
+  border-radius: 30px;
+}
+
+#home_appointment_button:hover {
+  background-color: #ad2e61;
 }
 
 .titan-title-size-2 {
@@ -1617,7 +1601,6 @@ Google map
 
 .features-title,
 .alt-features-title {
-  text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 400;
   font-size: 25px;
@@ -1978,7 +1961,12 @@ Google map
 .work-image img {
   display: block;
   overflow: hidden;
-  width: 100%;
+  width: 250px;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .work-image:after {
@@ -2301,7 +2289,6 @@ Google map
 .pagination a {
   border: 1px solid #eaeaea;
   display: inline-block;
-  text-transform: uppercase;
   text-align: center;
   color: #999;
   padding: 4px 12px;
