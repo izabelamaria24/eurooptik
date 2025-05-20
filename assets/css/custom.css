@@ -464,6 +464,42 @@
         max-width: 320px;
         margin-bottom: 30px;
     }
+
+    hr {
+        margin-left: -50vw !important;
+        margin-right: -50vw !important;
+        width: 100vw !important;
+        position: relative !important;
+        left: 50% !important;
+        right: 50% !important;
+    }
+
+    #services {
+        overflow-x: hidden !important;
+        width: 100%;
+        position: relative;
+    }
+
+    #services .container-fluid {
+        overflow: visible !important;
+        padding: 0 !important;
+        width: 100%;
+    }
+
+    #services hr {
+        width: 100vw !important;
+        position: relative !important;
+        left: 50% !important;
+        right: 50% !important;
+        margin-left: -50vw !important;
+        margin-right: -50vw !important;
+        display: block !important;
+        opacity: 0.5 !important;
+        z-index: 1 !important;
+        background: #000 !important;
+        height: 1px !important;
+        border: none !important;
+    }
 }
 
 /* Additional media query for very small devices */
