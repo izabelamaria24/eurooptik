@@ -1,3 +1,6 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Merriweather:ital@0;1&display=swap');
+
 /*--------------------------------------------------------------
 	Common
 --------------------------------------------------------------*/
@@ -8,8 +11,9 @@ html {
 }
 
 body {
-  background: #fff;
-  font: 400 12px/1.8 "Open Sans", sans-serif;
+  background: #f2f0ed;
+  /* Changed from #f5f5f5 to a warmer, slightly darker tone */
+  font: 400 12px/1.8 "Roboto", sans-serif;
   color: #666;
   -webkit-font-smoothing: antialiased;
 }
@@ -156,7 +160,8 @@ a,
 
 .main {
   position: relative;
-  background-color: #fff;
+  background-color: #f2f0ed;
+  /* Updated to match body background */
   z-index: 1;
 }
 
@@ -684,7 +689,8 @@ a,
 --------------------------------------------------------------*/
 .btn {
   border-radius: 0;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
   letter-spacing: 2px;
   font-size: 25px;
   padding: 8px 37px;
@@ -916,29 +922,32 @@ h5,
 h6 {
   line-height: 1.4;
   font-weight: 400;
+  font-family: "Roboto", sans-serif;
 }
 
 p,
 ol,
-ul,
-blockquote {
+ul {
+  font-family: "Merriweather", serif;
+  font-style: italic;
   margin: 0 0 20px;
 }
 
 blockquote {
   border: 0;
+  font-family: "Merriweather", serif;
   font-style: italic;
   font-size: 69px;
   padding: 0;
 }
 
 .font-alt {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Roboto", sans-serif;
   letter-spacing: 2px;
 }
 
 .font-serif {
-  font-family: Volkhov, "Times New Roman", sans-serif;
+  font-family: "Merriweather", serif;
   font-style: italic;
 }
 
@@ -955,14 +964,14 @@ blockquote {
   letter-spacing: 2px;
   text-align: center;
   font-weight: 400;
-  font-size: 40px;
+  font-size: 35px;
   color: #111;
-  margin: 0 0 45px;
+  margin: 0 0 35px;
 }
 
 .module-subtitle {
   text-align: center;
-  font-size: 22px;
+  font-size: 17px;
   color: #524c4c;
   margin-bottom: 30px;
 }
@@ -974,7 +983,7 @@ blockquote {
 }
 
 .module-title+.module-subtitle {
-  margin-top: -35px;
+  margin-top: -30px;
 }
 
 /* Restaurant module header */
@@ -1917,38 +1926,52 @@ Google map
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  /* allow wrapping */
   padding-left: 0;
   list-style: none;
+  gap: 8px;
+  margin: 0 5px;
+  margin-bottom: 30px;
+  /* Add space between buttons and grid */
 }
 
 
 #filters li {
-  margin: 0 10px;
-  /* spacing between items */
+  margin: 0;
+  /* Remove individual margins since we're using gap */
 }
 
 
 /* three per row on small viewports */
 @media (max-width: 767px) {
   #filters li {
-    flex: 0 0 33.3333%;
-    max-width: 33.3333%;
-    margin: 8px 0;
-    /* adjust vertical spacing */
-    text-align: center;
+    flex: 0 0 calc(33.3333% - 6px);
+    /* Adjusted to account for smaller gap */
+    max-width: calc(33.3333% - 6px);
+    margin: 0;
+    /* Remove margin since we're using gap */
   }
 }
 
 
 #filter-button {
-  font-size: 20px;
+  font-size: 16px;
   background-color: #d13775;
   color: white;
-  border-radius: 30px;
-  /* Adjust for desired roundness */
-  padding: 9px 12px;
-  /* Adjust top/bottom and left/right padding */
+  padding: 0px 6px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-break: break-word;
+  width: 100%;
+  line-height: 1.4;
+}
+
+#filter-button:hover {
+  background-color: #ad2e61;
 }
 
 #location-button {
@@ -1956,28 +1979,25 @@ Google map
   margin-bottom: 20px;
   background-color: #d13775;
   border: none;
-  border-radius: 30px;
   color: white;
-  width: 160px;
-  /* fixed width to match the others */
-  margin: 20px auto;
-  padding: 9px 0;
+  width: 130px;
+  padding: 7px;
+  margin: 4px;
+  font-size: 18px;
+}
+
+#location-button:hover {
+  background-color: #ad2e61;
 }
 
 #programare-button {
-  margin-right: 20px;
-  margin-bottom: 20px;
   border: none;
   border-radius: 30px;
   display: block;
-  /* top/bottom 20px, left/right auto = perfectly centered */
-  margin: 20px auto;
-  /* remove any leftover right‐only margin */
-  margin-right: 0;
+  margin: 0px auto;
 }
 
 
-/* Portfolio grid */
 #works-grid {
   display: flex;
   flex-wrap: wrap;
@@ -3138,4 +3158,39 @@ Google map
   flex-wrap: wrap !important;
   justify-content: center !important;
   gap: 20px;
+}
+
+/* Adjust container and card widths for single line */
+#adresses .container {
+  max-width: 100%;
+  padding: 0 20px;
+}
+
+#adresses .d-flex {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+#adresses .card {
+  flex: 0 0 180px;
+  /* Fixed width, no growing/shrinking */
+  width: 180px;
+  min-height: 160px;
+  border: 2px solid #ccc;
+  margin: 0;
+  /* Remove margin to avoid extra spacing */
+}
+
+/* Hide scrollbar but keep functionality */
+#adresses .d-flex::-webkit-scrollbar {
+  display: none;
+}
+
+#adresses .d-flex {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -428,6 +428,66 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
 
             return false;
         });
+
+        /* ---------------------------------------------- /*
+         * Address Cards Navigation
+         /* ---------------------------------------------- */
+        const initAddressCardsNav = function () {
+            const cardContainer = document.getElementById('addressCards');
+            const prevBtn = document.querySelector('.addresses-wrapper .prev-arrow');
+            const nextBtn = document.querySelector('.addresses-wrapper .next-arrow');
+
+            if (!cardContainer || !prevBtn || !nextBtn) {
+                console.error('Missing required elements for address cards navigation');
+                return;
+            }
+
+            const scrollCard = () => {
+                if (!cardContainer.firstElementChild) return 0;
+                const cardWidth = cardContainer.firstElementChild.offsetWidth;
+                return cardWidth + 20; // Add gap
+            };
+
+            prevBtn.addEventListener('click', function () {
+                const scrollAmount = -scrollCard();
+                cardContainer.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+
+            nextBtn.addEventListener('click', function () {
+                const scrollAmount = scrollCard();
+                cardContainer.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Update arrow states
+            const updateArrows = () => {
+                const isAtStart = cardContainer.scrollLeft <= 0;
+                const isAtEnd = cardContainer.scrollLeft >= (cardContainer.scrollWidth - cardContainer.clientWidth - 1);
+
+                prevBtn.style.opacity = isAtStart ? '0.5' : '1';
+                prevBtn.style.cursor = isAtStart ? 'not-allowed' : 'pointer';
+
+                nextBtn.style.opacity = isAtEnd ? '0.5' : '1';
+                nextBtn.style.cursor = isAtEnd ? 'not-allowed' : 'pointer';
+            };
+
+            // Listen for scroll events to update arrows
+            cardContainer.addEventListener('scroll', updateArrows);
+
+            // Initial arrow state
+            updateArrows();
+
+            // Also update arrows when window resizes
+            window.addEventListener('resize', updateArrows);
+        };
+
+        // Initialize address cards navigation
+        initAddressCardsNav();
     });
 })(jQuery);
 
