@@ -689,7 +689,7 @@ a,
 }
 
 #oftalmologie-copii {
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../images/horizontal_pattern.png');
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../images/doodle2.png');
 }
 
 /*--------------------------------------------------------------
@@ -3170,6 +3170,13 @@ Google map
   width: 200px;
   height: 200px;
   border: 2px solid #ccc;
+
+
+
+
+
+
+
   margin: 10px;
   /* ← fallback spacing */
 }
@@ -3216,4 +3223,65 @@ Google map
 #adresses .d-flex {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Styles for address navigation arrows */
+#adresses .address-navigation {
+  text-align: center;
+  /* Center the arrow buttons */
+  margin-top: 20px;
+  /* Add some space above the arrows */
+}
+
+#adresses .nav-arrow {
+  background-color: #d13775;
+  /* Fuchsia background */
+  color: white;
+  /* White icon color */
+  border: none;
+  border-radius: 50%;
+  /* Make them round */
+  width: 40px;
+  /* Define width */
+  height: 40px;
+  /* Define height */
+  display: inline-flex;
+  /* Use flex to center icon */
+  align-items: center;
+  /* Center icon vertically */
+  justify-content: center;
+  /* Center icon horizontally */
+  margin: 0 10px;
+  /* Add gap between arrows */
+  padding: 0;
+  /* Remove default padding */
+  font-size: 18px;
+  /* Adjust icon size if needed */
+  line-height: 1;
+  /* Ensure proper icon alignment */
+}
+
+#adresses .nav-arrow:hover {
+  background-color: #ad2e61;
+  /* Darker fuchsia on hover, consistent with other buttons */
+  color: white;
+}
+
+/* Hide address navigation arrows on wider screens */
+@media (min-width: 992px) {
+
+  /* Adjust breakpoint as needed */
+  #adresses .address-navigation {
+    display: none;
+  }
+}
+
+/* Ensure content starts from the left on smaller screens where scrolling is active */
+@media (max-width: 991.98px) {
+
+  /* Applies when arrows are visible (screen width < 992px) */
+  #adresses .d-flex {
+    justify-content: flex-start !important;
+    /* Align items to the start for scrollability */
+  }
 }
