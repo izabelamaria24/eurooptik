@@ -1929,6 +1929,21 @@ Google map
 --------------------------------------------------------------*/
 /* Portfolio filter */
 
+/* Background for Oftalmologie Copii section */
+.oftalmologie-copii-bg {
+  background-image: url('../images/horizontal_pattern.png');
+  background-repeat: repeat;
+  background-position: center;
+  padding: 30px 0;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+}
+
 /* center the filter buttons */
 #filters {
   display: flex;
@@ -2009,7 +2024,7 @@ Google map
 #works-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: min(20px, 110px);
   list-style: none;
   margin: 10px auto;
   padding: 0px;
