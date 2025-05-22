@@ -684,6 +684,14 @@ a,
   margin-right: 5px;
 }
 
+#services {
+  background-color: rgba(255, 252, 246, 0.8);
+}
+
+#oftalmologie-copii {
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../images/horizontal_pattern.png');
+}
+
 /*--------------------------------------------------------------
 	Buttons
 --------------------------------------------------------------*/
