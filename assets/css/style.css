@@ -168,7 +168,7 @@ a,
 .module,
 .module-small {
   position: relative;
-  padding: 80px 0;
+  padding: 60px 0;
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;
@@ -178,15 +178,15 @@ a,
 
 /* Module header */
 .module-small {
-  padding: 40px 0;
+  padding: 20px 0;
 }
 
 .module-extra-small {
-  padding: 20px 0px;
+  padding: 10px 0px;
 }
 
 .module-medium {
-  padding: 60px 0px;
+  padding: 40px 0px;
 }
 
 .holder-w {
@@ -228,7 +228,7 @@ a,
 }
 
 .side-image-text {
-  background: #fff;
+  background: #F5F3ED;
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
   padding: 140px 60px 140px;
@@ -251,11 +251,11 @@ a,
 .bg-dark-30 .alt-module-subtitle h5,
 .bg-dark-60 .alt-module-subtitle h5,
 .bg-dark-90 .alt-module-subtitle h5 {
-  color: #fff;
+  color: #F5F3ED;
 }
 
 .bg-dark {
-  background: #111;
+  background: #504C4C;
 }
 
 .bg-dark-30:before {
@@ -611,7 +611,7 @@ a,
 }
 
 .scroll-up a {
-  background: #fff;
+  background: #F5F3ED;
   display: block;
   height: 28px;
   width: 28px;
@@ -640,7 +640,7 @@ a,
 
 .video-controls-box a {
   display: inline-block;
-  color: #fff;
+  color: #F5F3ED;
   margin: 0 5px 0 0;
 }
 
@@ -656,7 +656,7 @@ a,
 }
 
 .landing-reason {
-  color: #fff;
+  color: #F5F3ED;
   font-size: 16px;
 }
 
@@ -685,11 +685,22 @@ a,
 }
 
 #services {
-  background-color: rgba(255, 252, 246, 0.8);
+  background-color: #F5F3ED;
 }
 
 #oftalmologie-copii {
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../images/doodle2.png');
+  background: linear-gradient(rgba(240, 241, 243, 0.65), rgba(240, 241, 243, 0.65)), url('../images/pattern_wide.png');
+}
+
+/* Custom spacing for specific sections */
+#services {
+  padding-bottom: 20px;
+  /* Adjust this value as needed */
+}
+
+#oftalmologie-copii {
+  padding-top: 20px;
+  /* Adjust this value as needed */
 }
 
 /*--------------------------------------------------------------
@@ -728,7 +739,7 @@ a,
 
 .btn.btn-w:hover,
 .btn.btn-w:focus {
-  background: white;
+  background: #F5F3ED;
 
 }
 
@@ -740,62 +751,63 @@ a,
 .btn.btn-g:hover,
 .btn.btn-g:focus {
   background: #d8d8d8;
-  color: #ffffff;
+  color: #F5F3ED;
 }
 
 .btn.btn-border-w {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.75);
-  color: #fff;
+  color: #F5F3ED;
 }
 
 .btn.btn-border-w:hover,
 .btn.btn-border-w:focus {
-  background: #fff;
+  background: #F5F3ED;
+  ;
   border-color: transparent;
-  color: #ffffff;
+  color: #F5F3ED;
 }
 
 .btn.btn-d {
-  background: rgba(17, 17, 17, 0.8);
-  color: #fff;
+  background: #504C4C;
+  color: #F5F3ED;
 }
 
 .btn.btn-d:hover,
 .btn.btn-d:focus {
-  background: #111111;
+  background: #504C4C;
 }
 
 .btn.btn-b {
-  background: #111111;
-  color: #fff;
+  background: #504C4C;
+  color: #F5F3ED;
 }
 
 .btn.btn-b:hover,
 .btn.btn-b:focus {
-  background: rgba(17, 17, 17, 0.8);
+  background: #504C4C;
 }
 
 .btn-border-d {
   background: transparent;
-  border: 1px solid #111111;
-  color: #111;
+  border: 1px solid #504C4C;
+  color: #504C4C;
 }
 
 .btn.btn-border-d:hover,
 .btn.btn-border-d:focus {
-  background: #111111;
-  color: #fff;
+  background: #504C4C;
+  color: #F5F3ED;
 }
 
 .btn.btn-font-w {
   background: rgba(255, 255, 255, 0.8);
-  color: #fff;
+  color: #F5F3ED;
 }
 
 .btn.btn-font-w:hover {
-  background: #fff;
-  color: #111;
+  color: #F5F3ED;
+  color: #504C4C;
 }
 
 /* Buttons size */
@@ -846,17 +858,17 @@ a,
 /* Selection */
 ::-moz-selection {
   background: #000;
-  color: #fff;
+  color: #F5F3ED;
 }
 
 ::-webkit-selection {
   background: #000;
-  color: #fff;
+  color: #F5F3ED;
 }
 
 ::selection {
   background: #000;
-  color: #fff;
+  color: #F5F3ED;
 }
 
 /* Forms common style */
@@ -903,7 +915,7 @@ a,
 	Typography
 --------------------------------------------------------------*/
 a {
-  color: #111;
+  color: #504C4C;
 }
 
 a:hover,
@@ -919,7 +931,7 @@ a:focus {
 
 .bg-dark a:hover,
 .bg-dark a:focus {
-  color: #fff;
+  color: #F5F3ED;
 }
 
 h1,
@@ -973,14 +985,14 @@ blockquote {
   text-align: center;
   font-weight: 400;
   font-size: 35px;
-  color: #111;
+  color: #504C4C;
   margin: 0 0 35px;
 }
 
 .module-subtitle {
   text-align: center;
   font-size: 17px;
-  color: #524c4c;
+  color: #635e5e;
   margin-bottom: 30px;
 }
 
@@ -1003,7 +1015,7 @@ blockquote {
   display: table-cell;
   white-space: pre;
   padding: 0 8px;
-  color: #111;
+  color: #504C4C;
 }
 
 /* Finance case study header */
@@ -1032,7 +1044,7 @@ blockquote {
 
 .free-trial {
   background-color: rgba(88, 20, 158, 0.9);
-  color: #FFFFFF;
+  color: #F5F3ED;
 }
 
 .free-trial .color-golden {
@@ -1101,7 +1113,7 @@ General Styles - FlexSlider
 
 .flex-control-nav>li>a {
   background: transparent;
-  border: 1px solid #fff;
+  border: 1px solid #F5F3ED;
   display: block;
   height: 6px;
   width: 6px;
@@ -1110,7 +1122,7 @@ General Styles - FlexSlider
 
 .flex-control-nav>li>a:hover,
 .flex-control-nav>li>a.flex-active {
-  background: #fff;
+  background: #F5F3ED;
 }
 
 /* -------------------------------------------------------------------
@@ -1213,7 +1225,8 @@ General Styles - Owlcarousel
 
 .owl-controls .owl-page span {
   background: transparent;
-  border: 1px solid #111;
+  border: 1px solid #504C4C;
+  ;
   display: block;
   height: 6px;
   width: 6px;
@@ -1224,14 +1237,14 @@ General Styles - Owlcarousel
 
 .owl-controls .owl-page.active span,
 .owl-controls.clickable .owl-page:hover span {
-  background: #111;
+  color: #504C4C;
 }
 
 .owl-controls .owl-buttons>div {
   display: inline-block;
   margin: 5px;
   font-size: 94px;
-  color: #111;
+  color: #504C4C;
 }
 
 /*--------------------------------------------------------------
@@ -1249,7 +1262,7 @@ General Styles - Owlcarousel
 
 .loader {
   position: absolute;
-  border-left: 2px solid #ffffff;
+  border-left: 2px solid #F5F3ED;
   border-top: 2px solid rgba(255, 255, 255, 0.2);
   border-right: 2px solid rgba(255, 255, 255, 0.2);
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
@@ -1300,8 +1313,40 @@ General Styles - Owlcarousel
 /*--------------------------------------------------------------
 	Navbar
 --------------------------------------------------------------*/
+#navbar-button {
+  line-height: 50px;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 5px;
+  font-style: normal;
+  color: #e9e7e3;
+  font-family: "Roboto";
+  font-size: 17px;
+  letter-spacing: -0.1px;
+}
+
+#navbar-button-programare {
+  background-color: #d13775;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-left: 7px;
+  border: none;
+  border-radius: 30px;
+  line-height: 30px;
+  margin-top: 10px;
+  font-style: normal;
+  color: #e9e7e3;
+  font-family: "Roboto";
+  font-size: 17px;
+  letter-spacing: -0.1px;
+  display: inline-block;
+  padding: 4px 10px;
+  width: auto;
+}
+
 .navbar-custom {
-  background-color: rgba(10, 10, 10, 0.9);
+  background-color: #383535;
+  ;
   border: 0;
   border-radius: 0;
   z-index: 1000;
@@ -1342,7 +1387,7 @@ General Styles - Owlcarousel
   letter-spacing: 4px;
   font-weight: 400;
   font-size: 22px;
-  color: #fff;
+  color: #F5F3ED;
 }
 
 .navbar-custom .nav li>a {
@@ -1387,7 +1432,7 @@ General Styles - Owlcarousel
 .navbar-custom .dropdown-menu>li>a:focus,
 .navbar-custom .dropdown-menu>li>a:hover {
   background: none;
-  color: #fff;
+  color: #F5F3ED;
 }
 
 .navbar-custom .dropdown-menu>li>a:hover {
@@ -1409,7 +1454,7 @@ General Styles - Owlcarousel
 }
 
 .navbar-custom .navbar-toggle .icon-bar {
-  background: #fff;
+  background: #F5F3ED;
 }
 
 .dropdown-menu {
@@ -1422,7 +1467,7 @@ General Styles - Owlcarousel
 --------------------------------------------------------------*/
 .home-section {
   position: relative;
-  background-color: #fff;
+  background-color: #F5F3ED;
   background-repeat: no-repeat;
   background-position: center center;
   width: 100%;
@@ -1436,6 +1481,7 @@ General Styles - Owlcarousel
   background-color: #d13775;
   border: none;
   border-radius: 30px;
+  color: #F5F3ED;
 }
 
 #home-cine-suntem-button:hover {
@@ -1448,6 +1494,7 @@ General Styles - Owlcarousel
   background-color: #d13775;
   border: none;
   border-radius: 30px;
+  color: #F5F3ED;
 }
 
 #home-appointment-button:hover {
@@ -1487,62 +1534,12 @@ General Styles - Owlcarousel
   background: rgba(2, 2, 2, 0.1);
 }
 
-/* Pricing Page Header */
-.pricing-page-header {
-  background-position: 40% 14%;
-  background-repeat: no-repeat;
-}
-
 .pricing-page-header:before {
   background: rgba(2, 2, 2, 0.6);
 }
 
-/* Gallery Page Header */
-.gallery-page-header {
-  background-position: 50% 0%;
-  background-repeat: no-repeat;
-}
-
-.gallery-page-header:before {
-  background: rgba(2, 2, 2, 0.2);
-}
-
-/* Contact Page Header */
-.contact-page-header {
-  background-position: 13% 45%;
-  background-repeat: no-repeat;
-}
-
-.contact-page-header:before {
-  background: rgba(2, 2, 2, 0.5);
-}
-
-/* FAQ Page Header */
-.faq-page-header:before {
-  background: rgba(2, 2, 2, 0.15);
-}
-
-/* Blog Page Header */
-.blog-page-header {
-  background-position: 50% 24%;
-  background-repeat: no-repeat;
-}
-
-.blog-page-header:before {
-  background: rgba(2, 2, 2, 0.3);
-}
-
-/* Restaurant menu Page Header */
-.restaurant-menu-bg:before {
-  background: rgba(2, 2, 2, 0.4);
-}
-
-.restaurant-page-header:before {
-  background: rgba(0, 0, 0, 0.45);
-}
-
-.restaurant-image-overlay:before {
-  background-color: rgba(2, 2, 2, 0.25);
+#pricing {
+  background-color: #F5F3ED;
 }
 
 /* Portfolio Page Header */
@@ -1637,7 +1634,7 @@ Google map
 .alt-features-icon {
   line-height: 1.2;
   font-size: 42px;
-  color: #111;
+  color: #504C4C;
 }
 
 .features-title,
@@ -1645,7 +1642,7 @@ Google map
   letter-spacing: 2px;
   font-weight: 400;
   font-size: 25px;
-  color: #111;
+  color: #504C4C;
   margin: 16px 0 15px;
 }
 
@@ -1687,13 +1684,29 @@ Google map
 .content-box-title {
   font-weight: 400;
   font-size: 18px;
-  color: #111;
+  color: #504C4C;
   margin: 16px 0 15px;
 }
 
 /*--------------------------------------------------------------
 	Team
 --------------------------------------------------------------*/
+
+#nume-doctori {
+  color: #F5F3ED;
+  font-size: 19px;
+  text-align: center;
+  font-style: normal;
+}
+
+#descriere-doctori {
+  font-size: 16px;
+  text-align: center;
+  color: #F5F3ED;
+  font-style: normal;
+}
+
+
 .team-item {
   position: relative;
   text-align: center;
@@ -1747,7 +1760,7 @@ Google map
 
 .team-name {
   font-size: 14px;
-  color: #111;
+  color: #504C4C;
 }
 
 .team-role {
@@ -1767,32 +1780,12 @@ Google map
   transform: translateY(50%);
 }
 
-/*--------------------------------------------------------------
-	Restaurant Menu
---------------------------------------------------------------*/
-.menu {
-  border-bottom: 1px dotted #e5e5e5;
-  padding: 0 0 10px;
-  margin: 0 0 20px;
-}
-
-.menu-title,
-.menu-price {
-  margin: 0 0 10px;
-  font-size: 14px;
-  color: #111;
-}
-
-.menu-price-detail {
-  position: relative;
-  text-align: right;
-}
 
 /*--------------------------------------------------------------
 	Price Table
 --------------------------------------------------------------*/
 .price-table {
-  background: #fff;
+  background: #fffffb;
   border: 1px solid #eaeaea;
   padding: 25px 20px;
   margin: 15px 0 30px;
@@ -1839,7 +1832,7 @@ Google map
 
 .borderline:after {
   position: absolute;
-  background: #fff;
+  background: #fffffb;
   content: "";
   bottom: -5px;
   left: 50%;
@@ -1854,32 +1847,29 @@ Google map
 }
 
 .price-table h4 {
-  color: #111;
+  color: #504C4C;
   margin: 0;
-}
-
-.price-table p.price {
-  font-size: 60px;
-  color: #111;
-  padding: 0;
-  margin: 0 0 0 -10px;
 }
 
 .price-table p.price span {
   display: inline-block;
   vertical-align: top;
-  font-size: 16px;
-  padding-top: 25px;
+  font-size: 20px;
+  padding-top: 13px;
+  color: #504C4C;
+  margin: 0 0 -15px;
 }
 
 .price-details {
   list-style: none;
   padding: 0;
-  margin: 0 0 23px;
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-style: normal;
 }
 
 .price-details li {
-  padding: 7px 0;
+  padding: 5px 0;
 }
 
 .price-details li>span {
@@ -1888,61 +1878,9 @@ Google map
 }
 
 /*--------------------------------------------------------------
-	Fun fact
---------------------------------------------------------------*/
-.count-item {
-  text-align: center;
-}
-
-.count-icon {
-  line-height: 1.2;
-  font-size: 42px;
-}
-
-/*--------------------------------------------------------------
-	Video Box
---------------------------------------------------------------*/
-.video-box {
-  text-align: center;
-  padding: 40px 0;
-}
-
-.video-box-icon>a>i,
-.video-box-icon>a>span {
-  line-height: 1.8;
-  font-size: 40px;
-  color: #fff;
-}
-
-.video-title {
-  letter-spacing: 4px;
-  font-size: 30px;
-  margin: 10px 0 0;
-}
-
-.video-subtitle {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/*--------------------------------------------------------------
 	Portfolio
 --------------------------------------------------------------*/
 /* Portfolio filter */
-
-/* Background for Oftalmologie Copii section */
-.oftalmologie-copii-bg {
-  background-image: url('../images/horizontal_pattern.png');
-  background-repeat: repeat;
-  background-position: center;
-  padding: 30px 0;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  overflow: hidden;
-}
 
 /* center the filter buttons */
 #filters {
@@ -1979,7 +1917,7 @@ Google map
 #filter-button {
   font-size: 16px;
   background-color: #d13775;
-  color: white;
+  color: #F5F3ED;
   padding: 0px 6px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -2002,11 +1940,12 @@ Google map
   margin-bottom: 20px;
   background-color: #d13775;
   border: none;
-  color: white;
+  color: #F5F3ED;
   width: 130px;
   padding: 7px;
   margin: 4px;
   font-size: 18px;
+  letter-spacing: -0.1px;
 }
 
 #location-button:hover {
@@ -2017,7 +1956,10 @@ Google map
   border: none;
   border-radius: 30px;
   display: block;
-  margin: 0px auto;
+  margin: 5px 10px;
+  font-size: 18px;
+  letter-spacing: -0.1px;
+  background-color: #504C4C;
 }
 
 
@@ -2093,7 +2035,7 @@ Google map
 
 .work-title {
   font-size: 14px;
-  color: #fff;
+  color: #F5F3ED;
   margin: 0 0 6px;
 }
 
@@ -2120,22 +2062,17 @@ Google map
   transform: translateY(50%);
 }
 
-/* Work item white background*/
 .works-grid.works-hover-w .work-title {
-  color: #111;
+  color: #504C4C;
 }
 
 .works-grid.works-hover-w .work-item:hover .work-image:after {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(228, 226, 221, 0.8);
 }
 
 /* Work item gradien background*/
 .works-grid.works-hover-g .work-image:after {
   opacity: 0;
-}
-
-.works-grid.works-hover-g .work-descr {
-  color: #fff;
 }
 
 .works-grid.works-hover-g .work-item:hover .work-image:after {
@@ -2157,7 +2094,7 @@ Google map
 }
 
 .work-details-title {
-  color: #111;
+  color: #504C4C;
   margin: 0 0 20px;
 }
 
@@ -2183,7 +2120,7 @@ Google map
 .callout-title {
   font-weight: 400;
   font-size: 16px;
-  color: #fff;
+  color: #F5F3ED;
   margin: 0;
 }
 
@@ -2273,7 +2210,7 @@ Google map
   z-index: 2;
   text-align: center;
   font-size: 28px;
-  color: #fff;
+  color: #F5F3ED;
   padding: 20px;
 }
 
@@ -2314,7 +2251,7 @@ Google map
 .post-title {
   line-height: 1.4;
   font-size: 22px;
-  color: #111;
+  color: #504C4C;
   margin: 0;
 }
 
@@ -2413,7 +2350,7 @@ Google map
 }
 
 .progress-bar.pb-dark {
-  background: #111;
+  background: #504C4C;
 }
 
 .progress-bar span {
@@ -2424,7 +2361,7 @@ Google map
   opacity: 0;
   line-height: 12px;
   font-size: 12px;
-  color: #111;
+  color: #504C4C;
   padding: 4px 0px;
 }
 
@@ -2482,39 +2419,13 @@ Google map
   border-top: 0;
 }
 
-.checkout-table {
-  border: 1px solid #e5e5e5;
-}
-
-.checkout-table>tbody>tr>td,
-.checkout-table>tbody>tr>th,
-.checkout-table>tfoot>tr>td,
-.checkout-table>tfoot>tr>th,
-.checkout-table>thead>tr>td,
-.checkout-table>thead>tr>th {
-  padding: 12px;
-}
-
-.checkout-table tr td,
-.checkout-table tr th {
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
-  border-right: 1px solid #e5e5e5;
-  border-left: 1px solid #e5e5e5;
-}
-
-.checkout-table tbody tr td:first-child,
-.checkout-table tbody tr th:first-child {
-  max-width: 36px;
-}
-
 /* Sidebar / Widget common*/
 .sidebar .widget {
   margin-bottom: 60px;
 }
 
 .sidebar .widget-title {
-  color: #111;
+  color: #504C4C;
 }
 
 .widget .widget-title {
@@ -2566,10 +2477,10 @@ Google map
 
 /* Tags */
 .tags a {
-  background: #111;
+  color: #504C4C;
   display: inline-block;
   font-size: 10px;
-  color: #fff;
+  color: #F5F3ED;
   padding: 4px 10px 4px 12px;
   margin: 0 1px 4px;
   border-radius: 2px;
@@ -2579,294 +2490,6 @@ Google map
   background: rgba(17, 17, 17, 0.8);
 }
 
-/*--------------------------------------------------------------
-	Comment Box in Blog
---------------------------------------------------------------*/
-.comments,
-.comment-form {
-  margin: 80px 0 0;
-}
-
-.comments .comment-title,
-.comment-form .comment-form-title {
-  border-bottom: 1px dotted #c2c2c2;
-  font-size: 16px;
-  color: #111;
-  padding-bottom: 15px;
-  margin: 0 0 20px;
-}
-
-.comment-author {
-  font-size: 14px;
-  margin: 0 0 10px;
-}
-
-.comment-avatar {
-  width: 55px;
-  float: left;
-  margin-top: 10px;
-}
-
-.comment-avatar img {
-  border-radius: 50%;
-}
-
-.comment-content {
-  padding-top: 5px;
-  margin-left: 75px;
-  margin-bottom: 30px;
-}
-
-@media (min-width: 768px) {
-  .comment .comment {
-    margin-left: 75px;
-  }
-}
-
-/*--------------------------------------------------------------
-	Client
---------------------------------------------------------------*/
-.client-logo {
-  opacity: .5;
-}
-
-.client-logo:hover {
-  opacity: 1;
-}
-
-/*--------------------------------------------------------------
-	Shop Items
---------------------------------------------------------------*/
-.shop-item {
-  text-align: center;
-  margin: 0 0 40px;
-}
-
-.shop-item-image {
-  position: relative;
-  overflow: hidden;
-}
-
-.shop-item-image img {
-  width: 100%;
-}
-
-.shop-item-detail,
-.shop-item-image:after {
-  transition: all 0.4s ease-in-out 0s;
-}
-
-.shop-item-image:after {
-  position: absolute;
-  display: block;
-  content: "";
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-}
-
-.shop-item-detail {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: 100%;
-  padding: 20px;
-  opacity: 0;
-  z-index: 2;
-  text-align: center;
-  font-size: 12px;
-  color: #aaa;
-}
-
-.shop-item-title {
-  font-weight: 400;
-  font-size: 14px;
-  color: #111;
-  margin: 15px 0 5px;
-}
-
-/* Shop item hover */
-.shop-item:hover .shop-item-image:after {
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.shop-item:hover .shop-item-detail {
-  opacity: 1;
-  bottom: 50%;
-  -webkit-transform: translateY(50%);
-  -ms-transform: translateY(50%);
-  transform: translateY(50%);
-}
-
-/* -------------------------------------------------------------------
-	Exclusive products
-------------------------------------------------------------------- */
-.ex-product {
-  opacity: .7;
-  transition: all 0.4s ease-in-out 0s;
-}
-
-.ex-product:hover {
-  opacity: 1;
-}
-
-/*--------------------------------------------------------------
-	Shop Single Product
---------------------------------------------------------------*/
-.product-gallery {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-  margin: 10px 0 0;
-}
-
-.product-gallery li {
-  display: inline-block;
-  width: 15%;
-  margin: 0 5px;
-}
-
-.product-gallery li:first-child {
-  margin-left: 0;
-}
-
-.product-title {
-  margin: 0 0 20px;
-  color: #111;
-}
-
-.star,
-.star-off {
-  margin-bottom: 5px;
-  color: #f1c40f;
-}
-
-.star-off {
-  color: #e5e5e5;
-}
-
-.amount {
-  font-size: 32px;
-  color: #111;
-}
-
-.reviews {
-  margin: 0;
-}
-
-/*--------------------------------------------------------------
-	Showcase Page
---------------------------------------------------------------*/
-.showcase-page .showcase-page-header {
-  background-color: rgba(2, 2, 2, 0.7);
-}
-
-.showcase-page .content-box {
-  display: block;
-  margin-bottom: 45px;
-}
-
-.showcase-page .content-box .content-box-image {
-  border-radius: 6px;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  overflow: hidden;
-  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.15);
-  margin-bottom: 15px;
-  transition: 0.35s ease-out;
-  -webkit-transition: 0.35s ease-out;
-  -moz-transition: 0.35s ease-out;
-}
-
-.showcase-page .content-box .content-box-image:hover {
-  transform: translate3d(0, -10px, 0);
-  -webkit-transform: translate3d(0, -10px, 0);
-  box-shadow: 0 23px 40px rgba(0, 0, 0, 0.2);
-}
-
-/*--------------------------------------------------------------
-	Documentation Page
---------------------------------------------------------------*/
-.documentation-page {
-  font-size: 14px;
-}
-
-.documentation-page .pln {
-  color: #000;
-}
-
-.documentation-page pre.prettyprint {
-  border: 1px solid #888;
-  padding: 15px;
-}
-
-.documentation-page ol.linenums {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.documentation-page li.L0,
-.documentation-page li.L1,
-.documentation-page li.L2,
-.documentation-page li.L3,
-.documentation-page li.L5,
-.documentation-page li.L6,
-.documentation-page li.L7,
-.documentation-page li.L8 {
-  list-style-type: none;
-}
-
-.documentation-page li.L1,
-.documentation-page li.L3,
-.documentation-page li.L5,
-.documentation-page li.L7,
-.documentation-page li.L9 {
-  background: #eee;
-}
-
-.documentation-page .com {
-  color: #800;
-}
-
-.documentation-page .lit {
-  color: #066;
-}
-
-.documentation-page .pun,
-.documentation-page .opn,
-.documentation-page .clo {
-  color: #660;
-}
-
-.documentation-page .fun {
-  color: red;
-}
-
-.documentation-page .str,
-.documentation-page .atv {
-  color: #080;
-}
-
-.documentation-page .kwd,
-.documentation-page .tag {
-  color: #008;
-}
-
-.documentation-page .typ,
-.documentation-page .atn,
-.documentation-page .dec,
-.documentation-page .var {
-  color: #606;
-}
-
-.documentation-page a {
-  color: #19B5FE;
-}
-
-.documentation-page a:hover {
-  color: #1C92C9;
-}
 
 /*--------------------------------------------------------------
 	Responsive Styles - Media Queries
@@ -3002,6 +2625,10 @@ Google map
   .navbar-custom .dropdown-menu .dropdown.open .dropdown-toggle:after {
     right: 7px;
     content: "\f106";
+  }
+
+  .navbar-custom .navbar-collapse {
+    max-height: none !important;
   }
 
   /* Shop navbar */
@@ -3163,20 +2790,15 @@ Google map
 
 /* adresses */
 
-/* adresses cards: fixed size + border */
+#adresses {
+  background-color: #F5F3ED;
+}
 
 #adresses .card {
   flex: 0 0 200px;
   width: 200px;
   height: 200px;
   border: 2px solid #ccc;
-
-
-
-
-
-
-
   margin: 10px;
   /* ← fallback spacing */
 }
@@ -3236,7 +2858,7 @@ Google map
 #adresses .nav-arrow {
   background-color: #d13775;
   /* Fuchsia background */
-  color: white;
+  color: #F5F3ED;
   /* White icon color */
   border: none;
   border-radius: 50%;
@@ -3264,7 +2886,7 @@ Google map
 #adresses .nav-arrow:hover {
   background-color: #ad2e61;
   /* Darker fuchsia on hover, consistent with other buttons */
-  color: white;
+  color: #F5F3ED;
 }
 
 /* Hide address navigation arrows on wider screens */
