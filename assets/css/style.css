@@ -1984,13 +1984,6 @@ Google map
   margin: 0;
 }
 
-.works-grid.works-grid-gut {
-  margin: 0 0 0 -10px;
-}
-
-.works-grid.works-grid-gut .work-item {
-  padding: 0 0 10px 10px;
-}
 
 .work-item>a {
   position: relative;
