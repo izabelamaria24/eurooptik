@@ -281,6 +281,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          /* ---------------------------------------------- */
 
         var worksgrid = $('#works-grid'),
+            worksgrid_copy = $('#works-grid-copy'), // Added for the new grid
             worksgrid_mode;
 
         if (worksgrid.hasClass('works-grid-masonry')) {
@@ -295,6 +296,16 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
                 itemSelector: '.work-item'
             });
         });
+
+        // Initialize Isotope for the copied grid
+        if (worksgrid_copy.length) {
+            worksgrid_copy.imagesLoaded(function () {
+                worksgrid_copy.isotope({
+                    layoutMode: worksgrid_mode, // Assuming same layout mode
+                    itemSelector: '.work-item'
+                });
+            });
+        }
 
         $('#filters a').click(function () {
             $('#filters .current').removeClass('current');
@@ -311,6 +322,43 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             });
 
             return false;
+        });
+
+        // Event listeners for the copied filters
+        $('#filters-copy a').click(function (e) {
+            e.preventDefault(); // Prevent default anchor behavior
+            var $this = $(this);
+            var selector = $this.attr('data-filter');
+            var $arrow = $this.find('.arrow-indicator'); // Get the arrow indicator
+
+            if ($this.hasClass('current')) {
+                // Clicked on the currently active button, toggle the grid display
+                worksgrid_copy.slideToggle(300, function () {
+                    // Toggle arrow direction based on grid visibility
+                    if (worksgrid_copy.is(':visible')) {
+                        $this.addClass('grid-open');
+                    } else {
+                        $this.removeClass('grid-open');
+                    }
+                });
+            } else {
+                // Clicked on a new filter button or the first click
+                $('#filters-copy .current').removeClass('current').removeClass('grid-open'); // Also remove grid-open from previously active
+                $this.addClass('current').addClass('grid-open'); // Add grid-open to the new active button
+
+                // Ensure the grid is visible, then filter
+                worksgrid_copy.slideDown(300, function () { // 300ms animation
+                    worksgrid_copy.isotope({
+                        filter: selector,
+                        animationOptions: {
+                            duration: 750,
+                            easing: 'linear',
+                            queue: false
+                        }
+                    });
+                    worksgrid_copy.isotope('layout'); // Force a re-layout after filtering
+                });
+            }
         });
 
         // Initialize Magnific Popup for portfolio items
