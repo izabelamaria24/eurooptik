@@ -2,7 +2,7 @@
 
 /* Add a nice gray background to the team section */
 #echipa-noastra {
-    background-color: #ebe9e0;
+    background-color: #F5F3ED;
     position: relative;
 }
 
@@ -31,22 +31,43 @@
     margin-bottom: 40px;
 }
 
-.team-filter-btn {
-    border-radius: 30px;
+
+#filter-button {
+    font-size: 16px;
     background-color: #d13775;
-    color: #fff;
-    box-shadow: 0 2px 5px rgba(209, 55, 117, 0.2);
+    color: #F5F3ED;
+    padding: 0px 6px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    word-break: break-word;
+    width: 100%;
+    line-height: 1.4;
+}
+
+#filter-button:hover {
+    background-color: #ad2e61;
+}
+
+.team-filter-btn {
+    font-family: "Roboto", sans-serif;
+    border-radius: 30px;
+    font-size: 16px;
+    background-color: #d13775;
+    color: #F5F3ED;
     transition: all 0.3s ease;
 }
 
 .team-filter-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(209, 55, 117, 0.3);
 }
 
 .team-filter-btn.btn-d,
 .team-filter-btn.active {
-    box-shadow: 0 4px 10px rgba(209, 55, 117, 0.4);
     font-weight: bold;
 }
 
