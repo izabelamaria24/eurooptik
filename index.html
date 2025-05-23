@@ -34,6 +34,9 @@
   <link href="assets/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
   <!-- Main stylesheet and color file-->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/team.css" rel="stylesheet">
+  <link href="assets/css/team-responsive.css" rel="stylesheet">
+  <link href="assets/css/team-enhancements.css" rel="stylesheet">
 </head>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
@@ -160,7 +163,6 @@
             <div class="col-sm-4 col-xs-12">
               <div class="features-item">
                 <div class="features-icon" id="features-img">
-                  <img src="assets/images/green copy.png">
                 </div>
                 <h3 class="features-title" style="font-size:20px;">Stellest</h3>
               </div>
@@ -185,85 +187,215 @@
         </div>
       </section>
 
-      <section class="module pb-0" id="works" style="background-color: #504c4c;">
+      <!-- ECHIPA NOASTRA Section -->
+      <section class="module" id="echipa-noastra">
+        <div class="team-section-decor"></div>
         <div class="container">
           <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-              <h2 class="module-title" style="color: #F5F3ED;">ECHIPA NOASTRĂ</h2>
+            <div class="col-sm-6 col-sm-offset-3 text-center">
+              <h3 class="module-title" style="font-size:30px;">ECHIPA
+                NOASTRĂ</h3>
+              <div class="module-subtitle">Medicii noștri specialiști oferă
+                servicii de înaltă calitate în toate locațiile</div>
+            </div>
+          </div>
+
+          <hr
+            style="width:100vw;height:2px;background:#b4b1b4;border:none;margin:15px 0 30px;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;">
+
+          <!-- Team Filter Buttons -->
+          <div class="row">
+            <div class="col-sm-12 text-center mb-40">
+              <div class="location-buttons-container">
+                <button type="button" class="btn btn-round team-filter-btn active" data-filter="all">Toți
+                  medicii</button>
+                <button type="button" class="btn btn-round team-filter-btn" data-filter="locatia-a">Bacău</button>
+                <button type="button" class="btn btn-round team-filter-btn" data-filter="locatia-b">Moinești</button>
+                <button type="button" class="btn btn-round team-filter-btn" data-filter="locatia-c">Comănești</button>
+                <button type="button" class="btn btn-round team-filter-btn" data-filter="locatia-d">Onești</button>
+                <button type="button" class="btn btn-round team-filter-btn" data-filter="locatia-e">Târgu Ocna</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Members Grid -->
+          <div class="row multi-columns-row">
+            <!-- Doctor 1 -->
+            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-a">
+              <div class="team-item">
+                <div class="team-image">
+                  <img src="assets/images/Angajati/Alina_Popa.png" alt="Alina Popa"
+                    style="width:100%; height:300px; object-fit:cover;">
+                  <div class="team-detail">
+                    <p class="font-serif">Specializare în oftalmologie
+                      pediatrică</p>
+                    <div class="team-social">
+                      <a href="#"><i class="fa fa-phone"></i></a>
+                      <a href="#"><i class="fa fa-envelope"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-descr">
+                  <div class="team-name">Dr. Alina Popa</div>
+                  <div class="team-role">Medic primar oftalmolog</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Doctor 2 -->
+            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-b">
+              <div class="team-item">
+                <div class="team-image">
+                  <img src="assets/images/Angajati/Ana_Miller.png" alt="Ana Miller"
+                    style="width:100%; height:300px; object-fit:cover;">
+                  <div class="team-detail">
+                    <p class="font-serif">Specialist în chirurgie
+                      refractivă</p>
+                    <div class="team-social">
+                      <a href="#"><i class="fa fa-phone"></i></a>
+                      <a href="#"><i class="fa fa-envelope"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-descr">
+                  <div class="team-name">Dr. Ana Miller</div>
+                  <div class="team-role">Medic specialist oftalmolog</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Doctor 3 -->
+            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-c">
+              <div class="team-item">
+                <div class="team-image">
+                  <img src="assets/images/Angajati/Anca_Craciun.png" alt="Anca Craciun"
+                    style="width:100%; height:300px; object-fit:cover;">
+                  <div class="team-detail">
+                    <p class="font-serif">Experiență în glaucom și boli
+                      retiniene</p>
+                    <div class="team-social">
+                      <a href="#"><i class="fa fa-phone"></i></a>
+                      <a href="#"><i class="fa fa-envelope"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-descr">
+                  <div class="team-name">Dr. Anca Crăciun</div>
+                  <div class="team-role">Medic specialist oftalmolog</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Doctor 4 -->
+            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-d">
+              <div class="team-item">
+                <div class="team-image">
+                  <img src="assets/images/Angajati/Andrei_Irimia.png" alt="Andrei Irimia"
+                    style="width:100%; height:300px; object-fit:cover;">
+                  <div class="team-detail">
+                    <p class="font-serif">Expert în chirurgia cataractei</p>
+                    <div class="team-social">
+                      <a href="#"><i class="fa fa-phone"></i></a>
+                      <a href="#"><i class="fa fa-envelope"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-descr">
+                  <div class="team-name">Dr. Andrei Irimia</div>
+                  <div class="team-role">Medic primar oftalmolog</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Doctor 5 -->
+            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-e">
+              <div class="team-item">
+                <div class="team-image">
+                  <img src="assets/images/Angajati/Cristina_Flondor.png" alt="Cristina Flondor"
+                    style="width:100%; height:300px; object-fit:cover;">
+                  <div class="team-detail">
+                    <p class="font-serif">Specializare în strabism și
+                      ambliopia</p>
+                    <div class="team-social">
+                      <a href="#"><i class="fa fa-phone"></i></a>
+                      <a href="#"><i class="fa fa-envelope"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-descr">
+                  <div class="team-name">Dr. Cristina Flondor</div>
+                  <div class="team-role">Medic primar oftalmolog</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Doctor 6 -->
+            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-a">
+              <div class="team-item">
+                <div class="team-image">
+                  <img src="assets/images/Angajati/Delia_Iftimie.png" alt="Delia Iftimie"
+                    style="width:100%; height:300px; object-fit:cover;">
+                  <div class="team-detail">
+                    <p class="font-serif">Specializare în boli ale polului
+                      anterior</p>
+                    <div class="team-social">
+                      <a href="#"><i class="fa fa-phone"></i></a>
+                      <a href="#"><i class="fa fa-envelope"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-descr">
+                  <div class="team-name">Dr. Delia Iftimie</div>
+                  <div class="team-role">Medic specialist oftalmolog</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Doctor 7 -->
+            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-b">
+              <div class="team-item">
+                <div class="team-image">
+                  <img src="assets/images/Angajati/Dana_Lupu.png" alt="Dana Lupu"
+                    style="width:100%; height:300px; object-fit:cover;">
+                  <div class="team-detail">
+                    <p class="font-serif">Expert în diagnosticul și
+                      tratamentul glaucomului</p>
+                    <div class="team-social">
+                      <a href="#"><i class="fa fa-phone"></i></a>
+                      <a href="#"><i class="fa fa-envelope"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-descr">
+                  <div class="team-name">Dr. Dana Lupu</div>
+                  <div class="team-role">Medic primar oftalmolog</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Doctor 8 -->
+            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-c">
+              <div class="team-item">
+                <div class="team-image">
+                  <img src="assets/images/Angajati/Roxana_Lungu.png" alt="Roxana Lungu"
+                    style="width:100%; height:300px; object-fit:cover;">
+                  <div class="team-detail">
+                    <p class="font-serif">Specialist în patologia
+                      retiniană</p>
+                    <div class="team-social">
+                      <a href="#"><i class="fa fa-phone"></i></a>
+                      <a href="#"><i class="fa fa-envelope"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-descr">
+                  <div class="team-name">Dr. Roxana Lungu</div>
+                  <div class="team-role">Medic specialist oftalmolog</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 text-center">
-              <ul class="filter" id="filters">
-                <li><a class="current wow fadeInUp" href="#" data-filter="*" id="filter-button">Dr. oftalmologi</a>
-                </li>
-                <li><a class="wow fadeInUp" href="#" data-filter=".illustration" data-wow-delay="0.2s"
-                    id="filter-button">Clinica Bacău</a></li>
-                <li><a class="wow fadeInUp" href="#" data-filter=".illustration" data-wow-delay="0.2s"
-                    id="filter-button">Cabinet Bacău</a></li>
-                <li><a class="wow fadeInUp" href="#" data-filter=".marketing" data-wow-delay="0.4s"
-                    id="filter-button">Cabinet Moinești</a></li>
-                <li><a class="wow fadeInUp" href="#" data-filter=".photography" data-wow-delay="0.6s"
-                    id="filter-button">Cabinet Onești</a></li>
-                <li><a class="wow fadeInUp" href="#" data-filter=".webdesign" data-wow-delay="0.6s"
-                    id="filter-button">Cabinet Comănești</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <ul class="works-grid works-grid-gut works-hover-w" id="works-grid">
-          <li class="work-item illustration webdesign">
-            <a href="assets/images/green.png" data-caption="test">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item illustration webdesign">
-            <a href="assets/images/green.png" data-caption="test">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item marketing photography">
-            <a href="assets/images/green.png" data-caption="Bag MockUp - Marketing">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item illustration photography">
-            <a href="assets/images/green.png" data-caption="Disk Cover - Illustration">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item marketing photography">
-            <a href="assets/images/green.png" data-caption="Business Card - Photography">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item illustration webdesign">
-            <a href="assets/images/green.png" data-caption="Business Card - Webdesign">
-              <div class="work-image"><img src="assets/images/green.png" alt=" Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item marketing webdesign">
-            <a href="assets/images/green.png" data-caption="Business Cards in paper clip - Marketing">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-        </ul>
       </section>
 
       <section class="module" id="pricing">
@@ -314,6 +446,25 @@
 
               <div class="col-sm-4 col-xs-12">
                 <div class="price-table complex" style="border: 2px solid #4aa190a2;">
+                  <h4>Consultație Complexă</h4>
+                  <div class="borderline"></div>
+                  <p class="price"><span>RON</span><span class="price-value" data-bacau="250" data-moinesti="230"
+                      data-comanesti="220">---</span></p>
+                  <div class="price-details">
+                    <ul class="price-details">
+                      <li>Stabilire dioptrii</li>
+                      <li>Tensiune oculara</li>
+                      <li>Fund de ochi</li>
+                      <li>Glaucom</li>
+                      <li><span>Cataracta</span></li>
+                    </ul>
+                  </div>
+                  <a class="btn btn-d btn-round" id="programare-button"
+                    href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a>
+                </div>
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <div class="price-table complex">
                   <h4>Consultație Complexă</h4>
                   <div class="borderline"></div>
                   <p class="price"><span>RON</span><span class="price-value" data-bacau="250" data-moinesti="230"
@@ -437,157 +588,247 @@
           </li>
         </ul>
       </section>
+      <div class="col-sm-4 col-xs-12">
+        <div class="price-table premium" style="border: 2px solid #D13775;">
+          <h4>Consultație Premium</h4>
+          <div class="borderline"></div>
+          <p class="price"><span>RON</span><span class="price-value" data-bacau="350" data-moinesti="320"
+              data-comanesti="300">---</span></p>
+          <div class="price-details">
+            <ul class="price-details">
+              <li>Stabilire dioptrii</li>
+              <li>Tensiune oculara</li>
+              <li>Fund de ochi</li>
+              <li>Glaucom</li>
+              <li>Cataracta</li>
+            </ul>
+          </div>
+          <a class="btn btn-d btn-round" id="programare-button"
+            href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </section>
 
-      <section class="module" id="team" style="background-color: #504c4c;">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-              <h2 class="module-title" style="color: #F5F3ED;">TESTIMONIALE</h2>
+    <section class="module" id="team" style="background-color: #504c4c;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <h2 class="module-title" style="color: #F5F3ED;">TESTIMONIALE</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
+            <div class="team-item">
+              <div class="team-image"><img src="assets/images/green copy.png" alt="Dr. Marius Ionescu" />
+                <div class="team-detail">
+                  <p>"Una dintre cele mai placute experiente medicale.
+                    Calm si profesionism."</p>
+                </div>
+              </div>
+              <div class="team-descr">
+                <div class="team-name" style="color: #F5F3ED;">Maria
+                  Popescu</div>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
-              <div class="team-item">
-                <div class="team-image"><img src="assets/images/green copy.png" alt="Dr. Marius Ionescu" />
-                  <div class="team-detail">
-                    <p>"Una dintre cele mai placute experiente medicale.
-                      Calm si profesionism."</p>
-                  </div>
-                </div>
-                <div class="team-descr">
-                  <div class="team-name" style="color: #F5F3ED;">Maria
-                    Popescu</div>
+          <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
+            <div class="team-item">
+              <div class="team-image"><img src="assets/images/green copy.png" alt="Dr. Elena Popescu" />
+                <div class="team-detail">
+                  <p>"Una dintre cele mai placute experiente medicale.
+                    Calm si profesionism."</p>
                 </div>
               </div>
-            </div>
-            <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
-              <div class="team-item">
-                <div class="team-image"><img src="assets/images/green copy.png" alt="Dr. Elena Popescu" />
-                  <div class="team-detail">
-                    <p>"Una dintre cele mai placute experiente medicale.
-                      Calm si profesionism."</p>
-                  </div>
-                </div>
-                <div class="team-descr">
-                  <div class="team-name" style="color: #F5F3ED;">Maria
-                    Popescu</div>
-                </div>
+              <div class="team-descr">
+                <div class="team-name" style="color: #F5F3ED;">Maria
+                  Popescu</div>
               </div>
             </div>
-            <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
-              <div class="team-item">
-                <div class="team-image"><img src="assets/images/green copy.png" alt="Andreea Dumitrescu" />
-                  <div class="team-detail">
-                    <p>"Una dintre cele mai placute experiente medicale.
-                      Calm si profesionism."</p>
-                  </div>
-                </div>
-                <div class="team-descr">
-                  <div class="team-name" style="color: #F5F3ED;;">Maria
-                    Popescu</div>
+          </div>
+          <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
+            <div class="team-item">
+              <div class="team-image"><img src="assets/images/green copy.png" alt="Andreea Dumitrescu" />
+                <div class="team-detail">
+                  <p>"Una dintre cele mai placute experiente medicale.
+                    Calm si profesionism."</p>
                 </div>
               </div>
+              <div class="team-descr">
+                <div class="team-name" style="color: #F5F3ED;;">Maria
+                  Popescu</div>
+              </div>
             </div>
-            <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
-              <div class="team-item">
-                <div class="team-image"><img src="assets/images/green copy.png" alt="Mihai Stancu" />
-                  <div class="team-detail">
-                    <p>"Una dintre cele mai placute experiente medicale.
-                      Calm si profesionism."</p>
-                  </div>
+          </div>
+          <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
+            <div class="team-item">
+              <div class="team-image"><img src="assets/images/green copy.png" alt="Mihai Stancu" />
+                <div class="team-detail">
+                  <p>"Una dintre cele mai placute experiente medicale.
+                    Calm si profesionism."</p>
                 </div>
-                <div class="team-descr">
-                  <div class="team-name" style="color: #F5F3ED;">Maria
-                    Popescu</div>
-                </div>
+              </div>
+              <div class="team-descr">
+                <div class="team-name" style="color: #F5F3ED;">Maria
+                  Popescu</div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
 
-
-      <section class="module" id="adresses">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 text-center">
-              <h2 class="module-title">CONTACT</h2>
-              <hr
-                style="width:100vw;height:2px;background:#b4b1b4;border:none;margin:-30px 0 0px;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;">
+    <section class="module" id="testimonials" style="background-color: #504c4c;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <h2 class="module-title" style="color: #F5F3ED;">TESTIMONIALE</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
+            <div class="team-item">
+              <div class="team-image"><img src="assets/images/green copy.png" alt="Dr. Marius Ionescu" />
+                <div class="team-detail">
+                  <p>"Una dintre cele mai placute experiente medicale.
+                    Calm si profesionism."</p>
+                </div>
+              </div>
+              <div class="team-descr">
+                <div class="team-name" style="color: #F5F3ED;">Maria
+                  Popescu</div>
+              </div>
             </div>
           </div>
-          <div class="addresses-wrapper">
-            <div class="d-flex flex-wrap justify-content-center mt-40" id="addressCards">
-              <!-- Card 1 -->
-              <div class="card text-center m-2">
-                <div class="card-body p-3">
-                  <h5 class="card-title">Bacău</h5>
-                  <p class="card-text mb-1">Str. Exemplu 1</p>
-                  <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
-                    567 890</p>
-                  <p class="card-text"><i class="fa fa-envelope"></i>
-                    bacau@eurooptik.ro</p>
+          <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
+            <div class="team-item">
+              <div class="team-image"><img src="assets/images/green copy.png" alt="Dr. Elena Popescu" />
+                <div class="team-detail">
+                  <p>"Una dintre cele mai placute experiente medicale.
+                    Calm si profesionism."</p>
                 </div>
               </div>
-              <!-- Card 2 -->
-              <div class="card text-center m-2">
-                <div class="card-body p-3">
-                  <h5 class="card-title">Moinești</h5>
-                  <p class="card-text mb-1">Str. Exemplu 2</p>
-                  <p class="card-text mb-1"><i class="fa fa-phone"></i> 0235
-                    678 901</p>
-                  <p class="card-text"><i class="fa fa-envelope"></i>
-                    moinesti@eurooptik.ro</p>
-                </div>
-              </div>
-              <!-- Card 3 -->
-              <div class="card text-center m-2">
-                <div class="card-body p-3">
-                  <h5 class="card-title">Bacău</h5>
-                  <p class="card-text mb-1">Str. Exemplu 1</p>
-                  <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
-                    567 890</p>
-                  <p class="card-text"><i class="fa fa-envelope"></i>
-                    bacau@eurooptik.ro</p>
-                </div>
-              </div>
-              <!-- Card 4 -->
-              <div class="card text-center m-2">
-                <div class="card-body p-3">
-                  <h5 class="card-title">Moinești</h5>
-                  <p class="card-text mb-1">Str. Exemplu 2</p>
-                  <p class="card-text mb-1"><i class="fa fa-phone"></i> 0235
-                    678 901</p>
-                  <p class="card-text"><i class="fa fa-envelope"></i>
-                    moinesti@eurooptik.ro</p>
-                </div>
-              </div>
-              <!-- Card 5 -->
-              <div class="card text-center m-2">
-                <div class="card-body p-3">
-                  <h5 class="card-title">Bacău</h5>
-                  <p class="card-text mb-1">Str. Exemplu 1</p>
-                  <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
-                    567 890</p>
-                  <p class="card-text"><i class="fa fa-envelope"></i>
-                    bacau@eurooptik.ro</p>
-                </div>
+              <div class="team-descr">
+                <div class="team-name" style="color: #F5F3ED;">Maria
+                  Popescu</div>
               </div>
             </div>
-            <div class="address-navigation">
-              <button class="nav-arrow prev-arrow" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
-              <button class="nav-arrow next-arrow" aria-label="Next"><i class="fa fa-chevron-right"></i></button>
+          </div>
+          <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
+            <div class="team-item">
+              <div class="team-image"><img src="assets/images/green copy.png" alt="Andreea Dumitrescu" />
+                <div class="team-detail">
+                  <p>"Una dintre cele mai placute experiente medicale.
+                    Calm si profesionism."</p>
+                </div>
+              </div>
+              <div class="team-descr">
+                <div class="team-name" style="color: #F5F3ED;;">Maria
+                  Popescu</div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3">
+            <div class="team-item">
+              <div class="team-image"><img src="assets/images/green copy.png" alt="Mihai Stancu" />
+                <div class="team-detail">
+                  <p>"Una dintre cele mai placute experiente medicale.
+                    Calm si profesionism."</p>
+                </div>
+              </div>
+              <div class="team-descr">
+                <div class="team-name" style="color: #F5F3ED;">Maria
+                  Popescu</div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <hr class="divider-d">
-      <footer class="footer bg-dark">
-        <p>Date de contact, meniu din nou, hyperlinks cu retele sociale, buton
-          de programare</p>
-      </footer>
+    <section class="module" id="adresses">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h2 class="module-title">CONTACT</h2>
+            <hr
+              style="width:100vw;height:2px;background:#b4b1b4;border:none;margin:-30px 0 0px;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;">
+          </div>
+        </div>
+        <div class="addresses-wrapper">
+          <div class="d-flex flex-wrap justify-content-center mt-40" id="addressCards">
+            <!-- Card 1 -->
+            <div class="card text-center m-2">
+              <div class="card-body p-3">
+                <h5 class="card-title">Bacău</h5>
+                <p class="card-text mb-1">Str. Exemplu 1</p>
+                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
+                  567 890</p>
+                <p class="card-text"><i class="fa fa-envelope"></i>
+                  bacau@eurooptik.ro</p>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card text-center m-2">
+              <div class="card-body p-3">
+                <h5 class="card-title">Moinești</h5>
+                <p class="card-text mb-1">Str. Exemplu 2</p>
+                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0235
+                  678 901</p>
+                <p class="card-text"><i class="fa fa-envelope"></i>
+                  moinesti@eurooptik.ro</p>
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card text-center m-2">
+              <div class="card-body p-3">
+                <h5 class="card-title">Bacău</h5>
+                <p class="card-text mb-1">Str. Exemplu 1</p>
+                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
+                  567 890</p>
+                <p class="card-text"><i class="fa fa-envelope"></i>
+                  bacau@eurooptik.ro</p>
+              </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="card text-center m-2">
+              <div class="card-body p-3">
+                <h5 class="card-title">Moinești</h5>
+                <p class="card-text mb-1">Str. Exemplu 2</p>
+                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0235
+                  678 901</p>
+                <p class="card-text"><i class="fa fa-envelope"></i>
+                  moinesti@eurooptik.ro</p>
+              </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="card text-center m-2">
+              <div class="card-body p-3">
+                <h5 class="card-title">Bacău</h5>
+                <p class="card-text mb-1">Str. Exemplu 1</p>
+                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
+                  567 890</p>
+                <p class="card-text"><i class="fa fa-envelope"></i>
+                  bacau@eurooptik.ro</p>
+              </div>
+            </div>
+          </div>
+          <div class="address-navigation">
+            <button class="nav-arrow prev-arrow" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
+            <button class="nav-arrow next-arrow" aria-label="Next"><i class="fa fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider-d">
+    <footer class="footer bg-dark">
+      <p>Date de contact, meniu din nou, hyperlinks cu retele sociale, buton
+        de programare</p>
+    </footer>
     </div>
 
     <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
@@ -609,6 +850,47 @@
   <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
+
+  <!-- Inline script to ensure filtering works correctly -->
+  <script>
+    $(document).ready(function () {
+      // Direct team filter implementation
+      $('.team-filter-btn').on('click', function () {
+        var filterValue = $(this).attr('data-filter');
+
+        // Update active state on buttons
+        $('.team-filter-btn').removeClass('active');
+        $(this).addClass('active');
+
+        // All buttons remain magenta now, just track active state
+        // No need to toggle btn-d and btn-border-d classes anymore
+
+        // First remove any existing animation classes
+        $('.team-member').removeClass('fadeIn cardAppear');
+
+        // Show/hide team members based on filter with animation - show simultaneously
+        if (filterValue === 'all') {
+          // Show all members simultaneously
+          $('.team-member').show().addClass('cardAppear');
+        } else {
+          $('.team-member').hide();
+          // Show filtered members simultaneously
+          $('.team-member[data-category="' + filterValue + '"]').show().addClass('cardAppear');
+        }
+
+        return false;
+      });
+
+      // Make sure initial state has the "all" button properly styled with active class
+      $('.team-filter-btn[data-filter="all"]').addClass('active');
+
+      // Add initial animation to all team members - show simultaneously
+      $('.team-member').addClass('fadeIn');
+    });
+  </script>
+
+  <!-- Team section specific script -->
+  <script src="assets/js/team.js"></script>
 
 </body>
 

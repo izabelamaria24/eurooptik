@@ -1,0 +1,70 @@
+/* Mobile optimizations for the doctor team section */
+
+@media (max-width: 767px) {
+
+    /* Center team members on mobile */
+    #echipa-noastra .row.multi-columns-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Make filter buttons more touchable on mobile */
+    .location-buttons-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 90%;
+        margin: 0 auto 20px;
+    }
+
+    /* Special styling for "All doctors" button */
+    .team-filter-btn[data-filter="all"] {
+        grid-column: span 2;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .team-filter-btn {
+        margin: 5px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* More breathing room between sections on mobile */
+    .module {
+        padding: 40px 0;
+    }
+
+    /* Better typography on mobile */
+    .module-title {
+        font-size: 24px !important;
+    }
+
+    .module-subtitle {
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+    /* Doctor cards better spacing */
+    .team-member {
+        margin-bottom: 30px;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+    .team-filter-btn {
+        font-size: 14px;
+        padding: 8px 12px;
+        min-width: 80%;
+        margin: 4px auto;
+    }
+
+    .location-buttons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
