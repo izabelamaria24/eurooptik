@@ -1804,222 +1804,33 @@ Google map
   letter-spacing: -0.1px;
 }
 
-#location-button:hover {
-  background-color: #ad2e61;
-}
-
-#programare-button {
-  border: none;
-  border-radius: 30px;
-  display: block;
-  margin: 5px 10px;
-  font-size: 18px;
-  letter-spacing: -0.1px;
-  background-color: #504C4C;
-}
-
-/* Copy of #filters for #filters-copy */
-#filters-copy {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding-left: 0;
-  list-style: none;
-  gap: 8px;
-  margin: 0 5px;
-  margin-bottom: 30px;
-}
-
-#filters-copy li {
-  margin: 0;
-}
-
-/* three per row on small viewports for #filters-copy */
+/* Responsive layout for location buttons */
 @media (max-width: 767px) {
-  #filters-copy li {
-    flex: 0 0 calc(33.3333% - 6px);
-    max-width: calc(33.3333% - 6px);
+  .location-buttons-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    margin: 0 auto 20px;
+  }
+
+  #location-button {
+    width: 100%;
     margin: 0;
+    white-space: normal;
+    height: auto;
+    min-height: 44px;
   }
 }
 
-/* Button styling for the copied section */
-#filters-copy li a.filters-copy-btn {
-  font-size: 16px;
-  background-color: #16987E;
-  /* Changed to teal */
-  color: #F5F3ED;
-  /* Original text color */
-  padding: 10px 25px 10px 15px;
-  /* Adjusted padding for text and arrow */
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  min-height: 44px;
-  /* Minimum height */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  word-break: break-word;
-  width: 100%;
-  line-height: 1.4;
-  position: relative;
-  /* Crucial for arrow positioning */
-  text-decoration: none;
-  /* Ensure no underline */
-  border-radius: 2px;
-  /* Match other buttons if necessary */
+@media (max-width: 480px) {
+  .location-buttons-container {
+    grid-template-columns: 1fr;
+  }
 }
 
-#filters-copy li a.filters-copy-btn:hover {
-  background-color: #127a66;
-  /* Changed to a darker teal for hover */
-  color: #F5F3ED;
-}
-
-/* Arrow indicator styles */
-#filters-copy li a.filters-copy-btn .arrow-indicator {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid #FFFFFF;
-  /* White arrow, pointing down */
-  border-bottom: none;
-  /* Explicitly no bottom border */
-  position: absolute;
-  top: 8px;
-  /* Adjust for vertical position */
-  right: 8px;
-  /* Adjust for horizontal position */
-  transition: border-color 0.3s ease, border-width 0.3s ease;
-  /* Smooth transition for arrow change */
-}
-
-#filters-copy li a.filters-copy-btn.grid-open .arrow-indicator {
-  border-top: none;
-  /* Remove top border (downward part) */
-  border-bottom: 5px solid #FFFFFF;
-  /* White arrow, pointing up */
-}
-
-/* Copy of #works-grid for #works-grid-copy */
-#works-grid-copy {
-  list-style: none;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0;
-  width: auto;
-  max-width: 1200px;
-  display: none;
-  /* Initially hide the grid */
-}
-
-#works-grid>li.work-item {
-  max-width: 160px;
-}
-
-/* Apply max-width to work-items within #works-grid-copy */
-#works-grid-copy>li.work-item {
-  max-width: 160px;
-}
-
-/* Update text color for #works-copy section */
-#works-copy .module-title,
-#works-copy .team-name,
-#works-copy .team-role {
-  color: #504c4c !important;
-  /* Added !important to ensure override */
-}
-
-.works-grid.works-grid-gut .work-item {
-  padding: 0 0 0 10px;
-}
-
-.work-item>a {
-  overflow: hidden;
-}
-
-.work-image {
-  position: relative;
-  overflow: hidden;
-}
-
-.work-image img {
-  overflow: hidden;
-  width: 180px;
-  height: 200px;
-  object-fit: cover;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.work-image:after {
-  position: absolute;
-  display: block;
-  content: "";
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-}
-
-.work-caption {
-  width: 100%;
-  padding: 0 20px;
-  opacity: 0;
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  text-align: center;
-  overflow: hidden;
-}
-
-.work-title {
-  font-size: 14px;
-  color: #F5F3ED;
-  margin: 0 0 6px;
-}
-
-.work-descr {
-  color: #aaa;
-}
-
-.work-item:hover .work-image:after {
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.work-item:hover .work-image>img {
-  -webkit-transform: scale(1.1) rotate(2deg);
-  -ms-transform: scale(1.1) rotate(2deg);
-  transform: scale(1.1) rotate(2deg);
-}
-
-.work-item:hover .work-caption {
-  bottom: 50%;
-  opacity: 1;
-  z-index: 3;
-  -webkit-transform: translateY(50%);
-  -ms-transform: translateY(50%);
-  transform: translateY(50%);
-}
-
-.works-grid.works-hover-w .work-title {
-  color: #504C4C;
-}
-
-.works-grid.works-hover-w .work-item:hover .work-image:after {
-  background: rgba(228, 226, 221, 0.8);
-}
-
-.works-grid.works-hover-g .work-item:hover .work-image:after {
-  background: #6fe29e;
-  background: linear-gradient(135deg, rgba(111, 226, 158, 0.8) 0%, rgba(91, 218, 209, 0.8) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6fe29e', endColorstr='#5bdad1', GradientType=1);
-  opacity: 1;
+#location-button:hover {
+  background-color: #ad2e61;
 }
 
 /*--------------------------------------------------------------

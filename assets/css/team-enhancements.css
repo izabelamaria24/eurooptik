@@ -31,31 +31,9 @@
     margin-bottom: 40px;
 }
 
-
-#filter-button {
-    font-size: 16px;
-    background-color: #d13775;
-    color: #F5F3ED;
-    padding: 0px 6px;
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    word-break: break-word;
-    width: 100%;
-    line-height: 1.4;
-}
-
-#filter-button:hover {
-    background-color: #ad2e61;
-}
-
 .team-filter-btn {
     font-family: "Roboto", sans-serif;
-    border-radius: 30px;
+    /* border-radius: 20px; */
     font-size: 16px;
     background-color: #d13775;
     color: #F5F3ED;
