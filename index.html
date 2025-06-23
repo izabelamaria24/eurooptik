@@ -81,8 +81,11 @@
             </li>
             <li><a class="section-scroll" href="#adresses" id="navbar-button">Contact</a>
             </li>
-            <li><a class="section-scroll" id="navbar-button-programare"
-                href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a></li>
+            <!-- <li><a class="section-scroll" id="navbar-button-programare"
+                href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a></li> -->
+            <li>
+              <a class="section-scroll" class="btn-programare" id="navbar-button-programare" href="#" onclick="showProgramareSection(); return false;">Programare</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -98,8 +101,7 @@
               style="max-width: 50%; height: auto; margin-bottom: -40px;">
           </div>
 
-          <a class="section-scroll btn btn-border-w btn-round" href="https://eurooptik.ro.programarionline.sophtha.com/"
-            id="home-appointment-button">Programează-te</a>
+          <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button" href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
           <a class="section-scroll btn btn-border-w btn-round" href="#services" id="home-cine-suntem-button">Cine
             Suntem</a>
 
@@ -661,6 +663,17 @@
       </div>
     </section>
 
+    <section id="programare-section" style="display:none; padding:40px 0; background:#f9f9f9;">
+      <button onclick="hideProgramareSection()" style="float:right; margin:10px; font-size:22px; font-weight:bold; background:none; border:none; cursor:pointer;">&times;</button>
+      <h2>Programează-te online</h2>
+      <div style="width:100%; max-width:900px; margin:auto;">
+        <iframe 
+          src="https://eurooptik.ro.programarionline.sophtha.com/" 
+          style="width:100%; min-height:600px; border:none;"
+          title="Programare online"></iframe>
+      </div>
+    </section>
+
     <hr class="divider-d">
     <footer class="footer bg-dark">
       <p>Date de contact, meniu din nou, hyperlinks cu retele sociale, buton
@@ -724,6 +737,17 @@
       // Add initial animation to all team members - show simultaneously
       $('.team-member').addClass('fadeIn');
     });
+  </script>
+
+  <script>
+    function showProgramareSection() {
+      const section = document.getElementById('programare-section');
+      section.style.display = 'block';
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+    function hideProgramareSection() {
+      document.getElementById('programare-section').style.display = 'none';
+    }
   </script>
 
   <!-- Team section specific script -->
