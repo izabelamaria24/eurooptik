@@ -1,0 +1,143 @@
+.footer {
+  background: #00332b;
+  color: #fff;
+  padding: 0;
+  font-family: inherit;
+  height: 100%;
+}
+
+.footer-message {
+  background: #d13c7a;
+  color: #fff;
+  text-align: center;
+  padding: 32px 0 24px 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.footer-message h2 {
+  margin: 0;
+  font-size: 2.8rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.footer-appointment-btn {
+  background: #00332b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 60px;
+  font-size: 2rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.footer-appointment-btn:hover {
+  background: #005c4b;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  background: #00332b;
+  padding: 48px 0 0 0;
+  min-height: 260px;
+  position: relative;
+  padding: 5% 0;
+}
+
+.footer-locations {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: flex-start;
+  color: #fff;
+  margin-left: 3vw;
+  margin-top: 0;
+  position: static;
+}
+
+/* .footer-location { 
+  padding: 10px 0;
+} */
+
+.footer-location-name {
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.footer-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.6rem;
+  margin: 0 10px;
+  transition: color 0.2s;
+}
+
+.footer-center {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  height: 100%;
+  padding: 0 0 32px 0;
+}
+
+.footer-menu {
+  display: flex;
+  gap: 36px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-bottom: 0;
+}
+
+.footer-logo img {
+  max-width: 90vw;
+  height: 75%;
+  width: 75%;
+  margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    min-height: unset;
+    padding-bottom: 32px;
+  }
+  .footer-center {
+    height: auto;
+    padding: 0;
+    justify-content: flex-start;
+  }
+  .footer-locations {
+    margin-left: 0;
+    margin-bottom: 24px;
+  }
+}
+
+/* for white gap */
+footer.footer {
+  background: #00332b;
+}
