@@ -101,6 +101,7 @@
   flex-wrap: wrap;
   margin-bottom: 0;
   margin-top: 0;
+  font-weight: 500;
 }
 
 .footer-logo {
@@ -110,6 +111,16 @@
   justify-content: flex-end;
   gap: 6px;
   margin-bottom: 0;
+  position: relative;
+}
+
+.footer-location-icon-container {
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-decoration: underline;
 }
 
 .footer-logo img {
@@ -141,3 +152,7 @@
 footer.footer {
   background: #00332b;
 }
+
+.location-icon {
+  margin-right: 8px;
+} 
