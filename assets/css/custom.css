@@ -1,5 +1,6 @@
 /* Custom styles for one-page functionality */
 
+
 /* Portfolio image cursor */
 .portfolio-image {
     cursor: pointer;
@@ -401,17 +402,6 @@
 
     textarea.form-control {
         height: 120px;
-    }
-
-    /* Footer mobile improvements */
-    .footer {
-        padding: 15px 0;
-    }
-
-    .footer .copyright,
-    .footer .footer-social-links {
-        text-align: center !important;
-        margin: 10px 0;
     }
 
     /* Ensure all pricing tables are centered on mobile */
