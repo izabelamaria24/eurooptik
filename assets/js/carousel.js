@@ -1,91 +1,81 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // --- Get main elements ---
     const viewport = document.querySelector('.carousel-viewport');
     const container = document.querySelector('.location-cards-container');
     const nav = document.querySelector('.carousel-nav');
+    const prevBtn = document.getElementById('prev-location');
+    const nextBtn = document.getElementById('next-location');
     
-    // --- NEW: Function to Randomize Card Order ---
-    // This runs once on page load to shuffle the cards.
-    function randomizeCards(containerElement) {
-        // Get all card elements as a true array
-        const cards = Array.from(containerElement.children);
-        
-        // Shuffle the array using the modern Fisher-Yates-like method
-        cards.sort(() => Math.random() - 0.5);
-        
-        // Append the cards back to the container in their new, random order
-        cards.forEach(card => containerElement.appendChild(card));
-    }
-
-    // --- Call the randomization function ONCE ---
-    randomizeCards(container);
-
-
-    // --- Carousel Logic (unchanged, but now works on the randomized order) ---
     let isCarouselActive = false;
     let autoPlayInterval;
     let currentIndex = 0;
     
+    function randomizeCards(containerElement) {
+        const cards = Array.from(containerElement.children);
+        cards.sort(() => Math.random() - 0.5);
+        cards.forEach(card => containerElement.appendChild(card));
+    }
+    randomizeCards(container);
+
+    let totalCards = 0; 
+    
+    function goToSlide(index) {
+        if (!isCarouselActive) return;
+        container.style.transform = `translateX(-${index * 100}%)`;
+        currentIndex = index;
+    }
+    
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalCards;
+        goToSlide(currentIndex);
+    }
+    
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+        goToSlide(currentIndex);
+    }
+
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayInterval = setInterval(nextSlide, 4000);
+    }
+
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+
+    const handleNextClick = () => nextSlide();
+    const handlePrevClick = () => prevSlide();
+    const handleMouseEnter = () => stopAutoPlay();
+    const handleMouseLeave = () => startAutoPlay();
+    
     function setupCarousel() {
         if (isCarouselActive) return;
         
-        const cards = container.querySelectorAll('.location-card');
-        const totalCards = cards.length;
-        // Re-fetch buttons inside setup to ensure they are the "live" ones
-        const prevBtn = document.getElementById('prev-location');
-        const nextBtn = document.getElementById('next-location');
-
-        function goToSlide(index) {
-            container.style.transform = `translateX(-${index * 100}%)`;
-            currentIndex = index;
-        }
-
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalCards;
-            goToSlide(currentIndex);
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + totalCards) % totalCards;
-            goToSlide(currentIndex);
-        }
-
-        function startAutoPlay() {
-            stopAutoPlay();
-            autoPlayInterval = setInterval(nextSlide, 4000);
-        }
-
-        function stopAutoPlay() {
-            clearInterval(autoPlayInterval);
-        }
-
-        // Event Listeners
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-        
-        viewport.addEventListener('mouseenter', stopAutoPlay);
-        viewport.addEventListener('mouseleave', startAutoPlay);
-
-        // Initialize
+        totalCards = container.querySelectorAll('.location-card').length;
         nav.style.display = 'flex';
-        goToSlide(0);
-        startAutoPlay();
+
+        nextBtn.addEventListener('click', handleNextClick);
+        prevBtn.addEventListener('click', handlePrevClick);
+        viewport.addEventListener('mouseenter', handleMouseEnter);
+        viewport.addEventListener('mouseleave', handleMouseLeave);
+        
         isCarouselActive = true;
+        goToSlide(0); 
+        // startAutoPlay();
     }
 
     function tearDownCarousel() {
         if (!isCarouselActive) return;
 
-        clearInterval(autoPlayInterval);
+        stopAutoPlay();
         container.style.transform = 'translateX(0)';
         nav.style.display = 'none';
         
-        // Clone and replace elements to safely remove event listeners
-        const oldViewport = viewport;
-        const newViewport = oldViewport.cloneNode(true);
-        oldViewport.parentNode.replaceChild(newViewport, oldViewport);
-
+        nextBtn.removeEventListener('click', handleNextClick);
+        prevBtn.removeEventListener('click', handlePrevClick);
+        viewport.removeEventListener('mouseenter', handleMouseEnter);
+        viewport.removeEventListener('mouseleave', handleMouseLeave);
+        
         isCarouselActive = false;
     }
 
@@ -97,10 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Initial check on page load
     handleResize();
 
-    // Listen for window resize events with debouncing
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
