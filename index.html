@@ -594,60 +594,68 @@
     <section id="adresses">
       <div class="container">
         <h2>LOCATIILE NOASTRE & CONTACT</h2>
+        
+        <div class="carousel-viewport">
+          <div class="location-cards-container">
 
-        <div class="location-cards-container">
+            <!-- Card 1: Clinica Bacau -->
+            <a href="https://www.google.com/maps/search/?api=1&query=Strada+Stefan+cel+Mare+7+Bacau" target="_blank" rel="noopener noreferrer" class="location-card card-bg-clinica">
+              <div class="card-content">
+                <h5>Clinica Bacau</h5>
+                <p class="location-address">str. Stefan cel Mare Nr.7</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 303</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
 
-          <!-- Card 1: Clinica Bacau -->
-          <div class="location-card card-bg-clinica">
-            <div class="card-content">
-              <h5>Clinica Bacau</h5>
-              <p>str. Stefan cel Mare Nr.7</p>
-              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 303</p>
-              <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
-            </div>
+            <!-- Card 2: Cabinet Bacau -->
+            <a href="https://www.google.com/maps/search/?api=1&query=Strada+Razboieni+7+Bacau" target="_blank" rel="noopener noreferrer" class="location-card card-bg-razboieni">
+              <div class="card-content">
+                <h5>Cabinet Bacau</h5>
+                <p class="location-address">str. Razboieni Nr.7</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 304</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
+            <!-- Card 3: Cabinet Moinesti -->
+            <a href="https://www.google.com/maps/search/?api=1&query=Strada+Tudor+Vladimirescu+177+Moinesti" target="_blank" rel="noopener noreferrer" class="location-card card-bg-moinesti">
+              <div class="card-content">
+                <h5>Cabinet Moinesti</h5>
+                <p class="location-address">str. T. Vladimirescu Nr.177</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 308</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
+            <!-- Card 4: Cabinet Comanesti -->
+            <a href="https://www.google.com/maps/search/?api=1&query=Strada+Nicolae+Ghica+2+Comanesti" target="_blank" rel="noopener noreferrer" class="location-card card-bg-comanesti">
+              <div class="card-content">
+                <h5>Cabinet Comanesti</h5>
+                <p class="location-address">str. Nicolae Ghica Nr.2</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 309</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
+            <!-- Card 5: Cabinet Onesti -->
+            <a href="https://www.google.com/maps/search/?api=1&query=Strada+Postei+6+Onesti" target="_blank" rel="noopener noreferrer" class="location-card card-bg-onesti">
+              <div class="card-content">
+                <h5>Cabinet Onesti</h5>
+                <p class="location-address">str. Postei Nr.6</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 306</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
           </div>
-
-          <!-- Card 2: Cabinet Bacau -->
-          <div class="location-card card-bg-razboieni">
-            <div class="card-content">
-              <h5>Cabinet Bacau</h5>
-              <p>str. Razboieni Nr.7</p>
-              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 304</p>
-              <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
-            </div>
-          </div>
-
-          <!-- Card 3: Cabinet Moinesti -->
-          <div class="location-card card-bg-moinesti">
-            <div class="card-content">
-              <h5>Cabinet Moinesti</h5>
-              <p>str. T. Vladimirescu Nr.177</p>
-              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 308</p>
-              <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
-            </div>
-          </div>
-
-          <!-- Card 4: Cabinet Comanesti -->
-          <div class="location-card card-bg-comanesti">
-            <div class="card-content">
-              <h5>Cabinet Comanesti</h5>
-              <p>str. Nicolae Ghica Nr.2</p>
-              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 309</p>
-              <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
-            </div>
-          </div>
-
-          <!-- Card 5: Cabinet Onesti -->
-          <div class="location-card card-bg-onesti">
-            <div class="card-content">
-              <h5>Cabinet Onesti</h5>
-              <p>str. Postei Nr.6</p>
-              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 306</p>
-              <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
-            </div>
-          </div>
-
         </div>
+
+        <div class="carousel-nav">
+          <button id="prev-location" class="carousel-btn"><i class="fa fa-chevron-left"></i></button>
+          <button id="next-location" class="carousel-btn"><i class="fa fa-chevron-right"></i></button>
+        </div>
+
       </div>
     </section>
 
@@ -687,6 +695,7 @@
   <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/carousel.js"></script>
 
   <!-- Inline script to ensure filtering works correctly -->
   <script>
