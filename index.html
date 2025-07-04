@@ -28,6 +28,7 @@
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
   <link href="assets/lib/animate.css/animate.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="assets/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="assets/lib/et-line-font/et-line-font.css" rel="stylesheet">
   <link href="assets/lib/flexslider/flexslider.css" rel="stylesheet">
@@ -37,6 +38,7 @@
   <!-- Main stylesheet and color file-->
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/team.css" rel="stylesheet">
+  <link href="assets/css/contact.css" rel="stylesheet">
   <link href="assets/css/team-responsive.css" rel="stylesheet">
   <link href="assets/css/team-enhancements.css" rel="stylesheet">
   <link href="assets/css/footer.css" rel="stylesheet">
@@ -93,7 +95,8 @@
             <!-- <li><a class="section-scroll" id="navbar-button-programare"
                 href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a></li> -->
             <li>
-              <a class="section-scroll" class="btn-programare" id="navbar-button-programare" href="#" onclick="showProgramareSection(); return false;">Programare</a>
+              <a class="section-scroll" class="btn-programare" id="navbar-button-programare" href="#"
+                onclick="showProgramareSection(); return false;">Programare</a>
             </li>
           </ul>
         </div>
@@ -110,7 +113,8 @@
               style="max-width: 50%; height: auto; margin-bottom: -40px;">
           </div>
 
-          <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button" href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
+          <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button"
+            href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
           <a class="section-scroll btn btn-border-w btn-round" href="#services" id="home-cine-suntem-button">Cine
             Suntem</a>
 
@@ -597,89 +601,86 @@
     </section>
 
 
-    <section class="module" id="adresses">
+    <section id="adresses">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-12 text-center">
-            <h2 class="module-title">CONTACT</h2>
-            <hr
-              style="width:100vw;height:2px;background:#b4b1b4;border:none;margin:-30px 0 0px;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;">
+        <h2>LOCATIILE NOASTRE & CONTACT</h2>
+
+        <div class="carousel-viewport">
+          <div class="location-cards-container">
+
+            <!-- Card 1: Clinica Bacau -->
+            <a href="https://g.co/kgs/CF3ZXSp" 
+            target="_blank" rel="noopener noreferrer" class="location-card card-bg-clinica">
+              <div class="card-content">
+                <h5>Clinica Bacau</h5>
+                <p class="location-address">str. Stefan cel Mare Nr.7</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 303</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
+            <!-- Card 2: Cabinet Bacau -->
+            <a href="https://g.co/kgs/kF5B3ia"
+             target="_blank" rel="noopener noreferrer" class="location-card card-bg-razboieni">
+              <div class="card-content">
+                <h5>Cabinet Bacau</h5>
+                <p class="location-address">str. Razboieni Nr.7</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 304</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
+            <!-- Card 3: Cabinet Moinesti -->
+            <a href="https://g.co/kgs/5yqERUP"
+             target="_blank" rel="noopener noreferrer" class="location-card card-bg-moinesti">
+              <div class="card-content">
+                <h5>Cabinet Moinesti</h5>
+                <p class="location-address">str. T. Vladimirescu Nr.177</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 308</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
+            <!-- Card 4: Cabinet Comanesti -->
+            <a href="https://g.co/kgs/c5HFjzz"
+             target="_blank" rel="noopener noreferrer" class="location-card card-bg-comanesti">
+              <div class="card-content">
+                <h5>Cabinet Comanesti</h5>
+                <p class="location-address">str. Nicolae Ghica Nr.2</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 309</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
+            <!-- Card 5: Cabinet Onesti -->
+            <a href="https://g.co/kgs/qbvbxa7"
+             target="_blank" rel="noopener noreferrer" class="location-card card-bg-onesti">
+              <div class="card-content">
+                <h5>Cabinet Onesti</h5>
+                <p class="location-address">str. Postei Nr.6</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 306</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
           </div>
         </div>
-        <div class="addresses-wrapper">
-          <div class="d-flex flex-wrap justify-content-center mt-40" id="addressCards">
-            <!-- Card 1 -->
-            <div class="card text-center m-2">
-              <div class="card-body p-3">
-                <h5 class="card-title">Bacău</h5>
-                <p class="card-text mb-1">Str. Exemplu 1</p>
-                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
-                  567 890</p>
-                <p class="card-text"><i class="fa fa-envelope"></i>
-                  bacau@eurooptik.ro</p>
-              </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="card text-center m-2">
-              <div class="card-body p-3">
-                <h5 class="card-title">Moinești</h5>
-                <p class="card-text mb-1">Str. Exemplu 2</p>
-                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0235
-                  678 901</p>
-                <p class="card-text"><i class="fa fa-envelope"></i>
-                  moinesti@eurooptik.ro</p>
-              </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="card text-center m-2">
-              <div class="card-body p-3">
-                <h5 class="card-title">Bacău</h5>
-                <p class="card-text mb-1">Str. Exemplu 1</p>
-                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
-                  567 890</p>
-                <p class="card-text"><i class="fa fa-envelope"></i>
-                  bacau@eurooptik.ro</p>
-              </div>
-            </div>
-            <!-- Card 4 -->
-            <div class="card text-center m-2">
-              <div class="card-body p-3">
-                <h5 class="card-title">Moinești</h5>
-                <p class="card-text mb-1">Str. Exemplu 2</p>
-                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0235
-                  678 901</p>
-                <p class="card-text"><i class="fa fa-envelope"></i>
-                  moinesti@eurooptik.ro</p>
-              </div>
-            </div>
-            <!-- Card 5 -->
-            <div class="card text-center m-2">
-              <div class="card-body p-3">
-                <h5 class="card-title">Bacău</h5>
-                <p class="card-text mb-1">Str. Exemplu 1</p>
-                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
-                  567 890</p>
-                <p class="card-text"><i class="fa fa-envelope"></i>
-                  bacau@eurooptik.ro</p>
-              </div>
-            </div>
-          </div>
-          <div class="address-navigation">
-            <button class="nav-arrow prev-arrow" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
-            <button class="nav-arrow next-arrow" aria-label="Next"><i class="fa fa-chevron-right"></i></button>
-          </div>
+
+        <div class="carousel-nav">
+          <button id="prev-location" class="carousel-btn"><i class="fa fa-chevron-left"></i></button>
+          <button id="next-location" class="carousel-btn"><i class="fa fa-chevron-right"></i></button>
         </div>
+
       </div>
     </section>
 
     <section id="programare-section" style="display:none; padding:40px 0; background:#f9f9f9;">
-      <button onclick="hideProgramareSection()" style="float:right; margin:10px; font-size:22px; font-weight:bold; background:none; border:none; cursor:pointer;">&times;</button>
+      <button onclick="hideProgramareSection()"
+        style="float:right; margin:10px; font-size:22px; font-weight:bold; background:none; border:none; cursor:pointer;">&times;</button>
       <h2>Programează-te online</h2>
       <div style="width:100%; max-width:900px; margin:auto;">
-        <iframe 
-          src="https://eurooptik.ro.programarionline.sophtha.com/" 
-          style="width:100%; min-height:600px; border:none;"
-          title="Programare online"></iframe>
+        <iframe src="https://eurooptik.ro.programarionline.sophtha.com/"
+          style="width:100%; min-height:600px; border:none;" title="Programare online"></iframe>
       </div>
     </section>
 
@@ -733,6 +734,7 @@
   <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/carousel.js"></script>
 
   <!-- Inline script to ensure filtering works correctly -->
   <script>
