@@ -42,6 +42,7 @@
   <link href="assets/css/team-responsive.css" rel="stylesheet">
   <link href="assets/css/team-enhancements.css" rel="stylesheet">
   <link href="assets/css/footer.css" rel="stylesheet">
+  <link href="assets/css/services.css" rel="stylesheet">
 
   <!-- Icons CDN -->
   <link
@@ -411,6 +412,36 @@
         </div>
       </section>
 
+      <section class="services-section">
+        <h2>SERVICIILE NOASTRE</h2>
+        <p>Selectați categoria pentru a vedea serviciile aferente.</p>
+
+        <!-- Alphabet navigation will be generated here by JavaScript -->
+        <nav id="alphabet-nav" class="alphabet-navigation"></nav>
+
+        <!-- Service content will be displayed here -->
+        <div id="service-content-wrapper" class="service-content-wrapper">
+            
+            <!-- Left Column: List of services for the selected letter -->
+            <div id="service-list-container" class="service-list-container">
+                <!-- Service list items (e.g., <ul>) will be inserted here -->
+            </div>
+
+            <!-- Right Column: Details of the selected service -->
+            <div id="service-details-container" class="service-details-container">
+                <div class="service-info">
+                    <p id="service-price" class="price"></p>
+                    <p id="service-description" class="description"></p>
+                    <p id="service-details" class="details"></p>
+                </div>
+                <div class="service-image-container">
+                    <img id="service-image" src="" alt="Service Image">
+                </div>
+            </div>
+
+        </div>
+      </section>
+
       <section class="module" id="pricing">
         <div class="container">
           <div class="row">
@@ -735,6 +766,7 @@
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/carousel.js"></script>
+  <script src="assets/js/services.js"></script>
 
   <!-- Inline script to ensure filtering works correctly -->
   <script>

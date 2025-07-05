@@ -1,0 +1,174 @@
+
+body {
+    background-color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.top-bar {
+    height: 30px;
+    background-color: #d8e8e8; 
+}
+
+.services-section {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #FFFDFD; 
+    text-align: center;
+}
+
+.services-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.services-section p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.alphabet-navigation {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.letter-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    cursor: not-allowed;
+    background-color: #ffffff;
+    color: #cccccc;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.letter-btn.available {
+    background-color: #fceeee; 
+    color: #333;
+    cursor: pointer;
+}
+
+.letter-btn.available:hover {
+    background-color: #f7dcdc;
+}
+
+.letter-btn.active {
+    background-color: #d94d7a;
+    color: white;
+}
+
+.service-content-wrapper {
+    display: flex;
+    background-color: #FDF8F8; 
+    padding: 40px;
+    gap: 40px;
+    min-height: 400px; 
+}
+
+.service-list-container {
+    flex: 1;
+    text-align: left;
+}
+
+.service-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.service-list-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    padding: 10px 0;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.3s;
+}
+
+.service-list-item:hover {
+    color: #000;
+}
+
+.service-list-item.active-service {
+    font-weight: 700;
+    color: #000;
+}
+
+.service-details-container {
+    flex: 2;
+    display: flex;
+    gap: 20px;
+}
+
+.service-info {
+    flex: 1;
+    text-align: left;
+    padding: 20px;
+    background-color: #FCEEEE;
+}
+
+.service-info .price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0;
+}
+
+.service-info .description {
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+.service-info .details {
+    font-size: 1rem;
+    color: #666;
+}
+
+.service-image-container {
+    flex: 1;
+}
+
+.service-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .service-content-wrapper, .service-details-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .letter-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    .services-section h2 {
+        font-size: 2rem;
+    }
+    .service-list-item {
+        font-size: 1.5rem;
+    }
+}
