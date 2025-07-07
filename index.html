@@ -587,49 +587,124 @@
               </style>
             </div>
           </div>
-          <script>
-            // Pricing card navigation without wrap-around
+            <style>
+            /* Animation for pricing card transitions */
+            .pricing-card {
+              transition: opacity 0.4s cubic-bezier(.4,0,.2,1), transform 0.4s cubic-bezier(.4,0,.2,1);
+              opacity: 0;
+              transform: translateX(40px);
+              position: absolute;
+              left: 0; right: 0; top: 0;
+              width: 100%;
+              z-index: 1;
+              pointer-events: none;
+            }
+            .pricing-card.active {
+              opacity: 1;
+              transform: translateX(0);
+              z-index: 2;
+              pointer-events: auto;
+              position: relative;
+            }
+            .pricing-card.slide-out-left {
+              opacity: 0;
+              transform: translateX(-40px);
+              z-index: 1;
+            }
+            .pricing-card.slide-in-right {
+              opacity: 1;
+              transform: translateX(0);
+              z-index: 2;
+            }
+            .pricing-card.slide-out-right {
+              opacity: 0;
+              transform: translateX(40px);
+              z-index: 1;
+            }
+            .pricing-card.slide-in-left {
+              opacity: 1;
+              transform: translateX(0);
+              z-index: 2;
+            }
+            .pricing-cards-wrapper {
+              min-height: 420px;
+              position: relative;
+            }
+            </style>
+            <script>
+            // Pricing card navigation with animation
             (function () {
               var cards = document.querySelectorAll('.pricing-card');
               var current = 0;
-              function showCard(idx) {
-                cards.forEach(function (c, i) { c.style.display = (i === idx ? 'block' : 'none'); });
+              function showCard(idx, direction) {
+              cards.forEach(function (c, i) {
+                c.classList.remove('active', 'slide-in-left', 'slide-in-right', 'slide-out-left', 'slide-out-right');
+                c.style.display = 'none';
+              });
+              if (typeof direction === 'string') {
+                // Animate out current card
+                if (direction === 'left') {
+                cards[current].classList.add('slide-out-left');
+                } else if (direction === 'right') {
+                cards[current].classList.add('slide-out-right');
+                }
+                // Animate in new card
+                cards[idx].style.display = 'block';
+                setTimeout(function () {
+                cards[idx].classList.add('active', direction === 'left' ? 'slide-in-right' : 'slide-in-left');
+                }, 10);
+              } else {
+                cards[idx].style.display = 'block';
+                cards[idx].classList.add('active');
+              }
+              // Hide all except the new active card after animation
+              setTimeout(function () {
+                cards.forEach(function (c, i) {
+                if (i !== idx) c.style.display = 'none';
+                });
+              }, 400);
               }
               function updateArrows() {
-                document.querySelector('.pricing-prev').disabled = (current === 0);
-                document.querySelector('.pricing-next').disabled = (current === cards.length - 1);
+              document.querySelector('.pricing-prev').disabled = (current === 0);
+              document.querySelector('.pricing-next').disabled = (current === cards.length - 1);
               }
               document.querySelector('.pricing-prev').onclick = function () {
-                if (current > 0) {
-                  current--;
-                  showCard(current);
-                  updateArrows();
-                }
+              if (current > 0) {
+                var prev = current;
+                current--;
+                showCard(current, 'right');
+                updateArrows();
+              }
               };
               document.querySelector('.pricing-next').onclick = function () {
-                if (current < cards.length - 1) {
-                  current++;
-                  showCard(current);
-                  updateArrows();
-                }
+              if (current < cards.length - 1) {
+                var prev = current;
+                current++;
+                showCard(current, 'left');
+                updateArrows();
+              }
               };
               // Optional: swipe support for mobile
               let startX = null;
               document.querySelector('.pricing-cards-wrapper').addEventListener('touchstart', function (e) {
-                startX = e.touches[0].clientX;
+              startX = e.touches[0].clientX;
               });
               document.querySelector('.pricing-cards-wrapper').addEventListener('touchend', function (e) {
-                if (startX === null) return;
-                let endX = e.changedTouches[0].clientX;
-                if (endX - startX > 50 && current > 0) document.querySelector('.pricing-prev').click();
-                else if (startX - endX > 50 && current < cards.length - 1) document.querySelector('.pricing-next').click();
-                startX = null;
+              if (startX === null) return;
+              let endX = e.changedTouches[0].clientX;
+              if (endX - startX > 50 && current > 0) document.querySelector('.pricing-prev').click();
+              else if (startX - endX > 50 && current < cards.length - 1) document.querySelector('.pricing-next').click();
+              startX = null;
               });
               // Initialize
-              showCard(current);
+              cards.forEach(function (c, i) {
+              c.style.display = 'none';
+              });
+              cards[0].style.display = 'block';
+              cards[0].classList.add('active');
               updateArrows();
             })();
-          </script>
+            </script>
           </div>
         </div>
       </section>
