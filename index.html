@@ -42,6 +42,7 @@
   <link href="assets/css/team-responsive.css" rel="stylesheet">
   <link href="assets/css/team-enhancements.css" rel="stylesheet">
   <link href="assets/css/footer.css" rel="stylesheet">
+  <link href="assets/css/contact.css" rel="stylesheet">
 
   <!-- Icons CDN -->
   <link
@@ -414,223 +415,246 @@
       <section class="module" id="pricing">
         <div class="container">
           <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-          <h5 class="module-title">TARIFELE NOASTRE</h5>
-          <div class="module-subtitle">Selectați locația pentru
-            a vedea prețurile consultațiilor disponibile în fiecare
-            clinică.</div>
-        </div>
+            <div class="col-sm-6 col-sm-offset-3">
+              <h5 class="module-title">TARIFELE NOASTRE</h5>
+              <div class="module-subtitle">Selectați locația pentru
+                a vedea prețurile consultațiilor disponibile în fiecare
+                clinică.</div>
+            </div>
           </div>
-
+      
           <div class="row">
-        <div class="col-sm-12 text-center mb-40">
-          <div class="location-buttons-container">
-            <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
-          data-location="comanesti">Sterge selectia</button>
-            <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
-          data-location="clinica">Clinica Bacău</button>
-            <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
-          data-location="bacau">Cabinet Bacau</button>
-            <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
-          data-location="comanesti">Cabinet Comănești</button>
-            <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
-          data-location="moinesti">Cabinet Moinești</button>
-            <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
-          data-location="onesti">Cabinet Onesti</button>
+            <div class="col-sm-12 text-center mb-40">
+              <div class="location-buttons-container">
+                <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
+                  data-location="comanesti">Sterge selectia</button>
+                <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
+                  data-location="clinica">Clinica Bacău</button>
+                <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
+                  data-location="bacau">Cabinet Bacau</button>
+                <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
+                  data-location="comanesti">Cabinet Comănești</button>
+                <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
+                  data-location="moinesti">Cabinet Moinești</button>
+                <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
+                  data-location="onesti">Cabinet Onesti</button>
+              </div>
+            </div>
           </div>
-        </div>
-          </div>
-
-        <div class="row price-row multi-columns-row" id="pricing-tables">
-          <div class="pricing-cards-wrapper" style="position:relative;">
-            <!-- Card 1: Consultatie Standard -->
-            <div class="pricing-card" style="display:block;">
-              <div class="col-sm-12 col-xs-12" style="padding-top: 16px;">
-                <div style="border: 2px solid #1e3932; border-radius: 0; overflow: hidden;">
-                  <!-- 1. Title section: full width, colored background -->
-                  <div style="background-color: #1e3932; color: #fff; padding: 18px 24px; border-radius: 0; text-align:center; font-size: 2em; font-weight: bold;">
-                    Consultație Standard
+      
+          <div class="row price-row" id="pricing-tables">
+            <div class="pricing-carousel-component">
+              <div class="pricing-carousel-viewport">
+                <div class="pricing-cards-container">
+                  <!-- Card 1: Consultatie Standard -->
+                  <div class="pricing-card">
+                    <div style="border: 2px solid #1e3932; border-radius: 0; overflow: hidden; height: 100%;">
+                      <div
+                        style="background-color: #1e3932; color: #fff; padding: 18px 24px; border-radius: 0; text-align:center; font-size: 2em; font-weight: bold;">
+                        Consultație Standard
+                      </div>
+                      <div style="text-align:center; padding: 12px 0 6px;">
+                        <span style="font-size: 1.75em; color: #1e3932; font-weight: 600;">RON</span>
+                        <span class="price-value" data-bacau="150" data-moinesti="130" data-comanesti="120"
+                          style="font-size:2.2em; font-weight:700; margin-left:8px;">---</span>
+                      </div>
+                      <div style="height: 2px; width: 100%; background: #1e3932; margin: 0 0 14px 0; border-radius:0;">
+                      </div>
+                      <ul
+                        style="list-style: disc inside; margin: 0 0 18px 0; padding-left: 18px; color: #222; font-size: 1.75em;">
+                        <li style="color: black; font-style: normal; text-transform: lowercase;">stabilire dioptrii</li>
+                        <li style="color: black; font-style: normal; text-transform: lowercase;">tensiune oculară</li>
+                        <li style="color: black; font-style: normal; text-transform: lowercase;">fund de ochi</li>
+                        <li style="color: #f5f3ed; font-style: normal; text-transform: lowercase;"></li>
+                        <li style="color: #f5f3ed; font-style: normal; text-transform: lowercase;"></li>
+                      </ul>
+                    </div>
                   </div>
-                  <!-- 2. Price section -->
-                  <div style="text-align:center; padding: 12px 0 6px;">
-                    <span style="font-size: 1.75em; color: #1e3932; font-weight: 600;">RON</span>
-                    <span class="price-value" data-bacau="150" data-moinesti="130" data-comanesti="120" style="font-size:2.2em; font-weight:700; margin-left:8px;">---</span>
+      
+                  <!-- Card 2: Consultatie Complexa -->
+                  <div class="pricing-card">
+                    <div style="border: 2px solid #4aa190a2; border-radius: 0; overflow: hidden; height: 100%;">
+                      <div
+                        style="background-color: #16987e; color: #fff; padding: 18px 24px; border-radius: 0; text-align:center; font-size: 2em; font-weight: bold;">
+                        Consultație Complexă
+                      </div>
+                      <div style="text-align:center; padding: 12px 0 6px;">
+                        <span style="font-size: 1.75em; color: #1e3932; font-weight: 600;">RON</span>
+                        <span class="price-value" data-bacau="250" data-moinesti="230" data-comanesti="220"
+                          style="font-size:2.2em; font-weight:700; margin-left:8px;">---</span>
+                      </div>
+                      <div
+                        style="height: 2px; width: 100%; background: #16987e; margin: 0 0 14px 0; border-radius:2px;">
+                      </div>
+                      <ul
+                        style="list-style: disc inside; margin: 0 0 18px 0; padding-left: 18px; color: #222; font-size: 1.75em;">
+                        <li style="font-style: normal; text-transform: lowercase;">stabilire dioptrii</li>
+                        <li style="font-style: normal; text-transform: lowercase;">tensiune oculara</li>
+                        <li style="font-style: normal; text-transform: lowercase;">fund de ochi</li>
+                        <li style="color: #16987e; font-style: normal; text-transform: lowercase;">glaucom</li>
+                        <li style="color: #f5f3ed; font-style: normal; text-transform: lowercase;"></li>
+                      </ul>
+                    </div>
                   </div>
-                  <!-- 3. Colored line below price (thinner) -->
-                  <div style="height: 2px; width: 100%; background: #1e3932; margin: 0 0 14px 0; border-radius:0;"></div>
-                  <!-- 4. Bulleted list -->
-                  <ul style="list-style: disc inside; margin: 0 0 18px 0; padding-left: 18px; color: #222; font-size: 1.75em;">
-                    <li style="color: black; font-style: normal; text-transform: lowercase;">stabilire dioptrii</li>
-                    <li style="color: black; font-style: normal; text-transform: lowercase;">tensiune oculară</li>
-                    <li style="color: black; font-style: normal; text-transform: lowercase;">fund de ochi</li>
-                    <li style="color: #f5f3ed; font-style: normal; text-transform: lowercase;"></li>
-                    <li style="color: #f5f3ed; font-style: normal; text-transform: lowercase;"></li>
-                  </ul>
-                  <!-- 5. Programare button
-                  <div style="text-align:center; margin-bottom: 10px;">
-                  <a class="btn btn-d btn-round" id="programare-button"
-                  href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a>
-                  </div> -->
+      
+                  <!-- Card 3: Consultatie Premium -->
+                  <div class="pricing-card">
+                    <div style="border: 2px solid #d13775c2; overflow: hidden; height: 100%;">
+                      <div
+                        style="background-color: #d13775; color: #fff; padding: 18px 24px; text-align:center; font-size: 2em; font-weight: bold;">
+                        Consultație Premium
+                      </div>
+                      <div style="text-align:center; padding: 12px 24px 6px;">
+                        <span style="font-size: 1.75em; color: #d13775; font-weight: 600;">RON</span>
+                        <span class="price-value" data-bacau="350" data-moinesti="320" data-comanesti="300"
+                          style="font-size:2.2em; font-weight:700; margin-left:8px;">---</span>
+                      </div>
+                      <div style="height: 2px; width: 100%; background: #d13775; margin: 0 0 14px 0;"></div>
+                      <ul
+                        style="list-style: disc inside; margin: 0 0 18px 0; padding-left: 18px; color: #222; font-size: 1.75em; padding-right:24px; padding-left:24px;">
+                        <li style="font-style: normal; text-transform: lowercase;">stabilire dioptrii</li>
+                        <li style="font-style: normal; text-transform: lowercase;">tensiune oculara</li>
+                        <li style="font-style: normal; text-transform: lowercase;">fund de ochi</li>
+                        <li style="color: #16987e; font-style: normal; text-transform: lowercase;">glaucom</li>
+                        <li style="color: #d13775; font-style: normal; text-transform: lowercase;">cataracta</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- Card 2: Consultatie Complexa -->
-            <div class="pricing-card" style="display:none;">
-              <div class="col-sm-12 col-xs-12" style="padding-top: 16px;">
-                <div style="border: 2px solid #4aa190a2; border-radius: 0; overflow: hidden;">
-                  <!-- 1. Title section: full width, colored background -->
-                  <div style="background-color: #16987e; color: #fff; padding: 18px 24px; border-radius: 0; text-align:center; font-size: 2em; font-weight: bold;">
-                    Consultație Complexă 
-                  </div>
-                  <!-- 2. Price section -->
-                  <div style="text-align:center; padding: 12px 0 6px;">
-                    <span style="font-size: 1.75em; color: #1e3932; font-weight: 600;">RON</span>
-                    <span class="price-value" data-bacau="250" data-moinesti="230" data-comanesti="220" style="font-size:2.2em; font-weight:700; margin-left:8px;">---</span>
-                  </div>
-                  <!-- 3. Colored line below price (thinner) -->
-                  <div style="height: 2px; width: 100%; background: #16987e; margin: 0 0 14px 0; border-radius:2px;"></div>
-                  <!-- 4. Bulleted list -->
-                  <ul style="list-style: disc inside; margin: 0 0 18px 0; padding-left: 18px; color: #222; font-size: 1.75em;">
-                    <li style="font-style: normal; text-transform: lowercase;">stabilire dioptrii</li>
-                    <li style="font-style: normal; text-transform: lowercase;">tensiune oculara</li>
-                    <li style="font-style: normal; text-transform: lowercase;">fund de ochi</li>
-                    <li style="color: #16987e; font-style: normal; text-transform: lowercase;">glaucom</li>
-                    <li style="color: #f5f3ed; font-style: normal; text-transform: lowercase;"></li>
-                  </ul>
-                  <!-- 5. Programare button
-                  <div style="text-align:center; margin-bottom: 10px;">
-                    <a class="btn btn-d btn-round" id="programare-button"
-                    href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a>
-                  </div> -->
-                </div>
-              </div>
-            </div>
-            <!-- Card 3: Consultatie Premium -->
-            <div class="pricing-card" style="display:none;">
-              <div class="col-sm-12 col-xs-12" style="padding-top: 16px;">
-                <div style="border: 2px solid #d13775c2; overflow: hidden;">
-                  <!-- 1. Title section: full width, colored background -->
-                  <div style="background-color: #d13775; color: #fff; padding: 18px 24px; text-align:center; font-size: 2em; font-weight: bold;">
-                    Consultație Premium
-                  </div>
-                  <!-- 2. Price section -->
-                  <div style="text-align:center; padding: 12px 24px 6px;">
-                    <span style="font-size: 1.75em; color: #d13775; font-weight: 600;">RON</span>
-                    <span class="price-value" data-bacau="350" data-moinesti="320" data-comanesti="300" style="font-size:2.2em; font-weight:700; margin-left:8px;">---</span>
-                  </div>
-                  <!-- 3. Colored line below price (thinner) -->
-                  <div style="height: 2px; width: 100%; background: #d13775; margin: 0 0 14px 0;"></div>
-                  <!-- 4. Bulleted list -->
-                  <ul style="list-style: disc inside; margin: 0 0 18px 0; padding-left: 18px; color: #222; font-size: 1.75em; padding-right:24px; padding-left:24px;">
-                    <li style="font-style: normal; text-transform: lowercase;">stabilire dioptrii</li>
-                    <li style="font-style: normal; text-transform: lowercase;">tensiune oculara</li>
-                    <li style="font-style: normal; text-transform: lowercase;">fund de ochi</li>
-                    <li style="color: #16987e; font-style: normal; text-transform: lowercase;">glaucom</li>
-                    <li style="color: #d13775; font-style: normal; text-transform: lowercase;">cataracta</li>
-                  </ul>
-                  <!-- 5. Programare button
-                  <div style="text-align:center; margin-bottom: 10px;">
-                    <a class="btn btn-d btn-round" id="programare-button"
-                    href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a>
-                  </div> -->
-                </div>
-              </div>
-            </div>
-                <!-- Navigation Buttons for Pricing Cards -->
-                <div style="height: 48px;"></div>
-                <div style="display: flex; justify-content: center; align-items: center; margin: 24px 0 0 0; gap: 24px; width: 100%; padding-top: 24px;">
-                  <div style="margin: 0 auto; display: flex; gap: 24px;">
+      
+              <!-- Navigation Buttons for Pricing Cards -->
+              <div style="height: 48px;"></div>
+              <div
+                style="display: flex; justify-content: center; align-items: center; margin: 24px 0 0 0; gap: 24px; width: 100%; padding-top: 24px;">
+                <div style="margin: 0 auto; display: flex; gap: 24px;">
                   <button type="button" class="btn-circle pricing-prev" aria-label="Previous" disabled>
-                  <i class="fa fa-chevron-left"></i>
+                    <i class="fa fa-chevron-left"></i>
                   </button>
                   <button type="button" class="btn-circle pricing-next" aria-label="Next">
-                  <i class="fa fa-chevron-right"></i>
+                    <i class="fa fa-chevron-right"></i>
                   </button>
-                  </div>
                 </div>
+              </div>
               <style>
-              .btn-circle {
-                background: #d13775;
-                color: #fff;
-                border: none;
-                border-radius: 50%;
-                width: 48px;
-                height: 48px;
-                min-width: 48px;
-                min-height: 48px;
-                max-width: 48px;
-                max-height: 48px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.5em;
-                transition: background 0.2s;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-                padding: 0;
-                aspect-ratio: 1 / 1;
-              }
-              .btn-circle:disabled,
-              .btn-circle[disabled] {
-                opacity: 0.5;
-                pointer-events: none;
-              }
-              .btn-circle:hover, .btn-circle:focus {
-                background: #b42c61;
-                color: #fff;
-                outline: none;
-              }
-              .btn-circle .fa {
-                color: #fff;
-              }
-              /* debug */
-              /* .pricing-prev, .pricing-next { border: 10px solid green; } */
+                .pricing-carousel-viewport {
+                  width: 100%;
+                  max-width: 420px;
+                  margin: 0 auto;
+                  overflow: hidden;
+                }
+      
+                .pricing-cards-container {
+                  display: flex;
+                  transition: transform 0.4s ease-in-out;
+                  padding-top: 16px;
+                }
+      
+                .pricing-card {
+                  flex: 0 0 100%;
+                  box-sizing: border-box;
+                  padding: 0 10px;
+                }
+      
+                .btn-circle {
+                  background: #d13775;
+                  color: #fff;
+                  border: none;
+                  border-radius: 50%;
+                  width: 48px;
+                  height: 48px;
+                  min-width: 48px;
+                  min-height: 48px;
+                  max-width: 48px;
+                  max-height: 48px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 1.5em;
+                  transition: background 0.2s;
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+                  padding: 0;
+                  aspect-ratio: 1 / 1;
+                }
+      
+                .btn-circle:disabled,
+                .btn-circle[disabled] {
+                  opacity: 0.5;
+                  pointer-events: none;
+                }
+      
+                .btn-circle:hover,
+                .btn-circle:focus {
+                  background: #b42c61;
+                  color: #fff;
+                  outline: none;
+                }
+      
+                .btn-circle .fa {
+                  color: #fff;
+                }
               </style>
             </div>
           </div>
           <script>
-            // Pricing card navigation without wrap-around
             (function () {
-              var cards = document.querySelectorAll('.pricing-card');
-              var current = 0;
-              function showCard(idx) {
-                cards.forEach(function (c, i) { c.style.display = (i === idx ? 'block' : 'none'); });
+              const container = document.querySelector('.pricing-cards-container');
+              if (!container) return; // Exit if the container doesn't exist
+      
+              const cards = container.querySelectorAll('.pricing-card');
+              const prevBtn = document.querySelector('.pricing-prev');
+              const nextBtn = document.querySelector('.pricing-next');
+              const viewport = document.querySelector('.pricing-carousel-viewport');
+      
+              let currentIndex = 0;
+              const totalCards = cards.length;
+      
+              function updateCarousel() {
+                const offset = -currentIndex * 100;
+                container.style.transform = 'translateX(' + offset + '%)';
+      
+                // Update button states
+                prevBtn.disabled = (currentIndex === 0);
+                nextBtn.disabled = (currentIndex >= totalCards - 1);
               }
-              function updateArrows() {
-                document.querySelector('.pricing-prev').disabled = (current === 0);
-                document.querySelector('.pricing-next').disabled = (current === cards.length - 1);
-              }
-              document.querySelector('.pricing-prev').onclick = function () {
-                if (current > 0) {
-                  current--;
-                  showCard(current);
-                  updateArrows();
+      
+              prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                  currentIndex--;
+                  updateCarousel();
                 }
-              };
-              document.querySelector('.pricing-next').onclick = function () {
-                if (current < cards.length - 1) {
-                  current++;
-                  showCard(current);
-                  updateArrows();
-                }
-              };
-              // Optional: swipe support for mobile
-              let startX = null;
-              document.querySelector('.pricing-cards-wrapper').addEventListener('touchstart', function (e) {
-                startX = e.touches[0].clientX;
               });
-              document.querySelector('.pricing-cards-wrapper').addEventListener('touchend', function (e) {
+      
+              nextBtn.addEventListener('click', () => {
+                if (currentIndex < totalCards - 1) {
+                  currentIndex++;
+                  updateCarousel();
+                }
+              });
+      
+              // Swipe support for mobile
+              let startX = null;
+              viewport.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+              }, { passive: true });
+      
+              viewport.addEventListener('touchend', (e) => {
                 if (startX === null) return;
                 let endX = e.changedTouches[0].clientX;
-                if (endX - startX > 50 && current > 0) document.querySelector('.pricing-prev').click();
-                else if (startX - endX > 50 && current < cards.length - 1) document.querySelector('.pricing-next').click();
+                let diffX = endX - startX;
+      
+                if (diffX > 50) { // Swiped right
+                  prevBtn.click();
+                } else if (diffX < -50) { // Swiped left
+                  nextBtn.click();
+                }
                 startX = null;
               });
+      
               // Initialize
-              showCard(current);
-              updateArrows();
+              updateCarousel();
             })();
           </script>
-          </div>
         </div>
       </section>
 
@@ -809,7 +833,7 @@
 
     <section id="programare-section" style="display:none; padding:40px 0; background:#f9f9f9;">
       <button onclick="hideProgramareSection()"
-        style="float:right; margin:10px; font-size:22px; font-weight:bold; background:none; border:none; cursor:pointer;">&times;</button>
+        style="float:right; margin:10px; font-size:22px; font-weight:bold; background:none; border:none; cursor:pointer;">×</button>
       <h2>Programează-te online</h2>
       <div style="width:100%; max-width:900px; margin:auto;">
         <iframe src="https://eurooptik.ro.programarionline.sophtha.com/"
