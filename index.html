@@ -22,21 +22,32 @@
     -->
   <!-- Default stylesheets-->
   <link href="assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  
   <!-- Template specific stylesheets-->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
   <link href="assets/lib/animate.css/animate.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="assets/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="assets/lib/et-line-font/et-line-font.css" rel="stylesheet">
   <link href="assets/lib/flexslider/flexslider.css" rel="stylesheet">
   <link href="assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
   <link href="assets/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
+
   <!-- Main stylesheet and color file-->
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/team.css" rel="stylesheet">
+  <link href="assets/css/contact.css" rel="stylesheet">
   <link href="assets/css/team-responsive.css" rel="stylesheet">
   <link href="assets/css/team-enhancements.css" rel="stylesheet">
+  <link href="assets/css/footer.css" rel="stylesheet">
+
+  <!-- Icons CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 </head>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
@@ -723,7 +734,7 @@
     </section>
 
 
-    <section class="module" id="adresses">
+    <section id="adresses">
       <div class="container">
         <div class="row">
           <div class="col-sm-12 text-center">
@@ -821,10 +832,34 @@
     </section>
 
     <hr class="divider-d">
-    <footer class="footer bg-dark">
-      <p>Date de contact, meniu din nou, hyperlinks cu retele sociale, buton
-        de programare</p>
-    </footer>
+    <footer class="footer">
+        <section class="footer-message">
+          <h2>Va mai asteptam la noi!</h2>
+          <button class="footer-appointment-btn">Programeaza-te online</button>
+        </section>
+        <div class="footer-content">
+          <div class="footer-locations">
+            <div class="footer-location"><span class="footer-location-name">Bacau - clinica</span><br>Luni - Vineri, 9 - 17</div>
+            <div class="footer-location"><span class="footer-location-name">Bacau</span><br>Luni - Vineri, 9 - 17</div>
+            <div class="footer-location"><span class="footer-location-name">Moinesti</span><br>Luni - Vineri, 8 - 16</div>
+            <div class="footer-location"><span class="footer-location-name">Comanesti</span><br>Luni - Vineri, 9 - 17</div>
+            <div class="footer-location"><span class="footer-location-name">Onesti</span><br>Luni - Vineri, 9 - 17</div>
+          </div>
+          <div class="footer-center">
+            <nav class="footer-menu">
+              <a href="#totop">Acasa</a>
+              <a href="#services">Serviciile Noastre</a>
+              <a href="#echipa-noastra">Echipa Noastra</a>
+              <a href="#pricing">Tarife</a>
+              <a href="#testimoniale">Testimoniale</a>
+              <a href="#adresses">Contact</a>
+            </nav>
+            <div class="footer-logo">
+              <img class="footer-logo-image" src="assets/images/logo-small.png" alt="eurooptik logo">
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
 
     <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
@@ -833,7 +868,7 @@
   <!--  
     JavaScripts
     =============================================
-    -->
+  -->
   <script src="assets/lib/jquery/dist/jquery.js"></script>
   <script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="assets/lib/wow/dist/wow.js"></script>
@@ -846,6 +881,7 @@
   <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/carousel.js"></script>
 
   <!-- Inline script to ensure filtering works correctly -->
   <script>
