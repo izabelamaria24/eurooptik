@@ -1,0 +1,150 @@
+/*==============================================================
+  [12] Location & Contact Section (Carousel)
+==============================================================*/
+
+#adresses {
+    padding: 80px 0;
+    text-align: center;
+    background-color: #f8f8f8;
+    overflow-x: hidden; /* Prevent horizontal scrollbar on the page */
+}
+
+#adresses h2 {
+    font-size: 28px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #333;
+}
+
+/* --- Carousel Structure --- */
+
+.carousel-viewport {
+    width: 100%;
+    max-width: 1200px; /* Optional: constrain max width on very large screens */
+    margin: 0 auto 30px auto;
+    overflow: hidden; /* This hides the parts of the container that are off-screen */
+}
+
+.location-cards-container {
+    display: flex;
+    /* The transform property will be manipulated by carousel.js */
+    transition: transform 0.5s ease-in-out; 
+}
+
+/* --- Location Card Styling --- */
+
+.location-card {
+    /* Defines how much space a single card takes */
+    flex-shrink: 0;
+    flex-basis: 100%; /* Mobile first: one card fits the screen */
+    max-width: 100%;
+    
+    box-sizing: border-box;
+    padding: 0 15px; /* Spacing between cards */
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 8px;
+    overflow: hidden; /* Ensures content respects the border-radius */
+    height: 280px; /* Give a fixed height to the link wrapper */
+    position: relative;
+}
+
+.location-card .card-content {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 100%);
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Aligns content to the bottom */
+    text-align: left;
+    transition: background 0.3s ease;
+}
+
+.location-card:hover .card-content {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+.location-card h5 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.location-card p {
+    margin: 3px 0;
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+.location-card .contact-info i.fa {
+    margin-right: 8px;
+    width: 15px; /* Align icons nicely */
+    text-align: center;
+}
+
+/* --- Card Background Images --- */
+/* Note: The path is relative to the CSS file's location */
+
+.card-bg-clinica { background-image: url('../images/locations/clinica.jpg'); }
+.card-bg-razboieni { background-image: url('../images/locations/razboieni.jpg'); }
+.card-bg-moinesti { background-image: url('../images/locations/moinesti.jpg'); }
+.card-bg-comanesti { background-image: url('../images/locations/comanesti.jpg'); }
+.card-bg-onesti { background-image: url('../images/locations/onesti.jpg'); }
+
+
+/* --- Carousel Navigation --- */
+
+.carousel-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.carousel-btn {
+    background: #d13775;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.carousel-btn:hover {
+    background: #b42c61;
+    transform: translateY(-2px);
+}
+
+.carousel-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- Responsive Breakpoints --- */
+
+@media (min-width: 576px) {
+    .location-card {
+        flex-basis: 50%; /* 2 cards on small tablets */
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .location-card {
+        flex-basis: 33.333%; /* 3 cards on desktop */
+        max-width: 33.333%;
+    }
+}
