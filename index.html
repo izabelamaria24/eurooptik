@@ -22,21 +22,34 @@
     -->
   <!-- Default stylesheets-->
   <link href="assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  
   <!-- Template specific stylesheets-->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
   <link href="assets/lib/animate.css/animate.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="assets/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="assets/lib/et-line-font/et-line-font.css" rel="stylesheet">
   <link href="assets/lib/flexslider/flexslider.css" rel="stylesheet">
   <link href="assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
   <link href="assets/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
+
   <!-- Main stylesheet and color file-->
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/team.css" rel="stylesheet">
+  <link href="assets/css/contact.css" rel="stylesheet">
   <link href="assets/css/team-responsive.css" rel="stylesheet">
   <link href="assets/css/team-enhancements.css" rel="stylesheet">
+  <link href="assets/css/footer.css" rel="stylesheet">
+  <link href="assets/css/contact.css" rel="stylesheet">
+  <link href="assets/css/prices.css" rel="stylesheet">
+
+  <!-- Icons CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 </head>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
@@ -84,7 +97,8 @@
             <!-- <li><a class="section-scroll" id="navbar-button-programare"
                 href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a></li> -->
             <li>
-              <a class="section-scroll" class="btn-programare" id="navbar-button-programare" href="#" onclick="showProgramareSection(); return false;">Programare</a>
+              <a class="section-scroll" class="btn-programare" id="navbar-button-programare" href="#"
+                onclick="showProgramareSection(); return false;">Programare</a>
             </li>
           </ul>
         </div>
@@ -101,7 +115,8 @@
               style="max-width: 50%; height: auto; margin-bottom: -40px;">
           </div>
 
-          <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button" href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
+          <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button"
+            href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
           <a class="section-scroll btn btn-border-w btn-round" href="#services" id="home-cine-suntem-button">Cine
             Suntem</a>
 
@@ -408,83 +423,181 @@
                 clinică.</div>
             </div>
           </div>
-
+      
           <div class="row">
             <div class="col-sm-12 text-center mb-40">
               <div class="location-buttons-container">
                 <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
-                  data-location="bacau">Bacău</button>
+                  data-location="comanesti">Sterge selectia</button>
                 <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
-                  data-location="moinesti">Moinești</button>
+                  data-location="clinica">Clinica Bacău</button>
                 <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
-                  data-location="comanesti">Comănești</button>
+                  data-location="bacau">Cabinet Bacau</button>
+                <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
+                  data-location="comanesti">Cabinet Comănești</button>
+                <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
+                  data-location="moinesti">Cabinet Moinești</button>
+                <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
+                  data-location="onesti">Cabinet Onesti</button>
               </div>
             </div>
           </div>
-
-          <div class="row price-row multi-columns-row" id="pricing-tables">
-            <div class="pricing-container">
-              <div class="col-sm-4 col-xs-12">
-                <div class="price-table standard">
-                  <h4>Consultație Standard</h4>
-                  <div class="borderline"></div>
-                  <p class="price"><span>RON</span><span class="price-value" data-bacau="150" data-moinesti="130"
-                      data-comanesti="120">---</span></p>
-                  <div class="price-details">
-                    <ul class="price-details">
-                      <li>Stabilire dioptrii</li>
-                      <li>Tensiune oculara</li>
-                      <li>Fund de ochi</li>
-                      <li><span>Glaucom</span></li>
-                      <li><span>Cataracta</span></li>
-                    </ul>
+      
+          <div class="row price-row" id="pricing-tables">
+            <div class="pricing-carousel-component">
+              <div class="pricing-carousel-viewport">
+                <div class="pricing-cards-container">
+                  <!-- Card 1: Consultatie Standard -->
+                  <div class="pricing-card">
+                    <div style="border: 2px solid #1e3932; border-radius: 0; overflow: hidden; height: 100%;">
+                      <div
+                        style="background-color: #1e3932; color: #fff; padding: 18px 24px; border-radius: 0; text-align:center; font-size: 2em; font-weight: bold;">
+                        Consultație Standard
+                      </div>
+                      <div style="text-align:center; padding: 12px 0 6px;">
+                        <span style="font-size: 1.75em; color: #1e3932; font-weight: 600;">RON</span>
+                        <span class="price-value" data-bacau="150" data-moinesti="130" data-comanesti="120"
+                          style="font-size:2.2em; font-weight:700; margin-left:8px;">---</span>
+                      </div>
+                      <div style="height: 2px; width: 100%; background: #1e3932; margin: 0 0 14px 0; border-radius:0;">
+                      </div>
+                      <ul
+                        style="list-style: disc inside; margin: 0 0 18px 0; padding-left: 18px; color: #222; font-size: 1.75em;">
+                        <li style="color: black; font-style: normal; text-transform: lowercase;">stabilire dioptrii</li>
+                        <li style="color: black; font-style: normal; text-transform: lowercase;">tensiune oculară</li>
+                        <li style="color: black; font-style: normal; text-transform: lowercase;">fund de ochi</li>
+                        <li style="color: #f5f3ed; font-style: normal; text-transform: lowercase;"></li>
+                        <li style="color: #f5f3ed; font-style: normal; text-transform: lowercase;"></li>
+                      </ul>
+                    </div>
                   </div>
-                  <a class="btn btn-d btn-round" id="programare-button"
-                    href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a>
+      
+                  <!-- Card 2: Consultatie Complexa -->
+                  <div class="pricing-card">
+                    <div style="border: 2px solid #4aa190a2; border-radius: 0; overflow: hidden; height: 100%;">
+                      <div
+                        style="background-color: #16987e; color: #fff; padding: 18px 24px; border-radius: 0; text-align:center; font-size: 2em; font-weight: bold;">
+                        Consultație Complexă
+                      </div>
+                      <div style="text-align:center; padding: 12px 0 6px;">
+                        <span style="font-size: 1.75em; color: #1e3932; font-weight: 600;">RON</span>
+                        <span class="price-value" data-bacau="250" data-moinesti="230" data-comanesti="220"
+                          style="font-size:2.2em; font-weight:700; margin-left:8px;">---</span>
+                      </div>
+                      <div
+                        style="height: 2px; width: 100%; background: #16987e; margin: 0 0 14px 0; border-radius:2px;">
+                      </div>
+                      <ul
+                        style="list-style: disc inside; margin: 0 0 18px 0; padding-left: 18px; color: #222; font-size: 1.75em;">
+                        <li style="font-style: normal; text-transform: lowercase;">stabilire dioptrii</li>
+                        <li style="font-style: normal; text-transform: lowercase;">tensiune oculara</li>
+                        <li style="font-style: normal; text-transform: lowercase;">fund de ochi</li>
+                        <li style="color: #16987e; font-style: normal; text-transform: lowercase;">glaucom</li>
+                        <li style="color: #f5f3ed; font-style: normal; text-transform: lowercase;"></li>
+                      </ul>
+                    </div>
+                  </div>
+      
+                  <!-- Card 3: Consultatie Premium -->
+                  <div class="pricing-card">
+                    <div style="border: 2px solid #d13775c2; overflow: hidden; height: 100%;">
+                      <div
+                        style="background-color: #d13775; color: #fff; padding: 18px 24px; text-align:center; font-size: 2em; font-weight: bold;">
+                        Consultație Premium
+                      </div>
+                      <div style="text-align:center; padding: 12px 24px 6px;">
+                        <span style="font-size: 1.75em; color: #d13775; font-weight: 600;">RON</span>
+                        <span class="price-value" data-bacau="350" data-moinesti="320" data-comanesti="300"
+                          style="font-size:2.2em; font-weight:700; margin-left:8px;">---</span>
+                      </div>
+                      <div style="height: 2px; width: 100%; background: #d13775; margin: 0 0 14px 0;"></div>
+                      <ul
+                        style="list-style: disc inside; margin: 0 0 18px 0; padding-left: 18px; color: #222; font-size: 1.75em; padding-right:24px; padding-left:24px;">
+                        <li style="font-style: normal; text-transform: lowercase;">stabilire dioptrii</li>
+                        <li style="font-style: normal; text-transform: lowercase;">tensiune oculara</li>
+                        <li style="font-style: normal; text-transform: lowercase;">fund de ochi</li>
+                        <li style="color: #16987e; font-style: normal; text-transform: lowercase;">glaucom</li>
+                        <li style="color: #d13775; font-style: normal; text-transform: lowercase;">cataracta</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div class="col-sm-4 col-xs-12">
-                <div class="price-table complex" style="border: 2px solid #4aa190a2;">
-                  <h4>Consultație Complexă</h4>
-                  <div class="borderline"></div>
-                  <p class="price"><span>RON</span><span class="price-value" data-bacau="250" data-moinesti="230"
-                      data-comanesti="220">---</span></p>
-                  <div class="price-details">
-                    <ul class="price-details">
-                      <li>Stabilire dioptrii</li>
-                      <li>Tensiune oculara</li>
-                      <li>Fund de ochi</li>
-                      <li>Glaucom</li>
-                      <li><span>Cataracta</span></li>
-                    </ul>
-                  </div>
-                  <a class="btn btn-d btn-round" id="programare-button"
-                    href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a>
-                </div>
-              </div>
-
-              <div class="col-sm-4 col-xs-12">
-                <div class="price-table premium" style="border: 2px solid #d13775c2;">
-                  <h4>Consultație Premium</h4>
-                  <div class="borderline"></div>
-                  <p class="price"><span>RON</span><span class="price-value" data-bacau="350" data-moinesti="320"
-                      data-comanesti="300">---</span></p>
-                  <div class="price-details">
-                    <ul class="price-details">
-                      <li>Stabilire dioptrii</li>
-                      <li>Tensiune oculara</li>
-                      <li>Fund de ochi</li>
-                      <li>Glaucom</li>
-                      <li>Cataracta</li>
-                    </ul>
-                  </div>
-                  <a class="btn btn-d btn-round" id="programare-button"
-                    href="https://eurooptik.ro.programarionline.sophtha.com/">Programare</a>
+      
+              <!-- Navigation Buttons for Pricing Cards -->
+              <div style="height: 48px;"></div>
+              <div
+                style="display: flex; justify-content: center; align-items: center; margin: 24px 0 0 0; gap: 24px; width: 100%; padding-top: 24px;">
+                <div style="margin: 0 auto; display: flex; gap: 24px;">
+                  <button type="button" class="btn-circle pricing-prev" aria-label="Previous" disabled>
+                    <i class="fa fa-chevron-left"></i>
+                  </button>
+                  <button type="button" class="btn-circle pricing-next" aria-label="Next">
+                    <i class="fa fa-chevron-right"></i>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
+          <script>
+            (function () {
+              const container = document.querySelector('.pricing-cards-container');
+              if (!container) return; // Exit if the container doesn't exist
+      
+              const cards = container.querySelectorAll('.pricing-card');
+              const prevBtn = document.querySelector('.pricing-prev');
+              const nextBtn = document.querySelector('.pricing-next');
+              const viewport = document.querySelector('.pricing-carousel-viewport');
+      
+              let currentIndex = 0;
+              const totalCards = cards.length;
+      
+              function updateCarousel() {
+                const offset = -currentIndex * 100;
+                container.style.transform = 'translateX(' + offset + '%)';
+      
+                // Update button states
+                prevBtn.disabled = (currentIndex === 0);
+                nextBtn.disabled = (currentIndex >= totalCards - 1);
+              }
+      
+              prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                  currentIndex--;
+                  updateCarousel();
+                }
+              });
+      
+              nextBtn.addEventListener('click', () => {
+                if (currentIndex < totalCards - 1) {
+                  currentIndex++;
+                  updateCarousel();
+                }
+              });
+      
+              // Swipe support for mobile
+              let startX = null;
+              viewport.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+              }, { passive: true });
+      
+              viewport.addEventListener('touchend', (e) => {
+                if (startX === null) return;
+                let endX = e.changedTouches[0].clientX;
+                let diffX = endX - startX;
+      
+                if (diffX > 50) { // Swiped right
+                  prevBtn.click();
+                } else if (diffX < -50) { // Swiped left
+                  nextBtn.click();
+                }
+                startX = null;
+              });
+      
+              // Initialize
+              updateCarousel();
+            })();
+          </script>
         </div>
       </section>
 
@@ -588,97 +701,118 @@
     </section>
 
 
-    <section class="module" id="adresses">
+    <section id="adresses">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-12 text-center">
-            <h2 class="module-title">CONTACT</h2>
-            <hr
-              style="width:100vw;height:2px;background:#b4b1b4;border:none;margin:-30px 0 0px;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;">
+        <h2>LOCATIILE NOASTRE & CONTACT</h2>
+
+        <div class="carousel-viewport">
+          <div class="location-cards-container">
+
+            <!-- Card 1: Clinica Bacau -->
+            <a href="https://g.co/kgs/CF3ZXSp" 
+            target="_blank" rel="noopener noreferrer" class="location-card card-bg-clinica">
+              <div class="card-content">
+                <h5>Clinica Bacau</h5>
+                <p class="location-address">str. Stefan cel Mare Nr.7</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 303</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
+            <!-- Card 2: Cabinet Bacau -->
+            <a href="https://g.co/kgs/kF5B3ia"
+             target="_blank" rel="noopener noreferrer" class="location-card card-bg-razboieni">
+              <div class="card-content">
+                <h5>Cabinet Bacau</h5>
+                <p class="location-address">str. Razboieni Nr.7</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 304</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
+            <!-- Card 3: Cabinet Moinesti -->
+            <a href="https://g.co/kgs/5yqERUP"
+             target="_blank" rel="noopener noreferrer" class="location-card card-bg-moinesti">
+              <div class="card-content">
+                <h5>Cabinet Moinesti</h5>
+                <p class="location-address">str. T. Vladimirescu Nr.177</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 308</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
+            <!-- Card 4: Cabinet Comanesti -->
+            <a href="https://g.co/kgs/c5HFjzz"
+             target="_blank" rel="noopener noreferrer" class="location-card card-bg-comanesti">
+              <div class="card-content">
+                <h5>Cabinet Comanesti</h5>
+                <p class="location-address">str. Nicolae Ghica Nr.2</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 309</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
+            <!-- Card 5: Cabinet Onesti -->
+            <a href="https://g.co/kgs/qbvbxa7"
+             target="_blank" rel="noopener noreferrer" class="location-card card-bg-onesti">
+              <div class="card-content">
+                <h5>Cabinet Onesti</h5>
+                <p class="location-address">str. Postei Nr.6</p>
+                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 306</p>
+                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+              </div>
+            </a>
+
           </div>
         </div>
-        <div class="addresses-wrapper">
-          <div class="d-flex flex-wrap justify-content-center mt-40" id="addressCards">
-            <!-- Card 1 -->
-            <div class="card text-center m-2">
-              <div class="card-body p-3">
-                <h5 class="card-title">Bacău</h5>
-                <p class="card-text mb-1">Str. Exemplu 1</p>
-                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
-                  567 890</p>
-                <p class="card-text"><i class="fa fa-envelope"></i>
-                  bacau@eurooptik.ro</p>
-              </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="card text-center m-2">
-              <div class="card-body p-3">
-                <h5 class="card-title">Moinești</h5>
-                <p class="card-text mb-1">Str. Exemplu 2</p>
-                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0235
-                  678 901</p>
-                <p class="card-text"><i class="fa fa-envelope"></i>
-                  moinesti@eurooptik.ro</p>
-              </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="card text-center m-2">
-              <div class="card-body p-3">
-                <h5 class="card-title">Bacău</h5>
-                <p class="card-text mb-1">Str. Exemplu 1</p>
-                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
-                  567 890</p>
-                <p class="card-text"><i class="fa fa-envelope"></i>
-                  bacau@eurooptik.ro</p>
-              </div>
-            </div>
-            <!-- Card 4 -->
-            <div class="card text-center m-2">
-              <div class="card-body p-3">
-                <h5 class="card-title">Moinești</h5>
-                <p class="card-text mb-1">Str. Exemplu 2</p>
-                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0235
-                  678 901</p>
-                <p class="card-text"><i class="fa fa-envelope"></i>
-                  moinesti@eurooptik.ro</p>
-              </div>
-            </div>
-            <!-- Card 5 -->
-            <div class="card text-center m-2">
-              <div class="card-body p-3">
-                <h5 class="card-title">Bacău</h5>
-                <p class="card-text mb-1">Str. Exemplu 1</p>
-                <p class="card-text mb-1"><i class="fa fa-phone"></i> 0234
-                  567 890</p>
-                <p class="card-text"><i class="fa fa-envelope"></i>
-                  bacau@eurooptik.ro</p>
-              </div>
-            </div>
-          </div>
-          <div class="address-navigation">
-            <button class="nav-arrow prev-arrow" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
-            <button class="nav-arrow next-arrow" aria-label="Next"><i class="fa fa-chevron-right"></i></button>
-          </div>
+
+        <div class="carousel-nav">
+          <button id="prev-location" class="carousel-btn"><i class="fa fa-chevron-left"></i></button>
+          <button id="next-location" class="carousel-btn"><i class="fa fa-chevron-right"></i></button>
         </div>
+
       </div>
     </section>
 
     <section id="programare-section" style="display:none; padding:40px 0; background:#f9f9f9;">
-      <button onclick="hideProgramareSection()" style="float:right; margin:10px; font-size:22px; font-weight:bold; background:none; border:none; cursor:pointer;">&times;</button>
+      <button onclick="hideProgramareSection()"
+        style="float:right; margin:10px; font-size:22px; font-weight:bold; background:none; border:none; cursor:pointer;">×</button>
       <h2>Programează-te online</h2>
       <div style="width:100%; max-width:900px; margin:auto;">
-        <iframe 
-          src="https://eurooptik.ro.programarionline.sophtha.com/" 
-          style="width:100%; min-height:600px; border:none;"
-          title="Programare online"></iframe>
+        <iframe src="https://eurooptik.ro.programarionline.sophtha.com/"
+          style="width:100%; min-height:600px; border:none;" title="Programare online"></iframe>
       </div>
     </section>
 
     <hr class="divider-d">
-    <footer class="footer bg-dark">
-      <p>Date de contact, meniu din nou, hyperlinks cu retele sociale, buton
-        de programare</p>
-    </footer>
+    <footer class="footer">
+        <section class="footer-message">
+          <h2>Va mai asteptam la noi!</h2>
+          <button class="footer-appointment-btn">Programeaza-te online</button>
+        </section>
+        <div class="footer-content">
+          <div class="footer-locations">
+            <div class="footer-location"><span class="footer-location-name">Bacau - clinica</span><br>Luni - Vineri, 9 - 17</div>
+            <div class="footer-location"><span class="footer-location-name">Bacau</span><br>Luni - Vineri, 9 - 17</div>
+            <div class="footer-location"><span class="footer-location-name">Moinesti</span><br>Luni - Vineri, 8 - 16</div>
+            <div class="footer-location"><span class="footer-location-name">Comanesti</span><br>Luni - Vineri, 9 - 17</div>
+            <div class="footer-location"><span class="footer-location-name">Onesti</span><br>Luni - Vineri, 9 - 17</div>
+          </div>
+          <div class="footer-center">
+            <nav class="footer-menu">
+              <a href="#totop">Acasa</a>
+              <a href="#services">Serviciile Noastre</a>
+              <a href="#echipa-noastra">Echipa Noastra</a>
+              <a href="#pricing">Tarife</a>
+              <a href="#testimoniale">Testimoniale</a>
+              <a href="#adresses">Contact</a>
+            </nav>
+            <div class="footer-logo">
+              <img class="footer-logo-image" src="assets/images/logo-small.png" alt="eurooptik logo">
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
 
     <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
@@ -687,7 +821,7 @@
   <!--  
     JavaScripts
     =============================================
-    -->
+  -->
   <script src="assets/lib/jquery/dist/jquery.js"></script>
   <script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="assets/lib/wow/dist/wow.js"></script>
@@ -700,6 +834,7 @@
   <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/carousel.js"></script>
 
   <!-- Inline script to ensure filtering works correctly -->
   <script>
