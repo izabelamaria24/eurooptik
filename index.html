@@ -45,6 +45,7 @@
   <link href="assets/css/footer.css" rel="stylesheet">
   <link href="assets/css/contact.css" rel="stylesheet">
   <link href="assets/css/prices.css" rel="stylesheet">
+  <link href="assets/css/testimonials.css" rel="stylesheet">
 
   <!-- Icons CDN -->
   <link
@@ -696,18 +697,117 @@
     </div>
     </section>
 
-    <section class="module" id="testimoniale" style="background-color: #504c4c;">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6 col-sm-offset-3">
-            <h2 class="module-title" style="color: #F5F3ED;">TESTIMONIALE</h2>
+    <!-- ============================================ -->
+<!--              Testimonials Section            -->
+<!-- ============================================ -->
+<section class="module" id="testimoniale" style="padding: 0; position: relative;">
+  <!-- On large screens, a background image can sit behind the grid -->
+  <div class="testimonial-bg-image"></div>
+  
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- This container holds both the text and the grid, and will be the reference for the overlay -->
+      <div class="testimonial-container">
+
+        <!-- 
+          TEXT ZONE
+          On small screens, this appears first.
+          On large screens, this becomes the overlay.
+        -->
+        <div id="testimonial-text-area" class="testimonial-text-area">
+          <div class="testimonial-text-inner">
+            <div class="module-header text-center text-lg-left">
+              <h2 class="module-title" style="color: #F5F3ED;">TESTIMONIALE</h2>
+              <p class="module-subtitle" style="color: #cccccc;">Ce spun pacienții noștri</p>
+            </div>
+            
+            <!-- This is where the testimonial paragraphs will be displayed -->
+            <div id="testimonial-content-wrapper">
+              <!-- Testimonial 1 (Visible by default) -->
+              <div class="testimonial-content active" data-testimonial="1">
+                <blockquote class="testimonial-quote">
+                  "O experiență excepțională! Profesionalismul echipei și atenția la detalii m-au impresionat. Văd clar acum, la propriu și la figurat. Recomand cu toată încrederea."
+                </blockquote>
+                <p class="testimonial-author">— Elena V.</p>
+              </div>
+              <!-- Testimonial 2 -->
+              <div class="testimonial-content" data-testimonial="2">
+                <blockquote class="testimonial-quote">
+                  "Am venit cu teamă, dar am plecat cu zâmbetul pe buze. Medicii sunt incredibil de răbdători și explică fiecare pas. Mulțumesc întregii echipe Eurooptik!"
+                </blockquote>
+                <p class="testimonial-author">— Andrei P.</p>
+              </div>
+              <!-- Testimonial 3 -->
+              <div class="testimonial-content" data-testimonial="3">
+                <blockquote class="testimonial-quote">
+                  "Operația de cataractă a fost un succes total. Mi-am recăpătat vederea și calitatea vieții. Servicii de 5 stele!"
+                </blockquote>
+                <p class="testimonial-author">— Maria S.</p>
+              </div>
+              <!-- Testimonial 4 -->
+              <div class="testimonial-content" data-testimonial="4">
+                <blockquote class="testimonial-quote">
+                  "Cel mai bun cabinet de oftalmologie pediatrică. Copilul meu se simte mereu confortabil și este tratat cu cea mai mare grijă."
+                </blockquote>
+                <p class="testimonial-author">— Ioana M.</p>
+              </div>
+              <!-- Testimonial 5 -->
+              <div class="testimonial-content" data-testimonial="5">
+                <blockquote class="testimonial-quote">
+                  "Echipamente de ultimă generație și o echipă de nota 10. Am primit ochelarii perfecți pentru nevoile mele. Voi reveni cu siguranță."
+                </blockquote>
+                <p class="testimonial-author">— George D.</p>
+              </div>
+              <!-- Testimonial 6 -->
+              <div class="testimonial-content" data-testimonial="6">
+                <blockquote class="testimonial-quote">
+                  "De la programare până la consultația finală, totul a decurs impecabil. O clinică modernă, curată și primitoare."
+                </blockquote>
+                <p class="testimonial-author">— Cristian B.</p>
+              </div>
+              <!-- Testimonial 7 -->
+              <div class="testimonial-content" data-testimonial="7">
+                <blockquote class="testimonial-quote">
+                  "Am apreciat transparența prețurilor și explicațiile detaliate. Știi exact pentru ce plătești și primești servicii de calitate."
+                </blockquote>
+                <p class="testimonial-author">— Ana T.</p>
+              </div>
+              <!-- Testimonial 8 -->
+              <div class="testimonial-content" data-testimonial="8">
+                <blockquote class="testimonial-quote">
+                  "Recomand cu căldură pentru oricine are nevoie de o consultație oftalmologică amănunțită. Medicii sunt adevărați profesioniști."
+                </blockquote>
+                <p class="testimonial-author">— Mihai R.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row">
 
+        <!-- 
+          IMAGE GRID ZONE
+          On small screens, this is a 2x2 grid below the text.
+          On large screens, this is a 4x2 grid.
+        -->
+        <div id="testimonial-grid" class="row no-gutters testimonial-grid">
+          <!-- On xs screens, show only 4 images in a 2x2 grid -->
+          <div class="col-xs-6 col-sm-3"><a href="#" class="testimonial-trigger active" data-target="1"><img src="https://picsum.photos/400/400?random=1" alt="Testimonial 1" class="img-responsive"></a></div>
+          <div class="col-xs-6 col-sm-3"><a href="#" class="testimonial-trigger" data-target="2"><img src="https://picsum.photos/400/400?random=2" alt="Testimonial 2" class="img-responsive"></a></div>
+          <div class="col-xs-6 col-sm-3"><a href="#" class="testimonial-trigger" data-target="3"><img src="https://picsum.photos/400/400?random=3" alt="Testimonial 3" class="img-responsive"></a></div>
+          <div class="col-xs-6 col-sm-3"><a href="#" class="testimonial-trigger" data-target="4"><img src="https://picsum.photos/400/400?random=4" alt="Testimonial 4" class="img-responsive"></a></div>
+          
+          <!-- On sm and up, show all 8 images in a 4x2 grid -->
+          <div class="hidden-xs col-sm-3"><a href="#" class="testimonial-trigger" data-target="5"><img src="https://picsum.photos/400/400?random=5" alt="Testimonial 5" class="img-responsive"></a></div>
+          <div class="hidden-xs col-sm-3"><a href="#" class="testimonial-trigger" data-target="6"><img src="https://picsum.photos/400/400?random=6" alt="Testimonial 6" class="img-responsive"></a></div>
+          <div class="hidden-xs col-sm-3"><a href="#" class="testimonial-trigger" data-target="7"><img src="https://picsum.photos/400/400?random=7" alt="Testimonial 7" class="img-responsive"></a></div>
+          <div class="hidden-xs col-sm-3"><a href="#" class="testimonial-trigger" data-target="8"><img src="https://picsum.photos/400/400?random=8" alt="Testimonial 8" class="img-responsive"></a></div>
         </div>
+        
       </div>
-    </section>
+
+    </div>
+  </div>
+</section>
 
 
     <section id="adresses">
@@ -844,6 +944,7 @@
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/carousel.js"></script>
+  
 
   <!-- Inline script to ensure filtering works correctly -->
   <script>
@@ -896,6 +997,11 @@
 
   <!-- Team section specific script -->
   <script src="assets/js/team.js"></script>
+  <script src="assets/js/team.js"></script>
+
+  <!-- Section specific scripts -->
+  <!-- started this practice with testimonials, might need refator in the future -->
+  <script src="assets/js/testimonials.js"></script>
 
 </body>
 

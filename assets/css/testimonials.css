@@ -1,0 +1,140 @@
+/* ============================================ */
+/*              Testimonial Section Styles      */
+/* ============================================ */
+
+/* --- General & Mobile First Styles --- */
+
+.testimonial-bg-image {
+  /* You can add a background image that shows through on large screens */
+  background: url('path/to/your/background.jpg') no-repeat center center;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.no-gutters > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+/* Container for the text area */
+.testimonial-text-area {
+  background-color: #504c4c; /* Dark background for mobile */
+  padding: 40px 20px;
+  color: #fff;
+}
+
+/* Hide all testimonial content by default */
+.testimonial-content {
+  display: none;
+  animation: fadeIn 0.5s;
+}
+
+/* Show only the active testimonial */
+.testimonial-content.active {
+  display: block;
+}
+
+.testimonial-quote {
+  font-family: 'Volkhov', serif;
+  font-size: 20px;
+  font-style: italic;
+  border-left: 3px solid #4aa190; /* Accent color */
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.testimonial-author {
+  font-weight: 700;
+  font-size: 16px;
+  color: #cccccc;
+}
+
+/* Styles for the image grid */
+.testimonial-grid .testimonial-trigger img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.6; /* Dim inactive images */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  filter: grayscale(80%);
+}
+
+/* Style for the active/hovered image */
+.testimonial-grid .testimonial-trigger.active img,
+.testimonial-grid .testimonial-trigger:hover img {
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.05);
+  z-index: 10;
+  position: relative;
+}
+
+/* --- Large Screen Styles (Breakpoint for lg in Bootstrap 3 is 1200px) --- */
+@media (min-width: 992px) {
+  #testimoniale {
+    /* Ensure the section takes up the full height of the grid */
+    overflow: hidden; 
+  }
+
+  .testimonial-container {
+    position: relative; /* This is crucial for the absolute positioning of the overlay */
+    display: flex; /* Use flexbox for layout */
+  }
+
+  /* Make the image grid take up the full available space */
+  .testimonial-grid {
+    width: 100%;
+  }
+  
+  /* On large screens, the image grid itself is on the left */
+  .testimonial-grid .col-xs-3 {
+    width: 25%; /* 4 columns */
+  }
+
+  /* The TEXT AREA becomes an overlay */
+  .testimonial-text-area {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    
+    /* Position: Start at 7/12 from the left, width is 1/3 (or 4/12) */
+    left: 58.333333%; /* 7 / 12 */
+    width: 33.333333%;  /* 4 / 12 */
+    
+    background-color: rgba(30, 30, 30, 0.85); /* Semi-transparent background */
+    backdrop-filter: blur(5px); /* Nice glass effect if you want */
+    -webkit-backdrop-filter: blur(5px);
+    
+    /* Use flexbox to vertically center the content */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px;
+    z-index: 20; /* Ensure it's on top of the images */
+  }
+  
+  .testimonial-text-inner {
+    width: 100%;
+  }
+
+  .text-lg-left {
+    text-align: left !important;
+  }
+}
+
+/* Keyframe for fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
