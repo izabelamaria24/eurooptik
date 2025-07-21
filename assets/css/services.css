@@ -76,13 +76,17 @@ body {
     display: flex;
     background-color: #FDF8F8;
     padding: 40px;
-    gap: 40px;    
+    gap: 40px;
+
     align-items: flex-start; 
 }
 
 .service-list-container {
     flex: 1;
     text-align: left;
+    
+    max-height: 400px; 
+    overflow-y: auto; 
 }
 
 .service-list {
@@ -113,7 +117,7 @@ body {
     flex: 2;
     display: flex;
     gap: 20px;
-    align-items: stretch;
+    align-items: stretch; 
 }
 
 .service-info {
@@ -142,8 +146,7 @@ body {
 .service-image-container {
     flex: 1 1 50%;
     height: 400px; 
-    
-    background-color: #f7dcdc; 
+    background-color: #f7dcdc;
 }
 
 .service-list-container::-webkit-scrollbar {
@@ -151,14 +154,14 @@ body {
 }
 
 .service-list-container::-webkit-scrollbar-track {
-    background: #fdf8f8; 
+    background: #fdf8f8;
     border-radius: 10px;
 }
 
 .service-list-container::-webkit-scrollbar-thumb {
-    background-color: #d94d7a; 
+    background-color: #d94d7a;
     border-radius: 10px;
-    border: 2px solid #fdf8f8; 
+    border: 2px solid #fdf8f8;
 }
 
 .service-image-container img {
