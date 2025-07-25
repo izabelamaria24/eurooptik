@@ -83,3 +83,38 @@
     display: none;
   }
 }
+
+/* --- CSS For Two-Line Buttons on Large Screens --- */
+
+@media (min-width: 992px) {
+
+  .team-filter-btn,
+  .location-btn {
+    
+    /* 1. Set a NARROW, fixed width to force text wrapping. */
+    /* THIS IS THE VALUE YOU WILL NEED TO ADJUST. */
+    width: 120px; 
+    
+    /* 2. Set a taller, fixed height to ensure all buttons are uniform. */
+    /* Adjust this to make the button taller or shorter. */
+    height: 65px;
+
+    /* 3. Use Flexbox for perfect centering. */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    /* 4. Ensure text inside is centered. */
+    text-align: center;
+
+    /* 5. IMPORTANT: Remove or override any 'white-space: nowrap' rule. */
+    white-space: normal; /* This allows text to wrap. */
+
+    /* 6. Adjust padding as needed, usually less is needed with fixed height. */
+    padding: 5px;
+    
+    /* 7. (Optional) Smoother transition for a polished look. */
+    transition: all 0.2s ease-in-out;
+  }
+
+}
