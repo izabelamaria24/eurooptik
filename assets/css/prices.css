@@ -56,3 +56,30 @@
 .btn-circle .fa {
   color: #fff;
 }
+
+/* --- Styles for Large Screens --- */
+/* On screens 992px and wider, display all cards and hide navigation */
+@media (min-width: 992px) {
+  .pricing-carousel-viewport {
+    max-width: none; /* Remove the width constraint */
+    overflow: visible; /* Make overflowing cards visible */
+  }
+
+  .pricing-cards-container {
+    justify-content: center; /* Center the cards */
+    gap: 20px; /* Add space between cards */
+    /* Override the transform property from the script to ensure they stay put */
+    transform: none !important;
+  }
+
+  .pricing-card {
+    flex-basis: 33.333%; /* Allow three cards to fit */
+    max-width: 400px; /* Set a max-width for aesthetics */
+  }
+
+  /* Hide the navigation buttons as they are not needed */
+  .pricing-prev,
+  .pricing-next {
+    display: none;
+  }
+}
