@@ -1,93 +1,121 @@
-/**
- * Team section functionality
- */
-(function ($) {
-    "use strict";
+document.addEventListener('DOMContentLoaded', () => {
 
-    // Hide team members initially
-    $('.team-member').css('opacity', 0);
+    // --- DOCTOR DATA ---
+    const doctors = [
+        {
+            name: 'Dr. Alina Popa',
+            role: 'Medic primar oftalmolog',
+            image: 'assets/images/Angajati/Alina_Popa.png',
+            specializations: ['Oftalmologie pediatrică', 'Control de rutină', 'Diagnosticare'],
+            categories: ['locatia-a']
+        },
+        {
+            name: 'Dr. Ana Miller',
+            role: 'Medic specialist oftalmolog',
+            image: 'assets/images/Angajati/Ana_Miller.png',
+            specializations: ['Chirurgie refractivă', 'Tratament laser', 'Boli retiniene'],
+            categories: ['locatia-b']
+        },
+        {
+            name: 'Dr. Anca Crăciun',
+            role: 'Medic specialist oftalmolog',
+            image: 'assets/images/Angajati/Anca_Craciun.png',
+            specializations: ['Glaucom', 'Boli retiniene', 'Urgențe oftalmologice'],
+            categories: ['locatia-c']
+        },
+        {
+            name: 'Dr. Andrei Irimia',
+            role: 'Medic primar oftalmolog',
+            image: 'assets/images/Angajati/Andrei_Irimia.png',
+            specializations: ['Chirurgia cataractei', 'Consultații avansate', 'Second opinion'],
+            categories: ['locatia-d']
+        },
+        {
+            name: 'Dr. Cristina Flondor',
+            role: 'Medic primar oftalmolog',
+            image: 'assets/images/Angajati/Cristina_Flondor.png',
+            specializations: ['Strabism și ambliopie', 'Oftalmologie pediatrică', 'Exerciții ortoptice'],
+            categories: ['locatia-e']
+        },
+        {
+            name: 'Dr. Delia Iftimie',
+            role: 'Medic specialist oftalmolog',
+            image: 'assets/images/Angajati/Delia_Iftimie.png',
+            specializations: ['Boli ale polului anterior', 'Lentile de contact', 'Control de rutină'],
+            categories: ['locatia-a']
+        },
+        {
+            name: 'Dr. Dana Lupu',
+            role: 'Medic primar oftalmolog',
+            image: 'assets/images/Angajati/Dana_Lupu.png',
+            specializations: ['Diagnostic și tratament glaucom', 'Patologie oculară', 'Monitorizare avansată'],
+            categories: ['locatia-b']
+        },
+        {
+            name: 'Dr. Roxana Lungu',
+            role: 'Medic specialist oftalmolog',
+            image: 'assets/images/Angajati/Roxana_Lungu.png',
+            specializations: ['Patologia retiniană', 'Injecții intravitreene', 'Tomografie oculară'],
+            categories: ['locatia-c']
+        }
+    ];
 
-    $(document).ready(function () {
-        // Initialize team filtering with delay to allow page to render
-        setTimeout(function () {
-            initTeamFilter();
+    const teamGrid = document.getElementById('team-grid');
+    const filterButtons = document.querySelectorAll('.btn-filter');
 
-            // Make sure filter buttons also work on mobile
-            ensureMobileFilterEvents();
+    // --- FUNCTIONS ---
 
-            // Make all doctor cards equal height
-            equalizeTeamCardHeights();
-        }, 300);
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
 
-        // On window resize, re-apply equal heights
-        $(window).on('resize', function () {
-            equalizeTeamCardHeights();
+    function displayDoctors(doctorArray) {
+        teamGrid.innerHTML = '';
+        doctorArray.forEach(doctor => {
+            const doctorCard = document.createElement('div');
+            doctorCard.className = 'team-member';
+            doctor.categories.forEach(cat => doctorCard.setAttribute(`data-${cat}`, 'true'));
+            const specializationsHTML = doctor.specializations.map(spec => `<li>${spec}</li>`).join('');
+
+            doctorCard.innerHTML = `
+                <div class="team-member-photo" style="background-image: url('${doctor.image}')"></div>
+                <h4 class="team-member-name">${doctor.name}</h4>
+                <p class="team-member-role">${doctor.role}</p>
+                <h5 class="team-member-specialization-title">Specializări</h5>
+                <ul class="team-member-specialization-list">
+                    ${specializationsHTML}
+                </ul>
+            `;
+            teamGrid.appendChild(doctorCard);
+        });
+    }
+    
+    function filterTeam(filter) {
+        const allMembers = document.querySelectorAll('.team-member');
+        allMembers.forEach(member => {
+            member.classList.remove('show');
+            if (filter === 'all' || member.hasAttribute(`data-${filter}`)) {
+                setTimeout(() => {
+                    member.classList.add('show');
+                }, 10);
+            }
+        });
+    }
+
+    // --- INITIALIZATION ---
+    shuffle(doctors);
+    displayDoctors(doctors);
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            const filterValue = button.getAttribute('data-filter');
+            filterTeam(filterValue);
         });
     });
 
-    /**
-     * Initialize team filtering system with animations
-     */
-    function initTeamFilter() {
-        // Initial animation for all team members - show simultaneously
-        $('.team-member').css('opacity', 1).addClass('cardAppear');
-
-        // Make sure "All" button is active by default
-        $('.team-filter-btn[data-filter="all"]').addClass('active');
-    }
-
-    /**
-     * Make sure filter buttons work on mobile touch events
-     */
-    function ensureMobileFilterEvents() {
-        // Add touchstart handler for mobile devices
-        $('.team-filter-btn').on('touchstart', function () {
-            var filterValue = $(this).attr('data-filter');
-            // Update button styling - only change active state, all buttons remain magenta
-            $('.team-filter-btn').removeClass('active');
-            $(this).addClass('active');
-
-            // Remove any existing animation classes
-            $('.team-member').removeClass('fadeIn');
-
-            // Show/hide team members based on filter with animation - show simultaneously
-            if (filterValue === 'all') {
-                // Show all members simultaneously
-                $('.team-member').show().addClass('cardAppear');
-            } else {
-                $('.team-member').hide();
-                // Show filtered members simultaneously
-                $('.team-member[data-category="' + filterValue + '"]').show().addClass('cardAppear');
-            }
-
-            return false;
-        });
-    }
-
-    /**
-     * Make all doctor cards the same height in each row
-     */
-    function equalizeTeamCardHeights() {
-        // Reset heights first
-        $('.team-item').css('height', 'auto');
-
-        // Skip on mobile
-        if ($(window).width() < 768) {
-            return;
-        }
-
-        // Find tallest card in each row
-        var maxHeight = 0;
-        $('.team-item').each(function () {
-            if ($(this).height() > maxHeight) {
-                maxHeight = $(this).height();
-            }
-        });
-
-        // Apply height to all cards
-        if (maxHeight > 0) {
-            $('.team-item').height(maxHeight);
-        }
-    }
-
-})(jQuery);
+});
