@@ -1,69 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    // --- DOCTOR DATA ---
     const doctors = [
         {
             name: 'Dr. Alina Popa',
             role: 'Medic primar oftalmolog',
             image: 'assets/images/Angajati/Alina_Popa.png',
-            specializations: ['Oftalmologie pediatrică', 'Control de rutină', 'Diagnosticare'],
+            specializations: ['Chirurgia cataractei', 'Consultații oftalmologice', 'Tratament laser glaucom si retină'],
             categories: ['locatia-a']
         },
         {
             name: 'Dr. Ana Miller',
             role: 'Medic specialist oftalmolog',
             image: 'assets/images/Angajati/Ana_Miller.png',
-            specializations: ['Chirurgie refractivă', 'Tratament laser', 'Boli retiniene'],
+            specializations: [],
             categories: ['locatia-b']
         },
         {
             name: 'Dr. Anca Crăciun',
             role: 'Medic specialist oftalmolog',
             image: 'assets/images/Angajati/Anca_Craciun.png',
-            specializations: ['Glaucom', 'Boli retiniene', 'Urgențe oftalmologice'],
+            specializations: [],
             categories: ['locatia-c']
         },
         {
             name: 'Dr. Andrei Irimia',
             role: 'Medic primar oftalmolog',
             image: 'assets/images/Angajati/Andrei_Irimia.png',
-            specializations: ['Chirurgia cataractei', 'Consultații avansate', 'Second opinion'],
+            specializations: ['Chirurgia cataractei', 'Operatii de retina'],
             categories: ['locatia-d']
         },
         {
             name: 'Dr. Cristina Flondor',
             role: 'Medic primar oftalmolog',
             image: 'assets/images/Angajati/Cristina_Flondor.png',
-            specializations: ['Strabism și ambliopie', 'Oftalmologie pediatrică', 'Exerciții ortoptice'],
+            specializations: ['Ochelari progresivi', 'Tratament glaucom'],
             categories: ['locatia-e']
         },
         {
             name: 'Dr. Delia Iftimie',
             role: 'Medic specialist oftalmolog',
             image: 'assets/images/Angajati/Delia_Iftimie.png',
-            specializations: ['Boli ale polului anterior', 'Lentile de contact', 'Control de rutină'],
+            specializations: [],
             categories: ['locatia-a']
         },
         {
             name: 'Dr. Dana Lupu',
             role: 'Medic primar oftalmolog',
             image: 'assets/images/Angajati/Dana_Lupu.png',
-            specializations: ['Diagnostic și tratament glaucom', 'Patologie oculară', 'Monitorizare avansată'],
+            specializations: [],
             categories: ['locatia-b']
         },
         {
             name: 'Dr. Roxana Lungu',
             role: 'Medic specialist oftalmolog',
             image: 'assets/images/Angajati/Roxana_Lungu.png',
-            specializations: ['Patologia retiniană', 'Injecții intravitreene', 'Tomografie oculară'],
+            specializations: ['Consultatii oftalmologice si prescriptii de ochelari', 'Sindrom de ochi uscat, glaucom'],
             categories: ['locatia-c']
         }
     ];
 
     const teamGrid = document.getElementById('team-grid');
     const filterButtons = document.querySelectorAll('.btn-filter');
-
-    // --- FUNCTIONS ---
 
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -105,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- INITIALIZATION ---
     shuffle(doctors);
     displayDoctors(doctors);
 
