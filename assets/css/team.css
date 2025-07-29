@@ -1,9 +1,7 @@
-
 #echipa-noastra {
     padding: 80px 0;
 }
 
-/* Filter Buttons */
 .team-filters {
     display: flex;
     justify-content: center;
@@ -13,7 +11,7 @@
 }
 
 .btn-filter {
-    background-color: #D13775; /* Pink color from Figma */
+    background-color: #D13775;
     color: #fff;
     border: none;
     padding: 12px 25px;
@@ -21,48 +19,49 @@
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 .btn-filter:hover, .btn-filter.active {
-    background-color: #b82a63; /* Darker pink for hover/active */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #b82a63;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
-
-/* Team Grid */
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    width: 100%;
+.team-carousel {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
-/* Doctor Card */
+.team-carousel.slick-initialized {
+    opacity: 1;
+}
+
 .team-member {
     text-align: center;
-    display: none; /* Hidden by default */
+    margin: 0 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.team-member.show {
-    display: block;
-    animation: fadeIn 0.5s ease-in-out;
+.team-member:hover {
+    transform: translateY(-5px);
 }
 
 .team-member-photo {
-    /* CHANGED: Increased size for a bolder look */
     width: 240px;
     height: 240px;
-    
-    /* ADDED: These properties ensure the image is perfectly centered and covers the circle */
-    background-size: cover;       /* Scales the image to cover the entire div */
-    background-position: center;  /* Aligns the image to the center */
-    background-repeat: no-repeat; /* Prevents the image from tiling */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    margin: 0 auto 25px auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
 
-    border-radius: 50%; /* Makes the div a perfect circle */
-    margin: 0 auto 25px auto; /* Auto side margins center the block, increased bottom margin */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Optional: Adds a subtle shadow */
+.team-member:hover .team-member-photo {
+    box-shadow: 0 10px 30px rgba(209, 55, 117, 0.3);
 }
 
 .team-member-name {
@@ -94,28 +93,132 @@
     line-height: 1.6;
 }
 
-/* Fade In Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.slick-prev:before, .slick-next:before {
+    color: #D13775;
+    font-size: 30px;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 991px) {
-    .team-grid { grid-template-columns: repeat(2, 1fr); }
     .team-member-photo {
-        width: 200px; /* Slightly smaller on tablets */
+        width: 200px;
         height: 200px;
     }
 }
 
 @media (max-width: 767px) {
-    .team-grid { grid-template-columns: 1fr; }
     .module-title { font-size: 28px; }
     .team-filters { gap: 10px; }
     .btn-filter { padding: 10px 20px; font-size: 13px; }
     .team-member-photo {
-        width: 220px; /* A bit larger again for single-column mobile view */
+        width: 220px;
+        height: 220px;
+    }
+}
+
+.btn-filter {
+    background-color: #D13775; 
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.btn-filter:hover, .btn-filter.active {
+    background-color: #b82a63; 
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.team-member {
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+}
+
+.team-member-photo {
+    transition: box-shadow 0.3s ease;
+}
+
+.team-member:hover .team-member-photo {
+    box-shadow: 0 10px 30px rgba(209, 55, 117, 0.3);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.carousel-viewport {
+    width: 100%;
+}
+
+#team-carousel-nav {
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#prev-doctor, #next-doctor {
+    background-color: transparent; 
+    border: 2px solid #D13775; 
+    color: #D13775;          
+    font-size: 24px;
+    font-weight: bold;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.carousel-btn:hover {
+    background-color: #D13775; 
+    color: #fff;         
+}
+
+.team-member-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 991px) {
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 767px) {
+    .team-grid { 
+        display: flex;
+        grid-template-columns: none;
+        gap: 0;
+    }
+
+    .team-member-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 15px; 
+        box-sizing: border-box;
+    }
+
+    .module-title { font-size: 28px; }
+    .team-filters { gap: 10px; }
+    .btn-filter { padding: 10px 20px; font-size: 13px; }
+    .team-member-photo {
+        width: 220px; 
         height: 220px;
     }
 }
