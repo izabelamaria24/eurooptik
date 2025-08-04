@@ -1,0 +1,166 @@
+/* --- custom-services-carousel.css --- */
+
+/* --- Main Section & Button Styling --- */
+#our-services-section {
+    font-family: 'Poppins', sans-serif !important;
+    background-color: #f8f6f5 !important; /* Page background color */
+    padding: 60px 0 !important;
+}
+
+#our-services-container {
+    text-align: center !important;
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+#our-services-container .section-title {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #000 !important;
+    margin-bottom: 10px !important;
+    text-transform: uppercase; /* Match template style */
+}
+
+#our-services-container .section-subtitle {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color: #4f4f4f !important;
+    margin-bottom: 30px !important;
+}
+
+#services-filter-container {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    margin-bottom: 30px !important;
+}
+
+#services-filter-container .filter-btn {
+    background-color: #f5eaf0 !important;
+    color: #3b3b3b !important;
+    border: none !important;
+    padding: 10px 22px !important;
+    border-radius: 20px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+#services-filter-container .filter-btn.active {
+    background-color: #d9538d !important;
+    color: white !important;
+}
+
+#services-filter-container .filter-btn:not(.active):hover {
+    background-color: #e8d8e0 !important;
+}
+
+/* --- Carousel Styling --- */
+#services-carousel-wrapper {
+    background-color: #fbeff3 !important;
+    padding: 40px 0 !important;
+    display: block !important; /* CRITICAL: Override template hiding styles */
+    visibility: visible !important; /* CRITICAL: Override template hiding styles */
+}
+
+#services-carousel-container {
+    position: relative !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+}
+
+#services-carousel-slider {
+    display: flex !important; /* CRITICAL: Override template display styles */
+    transition: transform 0.5s ease-in-out !important;
+}
+
+/* --- Carousel Card & UNIFIED Table Styling --- */
+#services-carousel-slider .carousel-card {
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    min-height: 380px !important;
+}
+
+#services-carousel-slider .service-table {
+    width: 100% !important;
+    background-color: white !important;
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+}
+
+#services-carousel-slider .service-table .table-row {
+    display: contents !important;
+}
+
+#services-carousel-slider .service-table .table-cell {
+    padding: 20px 25px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: left !important;
+    font-size: 16px !important;
+    color: #333 !important;
+}
+
+#services-carousel-slider .service-table .table-row:not(:last-of-type) .table-cell {
+    border-bottom: 1px solid #f2eaf0 !important;
+}
+
+#services-carousel-slider .service-table .price-cell {
+    background-color: #fcfbfe !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+}
+
+#services-carousel-slider .service-table .header-cell .main-title {
+    font-weight: 600 !important;
+}
+
+#services-carousel-slider .service-table .header-cell .subtitle {
+    font-size: 14px !important;
+    color: #666 !important;
+    font-weight: 400 !important;
+}
+
+/* --- Carousel Arrows and Dots --- */
+#services-carousel-container .carousel-arrow {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: transparent !important;
+    border: none !important;
+    font-size: 30px !important;
+    font-weight: bold !important;
+    color: #888 !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+}
+
+#services-carousel-container .carousel-arrow.prev { left: 10px !important; }
+#services-carousel-container .carousel-arrow.next { right: 10px !important; }
+
+#services-carousel-dots {
+    text-align: center !important;
+    margin-top: 25px !important;
+}
+
+#services-carousel-dots .dot {
+    display: inline-block !important;
+    width: 9px !important;
+    height: 9px !important;
+    margin: 0 4px !important;
+    background-color: #d1b5c2 !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+}
+
+#services-carousel-dots .dot.active {
+    background-color: #444444 !important;
+}
