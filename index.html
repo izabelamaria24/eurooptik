@@ -215,213 +215,41 @@
         </div>
       </section>
 
-      <!-- ECHIPA NOASTRA Section -->
       <section class="module" id="echipa-noastra">
-        <div class="team-section-decor"></div>
         <div class="container">
-          <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 text-center">
-              <h3 class="module-title" style="font-size:30px;">ECHIPA
-                NOASTRĂ</h3>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h2 class="module-title">ECHIPA NOASTRĂ</h2>
+                    <p class="module-subtitle">Selectați orașul pentru a vedea echipa noastră de profesioniști din fiecare locație.</p>
+                </div>
             </div>
-          </div>
-
-          <!-- Team Filter Buttons -->
-          <div class="row">
-            <div class="col-sm-12 text-center mb-40">
-              <div class="location-buttons-container">
-                <button type="button" class="btn btn-round team-filter-btn" data-filter="all">Toți
-                  medicii</button>
-                <button type="button" class="btn btn-round team-filter-btn" data-filter="locatia-a">Bacău
-                  Cabinet</button>
-                <button type="button" class="btn btn-round team-filter-btn" data-filter="locatia-b">Bacău
-                  Clinică</button>
-                <button type="button" class="btn btn-round team-filter-btn" data-filter="locatia-c">Comănești</button>
-                <button type="button" class="btn btn-round team-filter-btn" data-filter="locatia-d">Onești</button>
-                <button type="button" class="btn btn-round team-filter-btn" data-filter="locatia-e">Moinești</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Team Members Grid -->
-          <div class="row multi-columns-row">
-            <!-- Doctor 1 -->
-            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-a">
-              <div class="team-item">
-                <div class="team-image">
-                  <img src="assets/images/Angajati/Alina_Popa.png" alt="Alina Popa"
-                    style="width:100%; height:300px; object-fit:cover;">
-                  <div class="team-detail">
-                    <p class="font-serif">Specializare în oftalmologie
-                      pediatrică</p>
-                    <div class="team-social">
-                      <a href="#"><i class="fa fa-phone"></i></a>
-                      <a href="#"><i class="fa fa-envelope"></i></a>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="team-filters">
+                      <button type="button" class="btn-filter active" data-filter="all">Toți medicii</button>
+                      <button type="button" class="btn-filter" data-filter="locatia-a">Bacău - Clinică</button>
+                      <button type="button" class="btn-filter" data-filter="locatia-b">Bacău</button>
+                      <button type="button" class="btn-filter" data-filter="locatia-c">Moinești</button>
+                      <button type="button" class="btn-filter" data-filter="locatia-d">Comănești</button>
+                      <button type="button" class="btn-filter" data-filter="locatia-e">Onești</button>
                     </div>
-                  </div>
                 </div>
-                <div class="team-descr">
-                  <div class="team-name">Dr. Alina Popa</div>
-                  <div class="team-role">Medic primar oftalmolog</div>
-                </div>
-              </div>
             </div>
 
-            <!-- Doctor 2 -->
-            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-b">
-              <div class="team-item">
-                <div class="team-image">
-                  <img src="assets/images/Angajati/Ana_Miller.png" alt="Ana Miller"
-                    style="width:100%; height:300px; object-fit:cover;">
-                  <div class="team-detail">
-                    <p class="font-serif">Specialist în chirurgie
-                      refractivă</p>
-                    <div class="team-social">
-                      <a href="#"><i class="fa fa-phone"></i></a>
-                      <a href="#"><i class="fa fa-envelope"></i></a>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="team-carousel-viewport" class="carousel-viewport">
+                        <div id="team-grid" class="team-grid carousel-container">
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div class="team-descr">
-                  <div class="team-name">Dr. Ana Miller</div>
-                  <div class="team-role">Medic specialist oftalmolog</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Doctor 3 -->
-            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-c">
-              <div class="team-item">
-                <div class="team-image">
-                  <img src="assets/images/Angajati/Anca_Craciun.png" alt="Anca Craciun"
-                    style="width:100%; height:300px; object-fit:cover;">
-                  <div class="team-detail">
-                    <p class="font-serif">Experiență în glaucom și boli
-                      retiniene</p>
-                    <div class="team-social">
-                      <a href="#"><i class="fa fa-phone"></i></a>
-                      <a href="#"><i class="fa fa-envelope"></i></a>
+                    <div id="team-carousel-nav" class="carousel-nav" style="display: none;">
+                        <button id="prev-doctor" class="carousel-btn prev">‹</button>
+                        <button id="next-doctor" class="carousel-btn next">›</button>
                     </div>
-                  </div>
                 </div>
-                <div class="team-descr">
-                  <div class="team-name">Dr. Anca Crăciun</div>
-                  <div class="team-role">Medic specialist oftalmolog</div>
-                </div>
-              </div>
             </div>
-
-            <!-- Doctor 4 -->
-            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-d">
-              <div class="team-item">
-                <div class="team-image">
-                  <img src="assets/images/Angajati/Andrei_Irimia.png" alt="Andrei Irimia"
-                    style="width:100%; height:300px; object-fit:cover;">
-                  <div class="team-detail">
-                    <p class="font-serif">Expert în chirurgia cataractei</p>
-                    <div class="team-social">
-                      <a href="#"><i class="fa fa-phone"></i></a>
-                      <a href="#"><i class="fa fa-envelope"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="team-descr">
-                  <div class="team-name">Dr. Andrei Irimia</div>
-                  <div class="team-role">Medic primar oftalmolog</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Doctor 5 -->
-            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-e">
-              <div class="team-item">
-                <div class="team-image">
-                  <img src="assets/images/Angajati/Cristina_Flondor.png" alt="Cristina Flondor"
-                    style="width:100%; height:300px; object-fit:cover;">
-                  <div class="team-detail">
-                    <p class="font-serif">Specializare în strabism și
-                      ambliopia</p>
-                    <div class="team-social">
-                      <a href="#"><i class="fa fa-phone"></i></a>
-                      <a href="#"><i class="fa fa-envelope"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="team-descr">
-                  <div class="team-name">Dr. Cristina Flondor</div>
-                  <div class="team-role">Medic primar oftalmolog</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Doctor 6 -->
-            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-a">
-              <div class="team-item">
-                <div class="team-image">
-                  <img src="assets/images/Angajati/Delia_Iftimie.png" alt="Delia Iftimie"
-                    style="width:100%; height:300px; object-fit:cover;">
-                  <div class="team-detail">
-                    <p class="font-serif">Specializare în boli ale polului
-                      anterior</p>
-                    <div class="team-social">
-                      <a href="#"><i class="fa fa-phone"></i></a>
-                      <a href="#"><i class="fa fa-envelope"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="team-descr">
-                  <div class="team-name">Dr. Delia Iftimie</div>
-                  <div class="team-role">Medic specialist oftalmolog</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Doctor 7 -->
-            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-b">
-              <div class="team-item">
-                <div class="team-image">
-                  <img src="assets/images/Angajati/Dana_Lupu.png" alt="Dana Lupu"
-                    style="width:100%; height:300px; object-fit:cover;">
-                  <div class="team-detail">
-                    <p class="font-serif">Expert în diagnosticul și
-                      tratamentul glaucomului</p>
-                    <div class="team-social">
-                      <a href="#"><i class="fa fa-phone"></i></a>
-                      <a href="#"><i class="fa fa-envelope"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="team-descr">
-                  <div class="team-name">Dr. Dana Lupu</div>
-                  <div class="team-role">Medic primar oftalmolog</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Doctor 8 -->
-            <div class="col-sm-6 col-md-3 col-lg-3 mb-sm-20 team-member" data-category="locatia-c">
-              <div class="team-item">
-                <div class="team-image">
-                  <img src="assets/images/Angajati/Roxana_Lungu.png" alt="Roxana Lungu"
-                    style="width:100%; height:300px; object-fit:cover;">
-                  <div class="team-detail">
-                    <p class="font-serif">Specialist în patologia
-                      retiniană</p>
-                    <div class="team-social">
-                      <a href="#"><i class="fa fa-phone"></i></a>
-                      <a href="#"><i class="fa fa-envelope"></i></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="team-descr">
-                  <div class="team-name">Dr. Roxana Lungu</div>
-                  <div class="team-role">Medic specialist oftalmolog</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
+    </section>
 
       <section class="module" id="pricing">
         <div class="container">
