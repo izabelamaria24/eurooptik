@@ -46,14 +46,8 @@
   <link href="assets/css/contact.css" rel="stylesheet">
   <link href="assets/css/prices.css" rel="stylesheet">
   <link href="assets/css/testimonials.css" rel="stylesheet">
+  <link href="assets/css/location.css" rel="stylesheet"> <!-- Make sure this is linked! -->
 
-  <!-- Icons CDN -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
-  <link href="assets/css/footer.css" rel="stylesheet">
-  <link href="assets/css/contact.css" rel="stylesheet">
 
   <!-- Icons CDN -->
   <link
@@ -599,76 +593,103 @@
 </section>
 
 
-    <section id="adresses">
-      <div class="container">
-        <h2>LOCATIILE NOASTRE & CONTACT</h2>
-
-        <div class="carousel-viewport">
-          <div class="location-cards-container">
-
-            <!-- Card 1: Clinica Bacau -->
-            <a href="https://g.co/kgs/CF3ZXSp" 
-            target="_blank" rel="noopener noreferrer" class="location-card card-bg-clinica">
-              <div class="card-content">
-                <h5>Clinica Bacau</h5>
-                <p class="location-address">str. Stefan cel Mare Nr.7</p>
-                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 303</p>
-                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
-              </div>
-            </a>
-
-            <!-- Card 2: Cabinet Bacau -->
-            <a href="https://g.co/kgs/kF5B3ia"
-             target="_blank" rel="noopener noreferrer" class="location-card card-bg-razboieni">
-              <div class="card-content">
-                <h5>Cabinet Bacau</h5>
-                <p class="location-address">str. Razboieni Nr.7</p>
-                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 304</p>
-                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
-              </div>
-            </a>
-
-            <!-- Card 3: Cabinet Moinesti -->
-            <a href="https://g.co/kgs/5yqERUP"
-             target="_blank" rel="noopener noreferrer" class="location-card card-bg-moinesti">
-              <div class="card-content">
-                <h5>Cabinet Moinesti</h5>
-                <p class="location-address">str. T. Vladimirescu Nr.177</p>
-                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 308</p>
-                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
-              </div>
-            </a>
-
-            <!-- Card 4: Cabinet Comanesti -->
-            <a href="https://g.co/kgs/c5HFjzz"
-             target="_blank" rel="noopener noreferrer" class="location-card card-bg-comanesti">
-              <div class="card-content">
-                <h5>Cabinet Comanesti</h5>
-                <p class="location-address">str. Nicolae Ghica Nr.2</p>
-                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 309</p>
-                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
-              </div>
-            </a>
-
-            <!-- Card 5: Cabinet Onesti -->
-            <a href="https://g.co/kgs/qbvbxa7"
-             target="_blank" rel="noopener noreferrer" class="location-card card-bg-onesti">
-              <div class="card-content">
-                <h5>Cabinet Onesti</h5>
-                <p class="location-address">str. Postei Nr.6</p>
-                <p class="contact-info"><i class="fa fa-phone"></i>0760 676 306</p>
-                <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
-              </div>
-            </a>
-
+        <section id="adresses" class="module">
+      <div class="container"> <!-- This container now only holds the title and subtitle -->
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <h2 class="module-title">LOCATIILE NOASTRE & CONTACT</h2>
+            <div class="module-subtitle">Găsește clinica Eurooptik cea mai apropiată de tine.</div>
           </div>
         </div>
+      </div> <!-- End of container for title/subtitle -->
 
+      <!-- These elements are now outside the main container to allow full width -->
+      <div class="carousel-viewport">
+        <div class="location-cards-container">
+
+          <!-- Card 1: Clinica Bacau -->
+          <a href="https://g.co/kgs/CF3ZXSp" target="_blank" rel="noopener noreferrer" class="location-card">
+            <div class="location-card-header">
+              <h5>Clinica<br>Bacau</h5>
+            </div>
+            <div class="location-card-image">
+              <img src="assets/images/locations/eurooptik_clinica.png" alt="Clinica Bacau">
+            </div>
+            <div class="location-card-details">
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Stefan cel Mare Nr.7</p>
+              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 303</p>
+              <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+            </div>
+          </a>
+
+          <!-- Card 2: Cabinet Bacau -->
+          <a href="https://g.co/kgs/kF5B3ia" target="_blank" rel="noopener noreferrer" class="location-card">
+            <div class="location-card-header">
+              <h5>Cabinet<br>Bacau</h5>
+            </div>
+            <div class="location-card-image">
+              <img src="assets/images/locations/eurooptik_razboieni.png" alt="Cabinet Bacau">
+            </div>
+            <div class="location-card-details">
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Razboieni Nr.7</p>
+              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 304</p>
+              <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+            </div>
+          </a>
+
+          <!-- Card 3: Cabinet Moinesti -->
+          <a href="https://g.co/kgs/5yqERUP" target="_blank" rel="noopener noreferrer" class="location-card">
+            <div class="location-card-header">
+              <h5>Cabinet<br>Moinesti</h5>
+            </div>
+            <div class="location-card-image">
+              <img src="assets/images/locations/eurooptik_moinesti.png" alt="Cabinet Moinesti">
+            </div>
+            <div class="location-card-details">
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. T. Vladimirescu Nr.177</p>
+              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 308</p>
+              <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+            </div>
+          </a>
+
+          <!-- Card 4: Cabinet Comanesti -->
+          <a href="https://g.co/kgs/c5HFjzz" target="_blank" rel="noopener noreferrer" class="location-card">
+            <div class="location-card-header">
+              <h5>Cabinet<br>Comanesti</h5>
+            </div>
+            <div class="location-card-image">
+              <img src="assets/images/locations/eurooptik_comanesti.png" alt="Cabinet Comanesti">
+            </div>
+            <div class="location-card-details">
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Nicolae Ghica Nr.2</p>
+              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 309</p>
+              <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+            </div>
+          </a>
+
+          <!-- Card 5: Cabinet Onesti -->
+          <a href="https://g.co/kgs/qbvbxa7" target="_blank" rel="noopener noreferrer" class="location-card">
+            <div class="location-card-header">
+              <h5>Cabinet<br>Onesti</h5>
+            </div>
+            <div class="location-card-image">
+              <img src="assets/images/locations/eurooptik_onesti.png" alt="Cabinet Onesti">
+            </div>
+            <div class="location-card-details">
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Postei Nr.6</p>
+              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 306</p>
+              <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="container"> <!-- This container now holds only the carousel navigation -->
         <div class="carousel-nav">
           <button id="prev-location" class="carousel-btn"><i class="fa fa-chevron-left"></i></button>
           <button id="next-location" class="carousel-btn"><i class="fa fa-chevron-right"></i></button>
         </div>
-
       </div>
     </section>
 
