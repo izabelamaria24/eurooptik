@@ -22,8 +22,8 @@
     -->
   <!-- Default stylesheets-->
   <link href="assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  
+
+
   <!-- Template specific stylesheets-->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
@@ -45,21 +45,16 @@
   <link href="assets/css/footer.css" rel="stylesheet">
   <link href="assets/css/contact.css" rel="stylesheet">
   <link href="assets/css/prices.css" rel="stylesheet">
-  <link href="assets/css/specializations.css" rel="stylesheet">
+  <!-- IMPORTANT: Link the new specializations CSS here -->
+  <link href="assets/css/new-specializations.css" rel="stylesheet">
 
   <!-- Icons CDN -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="assets/css/footer.css" rel="stylesheet">
   <link href="assets/css/contact.css" rel="stylesheet">
 
   <!-- Icons CDN -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
@@ -135,34 +130,88 @@
     </section>
 
     <div class="main">
-      
-      <section class="module" id="specialitati">
+
+      <!-- NEW SPECIALIZATIONS SECTION -->
+      <section class="module" id="new-specializations">
         <div class="container">
-          <div class="row">
+          <div class="row text-center mb-40">
             <div class="col-sm-6 col-sm-offset-3">
               <h3 class="module-title">SPECIALITĂȚILE NOASTRE</h3>
             </div>
           </div>
-          <div class="specialitati-container">
-            <div class="specialitati-text">
-              <div class="specialitati-buttons">
-                <button data-content="content1">Chirurgie Avansată</button>
-                <button data-content="content2">Oftalmologie Pediatrică</button>
-              </div>
-              <div class="specialitati-content">
-                <p id="content1">Clinica noastră excelează în intervenții chirurgicale de înaltă precizie, inclusiv operații de cataractă cu implant de cristalin artificial de ultimă generație și proceduri laser pentru corectarea viciilor de refracție. Folosim tehnologie de vârf pentru a asigura siguranța și confortul pacienților, obținând rezultate remarcabile și o recuperare rapidă.</p>
-                <p id="content2">Suntem dedicați sănătății ochilor celor mici, oferind consultații specializate pentru copii. Diagnosticăm și tratăm afecțiuni precum strabismul, ambliopia și viciile de refracție, utilizând metode moderne și prietenoase cu copiii, cum ar fi lentilele Stellest pentru controlul miopiei și echipamentul PlusoptiX pentru screening vizual rapid și precis.</p>
-              </div>
-            </div>
-            <div class="specialitati-images">
-              <div class="specialitati-image-wrapper">
-                <img src="https://picsum.photos/400/500?random=1" alt="Imagine Specialitate 1">
-                <img src="https://picsum.photos/400/500?random=2" alt="Imagine Specialitate 2">
+
+          <!-- Main Category Buttons -->
+          <div class="row">
+            <div class="col-sm-12 text-center mb-40">
+              <div class="specialization-category-buttons">
+                <button class="btn btn-round category-btn active" data-category="surgical">Clinica Chirurgicală</button>
+                <button class="btn btn-round category-btn" data-category="pediatric">Oftalmologie Copii</button>
               </div>
             </div>
           </div>
+
+          <!-- Carousel of Specialization Cards -->
+          <div class="specialization-carousel-wrapper">
+            <div class="specialization-carousel-container">
+              <!-- Card 1: Cataracta (Surgical) -->
+              <div class="specialization-card" data-specialization="cataracta" data-category="surgical">
+                <div class="card-image-container">
+                  <img src="assets/images/specializations/cataracta.jpg" alt="Cataracta">
+                </div>
+                <h4 class="card-title">Cataracta</h4>
+              </div>
+              <!-- Card 2: Glaucom (Surgical) -->
+              <div class="specialization-card" data-specialization="glaucom" data-category="surgical">
+                <div class="card-image-container">
+                  <img src="assets/images/specializations/glaucom.jpg" alt="Glaucom">
+                </div>
+                <h4 class="card-title">Glaucom</h4>
+              </div>
+              <!-- Card 3: Laser (Surgical) -->
+              <div class="specialization-card" data-specialization="laser" data-category="surgical">
+                <div class="card-image-container">
+                  <img src="assets/images/specializations/laser.jpg" alt="Laser">
+                </div>
+                <h4 class="card-title">Operații Laser</h4>
+              </div>
+              <!-- Card 4: Stellest (Pediatric) -->
+              <div class="specialization-card" data-specialization="stellest" data-category="pediatric">
+                <div class="card-image-container">
+                  <img src="assets/images/specializations/stellest.jpg" alt="Stellest">
+                </div>
+                <h4 class="card-title">Lentile Stellest</h4>
+              </div>
+              <!-- Card 5: PlusoptiX (Pediatric) -->
+              <div class="specialization-card" data-specialization="plusoptix" data-category="pediatric">
+                <div class="card-image-container">
+                  <img src="assets/images/specializations/plusoptix.jpg" alt="PlusoptiX">
+                </div>
+                <h4 class="card-title">PlusoptiX</h4>
+              </div>
+              <!-- Card 6: Ortokeratologie (Pediatric) -->
+              <div class="specialization-card" data-specialization="ortokeratologie" data-category="pediatric">
+                <div class="card-image-container">
+                  <img src="assets/images/specializations/ortokeratologie.jpg" alt="Ortokeratologie">
+                </div>
+                <h4 class="card-title">Ortokeratologie</h4>
+              </div>
+            </div>
+            <button class="carousel-nav-btn prev-card"><i class="fa fa-chevron-left"></i></button>
+            <button class="carousel-nav-btn next-card"><i class="fa fa-chevron-right"></i></button>
+          </div>
+
+          <!-- Specialization Article Content (initially hidden) -->
+          <div class="specialization-article-container" style="display: none;">
+            <h3 class="article-title text-center"></h3>
+            <div class="article-content-wrapper">
+              <div class="article-text"></div>
+              <div class="article-image"></div>
+            </div>
+          </div>
+
         </div>
       </section>
+      <!-- END NEW SPECIALIZATIONS SECTION -->
 
       <section class="module" id="services">
         <div class="row">
@@ -232,16 +281,14 @@
               </div>
             </div>
             <div class="col-sm-4 col-xs-12">
-              <div class="features-item">
-                <div class="features-icon" id="features-img">
+              <div class="features-icon" id="features-img">
                   <img src="assets/images/green copy.png">
                 </div>
                 <h3 class="features-title" style="font-size:20px;">Ortokeratologie</h3>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       <!-- ECHIPA NOASTRA Section -->
       <section class="module" id="echipa-noastra">
@@ -461,7 +508,7 @@
                 clinică.</div>
             </div>
           </div>
-      
+
           <div class="row">
             <div class="col-sm-12 text-center mb-40">
               <div class="location-buttons-container">
@@ -480,7 +527,7 @@
               </div>
             </div>
           </div>
-      
+
           <div class="row price-row" id="pricing-tables">
             <div class="pricing-carousel-component">
               <div class="pricing-carousel-viewport">
@@ -509,7 +556,7 @@
                       </ul>
                     </div>
                   </div>
-      
+
                   <!-- Card 2: Consultatie Complexa -->
                   <div class="pricing-card">
                     <div style="border: 2px solid #4aa190a2; border-radius: 0; overflow: hidden; height: 100%;">
@@ -535,7 +582,7 @@
                       </ul>
                     </div>
                   </div>
-      
+
                   <!-- Card 3: Consultatie Premium -->
                   <div class="pricing-card">
                     <div style="border: 2px solid #d13775c2; overflow: hidden; height: 100%;">
@@ -561,7 +608,7 @@
                   </div>
                 </div>
               </div>
-      
+
               <!-- Navigation Buttons for Pricing Cards -->
               <div style="height: 48px;"></div>
               <div
@@ -581,49 +628,49 @@
             (function () {
               const container = document.querySelector('.pricing-cards-container');
               if (!container) return; // Exit if the container doesn't exist
-      
+
               const cards = container.querySelectorAll('.pricing-card');
               const prevBtn = document.querySelector('.pricing-prev');
               const nextBtn = document.querySelector('.pricing-next');
               const viewport = document.querySelector('.pricing-carousel-viewport');
-      
+
               let currentIndex = 0;
               const totalCards = cards.length;
-      
+
               function updateCarousel() {
                 const offset = -currentIndex * 100;
                 container.style.transform = 'translateX(' + offset + '%)';
-      
+
                 // Update button states
                 prevBtn.disabled = (currentIndex === 0);
                 nextBtn.disabled = (currentIndex >= totalCards - 1);
               }
-      
+
               prevBtn.addEventListener('click', () => {
                 if (currentIndex > 0) {
                   currentIndex--;
                   updateCarousel();
                 }
               });
-      
+
               nextBtn.addEventListener('click', () => {
                 if (currentIndex < totalCards - 1) {
                   currentIndex++;
                   updateCarousel();
                 }
               });
-      
+
               // Swipe support for mobile
               let startX = null;
               viewport.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].clientX;
               }, { passive: true });
-      
+
               viewport.addEventListener('touchend', (e) => {
                 if (startX === null) return;
                 let endX = e.changedTouches[0].clientX;
                 let diffX = endX - startX;
-      
+
                 if (diffX > 50) { // Swiped right
                   prevBtn.click();
                 } else if (diffX < -50) { // Swiped left
@@ -631,7 +678,7 @@
                 }
                 startX = null;
               });
-      
+
               // Initialize
               updateCarousel();
             })();
@@ -747,8 +794,8 @@
           <div class="location-cards-container">
 
             <!-- Card 1: Clinica Bacau -->
-            <a href="https://g.co/kgs/CF3ZXSp" 
-            target="_blank" rel="noopener noreferrer" class="location-card card-bg-clinica">
+            <a href="https://g.co/kgs/CF3ZXSp" target="_blank" rel="noopener noreferrer"
+              class="location-card card-bg-clinica">
               <div class="card-content">
                 <h5>Clinica Bacau</h5>
                 <p class="location-address">str. Stefan cel Mare Nr.7</p>
@@ -758,8 +805,8 @@
             </a>
 
             <!-- Card 2: Cabinet Bacau -->
-            <a href="https://g.co/kgs/kF5B3ia"
-             target="_blank" rel="noopener noreferrer" class="location-card card-bg-razboieni">
+            <a href="https://g.co/kgs/kF5B3ia" target="_blank" rel="noopener noreferrer"
+              class="location-card card-bg-razboieni">
               <div class="card-content">
                 <h5>Cabinet Bacau</h5>
                 <p class="location-address">str. Razboieni Nr.7</p>
@@ -769,8 +816,8 @@
             </a>
 
             <!-- Card 3: Cabinet Moinesti -->
-            <a href="https://g.co/kgs/5yqERUP"
-             target="_blank" rel="noopener noreferrer" class="location-card card-bg-moinesti">
+            <a href="https://g.co/kgs/5yqERUP" target="_blank" rel="noopener noreferrer"
+              class="location-card card-bg-moinesti">
               <div class="card-content">
                 <h5>Cabinet Moinesti</h5>
                 <p class="location-address">str. T. Vladimirescu Nr.177</p>
@@ -780,8 +827,8 @@
             </a>
 
             <!-- Card 4: Cabinet Comanesti -->
-            <a href="https://g.co/kgs/c5HFjzz"
-             target="_blank" rel="noopener noreferrer" class="location-card card-bg-comanesti">
+            <a href="https://g.co/kgs/c5HFjzz" target="_blank" rel="noopener noreferrer"
+              class="location-card card-bg-comanesti">
               <div class="card-content">
                 <h5>Cabinet Comanesti</h5>
                 <p class="location-address">str. Nicolae Ghica Nr.2</p>
@@ -791,8 +838,8 @@
             </a>
 
             <!-- Card 5: Cabinet Onesti -->
-            <a href="https://g.co/kgs/qbvbxa7"
-             target="_blank" rel="noopener noreferrer" class="location-card card-bg-onesti">
+            <a href="https://g.co/kgs/qbvbxa7" target="_blank" rel="noopener noreferrer"
+              class="location-card card-bg-onesti">
               <div class="card-content">
                 <h5>Cabinet Onesti</h5>
                 <p class="location-address">str. Postei Nr.6</p>
@@ -824,33 +871,33 @@
 
     <hr class="divider-d">
     <footer class="footer">
-        <section class="footer-message">
-          <h2>Va mai asteptam la noi!</h2>
-          <button class="footer-appointment-btn">Programeaza-te online</button>
-        </section>
-        <div class="footer-content">
-          <div class="footer-locations">
-            <div class="footer-location"><span class="footer-location-name">Bacau - clinica</span><br>Luni - Vineri, 9 - 17</div>
-            <div class="footer-location"><span class="footer-location-name">Bacau</span><br>Luni - Vineri, 9 - 17</div>
-            <div class="footer-location"><span class="footer-location-name">Moinesti</span><br>Luni - Vineri, 8 - 16</div>
-            <div class="footer-location"><span class="footer-location-name">Comanesti</span><br>Luni - Vineri, 9 - 17</div>
-            <div class="footer-location"><span class="footer-location-name">Onesti</span><br>Luni - Vineri, 9 - 17</div>
-          </div>
-          <div class="footer-center">
-            <nav class="footer-menu">
-              <a href="#totop">Acasa</a>
-              <a href="#services">Serviciile Noastre</a>
-              <a href="#echipa-noastra">Echipa Noastra</a>
-              <a href="#pricing">Tarife</a>
-              <a href="#testimoniale">Testimoniale</a>
-              <a href="#adresses">Contact</a>
-            </nav>
-            <div class="footer-logo">
-              <img class="footer-logo-image" src="assets/images/logo-small.png" alt="eurooptik logo">
-            </div>
+      <section class="footer-message">
+        <h2>Va mai asteptam la noi!</h2>
+        <button class="footer-appointment-btn">Programeaza-te online</button>
+      </section>
+      <div class="footer-content">
+        <div class="footer-locations">
+          <div class="footer-location"><span class="footer-location-name">Bacau - clinica</span><br>Luni - Vineri, 9 - 17</div>
+          <div class="footer-location"><span class="footer-location-name">Bacau</span><br>Luni - Vineri, 9 - 17</div>
+          <div class="footer-location"><span class="footer-location-name">Moinesti</span><br>Luni - Vineri, 8 - 16</div>
+          <div class="footer-location"><span class="footer-location-name">Comanesti</span><br>Luni - Vineri, 9 - 17</div>
+          <div class="footer-location"><span class="footer-location-name">Onesti</span><br>Luni - Vineri, 9 - 17</div>
+        </div>
+        <div class="footer-center">
+          <nav class="footer-menu">
+            <a href="#totop">Acasa</a>
+            <a href="#services">Serviciile Noastre</a>
+            <a href="#echipa-noastra">Echipa Noastra</a>
+            <a href="#pricing">Tarife</a>
+            <a href="#testimoniale">Testimoniale</a>
+            <a href="#adresses">Contact</a>
+          </nav>
+          <div class="footer-logo">
+            <img class="footer-logo-image" src="assets/images/logo-small.png" alt="eurooptik logo">
           </div>
         </div>
-      </footer>
+      </div>
+    </footer>
     </div>
 
     <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
@@ -873,7 +920,8 @@
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/carousel.js"></script>
-  <script src="assets/js/specializations.js"></script>
+  <!-- IMPORTANT: Link the new specializations JS here -->
+  <script src="assets/js/new-specializations.js"></script>
 
   <!-- Inline script to ensure filtering works correctly -->
   <script>
