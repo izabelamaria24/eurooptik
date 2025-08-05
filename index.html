@@ -60,6 +60,9 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
   />
+  
+  <!-- CONTENTFUL SDK -->
+  <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
 </head>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
@@ -225,13 +228,8 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="team-filters">
-                      <button type="button" class="btn-filter active" data-filter="all">Toți medicii</button>
-                      <button type="button" class="btn-filter" data-filter="locatia-a">Bacău - Clinică</button>
-                      <button type="button" class="btn-filter" data-filter="locatia-b">Bacău</button>
-                      <button type="button" class="btn-filter" data-filter="locatia-c">Moinești</button>
-                      <button type="button" class="btn-filter" data-filter="locatia-d">Comănești</button>
-                      <button type="button" class="btn-filter" data-filter="locatia-e">Onești</button>
+
+                    <div id="team-filters-container" class="team-filters">
                     </div>
                 </div>
             </div>
@@ -733,6 +731,9 @@
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/carousel.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
+  <script src="assets/js/contentful-service.js"></script>
   
 
   <!-- Inline script to ensure filtering works correctly -->
