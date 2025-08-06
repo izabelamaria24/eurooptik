@@ -5,16 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--  
-    Document Title
-    =============================================
-    -->
   <title>Eurooptik</title>
-  <!--  
-    Favicons
-    =============================================
-    -->
-
   <!--  
     Stylesheets
     =============================================
@@ -45,18 +36,10 @@
   <link href="assets/css/footer.css" rel="stylesheet">
   <link href="assets/css/contact.css" rel="stylesheet">
   <link href="assets/css/prices.css" rel="stylesheet">
-  <!-- IMPORTANT: Link the new specializations CSS here -->
-  <link href="assets/css/new-specializations.css" rel="stylesheet">
-
-  <!-- Icons CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="assets/css/footer.css" rel="stylesheet">
-  <link href="assets/css/contact.css" rel="stylesheet">
   <link href="assets/css/testimonials.css" rel="stylesheet">
-  <link href="assets/css/location.css" rel="stylesheet"> <!-- Make sure this is linked! -->
-
-
-  <!-- Icons CDN -->
+  <link href="assets/css/services.css" rel="stylesheet">
+  <link href="assets/css/new-specializations.css" rel="stylesheet">
+  <link href="assets/css/location.css" rel="stylesheet"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
@@ -517,90 +500,33 @@
         </div>
       </section>
 
-      <section class="module" id="works-copy" style="background-color: #39a58f28;">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-              <h2 class="module-title">TOATE SERVICIILE</h2>
+    <section id="our-services-section">
+        <div id="our-services-container">
+            <h2 class="section-title">SERVICIILE NOASTRE</h2>
+            <p class="section-subtitle"><i>Selectați categoria pentru a vedea serviciile aferente.</i></p>
+
+            <div id="services-filter-container">
+                 <button class="filter-btn active" data-category="cataracta">Interventii Chirurgicale pentru Cataracta</button>
+                 <button class="filter-btn" data-category="investigatii">Investigatii Oftalmologice</button>
+                 <button class="filter-btn" data-category="consultatii">Consultatii Oftalmologice</button>
+                 <button class="filter-btn" data-category="laser">Interventii cu Laser</button>
+                 <button class="filter-btn" data-category="retina">Tratamente Injectabile pentru Retina</button>
+                 <button class="filter-btn" data-category="glaucom">Interventii Chirurgicale pentru Glaucom</button>
+                 <button class="filter-btn" data-category="microchirurgicale">Interventii Microchirurgicale</button>
+                 <button class="filter-btn" data-category="estetice">Tratamente Estetice</button>
             </div>
-          </div>
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 text-center">
-              <ul class="filter" id="filters-copy"> <!-- Changed ID to avoid conflict -->
-                <li><a class="wow fadeInUp filters-copy-btn" href="#" data-filter="*">Dr. oftalmologi <span
-                      class="arrow-indicator"></span></a>
-                </li>
-                <li><a class="wow fadeInUp filters-copy-btn" href="#" data-filter=".illustration" id=""
-                    data-wow-delay="0.2s">Clinica Bacău <span class="arrow-indicator"></span></a></li>
-                <li><a class="wow fadeInUp filters-copy-btn" href="#" data-filter=".illustration"
-                    data-wow-delay="0.2s">Cabinet Bacău <span class="arrow-indicator"></span></a></li>
-                <li><a class="wow fadeInUp filters-copy-btn" href="#" data-filter=".marketing"
-                    data-wow-delay="0.4s">Cabinet Moinești <span class="arrow-indicator"></span></a></li>
-                <li><a class="wow fadeInUp filters-copy-btn" href="#" data-filter=".photography"
-                    data-wow-delay="0.6s">Cabinet Onești <span class="arrow-indicator"></span></a></li>
-                <li><a class="wow fadeInUp filters-copy-btn" href="#" data-filter=".webdesign"
-                    data-wow-delay="0.6s">Cabinet Comănești <span class="arrow-indicator"></span></a></li>
-              </ul>
+
+        <div id="services-carousel-wrapper">
+            <div id="services-carousel-container">
+                <div id="services-carousel-slider">
+                </div>
+                <button class="carousel-arrow prev" aria-label="Previous slide">❮</button>
+                <button class="carousel-arrow next" aria-label="Next slide">❯</button>
             </div>
-          </div>
+            <div id="services-carousel-dots">
+            </div>
         </div>
-        <ul class="works-grid works-grid-gut works-hover-w" id="works-grid-copy"> <!-- Changed ID to avoid conflict -->
-          <li class="work-item illustration webdesign">
-            <a href="assets/images/green.png" data-caption="test">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item illustration webdesign">
-            <a href="assets/images/green.png" data-caption="test">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item marketing photography">
-            <a href="assets/images/green.png" data-caption="Bag MockUp - Marketing">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item illustration photography">
-            <a href="assets/images/green.png" data-caption="Disk Cover - Illustration">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item marketing photography">
-            <a href="assets/images/green.png" data-caption="Business Card - Photography">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item illustration webdesign">
-            <a href="assets/images/green.png" data-caption="Business Card - Webdesign">
-              <div class="work-image"><img src="assets/images/green.png" alt=" Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-          <li class="work-item marketing webdesign">
-            <a href="assets/images/green.png" data-caption="Business Cards in paper clip - Marketing">
-              <div class="work-image"><img src="assets/images/green.png" alt="Portfolio Item" /></div>
-              <div class="team-name" id="nume-doctori">Mihai Stancu</div>
-              <div class="team-role" id="descriere-doctori"> Optometrist</div>
-            </a>
-          </li>
-        </ul>
-      </section>
-    </div>
-    </div>
-    </div>
     </section>
 
 <!-- ============================================ -->
@@ -838,47 +764,10 @@
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/carousel.js"></script>
-  <!-- IMPORTANT: Link the new specializations JS here -->
+  <script src="assets/js/team.js"></script>
+  <script src="assets/js/testimonials.js"></script>
+  <script src="assets/js/services.js"></script>
   <script src="assets/js/new-specializations.js"></script>
-  
-
-  <!-- Inline script to ensure filtering works correctly -->
-  <script>
-    $(document).ready(function () {
-      // Direct team filter implementation
-      $('.team-filter-btn').on('click', function () {
-        var filterValue = $(this).attr('data-filter');
-
-        // Update active state on buttons
-        $('.team-filter-btn').removeClass('active');
-        $(this).addClass('active');
-
-        // All buttons remain magenta now, just track active state
-        // No need to toggle btn-d and btn-border-d classes anymore
-
-        // First remove any existing animation classes
-        $('.team-member').removeClass('fadeIn cardAppear');
-
-        // Show/hide team members based on filter with animation - show simultaneously
-        if (filterValue === 'all') {
-          // Show all members simultaneously
-          $('.team-member').show().addClass('cardAppear');
-        } else {
-          $('.team-member').hide();
-          // Show filtered members simultaneously
-          $('.team-member[data-category="' + filterValue + '"]').show().addClass('cardAppear');
-        }
-
-        return false;
-      });
-
-      // Make sure initial state has the "all" button properly styled with active class
-      $('.team-filter-btn[data-filter="all"]').addClass('active');
-
-      // Add initial animation to all team members - show simultaneously
-      $('.team-member').addClass('fadeIn');
-    });
-  </script>
 
   <script>
     function showProgramareSection() {
@@ -891,13 +780,6 @@
     }
   </script>
 
-  <!-- Team section specific script -->
-  <script src="assets/js/team.js"></script>
-  <script src="assets/js/team.js"></script>
-
-  <!-- Section specific scripts -->
-  <!-- started this practice with testimonials, might need refator in the future -->
-  <script src="assets/js/testimonials.js"></script>
 
 </body>
 
