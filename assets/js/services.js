@@ -1,6 +1,5 @@
-// custom-services-carousel.js
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Check if the main container exists before running the script
     if (!document.getElementById('our-services-section')) {
         return;
     }
@@ -38,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
         cataracta: {
-            // This category has sub-categories, but will use the same base layout
             "Cristalin pentru vedere la distanță (se poartă ochelari pentru citit)": {
                 "Mini Ready 4 / Toric": "3650 / 4050 RON",
                 "Envista B&L / Toric": "3850 / 4250 RON",
@@ -58,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
         microchirurgicale: {
-            // This category has sub-categories
             "Interventii pleoape": {
                 "Blefaroplastie superioara": "3500 RON",
                 "Blefaroplastie inferioara": "4000 RON",
@@ -207,7 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Initial load
     if (filterButtons.length > 0) {
         updateCarousel('cataracta');
     }
