@@ -1,7 +1,6 @@
-
 #our-services-section {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f6f5; 
+    background-color: #fcfcfc; 
     padding: 60px 0;
 }
 
@@ -37,13 +36,13 @@
 
 #services-filter-container .filter-btn {
     background-color: #f5eaf0;
-    color: #3b3b3b;
+    color: black;
     border: none;
-    padding: 10px 22px;
+    padding: 5px 15px;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 22px; 
+    font-weight: 500; 
     transition: all 0.3s ease;
 }
 
@@ -59,8 +58,7 @@
 #services-carousel-wrapper {
     background-color: #fbeff3;
     padding: 40px 0;
-    display: block;
-    visibility: visible; 
+    text-align: center;
 }
 
 #services-carousel-container {
@@ -81,42 +79,56 @@
     padding: 0 60px;
     display: flex;
     align-items: center;
-    min-height: 380px;
+    justify-content: center;
 }
 
 #services-carousel-slider .service-table {
     width: 100%;
-    background-color: white;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto; 
+    background-image: linear-gradient(to right, white 70%, #f7f5fa 70%);
+    
+    height: 420px; 
+    
+    align-content: center;
+    border-radius: 8px;
+    overflow: hidden; 
 }
 
 #services-carousel-slider .service-table .table-row {
     display: contents;
 }
 
-#services-carousel-slider .service-table .table-cell {
-    padding: 20px 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left ;
-    font-size: 16px;
-    color: #333;
-}
-
-#services-carousel-slider .service-table .table-row:not(:last-of-type) .table-cell {
+#services-carousel-slider .service-table .table-row:not(:last-of-type) .name-cell {
     border-bottom: 1px solid #f2eaf0;
 }
 
+#services-carousel-slider .service-table .table-cell {
+    padding: 22px 40px; 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    font-size: 18px; 
+    color: #333;
+}
+
 #services-carousel-slider .service-table .price-cell {
-    background-color: #fcfbfe;
-    font-weight: 600;
+    background-color: transparent; 
+    font-weight: 700; 
     white-space: nowrap;
+    text-align: right;
+}
+
+#services-carousel-slider .service-table .header-cell + .price-cell {
+    text-align: center; 
+    font-weight: 600; 
 }
 
 #services-carousel-slider .service-table .header-cell .main-title {
     font-weight: 600;
+    font-size: 22px;
 }
 
 #services-carousel-slider .service-table .header-cell .subtitle {
@@ -133,17 +145,21 @@
     border: none;
     font-size: 30px;
     font-weight: bold;
-    color: #888;
+    color: rgb(54, 53, 53);
     cursor: pointer;
     z-index: 10;
 }
-
 #services-carousel-container .carousel-arrow.prev { left: 10px; }
 #services-carousel-container .carousel-arrow.next { right: 10px; }
 
 #services-carousel-dots {
     text-align: center;
     margin-top: 25px;
+    display: inline-block; 
+    background-color: white;
+    padding: 8px 12px; 
+    border-radius: 30px; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
 }
 
 #services-carousel-dots .dot {
@@ -157,5 +173,25 @@
 }
 
 #services-carousel-dots .dot.active {
-    background-color: #444444;
+    background-color: #d9538d;
+}
+
+@media (max-width: 768px) {
+    #services-carousel-slider .service-table {
+        height: auto; 
+    }
+    #services-carousel-slider .carousel-card { padding: 0 45px; }
+    #services-filter-container .filter-btn { font-size: 15px; padding: 9px 18px; }
+}
+
+@media (max-width: 576px) {
+    #our-services-section { padding: 40px 0; }
+    #services-filter-container { gap: 8px; }
+    #services-filter-container .filter-btn { font-size: 13px; padding: 8px 14px; }
+    #services-carousel-slider .carousel-card { padding: 0 40px; }
+    #services-carousel-slider .service-table .table-cell { font-size: 14px; padding: 15px 12px; }
+    #services-carousel-slider .service-table .header-cell .subtitle { font-size: 12px; }
+    #services-carousel-container .carousel-arrow { font-size: 24px; }
+    #services-carousel-container .carousel-arrow.prev { left: 8px; }
+    #services-carousel-container .carousel-arrow.next { right: 8px; }
 }
