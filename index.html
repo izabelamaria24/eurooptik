@@ -22,6 +22,7 @@
   <link href="assets/lib/animate.css/animate.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="assets/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="assets/lib/et-line-font/et-line-font.css" rel="stylesheet">
   <link href="assets/lib/flexslider/flexslider.css" rel="stylesheet">
   <link href="assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
@@ -40,7 +41,8 @@
   <link href="assets/css/services.css" rel="stylesheet">
   <link href="assets/css/new-specializations.css" rel="stylesheet">
   <link href="assets/css/location.css" rel="stylesheet"> 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- CONTENTFUL SDK -->
+  <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
 </head>
 
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
@@ -199,83 +201,6 @@
       </section>
       <!-- END NEW SPECIALIZATIONS SECTION -->
 
-      <section class="module" id="services">
-        <div class="row">
-          <div class="col-sm-6 col-sm-offset-3">
-            <h3 class="module-title">SERVICIILE NOASTRE</h3>
-          </div>
-        </div>
-
-        <div class="container" style="padding-top: 16px;">
-          <h3 class="module-title" style="font-size:30px;">Clinica
-            Chirurgicală</h3>
-          <hr
-            style="width:100vw;height:2px;background: #b4b1b4;border:none;margin:-30px 0 15px;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;">
-          <div class="row">
-            <div class="col-sm-4 col-xs-12">
-              <div class="features-item">
-                <div class="features-icon" id="features-img">
-                  <img src="assets/images/green copy.png">
-                </div>
-                <h3 class="features-title" style="font-size:20px;">Operații de
-                  Cataractă</h3>
-              </div>
-            </div>
-            <div class="col-sm-4 col-xs-12">
-              <div class="features-item">
-                <div class="features-icon" id="features-img">
-                  <img src="assets/images/green copy.png">
-                </div>
-                <h3 class="features-title" style="font-size:20px;">Operații de
-                  Glaucom</h3>
-              </div>
-            </div>
-            <div class="col-sm-4 col-xs-12">
-              <div class="features-item">
-                <div class="features-icon" id="features-img">
-                  <img src="assets/images/green copy.png">
-                </div>
-                <h3 class="features-title" style="font-size:20px;">Operații
-                  Laser</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="module" id="oftalmologie-copii">
-        <div class="container">
-          <h3 class="module-title" style="font-size:30px;">Oftalmologie
-            Copii</h3>
-          <hr
-            style="width:100vw;height:2px;background:#b4b1b4;border:none;margin:-30px 0 15px;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;">
-          <div class="row">
-            <div class="col-sm-4 col-xs-12">
-              <div class="features-item">
-                <div class="features-icon" id="features-img">
-                  <img src="assets/images/green copy.png">
-                </div>
-                <h3 class="features-title" style="font-size:20px;">Stellest</h3>
-              </div>
-            </div>
-            <div class="col-sm-4 col-xs-12">
-              <div class="features-item">
-                <div class="features-icon" id="features-img">
-                  <img src="assets/images/green copy.png">
-                </div>
-                <h3 class="features-title" style="font-size:20px;">PlusoptiX</h3>
-              </div>
-            </div>
-            <div class="col-sm-4 col-xs-12">
-              <div class="features-icon" id="features-img">
-                  <img src="assets/images/green copy.png">
-                </div>
-                <h3 class="features-title" style="font-size:20px;">Ortokeratologie</h3>
-              </div>
-            </div>
-          </div>
-        </section>
-
       <section class="module" id="echipa-noastra">
         <div class="container">
             <div class="row">
@@ -286,13 +211,8 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="team-filters">
-                      <button type="button" class="btn-filter active" data-filter="all">Toți medicii</button>
-                      <button type="button" class="btn-filter" data-filter="locatia-a">Bacău - Clinică</button>
-                      <button type="button" class="btn-filter" data-filter="locatia-b">Bacău</button>
-                      <button type="button" class="btn-filter" data-filter="locatia-c">Moinești</button>
-                      <button type="button" class="btn-filter" data-filter="locatia-d">Comănești</button>
-                      <button type="button" class="btn-filter" data-filter="locatia-e">Onești</button>
+
+                    <div id="team-filters-container" class="team-filters">
                     </div>
                 </div>
             </div>
@@ -500,34 +420,26 @@
         </div>
       </section>
 
-    <section id="our-services-section">
-        <div id="our-services-container">
-            <h2 class="section-title">SERVICIILE NOASTRE</h2>
-            <p class="section-subtitle"><i>Selectați categoria pentru a vedea serviciile aferente.</i></p>
+      <section id="our-services-section">
+          <div id="our-services-container">
+              <h2 class="section-title">SERVICIILE NOASTRE</h2>
+              <p class="section-subtitle"><i>Selectați categoria pentru a vedea serviciile aferente.</i></p>
 
-            <div id="services-filter-container">
-                 <button class="filter-btn active" data-category="cataracta">Interventii Chirurgicale pentru Cataracta</button>
-                 <button class="filter-btn" data-category="investigatii">Investigatii Oftalmologice</button>
-                 <button class="filter-btn" data-category="consultatii">Consultatii Oftalmologice</button>
-                 <button class="filter-btn" data-category="laser">Interventii cu Laser</button>
-                 <button class="filter-btn" data-category="retina">Tratamente Injectabile pentru Retina</button>
-                 <button class="filter-btn" data-category="glaucom">Interventii Chirurgicale pentru Glaucom</button>
-                 <button class="filter-btn" data-category="microchirurgicale">Interventii Microchirurgicale</button>
-                 <button class="filter-btn" data-category="estetice">Tratamente Estetice</button>
-            </div>
-        </div>
+              <div id="services-filter-container">
+              </div>
+          </div>
 
-        <div id="services-carousel-wrapper">
-            <div id="services-carousel-container">
-                <div id="services-carousel-slider">
-                </div>
-                <button class="carousel-arrow prev" aria-label="Previous slide">❮</button>
-                <button class="carousel-arrow next" aria-label="Next slide">❯</button>
-            </div>
-            <div id="services-carousel-dots">
-            </div>
-        </div>
-    </section>
+          <div id="services-carousel-wrapper">
+              <div id="services-carousel-container">
+                  <div id="services-carousel-slider">
+                  </div>
+                  <button class="carousel-arrow prev" aria-label="Previous slide">❮</button>
+                  <button class="carousel-arrow next" aria-label="Next slide">❯</button>
+              </div>
+              <div id="services-carousel-dots">
+              </div>
+          </div>
+      </section>
 
 <!-- ============================================ -->
 <!--              Testimonials Section            -->
@@ -768,7 +680,10 @@
   <script src="assets/js/testimonials.js"></script>
   <script src="assets/js/services.js"></script>
   <script src="assets/js/new-specializations.js"></script>
-
+  <script src="assets/js/config.js"></script>
+  <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
+  <script src="assets/js/contentful-service.js"></script>
+  
   <script>
     function showProgramareSection() {
       const section = document.getElementById('programare-section');
