@@ -1,81 +1,10 @@
-
 document.addEventListener('DOMContentLoaded', function () {
-    if (!document.getElementById('our-services-section')) {
+    const servicesSection = document.getElementById('our-services-section');
+    if (!servicesSection) {
         return;
     }
 
-    const servicesData = {
-        consultatii: {
-            items: {
-                "Consultație inițială cu medic oftalmolog": "200 - 250 RON",
-                "Evaluare optometrica realizata de specialist licențiat": "80 - 120 RON",
-                "Reevaluare la 6 luni cu medic oftalmolog": "100 - 130 RON",
-                "Control dioptrii și strabism copii (6 luni – 3 ani) – Plusoptix": "160 RON",
-                "Prescripție pentru lentile de contact": "200 - 250 RON",
-            }
-        },
-        investigatii: {
-            items: {
-                "Tomografie în Coerență Optică (OCT)": "200 RON",
-                "Biometrie optică": "150 RON",
-                "Pahimetrie corneană": "100 RON"
-            }
-        },
-        laser: {
-            items: {
-                "Fotocoagulare laser panretiniană": "400 RON",
-                "Iridotomie YAG laser": "300 RON",
-                "Capsulotomie YAG laser": "300 RON",
-                "Trabeculoplastie selectivă cu laser (SLT)": "500 RON",
-            }
-        },
-        retina: {
-            items: {
-                "Injectie intravitreana cu Avastin": "500 RON",
-                "Injectie intravitreana cu Eylea": "2500 RON",
-                "Injectie intravitreana cu Lucentis": "2000 RON"
-            }
-        },
-        cataracta: {
-            "Cristalin pentru vedere la distanță (se poartă ochelari pentru citit)": {
-                "Mini Ready 4 / Toric": "3650 / 4050 RON",
-                "Envista B&L / Toric": "3850 / 4250 RON",
-                "Alcon Acrysof MA 60 (miopie mare)": "3850 RON",
-                "Iris claw (cazuri speciale)": "4000 RON"
-            },
-            "Cristalin multifocal (vedere aproape și distanță)": {
-                "PanOptix / Toric": "6550 / 7050 RON",
-                "FineVision / Toric": "6550 / 7050 RON"
-            }
-        },
-        glaucom: {
-            items: {
-                "Screening glaucom": "250 RON",
-                "Tratament medicamentos glaucom": "Preț variabil",
-                "Interventie chirurgicala glaucom (trabeculectomie)": "4000 RON"
-            }
-        },
-        microchirurgicale: {
-            "Interventii pleoape": {
-                "Blefaroplastie superioara": "3500 RON",
-                "Blefaroplastie inferioara": "4000 RON",
-                "Corectie ptoza palpebrala": "3000 RON"
-            },
-            "Alte interventii": {
-                "Excizie chalazion": "600 RON",
-                "Excizie pterigion": "800 RON"
-            }
-        },
-        estetice: {
-            items: {
-                "Injectare toxina botulinica (Botox) - 3 zone": "1500 RON",
-                "Injectare acid hialuronic - 1 ml": "1200 RON",
-                "Mezoterapie faciala": "500 RON"
-            }
-        }
-    };
-
-    const filterButtons = document.querySelectorAll('#services-filter-container .filter-btn');
+    const filterButtonsContainer = document.getElementById('services-filter-container');
     const carouselSlider = document.getElementById('services-carousel-slider');
     const carouselContainer = document.getElementById('services-carousel-container');
     const prevArrow = carouselContainer.querySelector('.carousel-arrow.prev');
@@ -84,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let currentIndex = 0;
     let totalSlides = 0;
-    const itemsPerSlide = 5;
+    const itemsPerSlide = 5; 
+    let allServicesData = {}; 
 
     function buildSimpleTableSlide(items) {
         const itemsHTML = items.map(([name, price]) => `
@@ -93,15 +23,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="table-cell price-cell">${price}</div>
             </div>
         `).join('');
+
         return `<div class="carousel-card"><div class="service-table">${itemsHTML}</div></div>`;
     }
 
-    function buildSubcategorySlide(subCategoryName, items) {
+    function buildSubcategorySlide(subCategoryName, itemsChunk) {
         const titleMatch = subCategoryName.match(/([^(]+)\s*(\(.*\))?/);
         const mainTitle = titleMatch ? titleMatch[1].trim() : subCategoryName;
         const subtitle = titleMatch && titleMatch[2] ? titleMatch[2] : '';
 
-        const itemsHTML = Object.entries(items).map(([name, price]) => `
+        const itemsHTML = itemsChunk.map(([name, price]) => `
             <div class="table-row">
                 <div class="table-cell name-cell">${name}</div>
                 <div class="table-cell price-cell">${price}</div>
@@ -119,39 +50,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return `<div class="carousel-card"><div class="service-table">${headerHTML}${itemsHTML}</div></div>`;
     }
 
-    function updateCarousel(category) {
-        const categoryData = servicesData[category];
-        let slidesHTML = '';
-
-        if (categoryData.items) {
-            const items = Object.entries(categoryData.items);
-            for (let i = 0; i < items.length; i += itemsPerSlide) {
-                slidesHTML += buildSimpleTableSlide(items.slice(i, i + itemsPerSlide));
-            }
-            totalSlides = Math.ceil(items.length / itemsPerSlide);
-        } else {
-            const subcategories = Object.keys(categoryData);
-            for (const subName of subcategories) {
-                slidesHTML += buildSubcategorySlide(subName, categoryData[subName]);
-            }
-            totalSlides = subcategories.length;
-        }
-
-        carouselSlider.innerHTML = slidesHTML;
-        currentIndex = 0;
-        updateSliderPosition();
-        updateDots();
-        updateArrowVisibility();
-    }
-
     function updateSliderPosition() {
-        if (carouselSlider) {
-            carouselSlider.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
+        carouselSlider.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
-
+    
     function updateDots() {
-        if (!dotsContainer) return;
         dotsContainer.innerHTML = '';
         if (totalSlides > 1) {
             dotsContainer.innerHTML = Array.from({ length: totalSlides }, (_, i) =>
@@ -160,51 +63,104 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    if (dotsContainer) {
-        dotsContainer.addEventListener('click', (e) => {
-            if (e.target.matches('.dot')) {
-                currentIndex = parseInt(e.target.dataset.index, 10);
-                updateSliderPosition();
-                updateDots();
+    function updateArrowVisibility() {
+        const isVisible = totalSlides > 1;
+        prevArrow.style.display = isVisible ? 'block' : 'none';
+        nextArrow.style.display = isVisible ? 'block' : 'none';
+    }
+
+    function updateCarousel(categorySlug) {
+        const categoryData = allServicesData[categorySlug];
+        
+        let slidesHTML = '';
+        totalSlides = 0;
+
+        if (!categoryData) {
+            carouselSlider.innerHTML = '<div class="carousel-card"><p>Nu există servicii pentru această categorie.</p></div>';
+        } else {
+            const itemsPerSlide = window.innerWidth <= 768 ? 3 : 5;
+
+            if (categoryData.items) {
+                const items = Object.entries(categoryData.items);
+                for (let i = 0; i < items.length; i += itemsPerSlide) {
+                    slidesHTML += buildSimpleTableSlide(items.slice(i, i + itemsPerSlide));
+                }
+                totalSlides = Math.ceil(items.length / itemsPerSlide);
+            } else {
+                const subcategories = Object.keys(categoryData);
+                for (const subName of subcategories) {
+                    const allItemsForSubcategory = Object.entries(categoryData[subName]);
+                    
+                    for (let i = 0; i < allItemsForSubcategory.length; i += itemsPerSlide) {
+                        const itemsChunk = allItemsForSubcategory.slice(i, i + itemsPerSlide);
+                        
+                        slidesHTML += buildSubcategorySlide(subName, itemsChunk);
+                        totalSlides++; 
+                    }
+                }
+            }
+            carouselSlider.innerHTML = slidesHTML;
+        }
+
+        currentIndex = 0;
+        updateSliderPosition();
+        updateDots();
+        updateArrowVisibility();
+    }
+
+    function populateFilterButtons(categories) {
+        filterButtonsContainer.innerHTML = ''; 
+        categories.forEach((category, index) => {
+            const button = document.createElement('button');
+            button.className = 'filter-btn';
+            button.dataset.category = category.slug;
+            button.textContent = category.name;
+            if (index === 0) {
+                button.classList.add('active'); 
+            }
+            filterButtonsContainer.appendChild(button);
+        });
+    }
+
+    async function initializeServices() {
+        const { servicesData, categories } = await fetchServicesFromContentful();
+        
+        if (categories.length === 0) {
+            servicesSection.style.display = 'none';
+            return;
+        }
+        
+        allServicesData = servicesData; 
+        
+        populateFilterButtons(categories);
+        updateCarousel(categories[0].slug);
+
+        filterButtonsContainer.addEventListener('click', (e) => {
+            if (e.target.matches('.filter-btn')) {
+                filterButtonsContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                updateCarousel(e.target.dataset.category);
             }
         });
     }
 
-    function updateArrowVisibility() {
-        const isVisible = totalSlides > 1;
-        if (prevArrow && nextArrow) {
-            prevArrow.style.display = isVisible ? 'block' : 'none';
-            nextArrow.style.display = isVisible ? 'block' : 'none';
+    prevArrow.addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 1;
+        updateSliderPosition();
+        updateDots();
+    });
+    nextArrow.addEventListener('click', () => {
+        currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
+        updateSliderPosition();
+        updateDots();
+    });
+    dotsContainer.addEventListener('click', (e) => {
+        if (e.target.matches('.dot')) {
+            currentIndex = parseInt(e.target.dataset.index, 10);
+            updateSliderPosition();
+            updateDots();
         }
-    }
+    });
 
-    if (filterButtons.length > 0) {
-        filterButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                e.currentTarget.classList.add('active');
-                updateCarousel(e.currentTarget.dataset.category);
-            });
-        });
-    }
-
-    if (prevArrow) {
-        prevArrow.addEventListener('click', () => {
-            currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 1;
-            updateSliderPosition();
-            updateDots();
-        });
-    }
-
-    if (nextArrow) {
-        nextArrow.addEventListener('click', () => {
-            currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
-            updateSliderPosition();
-            updateDots();
-        });
-    }
-
-    if (filterButtons.length > 0) {
-        updateCarousel('cataracta');
-    }
+    initializeServices();
 });
