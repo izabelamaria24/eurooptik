@@ -48,10 +48,17 @@ async function fetchDataFromContentful() {
 }
 
 async function fetchServicesFromContentful() {
+    const spaceId = "__CONTENTFUL_SPACE_ID__";
+    const accessToken = "__CONTENTFUL_ACCESS_TOKEN__";
+
     const client = contentful.createClient({
-        space: CONFIG.SPACE_ID,
-        accessToken: CONFIG.ACCESS_TOKEN,
+        space: spaceId,
+        accessToken: accessToken,
     });
+
+    if (spaceId.startsWith("__")) {
+        console.warn("Contentful API keys are not set. This is expected in local development. The site will not fetch data.");
+    }
 
     try {
         const [serviceEntries, categoryEntries] = await Promise.all([
