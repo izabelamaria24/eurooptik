@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const prevBtn = document.querySelector('.specialization-carousel-wrapper .prev-card');
   const nextBtn = document.querySelector('.specialization-carousel-wrapper .next-card');
 
-  let currentCarouselIndex = 0;
+  let currentCarouselIndex = 0; // Index within the *active category*
   let visibleCardsCount = 3; // Default for desktop
   let activeCategory = 'surgical'; // Initial active category
   const categoryOrder = ['surgical', 'pediatric']; // Explicit order of categories
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const articles = {
     cataracta: {
       title: "Operații de Cataractă: Redobândirea Vederii Clare",
-      text: "Cataracta este o afecțiune oculară comună, caracterizată prin opacifierea cristalinului natural al ochiului, ducând la vedere încețoșată și dificultăți în perceperea culorilor. La Eurooptik, realizăm operații de cataractă utilizând tehnici moderne de facoemulsificare, o metodă minim invazivă care permite îndepărtarea cristalinului opacifiat și înlocuirea acestuia cu un cristalin artificial (lentilă intraoculară) personalizat. Intervenția este rapidă, sigură și oferă o recuperare rapidă, redând pacienților o vedere clară și o calitate a vieții îmbunătățită. Folosim lentile de ultimă generație, inclusiv monofocale, multifocale și torice, adaptate nevoilor individuale ale fiecărui pacient.",
+      text: "Cataracta este o afecțiune oculară comună, caracterizată prin opacifierea cristalinului natural al ochiului, ducând la vedere încețoșată și dificultăți în perceperea culorilor. La Eurooptik, realizăm operații de cataractă utilizând tehnici moderne de facoemulsificare, o metodă minim invazivă care permite îndepărtarea cristalinului opacifiat și înlocuirea acestuia cu un cristalin artificial (lentilă intraoculară) personalizat. Intervenția este rapidă, sigură și oferă o recuperare rapidă, redând pacienților o vedere clară și o calitate a vieții îmbunătățite. Folosim lentile de ultimă generație, inclusiv monofocale, multifocale și torice, adaptate nevoilor individuale ale fiecărui pacient.",
       image: "assets/images/specializations/cataracta-article.jpg" // Placeholder image
     },
     glaucom: {
@@ -66,26 +66,31 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       visibleCardsCount = 3;
     }
-    // No need to call updateCarouselNavigation here, it's called by updateCarouselPosition
   }
 
-  // Updates the carousel's transform property to show the correct cards
-  function updateCarouselPosition() {
+  // Calculates the total offset needed to bring the currentCarouselIndex of the active category into view
+  function calculateTransformOffset() {
     const activeCards = getActiveCards();
-    if (activeCards.length === 0) {
-      carouselContainer.style.transform = `translateX(0px)`;
-      updateCarouselNavigation();
-      return;
-    }
+    if (activeCards.length === 0) return 0;
 
-    // Get the actual width of a card and the gap
     const firstActiveCard = activeCards[0];
     const cardWidth = firstActiveCard.offsetWidth;
     const gapStyle = window.getComputedStyle(carouselContainer).getPropertyValue('gap');
     const gap = parseFloat(gapStyle) || 0;
-
     const totalCardWidthWithGap = cardWidth + gap;
-    carouselContainer.style.transform = `translateX(-${currentCarouselIndex * totalCardWidthWithGap}px)`;
+
+    // Find the index of the first card of the active category within the *allSpecializationCards* array
+    const firstCardOfActiveCategory = Array.from(allSpecializationCards).find(card => card.dataset.category === activeCategory);
+    const startIndexInAllCards = Array.from(allSpecializationCards).indexOf(firstCardOfActiveCategory);
+
+    // Calculate the total offset: offset to the start of the active category + offset within the active category
+    return (startIndexInAllCards + currentCarouselIndex) * totalCardWidthWithGap;
+  }
+
+  // Updates the carousel's transform property to show the correct cards
+  function updateCarouselPosition() {
+    const offset = calculateTransformOffset();
+    carouselContainer.style.transform = `translateX(-${offset}px)`;
     updateCarouselNavigation();
   }
 
@@ -103,17 +108,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle button visibility based on whether scrolling is needed within the current category
     // or if cross-category navigation is possible.
+    // Buttons are always 'flex' unless truly no navigation is possible.
     if (totalActiveCards <= visibleCardsCount && categoryOrder.length === 1) {
-      // Only one category and not enough cards to scroll within it
       prevBtn.style.display = 'none';
       nextBtn.style.display = 'none';
-    } else if (totalActiveCards <= visibleCardsCount && categoryOrder.length > 1) {
-      // Multiple categories, but current category doesn't need scrolling.
-      // Buttons should still be visible for cross-category navigation.
-      prevBtn.style.display = 'flex';
-      nextBtn.style.display = 'flex';
     } else {
-      // Current category needs scrolling
       prevBtn.style.display = 'flex';
       nextBtn.style.display = 'flex';
     }
@@ -133,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileNavWrapper.appendChild(prevBtn);
         mobileNavWrapper.appendChild(nextBtn);
       } else {
-        // If both are disabled, remove the wrapper if it exists
         if (mobileNavWrapper.parentNode) mobileNavWrapper.remove();
       }
     } else {
@@ -145,7 +143,6 @@ document.addEventListener('DOMContentLoaded', function() {
       prevBtn.style.left = '0';
       nextBtn.style.right = '0';
 
-      // Remove mobile wrapper if it exists and buttons are restored to desktop position
       const mobileNavWrapper = carouselWrapper.querySelector('.specialization-carousel-nav-mobile');
       if (mobileNavWrapper) {
         if (mobileNavWrapper.parentNode) mobileNavWrapper.remove();
@@ -163,7 +160,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Function to filter and display cards based on category
   function filterCardsByCategory(category, targetIndex = 0) {
     activeCategory = category;
-    currentCarouselIndex = targetIndex; // Set the index for the new category
+    currentCarouselIndex = targetIndex;
+
+    updateVisibleCardsCount();
 
     // Update active state on category buttons
     categoryButtons.forEach(btn => {
@@ -174,22 +173,21 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Show/hide specialization cards based on the active category
+    // Update visibility/opacity of cards based on the active category
+    // All cards remain in the DOM, but inactive ones are hidden via CSS opacity/pointer-events
     allSpecializationCards.forEach(card => {
       if (card.dataset.category === category) {
-        card.style.display = 'flex'; // Use flex to maintain internal layout
+        card.classList.add('active-category-card'); // Use a class for styling (opacity, transform)
       } else {
-        card.style.display = 'none';
+        card.classList.remove('active-category-card');
       }
       card.classList.remove('active'); // Deselect any active card when category changes
     });
 
     hideArticle(); // Hide article when category changes
-    // Use setTimeout to allow DOM to update before calculating positions,
-    // ensuring correct carousel positioning after filtering.
-    setTimeout(() => {
-      updateCarouselPosition();
-    }, 0);
+
+    // Update carousel position. This will now trigger a smooth slide if transition is enabled.
+    updateCarouselPosition();
   }
 
   // Event listener for the "Previous" carousel button
@@ -197,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeCards = getActiveCards();
     if (currentCarouselIndex > 0) {
       currentCarouselIndex--;
-      updateCarouselPosition();
+      updateCarouselPosition(); // This will use the CSS transition
     } else {
       // If at the beginning of the current category, try to go to the previous category
       const currentCategoryIndex = categoryOrder.indexOf(activeCategory);
@@ -206,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Calculate the last possible index for the previous category
         const prevCategoryCards = Array.from(allSpecializationCards).filter(card => card.dataset.category === prevCategory);
         const lastIndex = Math.max(0, prevCategoryCards.length - visibleCardsCount);
-        filterCardsByCategory(prevCategory, lastIndex);
+        filterCardsByCategory(prevCategory, lastIndex); // This will now slide smoothly
       }
     }
   });
@@ -216,13 +214,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeCards = getActiveCards();
     if (currentCarouselIndex < activeCards.length - visibleCardsCount) {
       currentCarouselIndex++;
-      updateCarouselPosition();
+      updateCarouselPosition(); // This will use the CSS transition
     } else {
       // If at the end of the current category, try to go to the next category
       const currentCategoryIndex = categoryOrder.indexOf(activeCategory);
       if (currentCategoryIndex < categoryOrder.length - 1) {
         const nextCategory = categoryOrder[currentCategoryIndex + 1];
-        filterCardsByCategory(nextCategory, 0); // Start from the first card of the next category
+        filterCardsByCategory(nextCategory, 0); // This will now slide smoothly
       }
     }
   });
@@ -282,7 +280,8 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', () => {
     // Re-evaluate visible cards count and carousel position on window resize
     updateVisibleCardsCount();
-    updateCarouselPosition();
+    // When resizing, re-calculate position for the current category to adjust for new visibleCardsCount
+    filterCardsByCategory(activeCategory, currentCarouselIndex);
   });
 
   // Trigger initial category filter to show "Clinica Chirurgicală" cards by default
