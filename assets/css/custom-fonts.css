@@ -103,3 +103,53 @@ p, li, blockquote, span, a {
 h1, h2, h3, h4, h5, h6 {
     font-weight: inherit;
 }
+
+/* Make the header taller */
+.navbar-custom {
+  padding-top: 1px; /* Increase this value to make it taller */
+  padding-bottom: 6px; /* Increase this value to make it taller */
+  transition: padding 0.3s ease; /* Smooth transition for shrinking effect */
+}
+
+/* Adjust logo positioning for the new taller header */
+/* Mobile logo adjustment */
+.navbar-brand-center.visible-xs .navbar-brand img {
+  max-height: 100px; /* Allow logo to take up more space */
+  margin-top: -35px; /* Adjust this value to move the logo up/down */
+}
+
+/* Desktop logo adjustment */
+.navbar-brand.hidden-xs .navbar-brand img {
+  max-height: 100px; /* Allow logo to take up more space */
+  margin-top: -47px; /* Adjust this value to move the logo up/down */
+}
+
+/* Adjust navigation links vertical alignment */
+.navbar-custom .nav > li > a {
+  padding-top: 10px; /* Adjust vertical padding of links */
+  padding-bottom: 10px; /* Adjust vertical padding of links */
+  line-height: 30px; /* Ensure text is vertically centered within its new padding */
+}
+
+/* Adjustments for when the navbar shrinks on scroll (if applicable) */
+/* The 'navbar-shrink' class is typically added by JavaScript when scrolling down */
+.navbar-custom.navbar-shrink {
+  padding-top: 15px; /* Smaller padding when shrunk */
+  padding-bottom: 15px;
+}
+
+.navbar-custom.navbar-shrink .navbar-brand-center.visible-xs .navbar-brand img {
+  margin-top: -30px; /* Revert to original or slightly adjusted for shrunk state */
+  max-height: 90px;
+}
+
+.navbar-custom.navbar-shrink .navbar-brand.hidden-xs .navbar-brand img {
+  margin-top: -42px; /* Revert to original or slightly adjusted for shrunk state */
+  max-height: 90px;
+}
+
+.navbar-custom.navbar-shrink .nav > li > a {
+  padding-top: 8px; /* Smaller padding for links when shrunk */
+  padding-bottom: 8px;
+  line-height: 24px; /* Adjust line-height for shrunk state */
+}
