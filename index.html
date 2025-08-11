@@ -41,6 +41,7 @@
   <link href="assets/css/services.css" rel="stylesheet">
   <link href="assets/css/new-specializations.css" rel="stylesheet">
   <link href="assets/css/location.css" rel="stylesheet"> 
+  <link href="assets/css/sponsors.css" rel="stylesheet"> <!-- NEW: Link to sponsors CSS -->
   <!-- CONTENTFUL SDK -->
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
 </head>
@@ -615,6 +616,42 @@
       </div>
     </section>
 
+    <!-- NEW SPONSORS SECTION START -->
+    <section id="sponsors" class="module">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <h2 class="module-title">PARTENERII NOSTRI</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-viewport sponsors-carousel-viewport">
+        <div class="sponsors-cards-container">
+          <!-- Sponsor Card 1 -->
+          <div class="sponsor-card">
+            <div class="sponsor-image-wrapper">
+              <img src="assets/images/sponsors/blood.png" alt="Blood Sponsor">
+            </div>
+          </div>
+          <!-- Sponsor Card 2 -->
+          <div class="sponsor-card">
+            <div class="sponsor-image-wrapper">
+              <img src="assets/images/sponsors/luxor.png" alt="Luxor Sponsor">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container"> <!-- Container for the navigation buttons -->
+        <div class="carousel-nav sponsors-carousel-nav">
+          <button id="prev-sponsor" class="carousel-btn"><i class="fa fa-chevron-left"></i></button>
+          <button id="next-sponsor" class="carousel-btn"><i class="fa fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+    <!-- NEW SPONSORS SECTION END -->
+
     <section id="programare-section" style="display:none; padding:40px 0; background:#f9f9f9;">
       <button onclick="hideProgramareSection()"
         style="float:right; margin:10px; font-size:22px; font-weight:bold; background:none; border:none; cursor:pointer;">×</button>
@@ -683,6 +720,7 @@
   <script src="assets/js/config.js"></script>
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
   <script src="assets/js/contentful-service.js"></script>
+  <script src="assets/js/sponsors.js"></script> <!-- NEW: Link to sponsors JS -->
   
   <script>
     function showProgramareSection() {
