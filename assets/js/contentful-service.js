@@ -1,29 +1,36 @@
 async function fetchDataFromContentful() {
-  const client = contentful.createClient({
-      space: CONFIG.SPACE_ID,
-      accessToken: CONFIG.ACCESS_TOKEN,
-  });
+    const spaceId = "__CONTENTFUL_SPACE_ID__";
+    const accessToken = "__CONTENTFUL_ACCESS_TOKEN__";
 
-  try {
-      const [doctorResponse, locationResponse] = await Promise.all([
-        client.getEntries({ content_type: 'doctor', include: 2, order: 'fields.numeDoctor' }),
-        client.getEntries({ content_type: 'locatie', order: 'fields.idFiltru' })
-      ]);
+    const client = contentful.createClient({
+        space: spaceId,
+        accessToken: accessToken,
+    });
 
-      const doctors = doctorResponse.items.map(item => {
-        const { fields } = item;
+    if (spaceId.startsWith("__")) {
+        console.warn("Contentful API keys are not set. This is expected in local development. The site will not fetch data.");
+    }
+
+    try {
+        const [doctorResponse, locationResponse] = await Promise.all([
+            client.getEntries({ content_type: 'doctor', include: 2, order: 'fields.numeDoctor' }),
+            client.getEntries({ content_type: 'locatie', order: 'fields.idFiltru' })
+        ]);
+
+        const doctors = doctorResponse.items.map(item => {
+            const { fields } = item;
+            
+            const filterId = fields.categorie?.fields?.idFiltru;
+            const category = filterId ? [filterId.toString()] : [];
         
-        const filterId = fields.categorie?.fields?.idFiltru;
-        const category = filterId ? [filterId.toString()] : [];
-        
-        return {
-          name: fields.numeDoctor || '',
-          role: fields.titluDoctor || '',
-          image: fields.fotografieDoctor?.fields?.file?.url ? `https:${fields.fotografieDoctor.fields.file.url}` : '',
-          specializations: fields.specializari || [],
-          categories: category 
-        };
-      });
+            return {
+                name: fields.numeDoctor || '',
+                role: fields.titluDoctor || '',
+                image: fields.fotografieDoctor?.fields?.file?.url ? `https:${fields.fotografieDoctor.fields.file.url}` : '',
+                specializations: fields.specializari || [],
+                categories: category 
+            };
+    });
 
       const locations = locationResponse.items.map(item => {
         return {
