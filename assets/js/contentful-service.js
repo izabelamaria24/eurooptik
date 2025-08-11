@@ -1,16 +1,18 @@
+
+const spaceId = "__CONTENTFUL_SPACE_ID__";
+const accessToken = "__CONTENTFUL_ACCESS_TOKEN__";
+
+const client = contentful.createClient({
+    space: spaceId,
+    accessToken: accessToken,
+});
+
+if (spaceId.startsWith("__")) {
+    console.warn("Contentful API keys are not set. This is expected in local development. The site will not fetch data.");
+}
+
+
 async function fetchDataFromContentful() {
-    const spaceId = "__CONTENTFUL_SPACE_ID__";
-    const accessToken = "__CONTENTFUL_ACCESS_TOKEN__";
-
-    const client = contentful.createClient({
-        space: spaceId,
-        accessToken: accessToken,
-    });
-
-    if (spaceId.startsWith("__")) {
-        console.warn("Contentful API keys are not set. This is expected in local development. The site will not fetch data.");
-    }
-
     try {
         const [doctorResponse, locationResponse] = await Promise.all([
             client.getEntries({ content_type: 'doctor', include: 2, order: 'fields.numeDoctor' }),
@@ -19,7 +21,6 @@ async function fetchDataFromContentful() {
 
         const doctors = doctorResponse.items.map(item => {
             const { fields } = item;
-            
             const filterId = fields.categorie?.fields?.idFiltru;
             const category = filterId ? [filterId.toString()] : [];
         
@@ -30,36 +31,22 @@ async function fetchDataFromContentful() {
                 specializations: fields.specializari || [],
                 categories: category 
             };
-    });
+        });
 
-      const locations = locationResponse.items.map(item => {
-        return {
+      const locations = locationResponse.items.map(item => ({
           name: item.fields.numeLocatie,
           filterId: item.fields.idFiltru.toString() 
-        }
-      });
+      }));
 
       return { doctors, locations };
 
     } catch (error) {
-      console.error('A apărut o eroare la preluarea datelor din Contentful:', error);
+      console.error('Error fetching doctors/locations from Contentful:', error);
       return { doctors: [], locations: [] };
     }
 }
 
 async function fetchServicesFromContentful() {
-    const spaceId = "__CONTENTFUL_SPACE_ID__";
-    const accessToken = "__CONTENTFUL_ACCESS_TOKEN__";
-
-    const client = contentful.createClient({
-        space: spaceId,
-        accessToken: accessToken,
-    });
-
-    if (spaceId.startsWith("__")) {
-        console.warn("Contentful API keys are not set. This is expected in local development. The site will not fetch data.");
-    }
-
     try {
         const [serviceEntries, categoryEntries] = await Promise.all([
             client.getEntries({ content_type: 'serviciu', include: 2, limit: 1000 }),
@@ -100,23 +87,17 @@ async function fetchServicesFromContentful() {
             return acc;
         }, {});
 
-        const categories = categoryEntries.items
-            .map(item => {
-                const slug = item.fields.idServiciu;
+        const categories = categoryEntries.items.map(item => ({
+            name: item.fields.numeCategorieServiciu,
+            slug: item.fields.idServiciu?.toString() || null 
+        })).filter(cat => cat.slug && cat.name);
 
-                return {
-                    name: item.fields.numeCategorieServiciu,
-                    slug: slug?.toString() || null 
-                };
-            })
-            .filter(cat => cat.slug && cat.name);
-
-        console.log("✅ Integration successful! Final categories array:", categories);
+        console.log("✅ Services integration successful!");
 
         return { servicesData, categories };
 
     } catch (error) {
-        console.error('Error fetching or processing services from Contentful:', error);
+        console.error('Error fetching services from Contentful:', error);
         return { servicesData: {}, categories: [] };
     }
 }
