@@ -41,6 +41,8 @@
   <link href="assets/css/services.css" rel="stylesheet">
   <link href="assets/css/new-specializations.css" rel="stylesheet">
   <link href="assets/css/location.css" rel="stylesheet"> 
+  <link href="assets/css/sponsors.css" rel="stylesheet">
+  <link href="assets/css/custom-fonts.css" rel="stylesheet">
   <!-- CONTENTFUL SDK -->
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
 </head>
@@ -110,8 +112,7 @@
 
           <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button"
             href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
-          <a class="section-scroll btn btn-border-w btn-round" href="#services" id="home-cine-suntem-button">Cine
-            Suntem</a>
+          <a class="section-scroll btn btn-border-w btn-round" href="#new-specializations" id="home-cine-suntem-button"> Specialitățile Noastre  </a>
 
         </div>
       </div>
@@ -247,8 +248,6 @@
             <div class="col-sm-12 text-center mb-40">
               <div class="location-buttons-container">
                 <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
-                  data-location="comanesti">Sterge <br> selectia</button>
-                <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
                   data-location="clinica">Clinica<br> Bacău</button>
                 <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
                   data-location="bacau">Cabinet<br> Bacau</button>
@@ -258,6 +257,8 @@
                   data-location="moinesti">Cabinet<br> Moinești</button>
                 <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
                   data-location="onesti">Cabinet<br> Onesti</button>
+                <button type="button" class="btn btn-border-d btn-round location-btn" id="location-button"
+                  data-location="comanesti">Sterge <br> Selectia</button>
               </div>
             </div>
           </div>
@@ -519,7 +520,7 @@
       <div class="container"> <!-- This container now only holds the title and subtitle -->
         <div class="row">
           <div class="col-sm-6 col-sm-offset-3">
-            <h2 class="module-title">LOCATIILE NOASTRE & CONTACT</h2>
+            <h2 class="module-title">LOCATIILE NOASTRE</h2>
             <div class="module-subtitle">Găsește clinica Eurooptik cea mai apropiată de tine.</div>
           </div>
         </div>
@@ -538,7 +539,7 @@
               <img src="assets/images/locations/eurooptik_clinica.png" alt="Clinica Bacau">
             </div>
             <div class="location-card-details">
-              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Stefan cel Mare Nr.7</p>
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Stefan cel Mare Nr. 7</p>
               <p class="contact-info"><i class="fa fa-phone"></i>0760 676 303</p>
               <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
             </div>
@@ -553,7 +554,7 @@
               <img src="assets/images/locations/eurooptik_razboieni.png" alt="Cabinet Bacau">
             </div>
             <div class="location-card-details">
-              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Razboieni Nr.7</p>
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Razboieni Nr. 7</p>
               <p class="contact-info"><i class="fa fa-phone"></i>0760 676 304</p>
               <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
             </div>
@@ -568,7 +569,7 @@
               <img src="assets/images/locations/eurooptik_moinesti.png" alt="Cabinet Moinesti">
             </div>
             <div class="location-card-details">
-              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. T. Vladimirescu Nr.177</p>
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. T. Vladimirescu Nr. 177</p>
               <p class="contact-info"><i class="fa fa-phone"></i>0760 676 308</p>
               <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
             </div>
@@ -583,7 +584,7 @@
               <img src="assets/images/locations/eurooptik_comanesti.png" alt="Cabinet Comanesti">
             </div>
             <div class="location-card-details">
-              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Nicolae Ghica Nr.2</p>
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Nicolae Ghica Nr. 2</p>
               <p class="contact-info"><i class="fa fa-phone"></i>0760 676 309</p>
               <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
             </div>
@@ -598,7 +599,7 @@
               <img src="assets/images/locations/eurooptik_onesti.png" alt="Cabinet Onesti">
             </div>
             <div class="location-card-details">
-              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Postei Nr.6</p>
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Postei Nr. 6</p>
               <p class="contact-info"><i class="fa fa-phone"></i>0760 676 306</p>
               <p class="contact-info"><i class="fa fa-envelope"></i>bacau@yahoo.com</p>
             </div>
@@ -614,6 +615,42 @@
         </div>
       </div>
     </section>
+
+    <!-- NEW SPONSORS SECTION START -->
+    <section id="sponsors" class="module">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <h2 class="module-title">PARTENERII NOSTRI</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-viewport sponsors-carousel-viewport">
+        <div class="sponsors-cards-container">
+          <!-- Sponsor Card 1 -->
+          <div class="sponsor-card">
+            <div class="sponsor-image-wrapper">
+              <img src="assets/images/sponsors/blood.png" alt="Blood Sponsor">
+            </div>
+          </div>
+          <!-- Sponsor Card 2 -->
+          <div class="sponsor-card">
+            <div class="sponsor-image-wrapper">
+              <img src="assets/images/sponsors/luxor.png" alt="Luxor Sponsor">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container"> <!-- Container for the navigation buttons -->
+        <div class="carousel-nav sponsors-carousel-nav">
+          <button id="prev-sponsor" class="carousel-btn"><i class="fa fa-chevron-left"></i></button>
+          <button id="next-sponsor" class="carousel-btn"><i class="fa fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+    <!-- NEW SPONSORS SECTION END -->
 
     <section id="programare-section" style="display:none; padding:40px 0; background:#f9f9f9;">
       <button onclick="hideProgramareSection()"
@@ -683,6 +720,7 @@
   <script src="assets/js/config.js"></script>
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
   <script src="assets/js/contentful-service.js"></script>
+  <script src="assets/js/sponsors.js"></script> <!-- NEW: Link to sponsors JS -->
   
   <script>
     function showProgramareSection() {
