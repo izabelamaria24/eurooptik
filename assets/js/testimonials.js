@@ -1,53 +1,88 @@
-// File: assets/js/testimonials.js
+import { fetchTestimonialsFromContentful } from "./contentful-service.js";
 
-jQuery(function($) {
-  // This is a best-practice way to wrap jQuery code.
-  // It ensures that the code runs after the document is ready and
-  // that `$` is a safe alias for jQuery.
+const imageContainer = document.getElementById('image-container');
+const contentWrapper = document.getElementById('testimonial-content-wrapper');
 
-  // Define the selector for our triggers
-  var triggerSelector = '.testimonial-trigger';
+if (!imageContainer || !contentWrapper) {
+    console.warn("One or both required containers for the Testimonials section are missing. The module will not run.");
+} else {
+    async function initializeTestimonials() {
+        const testimonials = await fetchTestimonialsFromContentful();
 
-  // Check if any testimonial triggers exist on the page before running code
-  if ($(triggerSelector).length > 0) {
+        if (!testimonials || testimonials.length === 0) {
+            imageContainer.innerHTML = '<p style="color: #fff;">No testimonials available.</p>';
+            return;
+        }
 
-    // Handle clicks on the testimonial image triggers
-    $(document).on('click', triggerSelector, function(e) {
-      // Prevent the link's default behavior (jumping to the top of the page)
-      e.preventDefault();
+        imageContainer.innerHTML = '';
+        contentWrapper.innerHTML = '';
 
-      var $this = $(this); // The specific trigger that was clicked
+        renderTestimonialHTML(testimonials);
+        activateFirstTestimonial();
+        setupEventListeners();
+    }
 
-      // If this one is already active, do nothing to prevent unnecessary animations
-      if ($this.hasClass('active')) {
-        return;
-      }
+    function renderTestimonialHTML(testimonials) {
+        testimonials.forEach((testimonial, index) => {
+            const imageNumber = index + 1;
+            const extraClasses = (index >= 4) ? 'hidden-sm-down' : '';
 
-      // Get the target ID from the data-target attribute
-      var targetId = $this.data('target');
+            const imageTriggerHTML = `
+                <div class="testimonial-grid-item img-${imageNumber} ${extraClasses}">
+                    <a href="#" class="testimonial-trigger" data-target-id="${testimonial.id}" aria-label="View testimonial from ${testimonial.author}">
+                        <img src="${testimonial.imageUrl}" alt="Photo of ${testimonial.author}" loading="lazy">
+                    </a>
+                </div>
+            `;
 
-      // --- Update Active State for Images ---
-      // 1. Remove 'active' class from all triggers
-      $(triggerSelector).removeClass('active');
-      // 2. Add 'active' class to the one that was clicked
-      $this.addClass('active');
+            const textContentHTML = `
+                <div class="testimonial-content" data-content-id="${testimonial.id}">
+                    <blockquote class="testimonial-quote">"${testimonial.quote}"</blockquote>
+                    <p class="testimonial-author">— ${testimonial.author}</p>
+                </div>
+            `;
 
-      // --- Update Active State for Text Content ---
-      var contentWrapper = $('#testimonial-content-wrapper');
-      var activeContent = contentWrapper.find('.testimonial-content.active');
-      var newContent = contentWrapper.find('.testimonial-content[data-testimonial="' + targetId + '"]');
-
-      // 1. Fade out the currently active text
-      if (activeContent.length > 0) {
-        activeContent.stop(true, true).fadeOut(200, function() {
-          $(this).removeClass('active');
-          // 2. Fade in the new text after the old one is gone
-          newContent.stop(true, true).fadeIn(300).addClass('active');
+            imageContainer.insertAdjacentHTML('beforeend', imageTriggerHTML);
+            contentWrapper.insertAdjacentHTML('beforeend', textContentHTML);
         });
-      } else {
-        // If no content was active (like on page load), just fade in the new one
-        newContent.stop(true, true).fadeIn(300).addClass('active');
-      }
-    });
-  }
-});
+    }
+
+    function activateFirstTestimonial() {
+        const firstTrigger = imageContainer.querySelector('.testimonial-trigger');
+        const firstContent = contentWrapper.querySelector('.testimonial-content');
+
+        if (firstTrigger && firstContent) {
+            firstTrigger.classList.add('active');
+            firstContent.classList.add('active', 'visible');
+        }
+    }
+
+    function setupEventListeners() {
+        imageContainer.addEventListener('click', (event) => {
+            const trigger = event.target.closest('.testimonial-trigger');
+            if (!trigger) return;
+
+            event.preventDefault();
+            if (trigger.classList.contains('active')) return;
+
+            imageContainer.querySelector('.testimonial-trigger.active')?.classList.remove('active');
+            const activeContent = contentWrapper.querySelector('.testimonial-content.active');
+            if (activeContent) {
+                activeContent.classList.remove('visible');
+                activeContent.addEventListener('transitionend', () => {
+                    activeContent.classList.remove('active');
+                }, { once: true });
+            }
+
+            const targetId = trigger.dataset.targetId;
+            const newContent = contentWrapper.querySelector(`.testimonial-content[data-content-id="${targetId}"]`);
+            trigger.classList.add('active');
+            if (newContent) {
+                newContent.classList.add('active');
+                setTimeout(() => newContent.classList.add('visible'), 20);
+            }
+        });
+    }
+
+    initializeTestimonials();
+}

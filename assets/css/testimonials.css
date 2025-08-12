@@ -1,11 +1,6 @@
-/* ============================================ */
-/*              Testimonial Section Styles      */
-/* ============================================ */
-
-/* --- Mobile First & General Styles --- */
 .testimonial-wrapper {
   width: 100%;
-  background-color: #000; /* A fallback background for any tiny gaps */
+  background-color: #000;
 }
 
 .testimonial-text-area {
@@ -14,34 +9,41 @@
   color: #fff;
 }
 
-.testimonial-content { display: none; animation: fadeIn 0.5s; }
-.testimonial-content.active { display: block; }
+.testimonial-content {
+  display: none; 
+  opacity: 0;
+  transform: translateY(10px); 
+  transition: opacity 0.2s ease-out, transform 0.4s ease-out; 
+}
+
+.testimonial-content.active {
+  display: block;
+}
+
+.testimonial-content.active.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .testimonial-quote { font-family: 'Volkhov', serif; font-size: 20px; font-style: italic; border-left: 3px solid #4aa190; padding-left: 20px; margin-bottom: 20px; }
 .testimonial-author { font-weight: 700; font-size: 16px; color: #cccccc; }
 
-/* --- Image & Grid Container Styles --- */
-
-/* Mobile Grid Container (Flexbox for 2x2) */
 .image-container {
   display: flex;
   flex-wrap: wrap;
 }
 
 .testimonial-grid-item {
-  /* On mobile, each item is 50% wide */
   flex: 0 0 50%;
   width: 50%;
-  /* This is the key: forces a 1:1 (square) aspect ratio */
   aspect-ratio: 1 / 1;
-  position: relative; /* For z-index on hover */
+  position: relative; 
 }
 
-/* Hide images 5 and 6 on mobile */
 .hidden-sm-down {
   display: none;
 }
 
-/* General styles for image links and images */
 .testimonial-grid-item a {
   display: block;
   width: 100%;
@@ -51,13 +53,12 @@
 .testimonial-grid-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Prevents image distortion */
+  object-fit: cover; 
   display: block;
   filter: grayscale(80%);
   transition: all 0.3s ease;
 }
 
-/* Active/Hover State */
 .testimonial-trigger.active img,
 .testimonial-trigger:hover img {
   filter: grayscale(0%);
@@ -65,39 +66,30 @@
   z-index: 10;
 }
 
-/* --- Large Screen Styles (Breakpoint for lg is 992px) --- */
 @media (min-width: 992px) {
-  
-  /* Make the two extra images visible on desktop */
   .hidden-sm-down {
     display: block;
   }
-  
-  /* 1. The main wrapper becomes a CSS Grid */
+
   .testimonial-wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* KEY FIX: Make row height equal to column width (25vw) to create squares */
     grid-auto-rows: 25vw;
-    /* KEY FIX: Remove all space between grid cells */
     gap: 0;
     grid-template-areas:
       "img1 img2 text-col img5"
       "img3 img4 text-col img6";
   }
   
-  /* Make the image container "disappear", promoting its children to be grid items */
   .image-container {
     display: contents;
   }
 
-  /* Reset mobile-specific styles for grid items */
   .testimonial-grid-item {
-    width: auto; /* Reset width */
-    aspect-ratio: auto; /* Reset aspect ratio, as the grid handles it now */
+    width: auto; 
+    aspect-ratio: auto;
   }
 
-  /* 2. Place each item into its named grid area */
   .testimonial-text-area { grid-area: text-col; }
   .img-1 { grid-area: img1; }
   .img-2 { grid-area: img2; }
@@ -106,7 +98,6 @@
   .img-5 { grid-area: img5; }
   .img-6 { grid-area: img6; }
   
-  /* 3. Vertically center the text content */
   .testimonial-text-area {
     display: flex;
     flex-direction: column;
@@ -115,9 +106,4 @@
   }
   
   .text-lg-left { text-align: left !important; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
