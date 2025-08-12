@@ -442,79 +442,25 @@
           </div>
       </section>
 
-<!-- ============================================ -->
-<!--              Testimonials Section            -->
-<!-- ============================================ -->
-<section class="module" id="testimoniale" style="padding: 0;">
-  <!-- This wrapper becomes the CSS Grid on large screens -->
-  <div class="testimonial-wrapper">
-
-    <!-- 
-      TEXT ZONE
-      On mobile, this appears first (on top).
-      On large screens, this is placed into the 3rd column of our CSS Grid.
-    -->
-    <div id="testimonial-text-area" class="testimonial-text-area">
-      <div class="testimonial-text-inner">
-        <div class="module-header text-center text-lg-left">
-          <h2 class="module-title" style="color: #F5F3ED;">TESTIMONIALE</h2>
-          <p class="module-subtitle" style="color: #cccccc;">Ce spun pacienții noștri</p>
-        </div>
-        <div id="testimonial-content-wrapper">
-          <!-- Testimonial 1 (Active) -->
-          <div class="testimonial-content active" data-testimonial="1">
-            <blockquote class="testimonial-quote">"O experiență excepțională! Profesionalismul echipei și atenția la detalii m-au impresionat."</blockquote>
-            <p class="testimonial-author">— Elena V.</p>
+      <section class="module" id="testimoniale" style="padding: 0;">
+        <div class="testimonial-wrapper">
+          <div id="testimonial-text-area" class="testimonial-text-area">
+            <div class="testimonial-text-inner">
+              <div class="module-header text-center text-lg-left">
+                <h2 class="module-title" style="color: #F5F3ED;">TESTIMONIALE</h2>
+                <p class="module-subtitle" style="color: #cccccc;">Ce spun pacienții noștri</p>
+              </div>
+              <div id="testimonial-content-wrapper">
+              </div>
+            </div>
           </div>
-          <!-- Testimonial 2 -->
-          <div class="testimonial-content" data-testimonial="2"><blockquote class="testimonial-quote">"Am venit cu teamă, dar am plecat cu zâmbetul pe buze. Mulțumesc întregii echipe Eurooptik!"</blockquote><p class="testimonial-author">— Andrei P.</p></div>
-          <!-- Testimonial 3 -->
-          <div class="testimonial-content" data-testimonial="3"><blockquote class="testimonial-quote">"Operația de cataractă a fost un succes total. Mi-am recăpătat vederea și calitatea vieții."</blockquote><p class="testimonial-author">— Maria S.</p></div>
-          <!-- Testimonial 4 -->
-          <div class="testimonial-content" data-testimonial="4"><blockquote class="testimonial-quote">"Cel mai bun cabinet de oftalmologie pediatrică. Copilul meu este tratat cu cea mai mare grijă."</blockquote><p class="testimonial-author">— Ioana M.</p></div>
-          <!-- Testimonial 5 -->
-          <div class="testimonial-content" data-testimonial="5"><blockquote class="testimonial-quote">"Echipamente de ultimă generație și o echipă de nota 10. Voi reveni cu siguranță."</blockquote><p class="testimonial-author">— George D.</p></div>
-          <!-- Testimonial 6 -->
-          <div class="testimonial-content" data-testimonial="6"><blockquote class="testimonial-quote">"De la programare până la consultația finală, totul a decurs impecabil. O clinică modernă."</blockquote><p class="testimonial-author">— Cristian B.</p></div>
+          
+          <div id="image-container" class="image-container">
+            <div class="loader" style="color: #fff; text-align: center;">Loading testimonials...</div>
+          </div>
+          
         </div>
-      </div>
-    </div>
-
-    <!-- 
-      IMAGE ITEMS
-      On mobile, this container uses flexbox for a 2x2 grid.
-      On large screens, each item is placed individually into the parent grid.
-    -->
-    <div id="image-container" class="image-container">
-      <!-- Image 1 (Part of the 2x2 block) -->
-      <div class="testimonial-grid-item img-1">
-        <a href="#" class="testimonial-trigger active" data-target="1"><img src="https://picsum.photos/400/400?random=1" alt="Testimonial 1"></a>
-      </div>
-      <!-- Image 2 (Part of the 2x2 block) -->
-      <div class="testimonial-grid-item img-2">
-        <a href="#" class="testimonial-trigger" data-target="2"><img src="https://picsum.photos/400/400?random=2" alt="Testimonial 2"></a>
-      </div>
-      <!-- Image 3 (Part of the 2x2 block) -->
-      <div class="testimonial-grid-item img-3">
-        <a href="#" class="testimonial-trigger" data-target="3"><img src="https://picsum.photos/400/400?random=3" alt="Testimonial 3"></a>
-      </div>
-      <!-- Image 4 (Part of the 2x2 block) -->
-      <div class="testimonial-grid-item img-4">
-        <a href="#" class="testimonial-trigger" data-target="4"><img src="https://picsum.photos/400/400?random=4" alt="Testimonial 4"></a>
-      </div>
-      <!-- Image 5 (Part of the 2x1 block - hidden on mobile) -->
-      <div class="testimonial-grid-item img-5 hidden-sm-down">
-        <a href="#" class="testimonial-trigger" data-target="5"><img src="https://picsum.photos/400/400?random=5" alt="Testimonial 5"></a>
-      </div>
-      <!-- Image 6 (Part of the 2x1 block - hidden on mobile) -->
-      <div class="testimonial-grid-item img-6 hidden-sm-down">
-        <a href="#" class="testimonial-trigger" data-target="6"><img src="https://picsum.photos/400/400?random=6" alt="Testimonial 6"></a>
-      </div>
-    </div>
-    
-  </div>
-</section>
-
+      </section>
 
         <section id="adresses" class="module">
       <div class="container"> <!-- This container now only holds the title and subtitle -->
@@ -713,14 +659,14 @@
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/carousel.js"></script>
-  <script src="assets/js/team.js"></script>
-  <script src="assets/js/testimonials.js"></script>
-  <script src="assets/js/services.js"></script>
+  <script type="module" src="assets/js/team.js"></script>
+  <script type="module" src="assets/js/testimonials.js"></script>
+  <script type="module" src="assets/js/services.js"></script>
   <script src="assets/js/new-specializations.js"></script>
-  <script src="assets/js/config.js"></script>
+  <script type="module" src="assets/js/config.js"></script>
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
-  <script src="assets/js/contentful-service.js"></script>
   <script src="assets/js/sponsors.js"></script> <!-- NEW: Link to sponsors JS -->
+  <script type="module" src="assets/js/contentful-service.js"></script>
   
   <script>
     function showProgramareSection() {
