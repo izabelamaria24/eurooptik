@@ -155,3 +155,63 @@ export async function fetchTestimonialsFromContentful() {
         return []; 
     }
 }
+
+
+export async function fetchPricingData() {
+    await initializeContentful();
+    if (!client) return {};
+
+    try {
+        const response = await client.getEntries({
+            content_type: 'tarif',
+            include: 2,
+            limit: 1000
+        });
+
+        if (!response.items) return {};
+
+        const pricingData = response.items.reduce((acc, item) => {
+            const tarif = item.fields;
+
+            const locationName = tarif.locatie?.fields?.numeLocatie;
+            const consultationTypeName = tarif.tipConsultatie?.fields?.tipConsultatie;
+            const price = tarif.pret;
+
+            const createKey = (str) => {
+                if (!str) return null;
+                return str
+                    .toLowerCase()
+                    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+            };
+
+            const locationKey = createKey(locationName);
+
+            console.log(locationKey)
+            const consultationKey = createKey(consultationTypeName);
+
+            if (locationKey && consultationKey && typeof price !== 'undefined') {
+                if (!acc[locationKey]) {
+                    acc[locationKey] = {};
+                }
+                acc[locationKey][consultationKey] = price;
+            } else {
+                console.warn('Skipping a tarif entry due to missing data.', {
+                    item,
+                    derivedLocationKey: locationKey,
+                    derivedConsultationKey: consultationKey
+                });
+            }
+
+            return acc;
+        }, {});
+
+        console.log("Pricing data fetched and processed successfully:", pricingData);
+        return pricingData;
+
+    } catch (error) {
+        console.error('Error fetching pricing data from Contentful:', error);
+        return {};
+    }
+}
