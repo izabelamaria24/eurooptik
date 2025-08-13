@@ -32,7 +32,7 @@ async function initializeContentful() {
 
 export { initializeContentful };
 
-export async function fetchDataFromContentful() {
+export async function fetchTeamFromContentful() {
     await initializeContentful();
 
     if (!client) return { doctors: [], locations: [] };
@@ -69,6 +69,7 @@ export async function fetchDataFromContentful() {
         return { doctors: [], locations: [] };
     }
 }
+
 
 export async function fetchServicesFromContentful() {
     await initializeContentful();
@@ -119,6 +120,7 @@ export async function fetchServicesFromContentful() {
         return { servicesData: {}, categories: [] };
     }
 }
+
 
 export async function fetchTestimonialsFromContentful() {
     await initializeContentful();
@@ -187,8 +189,6 @@ export async function fetchPricingData() {
             };
 
             const locationKey = createKey(locationName);
-
-            console.log(locationKey)
             const consultationKey = createKey(consultationTypeName);
 
             if (locationKey && consultationKey && typeof price !== 'undefined') {
@@ -213,5 +213,56 @@ export async function fetchPricingData() {
     } catch (error) {
         console.error('Error fetching pricing data from Contentful:', error);
         return {};
+    }
+}
+
+
+export async function fetchSpecializationsData() {
+    await initializeContentful();
+    if (!client) return { categories: [], specializations: [] };
+
+    try {
+        const [categoryResponse, specializationResponse] = await Promise.all([
+            client.getEntries({ content_type: 'categorieSpecialitate', order: 'fields.idFiltru' }),
+            client.getEntries({ content_type: 'specialitate', include: 2, order: 'sys.createdAt' })
+        ]);
+
+        const createKey = (str) => {
+            if (!str) return null;
+            return str.toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        };
+
+        const categories = categoryResponse.items.map(item => ({
+            id: item.fields.idFiltru.toString(),
+            name: item.fields.numeCategorieSpecialitate,
+            slug: createKey(item.fields.numeCategorieSpecialitate)
+        }));
+
+        const specializations = specializationResponse.items.map(item => {
+            const fields = item.fields;
+            if (!fields.numeSpecialitate || !fields.categorieSpecialitate?.fields) {
+                return null; 
+            }
+            
+            return {
+                slug: createKey(fields.numeSpecialitate),
+                cardTitle: fields.numeSpecialitate,
+                cardImage: `https:${fields.pozaSpecialitate?.fields?.file?.url || ''}`,
+                categorySlug: createKey(fields.categorieSpecialitate.fields.numeCategorieSpecialitate),
+                articleTitle: fields.titluSpecialitate,
+                articleDescription: fields.descriereSpecialitate, 
+                articleImage: `https:${fields.pozaSpecialitate?.fields?.file?.url || ''}`
+            };
+        }).filter(Boolean); 
+
+        console.log("Specializations data fetched successfully:", { categories, specializations });
+        return { categories, specializations };
+
+    } catch (error) {
+        console.error('Error fetching specializations data from Contentful:', error);
+        return { categories: [], specializations: [] };
     }
 }
