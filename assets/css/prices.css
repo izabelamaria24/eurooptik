@@ -1,120 +1,146 @@
-/* assets/css/prices.css */
+#pricing .location-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+#pricing .btn-border-d {
+  background-color: #d13775;
+  color: white;
+  border: 1px solid #d13775;
+}
+#pricing .btn-border-d.active,
+#pricing .btn-border-d:hover {
+  background-color: #b92f68;
+  border-color: #b92f68;
+}
+
+.pricing-carousel-component {
+  width: 100%;
+}
 
 .pricing-carousel-viewport {
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
   overflow: hidden;
+  width: 100%;
 }
 
 .pricing-cards-container {
   display: flex;
-  transition: transform 0.4s ease-in-out;
-  padding-top: 16px;
+  transition: transform 0.5s ease-in-out;
+  gap: 30px; 
 }
 
 .pricing-card {
   flex: 0 0 100%;
+  max-width: 100%;
   box-sizing: border-box;
-  padding: 0 10px;
 }
 
-.btn-circle {
-  background: #d13775;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  min-height: 48px;
-  max-width: 48px;
-  max-height: 48px;
+.pricing-card-wrapper {
+  border-radius: 0;
+  overflow: hidden;
+  height: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+.pricing-card-header {
+  color: #fff;
+  padding: 18px 24px;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.pricing-card-price-body {
+  text-align: center;
+  padding: 12px 24px 6px;
+}
+.pricing-card-price-body .currency {
+  font-size: 1.75em;
+  font-weight: 600;
+}
+.pricing-card-price-body .price-value {
+  font-size: 2.2em;
+  font-weight: 700;
+  margin-left: 8px;
+  color: #333;
+}
+
+.pricing-card-divider {
+  height: 2px;
+  width: 100%;
+  margin: 0 0 14px 0;
+}
+
+.pricing-card-features {
+  list-style: disc inside;
+  margin: 0 0 18px 0;
+  padding: 0 24px;
+  color: #222;
+  font-size: 1.75em;
+  flex-grow: 1;
+}
+.pricing-card-features li {
+  font-style: normal;
+  text-transform: lowercase;
+  color: black;
+  margin-bottom: 8px;
+}
+
+.pricing-card.standard .pricing-card-wrapper { border: 2px solid #1e3932; }
+.pricing-card.standard .pricing-card-header { background-color: #1e3932; }
+.pricing-card.standard .pricing-card-price-body .currency { color: #1e3932; }
+.pricing-card.standard .pricing-card-divider { background: #1e3932; }
+
+.pricing-card.complex .pricing-card-wrapper { border: 2px solid #4aa190a2; }
+.pricing-card.complex .pricing-card-header { background-color: #16987e; }
+.pricing-card.complex .pricing-card-price-body .currency { color: #16987e; }
+.pricing-card.complex .pricing-card-divider { background: #16987e; }
+
+.pricing-card.premium .pricing-card-wrapper { border: 2px solid #d13775c2; }
+.pricing-card.premium .pricing-card-header { background-color: #d13775; }
+.pricing-card.premium .pricing-card-price-body .currency { color: #d13775; }
+.pricing-card.premium .pricing-card-divider { background: #d13775; }
+
+.pricing-card-features .feature-glaucom { color: #16987e; }
+.pricing-card-features .feature-cataracta { color: #d13775; }
+
+.pricing-nav-container {
+  display: flex;
   justify-content: center;
-  font-size: 1.5em;
-  transition: background 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  padding: 0;
-  aspect-ratio: 1 / 1;
+  align-items: center;
+  margin-top: 24px;
+  gap: 24px;
+  width: 100%;
+  padding-top: 24px;
 }
-
-.btn-circle:disabled,
-.btn-circle[disabled] {
-  opacity: 0.5;
-  pointer-events: none;
+.pricing-nav-buttons {
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
 }
-
-.btn-circle:hover,
-.btn-circle:focus {
-  background: #b42c61;
-  color: #fff;
-  outline: none;
-}
-
-.btn-circle .fa {
-  color: #fff;
-}
-
-/* --- Styles for Large Screens --- */
-/* On screens 992px and wider, display all cards and hide navigation */
-@media (min-width: 992px) {
-  .pricing-carousel-viewport {
-    max-width: none; /* Remove the width constraint */
-    overflow: visible; /* Make overflowing cards visible */
-  }
-
-  .pricing-cards-container {
-    justify-content: center; /* Center the cards */
-    gap: 20px; /* Add space between cards */
-    /* Override the transform property from the script to ensure they stay put */
-    transform: none !important;
-  }
-
-  .pricing-card {
-    flex-basis: 33.333%; /* Allow three cards to fit */
-    max-width: 400px; /* Set a max-width for aesthetics */
-  }
-
-  /* Hide the navigation buttons as they are not needed */
-  .pricing-prev,
-  .pricing-next {
-    display: none;
-  }
-}
-
-/* --- CSS For Two-Line Buttons on Large Screens --- */
-
-@media (min-width: 992px) {
-
-  .team-filter-btn,
-  .location-btn {
-    
-    /* 1. Set a NARROW, fixed width to force text wrapping. */
-    /* THIS IS THE VALUE YOU WILL NEED TO ADJUST. */
-    width: 120px; 
-    
-    /* 2. Set a taller, fixed height to ensure all buttons are uniform. */
-    /* Adjust this to make the button taller or shorter. */
-    height: 65px;
-
-    /* 3. Use Flexbox for perfect centering. */
+.btn-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
     display: inline-flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+}
 
-    /* 4. Ensure text inside is centered. */
-    text-align: center;
-
-    /* 5. IMPORTANT: Remove or override any 'white-space: nowrap' rule. */
-    white-space: normal; /* This allows text to wrap. */
-
-    /* 6. Adjust padding as needed, usually less is needed with fixed height. */
-    padding: 5px;
-    
-    /* 7. (Optional) Smoother transition for a polished look. */
-    transition: all 0.2s ease-in-out;
+@media (min-width: 992px) {
+  .pricing-cards-container {
+    transform: none !important; 
+    display: flex;
+    justify-content: center;
   }
-
+  .pricing-card {
+    flex: 1; 
+    max-width: 33.333%;
+  }
+  .pricing-nav-container {
+    display: none; 
+  }
 }
