@@ -1,4 +1,4 @@
-import { fetchDataFromContentful } from "./contentful-service.js";
+import { fetchTeamFromContentful } from "./contentful-service.js";
 
 class CustomCarousel {
     constructor(element, options = {}) {
@@ -167,7 +167,7 @@ function displayFilterButtons(locations) {
 }
 
 async function initializeTeamSection() {
-    const { doctors, locations } = await fetchDataFromContentful();
+    const { doctors, locations } = await fetchTeamFromContentful();
     allDoctors = doctors;
 
     if (!teamGrid || !filtersContainer || !viewport) {

@@ -118,7 +118,6 @@
 
     <div class="main">
 
-      <!-- NEW SPECIALIZATIONS SECTION -->
       <section class="module" id="new-specializations">
         <div class="container">
           <div class="row text-center mb-40">
@@ -127,67 +126,21 @@
             </div>
           </div>
 
-          <!-- Main Category Buttons -->
           <div class="row">
             <div class="col-sm-12 text-center mb-40">
               <div class="specialization-category-buttons">
-                <button class="btn btn-round category-btn active" data-category="surgical">Clinica Chirurgicală</button>
-                <button class="btn btn-round category-btn" data-category="pediatric">Oftalmologie Copii</button>
               </div>
             </div>
           </div>
 
-          <!-- Carousel of Specialization Cards -->
           <div class="specialization-carousel-wrapper">
             <div class="specialization-carousel-container">
-              <!-- Card 1: Cataracta (Surgical) -->
-              <div class="specialization-card" data-specialization="cataracta" data-category="surgical">
-                <div class="card-image-container">
-                  <img src="assets/images/specializations/cataracta.jpg" alt="Cataracta">
-                </div>
-                <h4 class="card-title">Cataracta</h4>
-              </div>
-              <!-- Card 2: Glaucom (Surgical) -->
-              <div class="specialization-card" data-specialization="glaucom" data-category="surgical">
-                <div class="card-image-container">
-                  <img src="assets/images/specializations/glaucom.jpg" alt="Glaucom">
-                </div>
-                <h4 class="card-title">Glaucom</h4>
-              </div>
-              <!-- Card 3: Laser (Surgical) -->
-              <div class="specialization-card" data-specialization="laser" data-category="surgical">
-                <div class="card-image-container">
-                  <img src="assets/images/specializations/laser.jpg" alt="Laser">
-                </div>
-                <h4 class="card-title">Operații Laser</h4>
-              </div>
-              <!-- Card 4: Stellest (Pediatric) -->
-              <div class="specialization-card" data-specialization="stellest" data-category="pediatric">
-                <div class="card-image-container">
-                  <img src="assets/images/specializations/stellest.jpg" alt="Stellest">
-                </div>
-                <h4 class="card-title">Lentile Stellest</h4>
-              </div>
-              <!-- Card 5: PlusoptiX (Pediatric) -->
-              <div class="specialization-card" data-specialization="plusoptix" data-category="pediatric">
-                <div class="card-image-container">
-                  <img src="assets/images/specializations/plusoptix.jpg" alt="PlusoptiX">
-                </div>
-                <h4 class="card-title">PlusoptiX</h4>
-              </div>
-              <!-- Card 6: Ortokeratologie (Pediatric) -->
-              <div class="specialization-card" data-specialization="ortokeratologie" data-category="pediatric">
-                <div class="card-image-container">
-                  <img src="assets/images/specializations/ortokeratologie.jpg" alt="Ortokeratologie">
-                </div>
-                <h4 class="card-title">Ortokeratologie</h4>
-              </div>
             </div>
+ 
             <button class="carousel-nav-btn prev-card"><i class="fa fa-chevron-left"></i></button>
             <button class="carousel-nav-btn next-card"><i class="fa fa-chevron-right"></i></button>
           </div>
 
-          <!-- Specialization Article Content (initially hidden) -->
           <div class="specialization-article-container" style="display: none;">
             <h3 class="article-title text-center"></h3>
             <div class="article-content-wrapper">
@@ -198,7 +151,6 @@
 
         </div>
       </section>
-      <!-- END NEW SPECIALIZATIONS SECTION -->
 
       <section class="module" id="echipa-noastra">
         <div class="container">
@@ -565,6 +517,7 @@
   <script src="assets/lib/smoothscroll.js"></script>
   <script src="assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
   <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+  <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script> 
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/carousel.js"></script>
@@ -572,11 +525,11 @@
   <script type="module" src="assets/js/testimonials.js"></script>
   <script type="module" src="assets/js/services.js"></script>
   <script type="module" src="assets/js/pricing.js"></script>
-  <script src="assets/js/new-specializations.js"></script>
+
+
+  <script type="module" src="assets/js/new-specializations.js"></script>
   <script src="assets/js/sponsors.js"></script>
   <script type="module" src="assets/js/config.js"></script>
-
-  <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script> 
   <script type="module" src="assets/js/contentful-service.js"></script>
   
   <script>
