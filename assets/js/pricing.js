@@ -62,10 +62,11 @@ async function initPricingLogic(pricingSection) {
         const pricesForLocation = pricingData[locationSlug];
         priceValueElements.forEach(el => {
             const consultationType = el.dataset.consultationType;
+
             if (locationSlug === 'clear') {
-                el.textContent = '---';
+                el.textContent = '- RON'; 
             } else if (pricesForLocation && typeof pricesForLocation[consultationType] !== 'undefined') {
-                el.textContent = pricesForLocation[consultationType];
+                el.textContent = 'RON ' + pricesForLocation[consultationType];
             } else {
                 el.textContent = 'N/A';
             }
