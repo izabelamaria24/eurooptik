@@ -1,4 +1,6 @@
-import { fetchServicesFromContentful } from './contentful-service.js';
+import { documentToHtmlString } from 'https://cdn.jsdelivr.net/npm/@contentful/rich-text-html-renderer/+esm';
+
+import { fetchServicesFromContentful, fetchArticlesFromContentful } from './contentful-service.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const filterContainer = document.getElementById('blog-filter-container');
@@ -6,45 +8,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const dotsContainer = document.getElementById('blog-carousel-dots');
     const prevArrow = document.getElementById('blog-prev-arrow');
     const nextArrow = document.getElementById('blog-next-arrow');
+    
+    const articleDisplayContainer = document.getElementById('blog-article-display-container');
+    const articleTitleEl = document.getElementById('article-display-title');
+    const articleAuthorEl = document.getElementById('article-display-author');
+    const articleContentEl = document.getElementById('article-display-content');
 
-    let allArticles = {}; 
+    let servicesByCategory = {};
+    let allArticlesData = {};
     let categories = [];
     let activeCategorySlug = '';
     let currentSlideIndex = 0;
     let totalSlides = 0;
-    
-    const getArticlesPerSlide = () => {
-        if (window.innerWidth <= 768) return 1;
-        // if (window.innerWidth <= 992) return 2; // decomentează pt 2 pe tabletă
-        return 3;
-    }
+    let activeArticleService = null; 
+
+    const getArticlesPerSlide = () => window.innerWidth <= 768 ? 1 : 3;
 
     async function initBlogSection() {
-        const data = await fetchServicesFromContentful();
-        if (!data || !data.servicesData || !data.categories) {
-            console.error('Nu s-au putut încărca datele pentru blog.');
+        const [serviceResponse, articlesData] = await Promise.all([
+            fetchServicesFromContentful(),
+            fetchArticlesFromContentful()
+        ]);
+
+        if (!serviceResponse || !serviceResponse.servicesData) {
+            console.error('Nu s-au putut încărca serviciile pentru blog.');
             return;
         }
 
-        categories = data.categories;
-        
-        allArticles = Object.keys(data.servicesData).reduce((acc, categorySlug) => {
-            const categoryData = data.servicesData[categorySlug];
-            let articlesInCategory = [];
-            
-            if (categoryData.items) {
-                articlesInCategory = Object.keys(categoryData.items).map(name => ({ title: name }));
-            } else {
-                Object.values(categoryData).forEach(subCategory => {
-                    const serviceNames = Object.keys(subCategory).map(name => ({ title: name }));
-                    articlesInCategory.push(...serviceNames);
-                });
-            }
-            
-            acc[categorySlug] = articlesInCategory;
-            return acc;
-        }, {});
-        
+        categories = serviceResponse.categories;
+        servicesByCategory = transformServicesToArticles(serviceResponse.servicesData);
+        allArticlesData = articlesData;
+
         if (categories.length > 0) {
             renderFilters();
             setActiveCategory(categories[0].slug);
@@ -53,15 +47,32 @@ document.addEventListener('DOMContentLoaded', () => {
         prevArrow.addEventListener('click', () => showSlide(currentSlideIndex - 1));
         nextArrow.addEventListener('click', () => showSlide(currentSlideIndex + 1));
         
+        slider.addEventListener('click', handleCardClick);
+        
         window.addEventListener('resize', () => {
-            if (activeCategorySlug) {
-                renderCarousel(allArticles[activeCategorySlug]);
-            }
+            if (activeCategorySlug) renderCarousel(servicesByCategory[activeCategorySlug]);
         });
     }
 
+    function transformServicesToArticles(servicesData) {
+        return Object.keys(servicesData).reduce((acc, categorySlug) => {
+            const categoryData = servicesData[categorySlug];
+            let articlesInCategory = [];
+            if (categoryData.items) {
+                articlesInCategory = Object.keys(categoryData.items).map(name => ({ title: name }));
+            } else {
+                Object.values(categoryData).forEach(subCategory => {
+                    const serviceNames = Object.keys(subCategory).map(name => ({ title: name }));
+                    articlesInCategory.push(...serviceNames);
+                });
+            }
+            acc[categorySlug] = articlesInCategory;
+            return acc;
+        }, {});
+    }
+    
     function renderFilters() {
-        filterContainer.innerHTML = ''; 
+        filterContainer.innerHTML = '';
         categories.forEach(category => {
             const button = document.createElement('button');
             button.className = 'filter-btn';
@@ -76,12 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeCategorySlug === slug) return;
         activeCategorySlug = slug;
 
-        const buttons = filterContainer.querySelectorAll('.filter-btn');
-        buttons.forEach(btn => {
+        document.querySelectorAll('#blog-filter-container .filter-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.slug === slug);
         });
-
-        renderCarousel(allArticles[slug] || []);
+        
+        hideArticle();
+        renderCarousel(servicesByCategory[slug] || []);
     }
 
     function renderCarousel(articles) {
@@ -89,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dotsContainer.innerHTML = '';
         
         if (!articles || articles.length === 0) {
-            slider.innerHTML = `<p style="width:100%; text-align:center;">Nu există articole în această categorie.</p>`;
+            slider.innerHTML = `<p style="width:100%; text-align:center;">Nu există servicii în această categorie.</p>`;
             totalSlides = 0;
             updateArrows();
             return;
@@ -101,17 +112,24 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < totalSlides; i++) {
             const slide = document.createElement('div');
             slide.className = 'blog-carousel-slide';
-            
             const slideArticles = articles.slice(i * articlesPerSlide, (i + 1) * articlesPerSlide);
 
             slideArticles.forEach(article => {
-                const card = document.createElement('a'); 
-                card.href = '#'; // TODO link to real article
+                const serviceName = article.title;
+                const hasActualArticle = allArticlesData.hasOwnProperty(serviceName);
+
+                const card = document.createElement('div'); 
                 card.className = 'blog-article-card';
-                card.innerHTML = `<div class="article-title">${article.title}</div>`;
+                
+                card.dataset.serviceName = serviceName;
+
+                if (!hasActualArticle) {
+                    card.classList.add('disabled');
+                }
+                
+                card.innerHTML = `<div class="article-title">${serviceName}</div>`;
                 slide.appendChild(card);
             });
-
             slider.appendChild(slide);
         }
 
@@ -124,35 +142,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 dotsContainer.appendChild(dot);
             }
         }
-
         showSlide(0);
     }
 
+    function handleCardClick(event) {
+        const card = event.target.closest('.blog-article-card');
+        
+        if (card && !card.classList.contains('disabled')) {
+            const serviceName = card.dataset.serviceName;
+            
+            if (activeArticleService === serviceName) {
+                hideArticle();
+            } else {
+                displayArticle(serviceName);
+            }
+        }
+    }
+
+    function displayArticle(serviceName) {
+        const articleData = allArticlesData[serviceName];
+        if (!articleData) return;
+
+        activeArticleService = serviceName;
+
+        articleTitleEl.textContent = articleData.title;
+        articleAuthorEl.textContent = articleData.doctors.length > 0 ? `De Dr. ${articleData.doctors.join(', ')}` : '';
+        
+        articleContentEl.innerHTML = documentToHtmlString(articleData.content);
+
+        articleDisplayContainer.classList.remove('hidden');
+        
+        setTimeout(() => {
+            articleDisplayContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100); 
+    }
+
+    function hideArticle() {
+        activeArticleService = null;
+        articleDisplayContainer.classList.add('hidden');
+    }
+
     function showSlide(index) {
-        if (index >= totalSlides) {
-            index = 0;
-        }
-        if (index < 0) {
-            index = totalSlides - 1;
-        }
-
-        currentSlideIndex = index;
-
+        if (totalSlides === 0) return;
+        currentSlideIndex = (index + totalSlides) % totalSlides;
         slider.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
 
-        const dots = dotsContainer.querySelectorAll('.dot');
-        if (dots.length > 0) {
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlideIndex);
-            });
-        }
-        
+        document.querySelectorAll('#blog-carousel-dots .dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentSlideIndex);
+        });
         updateArrows();
     }
     
     function updateArrows() {
-        prevArrow.style.display = totalSlides > 1 ? 'block' : 'none';
-        nextArrow.style.display = totalSlides > 1 ? 'block' : 'none';
+        const show = totalSlides > 1;
+        prevArrow.style.display = show ? 'block' : 'none';
+        nextArrow.style.display = show ? 'block' : 'none';
     }
 
     initBlogSection();

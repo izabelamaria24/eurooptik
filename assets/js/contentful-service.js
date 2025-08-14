@@ -122,6 +122,42 @@ export async function fetchServicesFromContentful() {
 }
 
 
+export async function fetchArticlesFromContentful() {
+    await initializeContentful(); 
+    if (!client) return {};
+
+    try {
+        const articleEntries = await client.getEntries({
+            content_type: 'articol',
+            include: 3 
+        });
+
+        const articlesData = articleEntries.items.reduce((acc, entry) => {
+            const article = entry.fields;
+            const relatedService = article.serviciu?.fields;
+
+            if (relatedService && relatedService.numeServiciu) {
+                const serviceName = relatedService.numeServiciu;
+                
+                acc[serviceName] = {
+                    title: article.denumireArticol,
+                    doctors: (article.doctori || []).map(doc => doc.fields.numeDoctor).filter(Boolean),
+                    content: article.continutArticol
+                };
+            }
+            return acc;
+        }, {});
+
+        console.log("Articles integration successful!");
+        return articlesData;
+
+    } catch (error) {
+        console.error('Error fetching articles from Contentful:', error);
+        return {};
+    }
+}
+
+
 export async function fetchTestimonialsFromContentful() {
     await initializeContentful();
     if (!client) return [];
