@@ -1,5 +1,3 @@
-import { documentToHtmlString } from 'https://cdn.jsdelivr.net/npm/@contentful/rich-text-html-renderer/+esm';
-
 import { fetchServicesFromContentful, fetchArticlesFromContentful } from './contentful-service.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,18 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevArrow = document.getElementById('blog-prev-arrow');
     const nextArrow = document.getElementById('blog-next-arrow');
     
-    const articleDisplayContainer = document.getElementById('blog-article-display-container');
-    const articleTitleEl = document.getElementById('article-display-title');
-    const articleAuthorEl = document.getElementById('article-display-author');
-    const articleContentEl = document.getElementById('article-display-content');
-
     let servicesByCategory = {};
     let allArticlesData = {};
     let categories = [];
     let activeCategorySlug = '';
     let currentSlideIndex = 0;
     let totalSlides = 0;
-    let activeArticleService = null; 
 
     const getArticlesPerSlide = () => window.innerWidth <= 768 ? 1 : 3;
 
@@ -47,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
         prevArrow.addEventListener('click', () => showSlide(currentSlideIndex - 1));
         nextArrow.addEventListener('click', () => showSlide(currentSlideIndex + 1));
         
-        slider.addEventListener('click', handleCardClick);
-        
         window.addEventListener('resize', () => {
-            if (activeCategorySlug) renderCarousel(servicesByCategory[activeCategorySlug]);
+            if (activeCategorySlug) {
+                renderCarousel(servicesByCategory[activeCategorySlug]);
+            }
         });
     }
 
@@ -91,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.toggle('active', btn.dataset.slug === slug);
         });
         
-        hideArticle();
         renderCarousel(servicesByCategory[slug] || []);
     }
 
@@ -116,14 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             slideArticles.forEach(article => {
                 const serviceName = article.title;
-                const hasActualArticle = allArticlesData.hasOwnProperty(serviceName);
+                const articleData = allArticlesData[serviceName];
+                const hasActualArticle = articleData && articleData.slug;
 
-                const card = document.createElement('div'); 
+                const card = document.createElement(hasActualArticle ? 'a' : 'div');
                 card.className = 'blog-article-card';
                 
-                card.dataset.serviceName = serviceName;
-
-                if (!hasActualArticle) {
+                if (hasActualArticle) {
+                    card.href = `pages/articol.html?slug=${articleData.slug}`;
+                } else {
                     card.classList.add('disabled');
                 }
                 
@@ -143,43 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         showSlide(0);
-    }
-
-    function handleCardClick(event) {
-        const card = event.target.closest('.blog-article-card');
-        
-        if (card && !card.classList.contains('disabled')) {
-            const serviceName = card.dataset.serviceName;
-            
-            if (activeArticleService === serviceName) {
-                hideArticle();
-            } else {
-                displayArticle(serviceName);
-            }
-        }
-    }
-
-    function displayArticle(serviceName) {
-        const articleData = allArticlesData[serviceName];
-        if (!articleData) return;
-
-        activeArticleService = serviceName;
-
-        articleTitleEl.textContent = articleData.title;
-        articleAuthorEl.textContent = articleData.doctors.length > 0 ? `De Dr. ${articleData.doctors.join(', ')}` : '';
-        
-        articleContentEl.innerHTML = documentToHtmlString(articleData.content);
-
-        articleDisplayContainer.classList.remove('hidden');
-        
-        setTimeout(() => {
-            articleDisplayContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100); 
-    }
-
-    function hideArticle() {
-        activeArticleService = null;
-        articleDisplayContainer.classList.add('hidden');
     }
 
     function showSlide(index) {

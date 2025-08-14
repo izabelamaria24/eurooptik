@@ -141,6 +141,7 @@ export async function fetchArticlesFromContentful() {
                 
                 acc[serviceName] = {
                     title: article.denumireArticol,
+                    slug: article.slug,
                     doctors: (article.doctori || []).map(doc => doc.fields.numeDoctor).filter(Boolean),
                     content: article.continutArticol
                 };
@@ -154,6 +155,38 @@ export async function fetchArticlesFromContentful() {
     } catch (error) {
         console.error('Error fetching articles from Contentful:', error);
         return {};
+    }
+}
+
+
+export async function fetchArticleBySlug(slug) {
+    await initializeContentful();
+    if (!client || !slug) return null;
+
+    try {
+        const entry = await client.getEntries({
+            content_type: 'articol',
+            'fields.slug': slug, 
+            include: 3,
+            limit: 1 
+        });
+
+        if (entry.items.length === 0) {
+            console.warn(`No article found with slug: ${slug}`);
+            return null;
+        }
+
+        const article = entry.items[0].fields;
+        
+        return {
+            title: article.denumireArticol,
+            doctors: (article.doctori || []).map(doc => doc.fields.numeDoctor).filter(Boolean),
+            content: article.continutArticol
+        };
+
+    } catch (error) {
+        console.error(`Error fetching article with slug ${slug}:`, error);
+        return null;
     }
 }
 
