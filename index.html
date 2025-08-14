@@ -41,6 +41,7 @@
   <link href="assets/css/location.css" rel="stylesheet"> 
   <link href="assets/css/sponsors.css" rel="stylesheet">
   <link href="assets/css/custom-fonts.css" rel="stylesheet">
+  <link href="assets/css/blog.css" rel="stylesheet">
   <!-- CONTENTFUL SDK -->
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
 </head>
@@ -323,15 +324,40 @@
         </div>
       </section>
 
-        <section id="adresses" class="module">
-      <div class="container"> <!-- This container now only holds the title and subtitle -->
+      <section id="blog-section">
+        <div id="blog-container">
+            <h2 class="section-title">BLOG - ARTICOLE MEDICALE</h2>
+            <p class="section-subtitle">
+                Selectați categoria pentru a citi articolele medicale scrise de doctorii noștri pentru fiecare dintre specialitățile oferite de clinica noastră.
+            </p>
+
+            <div id="blog-filter-container">
+            </div>
+        </div>
+
+        <div id="blog-carousel-wrapper">
+            <div id="blog-carousel-container">
+                <div id="blog-carousel-slider">
+                </div>
+
+                <button class="carousel-arrow prev" id="blog-prev-arrow">&#10094;</button>
+                <button class="carousel-arrow next" id="blog-next-arrow">&#10095;</button>
+            </div>
+            
+            <div id="blog-carousel-dots">
+            </div>
+        </div>
+    </section>
+
+    <section id="adresses" class="module">
+      <div class="container">
         <div class="row">
           <div class="col-sm-6 col-sm-offset-3">
             <h2 class="module-title">LOCATIILE NOASTRE</h2>
             <div class="module-subtitle">Găsește clinica Eurooptik cea mai apropiată de tine.</div>
           </div>
         </div>
-      </div> <!-- End of container for title/subtitle -->
+      </div> 
 
       <!-- These elements are now outside the main container to allow full width -->
       <div class="carousel-viewport">
@@ -525,8 +551,7 @@
   <script type="module" src="assets/js/testimonials.js"></script>
   <script type="module" src="assets/js/services.js"></script>
   <script type="module" src="assets/js/pricing.js"></script>
-
-
+  <script type="module" src="assets/js/blog.js"></script>
   <script type="module" src="assets/js/new-specializations.js"></script>
   <script src="assets/js/sponsors.js"></script>
   <script type="module" src="assets/js/config.js"></script>
