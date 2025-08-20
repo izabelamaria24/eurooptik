@@ -41,7 +41,8 @@
   <link href="assets/css/location.css" rel="stylesheet"> 
   <link href="assets/css/sponsors.css" rel="stylesheet">
   <link href="assets/css/custom-fonts.css" rel="stylesheet">
-  <link href="assets/css/blog.css" rel="stylesheet">
+  <link href="assets/css/blog.css?v=1.4" rel="stylesheet">
+
   <!-- CONTENTFUL SDK -->
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
 </head>
@@ -324,7 +325,7 @@
         </div>
       </section>
 
-      <section id="blog-section">
+    <section id="blog-section">
         <div id="blog-container">
             <h2 class="section-title">BLOG - ARTICOLE MEDICALE</h2>
             <p class="section-subtitle">
@@ -345,6 +346,14 @@
             </div>
             
             <div id="blog-carousel-dots">
+            </div>
+        </div>
+
+        <div id="blog-article-display-container" class="hidden">
+            <div class="article-content-wrapper">
+                <h3 id="article-display-title"></h3>
+                <p id="article-display-author"></p>
+                <div id="article-display-content"></div>
             </div>
         </div>
     </section>
