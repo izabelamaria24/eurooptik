@@ -2,7 +2,6 @@ import { fetchServicesFromContentful, fetchArticlesFromContentful } from './cont
 import { documentToHtmlString } from 'https://cdn.jsdelivr.net/npm/@contentful/rich-text-html-renderer/+esm';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- ELEMENTE DOM ---
     const filterContainer = document.getElementById('blog-filter-container');
     const slider = document.getElementById('blog-carousel-slider');
     const dotsContainer = document.getElementById('blog-carousel-dots');
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const articleAuthorEl = document.getElementById('article-display-author');
     const articleContentEl = document.getElementById('article-display-content');
     
-    // --- STAREA APLICAȚIEI ---
     let servicesByCategory = {};
     let allArticlesData = {};
     let articlesBySlug = {}; 
@@ -25,9 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const getArticlesPerSlide = () => window.innerWidth <= 768 ? 1 : 3;
 
-    /**
-     * Funcția principală de inițializare.
-     */
     async function initBlogSection() {
         try {
             const [serviceResponse, articlesData] = await Promise.all([
@@ -55,6 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 setActiveCategory(categories[0].slug);
             }
 
+            function checkUrlForArticle() {
+                const hash = window.location.hash.substring(1); 
+                if (hash && articlesBySlug[hash]) {
+                    displayArticle(articlesBySlug[hash], false); 
+                }
+            }
+            checkUrlForArticle(); 
+           
             prevArrow.addEventListener('click', () => showSlide(currentSlideIndex - 1));
             nextArrow.addEventListener('click', () => showSlide(currentSlideIndex + 1));
             
@@ -81,15 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Afișează conținutul unui articol în containerul dedicat.
-     */
     function displayArticle(article, updateHistory = true) {
         if (!article || !articleDisplayContainer) return;
 
         articleTitleEl.textContent = article.title || 'Titlu indisponibil';
         
-        // ==== MODIFICARE AICI: Am scos "Dr." pentru a nu se dubla ====
         articleAuthorEl.textContent = article.doctors && article.doctors.length > 0 
             ? `De ${article.doctors.join(', ')}` 
             : '';
@@ -100,13 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
         articleDisplayContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
         if (updateHistory) {
-            const newUrl = `pages/articol.html?slug=${article.slug}`;
-            const pageTitle = `${article.title} - Clinica Eurooptik`;
-            history.pushState({ slug: article.slug }, pageTitle, newUrl);
+            const newHash = `#${article.slug}`;
+            history.pushState({ slug: article.slug }, '', newHash);
         }
     }
     
-    // --- RESTUL FUNCȚIILOR (NU AU FOST MODIFICATE) ---
     function transformServicesToArticles(servicesData) {
         return Object.keys(servicesData).reduce((acc, categorySlug) => {
             const categoryData = servicesData[categorySlug];
@@ -217,6 +214,5 @@ document.addEventListener('DOMContentLoaded', () => {
         nextArrow.style.display = show ? 'block' : 'none';
     }
 
-    // --- PORNIRE ---
     initBlogSection();
 });

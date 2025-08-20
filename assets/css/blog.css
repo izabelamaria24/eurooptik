@@ -177,10 +177,6 @@
     box-shadow: none;
 }
 
-/* =================================================================== */
-/*           STILURI CU FLEXBOX PENTRU ARTICOLUL DINAMIC               */
-/* =================================================================== */
-
 #blog-article-display-container {
     padding: 80px 20px;
     background-color: #fff;
@@ -230,10 +226,9 @@
     padding-top: 30px;
     border-top: 1px solid #eee;
     
-    /* ==== MODIFICARE AICI: Am reintrodus scrolling-ul ==== */
     max-height: 70vh;
     overflow-y: auto;
-    padding-right: 15px; /* Spațiu pentru scroll-bar */
+    padding-right: 15px; 
 }
 
 #blog-article-display-container #article-display-content p {
