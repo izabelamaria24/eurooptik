@@ -253,3 +253,10 @@
     margin-bottom: 15px;
     padding-left: 10px;
 }
+
+.blog-article-card.highlight {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid #d9538d; 
+    transition: all 0.3s ease;
+}

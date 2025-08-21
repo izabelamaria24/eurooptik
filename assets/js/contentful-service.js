@@ -293,7 +293,7 @@ export async function fetchSpecializationsData() {
     try {
         const [categoryResponse, specializationResponse] = await Promise.all([
             client.getEntries({ content_type: 'categorieSpecialitate', order: 'fields.idFiltru' }),
-            client.getEntries({ content_type: 'specialitate', include: 2, order: 'sys.createdAt' })
+            client.getEntries({ content_type: 'specialitate', include: 3, order: 'sys.createdAt' })
         ]);
 
         const createKey = (str) => {
@@ -312,15 +312,14 @@ export async function fetchSpecializationsData() {
 
         const specializations = specializationResponse.items.map(item => {
             const fields = item.fields;
-            if (!fields.numeSpecialitate || !fields.categorieSpecialitate?.fields) {
-                return null;
-            }
+            if (!fields.numeSpecialitate || !fields.categorieSpecialitate?.fields) return null;
 
-            const testimonialId = fields.testimonialQuote?.sys?.id || null;
-            const testimonialQuote = fields.testimonialQuote?.fields?.continutTestimonial || null;
+            const testimonialId = fields.testimonial?.sys?.id || null;
+            const testimonialQuote = fields.testimonial?.fields?.continutTestimonial || null;
+            const testimonialAuthorImage = fields.testimonial?.fields?.pozaTestimonial?.fields?.file?.url ? `https:${fields.testimonial.fields.pozaTestimonial.fields.file.url}` : null;
 
-            const blogSlug = fields.blogLink?.fields?.slug || null;
-            const fullBlogLink = blogSlug ? `/#${blogSlug}` : null;
+            const blogSlug = fields.blog?.fields?.slug || null;
+            const blogCategorySlug = fields.blog?.fields?.serviciu?.fields?.categorie?.fields?.idServiciu?.toString() || null;
 
             return {
                 slug: createKey(fields.numeSpecialitate),
@@ -331,9 +330,11 @@ export async function fetchSpecializationsData() {
                 articleDescription: fields.descriereSpecialitate,
                 articleImage: `https:${fields.pozaSpecialitate?.fields?.file?.url || ''}`,
                 
-                testimonialId: testimonialId,
-                testimonialQuote: testimonialQuote,
-                blogLink: fullBlogLink
+                testimonialId,
+                testimonialQuote,
+                testimonialAuthorImage,
+                blogSlug,
+                blogCategorySlug
             };
         }).filter(Boolean);
 
