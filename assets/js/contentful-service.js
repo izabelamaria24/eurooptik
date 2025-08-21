@@ -122,6 +122,75 @@ export async function fetchServicesFromContentful() {
 }
 
 
+export async function fetchArticlesFromContentful() {
+    await initializeContentful(); 
+    if (!client) return {};
+
+    try {
+        const articleEntries = await client.getEntries({
+            content_type: 'articol',
+            include: 3 
+        });
+
+        const articlesData = articleEntries.items.reduce((acc, entry) => {
+            const article = entry.fields;
+            const relatedService = article.serviciu?.fields;
+
+            if (relatedService && relatedService.numeServiciu) {
+                const serviceName = relatedService.numeServiciu;
+                
+                acc[serviceName] = {
+                    title: article.denumireArticol,
+                    slug: article.slug,
+                    doctors: (article.doctori || []).map(doc => doc.fields.numeDoctor).filter(Boolean),
+                    content: article.continutArticol
+                };
+            }
+            return acc;
+        }, {});
+
+        console.log("Articles integration successful!");
+        return articlesData;
+
+    } catch (error) {
+        console.error('Error fetching articles from Contentful:', error);
+        return {};
+    }
+}
+
+
+export async function fetchArticleBySlug(slug) {
+    await initializeContentful();
+    if (!client || !slug) return null;
+
+    try {
+        const entry = await client.getEntries({
+            content_type: 'articol',
+            'fields.slug': slug, 
+            include: 3,
+            limit: 1 
+        });
+
+        if (entry.items.length === 0) {
+            console.warn(`No article found with slug: ${slug}`);
+            return null;
+        }
+
+        const article = entry.items[0].fields;
+        
+        return {
+            title: article.denumireArticol,
+            doctors: (article.doctori || []).map(doc => doc.fields.numeDoctor).filter(Boolean),
+            content: article.continutArticol
+        };
+
+    } catch (error) {
+        console.error(`Error fetching article with slug ${slug}:`, error);
+        return null;
+    }
+}
+
+
 export async function fetchTestimonialsFromContentful() {
     await initializeContentful();
     if (!client) return [];
