@@ -313,19 +313,29 @@ export async function fetchSpecializationsData() {
         const specializations = specializationResponse.items.map(item => {
             const fields = item.fields;
             if (!fields.numeSpecialitate || !fields.categorieSpecialitate?.fields) {
-                return null; 
+                return null;
             }
-            
+
+            const testimonialId = fields.testimonialQuote?.sys?.id || null;
+            const testimonialQuote = fields.testimonialQuote?.fields?.continutTestimonial || null;
+
+            const blogSlug = fields.blogLink?.fields?.slug || null;
+            const fullBlogLink = blogSlug ? `/#${blogSlug}` : null;
+
             return {
                 slug: createKey(fields.numeSpecialitate),
                 cardTitle: fields.numeSpecialitate,
                 cardImage: `https:${fields.pozaSpecialitate?.fields?.file?.url || ''}`,
                 categorySlug: createKey(fields.categorieSpecialitate.fields.numeCategorieSpecialitate),
                 articleTitle: fields.titluSpecialitate,
-                articleDescription: fields.descriereSpecialitate, 
-                articleImage: `https:${fields.pozaSpecialitate?.fields?.file?.url || ''}`
+                articleDescription: fields.descriereSpecialitate,
+                articleImage: `https:${fields.pozaSpecialitate?.fields?.file?.url || ''}`,
+                
+                testimonialId: testimonialId,
+                testimonialQuote: testimonialQuote,
+                blogLink: fullBlogLink
             };
-        }).filter(Boolean); 
+        }).filter(Boolean);
 
         console.log("Specializations data fetched successfully:", { categories, specializations });
         return { categories, specializations };

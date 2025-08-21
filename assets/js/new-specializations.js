@@ -1,5 +1,4 @@
 import { documentToHtmlString } from 'https://cdn.jsdelivr.net/npm/@contentful/rich-text-html-renderer/+esm';
-
 import { fetchSpecializationsData } from './contentful-service.js';
 
 async function main() {
@@ -44,6 +43,12 @@ function initializeInteractivity(categories, specializations) {
     const articleTitle = articleContainer.querySelector('.article-title');
     const articleText = articleContainer.querySelector('.article-text');
     const articleImage = articleContainer.querySelector('.article-image');
+
+    const testimonialContainer = articleContainer.querySelector('.article-testimonial');
+    const testimonialLink = testimonialContainer.querySelector('.testimonial-scroll-link');
+    const testimonialQuote = testimonialContainer.querySelector('.testimonial-quote');
+    const blogLink = testimonialContainer.querySelector('.blog-link');
+
     const carouselContainer = document.querySelector('.specialization-carousel-container');
     const prevBtn = document.querySelector('.specialization-carousel-wrapper .prev-card');
     const nextBtn = document.querySelector('.specialization-carousel-wrapper .next-card');
@@ -112,10 +117,33 @@ function initializeInteractivity(categories, specializations) {
             this.classList.add('active');
             const specializationSlug = this.dataset.specialization;
             const articleData = specializations.find(spec => spec.slug === specializationSlug);
+
             if (articleData && articleData.articleDescription) {
                 articleTitle.textContent = articleData.articleTitle;
                 articleText.innerHTML = documentToHtmlString(articleData.articleDescription);
                 articleImage.innerHTML = `<img src="${articleData.articleImage}" alt="${articleData.articleTitle}">`;
+
+                if (articleData.testimonialId && articleData.testimonialQuote) {
+                    testimonialQuote.textContent = `‘${articleData.testimonialQuote.substring(0, 120)}…’`;
+                    testimonialLink.dataset.testimonialId = articleData.testimonialId;
+                    testimonialLink.style.display = 'block';
+                } else {
+                    testimonialLink.style.display = 'none';
+                }
+
+                if (articleData.blogLink) {
+                    blogLink.href = articleData.blogLink;
+                    blogLink.style.display = 'block';
+                } else {
+                    blogLink.style.display = 'none';
+                }
+
+                if (articleData.testimonialId || articleData.blogLink) {
+                    testimonialContainer.style.display = 'block';
+                } else {
+                    testimonialContainer.style.display = 'none';
+                }
+                
                 showArticle();
             } else {
                 hideArticle();
@@ -136,6 +164,20 @@ function initializeInteractivity(categories, specializations) {
     window.addEventListener('resize', () => {
         updateVisibleCardsCount();
         updateCarousel();
+    });
+
+    testimonialLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        const targetId = this.dataset.testimonialId;
+        const testimonialsSection = document.getElementById('testimoniale');
+
+        if (targetId && testimonialsSection) {
+            sessionStorage.setItem('scrollToTestimonial', targetId);
+            
+            testimonialsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            window.dispatchEvent(new CustomEvent('testimonialScroll', { detail: { id: targetId } }));
+        }
     });
 
     updateVisibleCardsCount();
