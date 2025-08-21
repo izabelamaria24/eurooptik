@@ -11,20 +11,20 @@
     padding: 0 20px;
 }
 
-#our-services-container .section-title {
+/* #our-services-container .section-title {
     font-size: 24px;
     font-weight: 700;
     color: #000;
     margin-bottom: 10px;
     text-transform: uppercase; 
-}
+} */
 
-#our-services-container .section-subtitle {
+/* #our-services-container .section-subtitle {
     font-size: 16px;
     font-weight: 400;
     color: #4f4f4f;
     margin-bottom: 30px;
-}
+} */
 
 #services-filter-container {
     display: flex;
@@ -41,7 +41,7 @@
     padding: 5px 15px;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 22px; 
+    font-size: 20px; 
     font-weight: 500; 
     transition: all 0.3s ease;
 }

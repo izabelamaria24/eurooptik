@@ -11,7 +11,7 @@
     padding: 0 20px;
 }
 
-#blog-container .section-title {
+/* #blog-container .section-title {
     font-size: 24px;
     font-weight: 700;
     color: #000;
@@ -24,7 +24,7 @@
     font-weight: 400;
     color: #4f4f4f;
     margin-bottom: 40px;
-}
+} */
 
 #blog-filter-container {
     display: flex;
@@ -38,10 +38,10 @@
     background-color: #f5eaf0;
     color: black;
     border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 5px 15px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 16px; 
+    font-size: 20px; 
     font-weight: 500; 
     transition: all 0.3s ease;
 }
