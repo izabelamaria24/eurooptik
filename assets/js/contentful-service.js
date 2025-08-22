@@ -32,41 +32,70 @@ async function initializeContentful() {
 
 export { initializeContentful };
 
+
+function processMember(memberEntry, memberType) {
+    if (!memberEntry || !memberEntry.fields) return null;
+    
+    const { fields } = memberEntry;
+
+    const filterId = fields.categorie?.fields?.idFiltru;
+    const category = filterId ? [filterId.toString()] : [];
+
+    return {
+        name: fields.nume || fields.nume || '', 
+        role: fields.titlu || fields.titlu || '', 
+        image: fields.fotografie?.fields?.file?.url ? `https:${fields.fotografie.fields.file.url}` : 
+               (fields.fotografie?.fields?.file?.url ? `https:${fields.fotografie.fields.file.url}` : ''),
+        specializations: fields.specializari || [],
+        categories: category,
+        type: memberType 
+    };
+}
+
+
 export async function fetchTeamFromContentful() {
     await initializeContentful();
-
-    if (!client) return { doctors: [], locations: [] };
+    if (!client) return { members: [], locations: [] };
 
     try {
-        const [doctorResponse, locationResponse] = await Promise.all([
-            client.getEntries({ content_type: 'doctor', include: 2, order: 'fields.numeDoctor' }),
+        const [teamPageResponse, locationResponse] = await Promise.all([
+            client.getEntries({ content_type: 'team', include: 3 }), 
             client.getEntries({ content_type: 'locatie', order: 'fields.idFiltru' })
         ]);
 
-        const doctors = doctorResponse.items.map(item => {
-            const { fields } = item;
-            const filterId = fields.categorie?.fields?.idFiltru;
-            const category = filterId ? [filterId.toString()] : [];
-        
-            return {
-                name: fields.numeDoctor || '',
-                role: fields.titluDoctor || '',
-                image: fields.fotografieDoctor?.fields?.file?.url ? `https:${fields.fotografieDoctor.fields.file.url}` : '',
-                specializations: fields.specializari || [],
-                categories: category 
-            };
+        if (!teamPageResponse.items.length) {
+            console.error("Intrarea 'Echipa' nu a fost găsită în Contentful.");
+            return { members: [], locations: [] };
+        }
+
+        const teamFields = teamPageResponse.items[0].fields;
+        let allTeamMembers = [];
+
+        (teamFields.listaDoctori || []).forEach(member => {
+            allTeamMembers.push(processMember(member, 'doctor'));
         });
+        (teamFields.listaAsistenteMedicale || []).forEach(member => {
+            allTeamMembers.push(processMember(member, 'asistenta-medicala'));
+        });
+        (teamFields.listaInfirmiere || []).forEach(member => {
+            allTeamMembers.push(processMember(member, 'infirmiera'));
+        });
+        (teamFields.listaConsilieri || []).forEach(member => {
+            allTeamMembers.push(processMember(member, 'consilier'));
+        });
+        
+        allTeamMembers = allTeamMembers.filter(Boolean);
 
         const locations = locationResponse.items.map(item => ({
             name: item.fields.numeLocatie,
-            filterId: item.fields.idFiltru.toString() 
+            filterId: item.fields.idFiltru.toString()
         }));
 
-        return { doctors, locations };
+        return { members: allTeamMembers, locations };
 
     } catch (error) {
-        console.error('Error fetching doctors/locations from Contentful:', error);
-        return { doctors: [], locations: [] };
+        console.error('Eroare la preluarea datelor echipei din Contentful:', error);
+        return { members: [], locations: [] };
     }
 }
 
@@ -142,7 +171,7 @@ export async function fetchArticlesFromContentful() {
                 acc[serviceName] = {
                     title: article.denumireArticol,
                     slug: article.slug,
-                    doctors: (article.doctori || []).map(doc => doc.fields.numeDoctor).filter(Boolean),
+                    doctors: (article.doctori || []).map(doc => doc.fields.nume).filter(Boolean),
                     content: article.continutArticol
                 };
             }
@@ -180,7 +209,7 @@ export async function fetchArticleBySlug(slug) {
         
         return {
             title: article.denumireArticol,
-            doctors: (article.doctori || []).map(doc => doc.fields.numeDoctor).filter(Boolean),
+            doctors: (article.doctori || []).map(doc => doc.fields.nume).filter(Boolean),
             content: article.continutArticol
         };
 

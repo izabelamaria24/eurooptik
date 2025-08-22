@@ -1,6 +1,6 @@
 #our-services-section {
     font-family: 'Poppins', sans-serif;
-    background-color: #fcfcfc; 
+    background-color: white; 
     padding: 60px 0;
 }
 
@@ -10,21 +10,6 @@
     margin: 0 auto;
     padding: 0 20px;
 }
-
-/* #our-services-container .section-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #000;
-    margin-bottom: 10px;
-    text-transform: uppercase; 
-} */
-
-/* #our-services-container .section-subtitle {
-    font-size: 16px;
-    font-weight: 400;
-    color: #4f4f4f;
-    margin-bottom: 30px;
-} */
 
 #services-filter-container {
     display: flex;

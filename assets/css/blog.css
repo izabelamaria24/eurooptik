@@ -1,6 +1,6 @@
 #blog-section {
     font-family: 'Poppins', sans-serif;
-    background-color: #fcfcfc; 
+    background-color: white; 
     padding: 60px 0 0 0; 
     text-align: center;
 }
@@ -10,21 +10,6 @@
     margin: 0 auto;
     padding: 0 20px;
 }
-
-/* #blog-container .section-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #000;
-    margin-bottom: 10px;
-    text-transform: uppercase; 
-}
-
-#blog-container .section-subtitle {
-    font-size: 16px;
-    font-weight: 400;
-    color: #4f4f4f;
-    margin-bottom: 40px;
-} */
 
 #blog-filter-container {
     display: flex;
