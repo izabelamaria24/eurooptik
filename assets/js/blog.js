@@ -47,17 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (categories.length > 0) {
                 renderFilters();
-                setActiveCategory(categories[0].slug);
+                setActiveCategory(categories[0].slug, false); 
             }
 
-            function checkUrlForArticle() {
-                const hash = window.location.hash.substring(1); 
-                if (hash && articlesBySlug[hash]) {
-                    displayArticle(articlesBySlug[hash], false); 
-                }
-            }
-            checkUrlForArticle(); 
-           
+            window.addEventListener('blogScroll', handleBlogScroll);
+
             prevArrow.addEventListener('click', () => showSlide(currentSlideIndex - 1));
             nextArrow.addEventListener('click', () => showSlide(currentSlideIndex + 1));
             
@@ -78,21 +72,52 @@ document.addEventListener('DOMContentLoaded', () => {
                     hideArticle();
                 }
             });
+            checkUrlForArticle();
 
         } catch (error) {
             console.error("A apărut o eroare majoră în `initBlogSection`:", error);
         }
     }
 
+    function handleBlogScroll(event) {
+        const { articleSlug, categorySlug } = event.detail;
+        if (!categorySlug || !articleSlug) return;
+
+        setActiveCategory(categorySlug, false); 
+
+        setTimeout(() => {
+            const allCards = slider.querySelectorAll('.blog-article-card');
+            let targetCard = null;
+            let cardIndex = -1;
+
+            allCards.forEach((card, index) => {
+                if (card.dataset.articleSlug === articleSlug) {
+                    targetCard = card;
+                    cardIndex = index;
+                }
+            });
+
+            if (targetCard) {
+                const articlesPerSlide = getArticlesPerSlide();
+                const targetSlideIndex = Math.floor(cardIndex / articlesPerSlide);
+                showSlide(targetSlideIndex);
+
+                document.querySelectorAll('.blog-article-card.highlight').forEach(c => c.classList.remove('highlight'));
+                targetCard.classList.add('highlight');
+                
+                const articleData = articlesBySlug[articleSlug];
+                if (articleData) {
+                    displayArticle(articleData, true); 
+                }
+            }
+        }, 100); 
+    }
+
     function displayArticle(article, updateHistory = true) {
         if (!article || !articleDisplayContainer) return;
 
         articleTitleEl.textContent = article.title || 'Titlu indisponibil';
-        
-        articleAuthorEl.textContent = article.doctors && article.doctors.length > 0 
-            ? `De ${article.doctors.join(', ')}` 
-            : '';
-        
+        articleAuthorEl.textContent = article.doctors && article.doctors.length > 0 ? `De ${article.doctors.join(', ')}` : '';
         articleContentEl.innerHTML = article.content ? documentToHtmlString(article.content) : '<p>Conținut indisponibil.</p>';
 
         articleDisplayContainer.classList.remove('hidden');
@@ -101,6 +126,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (updateHistory) {
             const newHash = `#${article.slug}`;
             history.pushState({ slug: article.slug }, '', newHash);
+        }
+    }
+
+    function checkUrlForArticle() {
+        const hash = window.location.hash.substring(1); 
+        if (hash && articlesBySlug[hash]) {
+            displayArticle(articlesBySlug[hash], false); 
         }
     }
     
@@ -120,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return acc;
         }, {});
     }
+
     function renderFilters() {
         filterContainer.innerHTML = '';
         categories.forEach(category => {
@@ -127,19 +160,28 @@ document.addEventListener('DOMContentLoaded', () => {
             button.className = 'filter-btn';
             button.textContent = category.name;
             button.dataset.slug = category.slug;
-            button.addEventListener('click', () => setActiveCategory(category.slug));
+            button.addEventListener('click', () => setActiveCategory(category.slug, true));
             filterContainer.appendChild(button);
         });
     }
-    function setActiveCategory(slug) {
-        if (activeCategorySlug === slug) return;
+
+    function setActiveCategory(slug, shouldScroll = true) {
+        if (activeCategorySlug === slug && !shouldScroll) return; 
+
         activeCategorySlug = slug;
         document.querySelectorAll('#blog-filter-container .filter-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.slug === slug);
         });
+        
         hideArticle();
         renderCarousel(servicesByCategory[slug] || []);
+
+        if (shouldScroll) {
+            const blogSection = document.getElementById('blog'); 
+            if (blogSection) blogSection.scrollIntoView({ behavior: 'smooth' });
+        }
     }
+
     function renderCarousel(articles) {
         slider.innerHTML = '';
         dotsContainer.innerHTML = '';
@@ -184,6 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         showSlide(0);
     }
+
     function handleArticleClick(event) {
         event.preventDefault(); 
         const slug = event.currentTarget.dataset.articleSlug;
@@ -194,11 +237,14 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = event.currentTarget.href;
         }
     }
+
     function hideArticle() {
         if (articleDisplayContainer) {
             articleDisplayContainer.classList.add('hidden');
         }
+        document.querySelectorAll('.blog-article-card.highlight').forEach(c => c.classList.remove('highlight'));
     }
+
     function showSlide(index) {
         if (totalSlides === 0) return;
         currentSlideIndex = (index + totalSlides) % totalSlides;
@@ -208,6 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         updateArrows();
     }
+
     function updateArrows() {
         const show = totalSlides > 1;
         prevArrow.style.display = show ? 'block' : 'none';
