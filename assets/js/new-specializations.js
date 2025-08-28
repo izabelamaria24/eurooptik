@@ -6,8 +6,7 @@ async function main() {
     if (!section) return;
 
     const { categories, specializations } = await fetchSpecializationsData();
-    if (!categories.length || !specializations.length) {
-        console.warn("No specializations data found. Section will not be rendered.");
+    if (!categories || !categories.length || !specializations || !specializations.length) {
         section.style.display = 'none';
         return;
     }
@@ -49,7 +48,9 @@ function initializeInteractivity(categories, specializations) {
     const authorImage = testimonialContainer.querySelector('.testimonial-author-image img');
     const testimonialLink = testimonialContainer.querySelector('.testimonial-scroll-link');
     const testimonialQuote = testimonialContainer.querySelector('.testimonial-quote');
-    const blogLink = testimonialContainer.querySelector('.blog-link');
+    
+    const blogLinksContainer = articleContainer.querySelector('.blog-links-container');
+    const blogLinksList = articleContainer.querySelector('.blog-links-list');
 
     const carouselContainer = document.querySelector('.specialization-carousel-container');
     const prevBtn = document.querySelector('.specialization-carousel-wrapper .prev-card');
@@ -127,7 +128,6 @@ function initializeInteractivity(categories, specializations) {
                 if (articleData.testimonialId && articleData.testimonialQuote) {
                     testimonialQuote.textContent = `‘${articleData.testimonialQuote.substring(0, 120)}…’`;
                     testimonialLink.dataset.testimonialId = articleData.testimonialId;
-
                     if (articleData.testimonialAuthorImage) {
                         authorImage.src = articleData.testimonialAuthorImage;
                         authorImage.parentElement.style.display = 'block';
@@ -138,16 +138,32 @@ function initializeInteractivity(categories, specializations) {
                 } else {
                     testimonialContentWrapper.style.display = 'none'; 
                 }
+                
+                blogLinksContainer.style.display = 'none';
+                blogLinksList.innerHTML = '';
 
-                if (articleData.blogSlug && articleData.blogCategorySlug) {
-                    blogLink.dataset.articleSlug = articleData.blogSlug;
-                    blogLink.dataset.categorySlug = articleData.blogCategorySlug;
-                    blogLink.style.display = 'block';
-                } else {
-                    blogLink.style.display = 'none';
+                if (articleData.articles && Array.isArray(articleData.articles) && articleData.articles.length > 0) {
+                    articleData.articles.forEach(article => {
+                        if (article && article.title && article.slug && article.categorySlug) {
+                            const link = document.createElement('a');
+                            link.href = '#';
+                            link.className = 'blog-link-item';
+                            link.textContent = article.title;
+                            link.dataset.articleSlug = article.slug;
+                            link.dataset.categorySlug = article.categorySlug;
+                            blogLinksList.appendChild(link);
+                        }
+                    });
+
+                    if (blogLinksList.children.length > 0) {
+                        blogLinksContainer.style.display = 'block';
+                    }
                 }
 
-                if (articleData.testimonialId || articleData.blogSlug) {
+                const hasTestimonial = testimonialContentWrapper.style.display !== 'none';
+                const hasBlogLinks = blogLinksContainer.style.display !== 'none';
+
+                if (hasTestimonial || hasBlogLinks) {
                     testimonialContainer.style.display = 'block';
                 } else {
                     testimonialContainer.style.display = 'none';
@@ -186,20 +202,23 @@ function initializeInteractivity(categories, specializations) {
         }
     });
 
-    blogLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        const articleSlug = this.dataset.articleSlug;
-        const categorySlug = this.dataset.categorySlug;
-        const blogSection = document.getElementById('blog-section');
+    blogLinksList.addEventListener('click', function(event) {
+        if (event.target.matches('.blog-link-item')) {
+            event.preventDefault();
+            const link = event.target;
+            const articleSlug = link.dataset.articleSlug;
+            const categorySlug = link.dataset.categorySlug;
+            const blogSection = document.getElementById('blog-section');
 
-        if (articleSlug && categorySlug && blogSection) {
-            blogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            window.dispatchEvent(new CustomEvent('blogScroll', { 
-                detail: { 
-                    articleSlug: articleSlug,
-                    categorySlug: categorySlug 
-                } 
-            }));
+            if (articleSlug && categorySlug && blogSection) {
+                blogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                window.dispatchEvent(new CustomEvent('blogScroll', { 
+                    detail: { 
+                        articleSlug: articleSlug,
+                        categorySlug: categorySlug 
+                    } 
+                }));
+            }
         }
     });
 

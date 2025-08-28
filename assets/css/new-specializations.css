@@ -289,3 +289,21 @@
   }
 }
 
+.blog-links-list .blog-link-item {
+  display: block;
+  margin-bottom: 8px;
+  color: #337ab7;     
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.blog-links-list .blog-link-item:hover {
+  text-decoration: underline; 
+  color: #23527c; 
+}
+
+.blog-links-container .blog-links-heading {
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: #555;
+}
