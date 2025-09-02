@@ -16,7 +16,7 @@
 
 .footer-message h2 {
   margin: 0;
-  font-size: 2.8rem;
+  font-size: 1.5em;
   font-weight: 400;
   letter-spacing: 1px;
 }
@@ -27,7 +27,7 @@
   border: none;
   border-radius: 6px;
   padding: 12px 60px;
-  font-size: 2rem;
+  font-size: 1.5em;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s;
@@ -55,12 +55,12 @@
 }
 
 .footer-location {
-  font-size: 1.4rem;
+  font-size: 1.5em;
 }
 
 .footer-location-name {
   font-weight: 600;
-  font-size: 1.6rem;
+  font-size: 1.5em;
 }
 
 .footer-center {
@@ -82,7 +82,7 @@
 .footer-menu a {
   color: black;
   text-decoration: none;
-  font-size: 1.6rem;
+  font-size: 1.5em;
   font-weight: 500;
   transition: color 0.2s;
 }
@@ -106,21 +106,21 @@
   }
 
   .footer-location {
-    font-size: 1.1rem;
+    font-size: 1.5em;
   }
 
   .footer-location-name {
-    font-size: 1.4rem;
+    font-size: 1.5em;
   }
   
   .footer-menu a {
-    font-size: 1.4rem;
+    font-size: 1.5em;
   }
 }
 
 @media (max-width: 992px) {
   .footer-menu a {
-    font-size: 1.4rem;
+    font-size: 1.5em;
   }
 
   .footer-logo img {
@@ -161,6 +161,6 @@
   }
 
   .footer-message h2 {
-      font-size: 2.2rem;
+      font-size: 1.5em;
   }
 }
