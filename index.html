@@ -44,64 +44,53 @@
       <div class="loader">Loading...</div>
     </div>
     <nav class="navbar navbar-custom navbar-transparent navbar-fixed-top one-page" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
 
-          <div class="navbar-brand-center visible-xs">
-            <a class="navbar-brand" href="#totop">
-              <img src="assets/images/logo-full.png" alt="Eurooptik" style="max-height: 90px; margin-top: -30px;">
-            </a>
-          </div>
-
-          <div class="navbar-brand hidden-xs" style="float: left;">
-            <a class="navbar-brand" href="#totop">
-              <img src="assets/images/logo-full.png" alt="Eurooptik" style="max-height: 90px; margin-top: -42px;">
-            </a>
-          </div>
-        </div>
-        <div class="collapse navbar-collapse" id="custom-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a class="section-scroll navbar-anim-link" href="#totop" id="navbar-button">Acasa
-              </a></li>
-            <li><a class="section-scroll navbar-anim-link" href="#our-services-section" id="navbar-button">Servicii</a>
-            </li>
-            <li><a class="section-scroll navbar-anim-link" href="#echipa-noastra" id="navbar-button">Echipa</a>
-            </li>
-            <li><a class="section-scroll navbar-anim-link" href="#pricing" id="navbar-button">Tarife</a>
-            </li>
-            <li><a class="section-scroll navbar-anim-link" href="#testimoniale" id="navbar-button">Testimoniale</a>
-            </li>
-            <li><a class="section-scroll navbar-anim-link" href="#blog-section" id="navbar-button">Blog</a>
-            </li>
-            <li><a class="section-scroll navbar-anim-link" href="#adresses" id="navbar-button">Contact</a>
-            </li>
-            <li><a class="section-scroll navbar-anim-link" href="#sponsors" id="navbar-button">Parteneri</a>
-            </li>
-      <style>
-        .navbar-anim-link {
-          transition: color 0.2s, transform 0.2s;
-          display: inline-block;
-        }
-        .navbar-anim-link:hover, .navbar-anim-link:focus {
-          color: #2a8be0 !important;
-          text-decoration: none;
-          transform: scale(1.08);
-        }
-      </style>
-            <li>
-              <a class="section-scroll navbar-anim-link" class="btn-programare" id="navbar-button-programare" href="#"
-                onclick="showProgramareSection(); return false;">Programare</a>
-            </li>
-          </ul>
-        </div>
+      <!-- Logo XS -->
+      <div class="navbar-brand-center visible-xs">
+        <a class="navbar-brand" href="#totop">
+          <img src="assets/images/logo-full.png" alt="Eurooptik" style="max-height: 90px; margin-top: -30px;">
+        </a>
       </div>
-    </nav>
+
+      <!-- Logo Desktop -->
+      <div class="navbar-brand hidden-xs" style="float: left;">
+        <a class="navbar-brand" href="#totop">
+          <img src="assets/images/logo-full.png" alt="Eurooptik" style="max-height: 90px; margin-top: -42px;">
+        </a>
+      </div>
+    </div>
+
+    <!-- Navbar Items -->
+    <div class="collapse navbar-collapse" id="custom-collapse">
+      <!-- Left / Center Menu -->
+      <ul class="nav navbar-nav navbar-left">
+        <li><a class="section-scroll navbar-anim-link" href="#totop"><b>Acasa</b></a></li>
+        <li><a class="section-scroll navbar-anim-link" href="#our-services-section"><b></b>Servicii</b></a></li>
+        <li><a class="section-scroll navbar-anim-link" href="#echipa-noastra"><b>Echipa</b></a></li>
+        <li><a class="section-scroll navbar-anim-link" href="#pricing"><b>Tarife</b></a></li>
+        <li><a class="section-scroll navbar-anim-link" href="#blog-section"><b>Blog</b></a></li>
+        <li><a class="section-scroll navbar-anim-link" href="#sponsors"><b>Parteneri</b></a></li>
+      </ul>
+
+      <!-- Right Menu -->
+      <ul class="nav navbar-nav navbar-right">
+        <li><a class="section-scroll navbar-anim-link" href="#adresses"><b>Contact</b></b></a></li>
+        <li>
+          <a class="btn-programare" href="#"
+             onclick="showProgramareSection(); return false;"><b>Programează-te</b></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
     <section class="home-section home-full-height" id="home">
       <img src="assets/images/background.png" alt="Background"
