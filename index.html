@@ -67,24 +67,35 @@
         </div>
         <div class="collapse navbar-collapse" id="custom-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#totop" id="navbar-button">Acasa
+            <li><a class="section-scroll navbar-anim-link" href="#totop" id="navbar-button">Acasa
               </a></li>
-            <li><a class="section-scroll" href="#our-services-section" id="navbar-button">Servicii</a>
+            <li><a class="section-scroll navbar-anim-link" href="#our-services-section" id="navbar-button">Servicii</a>
             </li>
-            <li><a class="section-scroll" href="#echipa-noastra" id="navbar-button">Echipa</a>
+            <li><a class="section-scroll navbar-anim-link" href="#echipa-noastra" id="navbar-button">Echipa</a>
             </li>
-            <li><a class="section-scroll" href="#pricing" id="navbar-button">Tarife</a>
+            <li><a class="section-scroll navbar-anim-link" href="#pricing" id="navbar-button">Tarife</a>
             </li>
-            <li><a class="section-scroll" href="#testimoniale" id="navbar-button">Testimoniale</a>
+            <li><a class="section-scroll navbar-anim-link" href="#testimoniale" id="navbar-button">Testimoniale</a>
             </li>
-            <li><a class="section-scroll" href="#blog-section" id="navbar-button">Blog</a>
+            <li><a class="section-scroll navbar-anim-link" href="#blog-section" id="navbar-button">Blog</a>
             </li>
-            <li><a class="section-scroll" href="#adresses" id="navbar-button">Contact</a>
+            <li><a class="section-scroll navbar-anim-link" href="#adresses" id="navbar-button">Contact</a>
             </li>
-            <li><a class="section-scroll" href="#sponsors" id="navbar-button">Parteneri</a>
+            <li><a class="section-scroll navbar-anim-link" href="#sponsors" id="navbar-button">Parteneri</a>
             </li>
+      <style>
+        .navbar-anim-link {
+          transition: color 0.2s, transform 0.2s;
+          display: inline-block;
+        }
+        .navbar-anim-link:hover, .navbar-anim-link:focus {
+          color: #2a8be0 !important;
+          text-decoration: none;
+          transform: scale(1.08);
+        }
+      </style>
             <li>
-              <a class="section-scroll" class="btn-programare" id="navbar-button-programare" href="#"
+              <a class="section-scroll navbar-anim-link" class="btn-programare" id="navbar-button-programare" href="#"
                 onclick="showProgramareSection(); return false;">Programare</a>
             </li>
           </ul>
