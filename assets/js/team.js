@@ -133,10 +133,16 @@ function filterAndDisplayTeam(filter) {
                     <div class="team-member-photo" style="background-image: url('${member.image}')"></div>
                     <h4 class="team-member-name">${member.name}</h4>
                     <p class="team-member-role">${member.role}</p>
-                    <h5 class="team-member-specialization-title">Specializări</h5>
-                    <ul class="team-member-specialization-list">
-                        ${specializationsHTML}
-                    </ul>
+
+                    ${member.specializations.length > 0 ?
+                        `
+                        <h5 class="team-member-specialization-title">Specializări</h5>
+                        <ul class="team-member-specialization-list">
+                            ${specializationsHTML}
+                        </ul>
+                        `
+                    : ''
+                    }
                 </div>
             `;
             teamGrid.appendChild(memberCardWrapper);
