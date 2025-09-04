@@ -110,43 +110,39 @@ function shuffle(array) {
 
 function filterAndDisplayTeam(filter) {
     if (!teamGrid) return;
-    teamGrid.innerHTML = '';
 
-    const filteredMembers = filter === 'all' ?
-        allTeamMembers :
-        allTeamMembers.filter(member => member.categories.includes(filter));
+    const filteredMembers = filter === 'all' 
+        ? allTeamMembers 
+        : allTeamMembers.filter(member => member.categories.includes(filter));
 
     shuffle(filteredMembers);
 
     if (filteredMembers.length === 0) {
         teamGrid.innerHTML = '<p>Niciun membru al echipei nu corespunde filtrului selectat.</p>';
     } else {
-        filteredMembers.forEach(member => {
-            const memberCardWrapper = document.createElement('div');
-            memberCardWrapper.className = 'team-member-wrapper';
-            const specializationsHTML = member.specializations.map(spec => `<li>${spec}</li>`).join('');
+        const allCardsHTML = filteredMembers.map(member => {
+            const { name, role, image, specializations, type } = member;
+            const specializationsHTML = specializations.map(spec => `<li>${spec}</li>`).join('');
+            const memberTypeClass = type || 'default';
 
-            const memberTypeClass = member.type || 'default';
-
-            memberCardWrapper.innerHTML = `
-                <div class="team-member ${memberTypeClass}">
-                    <div class="team-member-photo" style="background-image: url('${member.image}')"></div>
-                    <h4 class="team-member-name">${member.name}</h4>
-                    <p class="team-member-role">${member.role}</p>
-
-                    ${member.specializations.length > 0 ?
-                        `
-                        <h5 class="team-member-specialization-title">Specializări</h5>
-                        <ul class="team-member-specialization-list">
-                            ${specializationsHTML}
-                        </ul>
-                        `
-                    : ''
-                    }
+            return `
+                <div class="team-member-wrapper">
+                    <div class="team-member ${memberTypeClass}">
+                        <div class="team-member-photo" style="background-image: url('${image}')"></div>
+                        <h4 class="team-member-name">${name}</h4>
+                        <p class="team-member-role">${role}</p>
+                        ${specializations.length > 0 ? `
+                            <h5 class="team-member-specialization-title">Specializări</h5>
+                            <ul class="team-member-specialization-list">
+                                ${specializationsHTML}
+                            </ul>
+                        ` : ''}
+                    </div>
                 </div>
             `;
-            teamGrid.appendChild(memberCardWrapper);
-        });
+        }).join('');
+
+        teamGrid.innerHTML = allCardsHTML;
     }
 
     if (teamCarousel) {

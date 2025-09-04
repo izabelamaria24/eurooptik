@@ -34,20 +34,23 @@ export { initializeContentful };
 
 
 function processMember(memberEntry, memberType) {
-    if (!memberEntry || !memberEntry.fields) return null;
+    if (!memberEntry || !memberEntry.fields) {
+        return null;
+    }
     
     const { fields } = memberEntry;
+    const categoriesAsArray = [].concat(fields.categorie).filter(Boolean);
 
-    const filterId = fields.categorie?.fields?.idFiltru;
-    const category = filterId ? [filterId.toString()] : [];
+    const finalCategories = categoriesAsArray
+        .map(item => item.fields?.idFiltru?.toString()) 
+        .filter(Boolean); 
 
     return {
-        name: fields.nume || fields.nume || '', 
-        role: fields.titlu || fields.titlu || '', 
-        image: fields.fotografie?.fields?.file?.url ? `https:${fields.fotografie.fields.file.url}` : 
-                (fields.fotografie?.fields?.file?.url ? `https:${fields.fotografie.fields.file.url}` : ''),
+        name: fields.nume || '', 
+        role: fields.titlu || '', 
+        image: fields.fotografie?.fields?.file?.url ? `https:${fields.fotografie.fields.file.url}` : '',
         specializations: fields.specializari || [],
-        categories: category,
+        categories: finalCategories,
         type: memberType 
     };
 }
