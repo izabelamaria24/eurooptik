@@ -346,9 +346,20 @@ export async function fetchSpecializationsData() {
             const testimonialId = fields.testimonial?.sys?.id || null;
             const testimonialQuote = fields.testimonial?.fields?.continutTestimonial || null;
             const testimonialAuthorImage = fields.testimonial?.fields?.pozaTestimonial?.fields?.file?.url ? `https:${fields.testimonial.fields.pozaTestimonial.fields.file.url}` : null;
+            
+            const articles = (fields.articles || []).map(articleEntry => {
+                const articleFields = articleEntry?.fields;
+                if (!articleFields) return null;
 
-            const blogSlug = fields.blog?.fields?.slug || null;
-            const blogCategorySlug = fields.blog?.fields?.serviciu?.fields?.categorie?.fields?.idServiciu?.toString() || null;
+                const title = articleFields.denumireArticol;
+                const slug = articleFields.slug;
+                const categorySlug = articleFields.serviciu?.fields?.categorie?.fields?.idServiciu?.toString() || null;
+
+                if (title && slug && categorySlug) {
+                    return { title, slug, categorySlug };
+                }
+                return null;
+            }).filter(Boolean); 
 
             return {
                 slug: createKey(fields.numeSpecialitate),
@@ -362,8 +373,8 @@ export async function fetchSpecializationsData() {
                 testimonialId,
                 testimonialQuote,
                 testimonialAuthorImage,
-                blogSlug,
-                blogCategorySlug
+                
+                articles: articles
             };
         }).filter(Boolean);
 
