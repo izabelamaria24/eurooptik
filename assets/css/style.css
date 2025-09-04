@@ -877,9 +877,9 @@ blockquote {
   bottom: 20px;
   z-index: 11;
   text-align: center;
-  -webkit-transform: translateX(-50%);
+  /* -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
 }
 
 .flex-control-nav>li {
@@ -1042,7 +1042,8 @@ General Styles - Owlcarousel
   border: 0;
   border-radius: 0;
   z-index: 1000;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
   letter-spacing: 3px;
   font-size: 15px;
   transition: background, padding 0.4s ease-in-out 0s;
@@ -1389,4 +1390,37 @@ General Styles - Owlcarousel
   .align-left-sm {
     text-align: left;
   }
+}
+
+body, .navbar, .navbar a {
+  font-family: 'Roboto', sans-serif !important;
+  font-style: normal !important;
+}
+
+/* Navbar link animation */
+.navbar-anim-link {
+  transition: color 0.2s, transform 0.2s;
+  display: inline-block;
+  will-change: transform;
+}
+.navbar-anim-link:hover, .navbar-anim-link:focus {
+  color: #2a8be0 !important;
+  text-decoration: none;
+  transform: scale(1.01);
+}
+
+/* Programare button style */
+.btn-programare {
+  background: #d13775;
+  color: #fff !important;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: background 0.3s, transform 0.2s;
+  display: inline-block;
+}
+.btn-programare:hover {
+  background: #d13775;
+  transform: scale(1.05);
+  text-decoration: none;
 }
