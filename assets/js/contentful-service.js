@@ -34,20 +34,23 @@ export { initializeContentful };
 
 
 function processMember(memberEntry, memberType) {
-    if (!memberEntry || !memberEntry.fields) return null;
+    if (!memberEntry || !memberEntry.fields) {
+        return null;
+    }
     
     const { fields } = memberEntry;
+    const categoriesAsArray = [].concat(fields.categorie).filter(Boolean);
 
-    const filterId = fields.categorie?.fields?.idFiltru;
-    const category = filterId ? [filterId.toString()] : [];
+    const finalCategories = categoriesAsArray
+        .map(item => item.fields?.idFiltru?.toString()) 
+        .filter(Boolean); 
 
     return {
-        name: fields.nume || fields.nume || '', 
-        role: fields.titlu || fields.titlu || '', 
-        image: fields.fotografie?.fields?.file?.url ? `https:${fields.fotografie.fields.file.url}` : 
-               (fields.fotografie?.fields?.file?.url ? `https:${fields.fotografie.fields.file.url}` : ''),
+        name: fields.nume || '', 
+        role: fields.titlu || '', 
+        image: fields.fotografie?.fields?.file?.url ? `https:${fields.fotografie.fields.file.url}` : '',
         specializations: fields.specializari || [],
-        categories: category,
+        categories: finalCategories,
         type: memberType 
     };
 }
@@ -64,7 +67,7 @@ export async function fetchTeamFromContentful() {
         ]);
 
         if (!teamPageResponse.items.length) {
-            console.error("Intrarea 'Echipa' nu a fost găsită în Contentful.");
+            console.error("Team was not found in Contentful.");
             return { members: [], locations: [] };
         }
 
@@ -83,6 +86,12 @@ export async function fetchTeamFromContentful() {
         (teamFields.listaConsilieri || []).forEach(member => {
             allTeamMembers.push(processMember(member, 'consilier'));
         });
+        (teamFields.listaManageri || []).forEach(member => {
+            allTeamMembers.push(processMember(member, 'manager'));
+        });
+        (teamFields.listaOptometristi || []).forEach(member => {
+            allTeamMembers.push(processMember(member, 'optometrist'));
+        });
         
         allTeamMembers = allTeamMembers.filter(Boolean);
 
@@ -94,7 +103,7 @@ export async function fetchTeamFromContentful() {
         return { members: allTeamMembers, locations };
 
     } catch (error) {
-        console.error('Eroare la preluarea datelor echipei din Contentful:', error);
+        console.error('Error at fetching team data from Contentful:', error);
         return { members: [], locations: [] };
     }
 }
