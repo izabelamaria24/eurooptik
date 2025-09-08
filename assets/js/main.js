@@ -27,17 +27,19 @@
          * Initialization General Scripts for all pages
          /* ---------------------------------------------- */
 
-        var homeSection = $('.home-section'),
-            navbar = $('.navbar-custom'),
-            navHeight = navbar.height(),
-            width = Math.max($(window).width(), window.innerWidth),
-            mobileTest = false;
+        var homeSection = $('.home-section');
+        var navbar = $('.navbar-custom');
+        // Initial navHeight, including initial padding, before any scroll or resize changes
+        var navHeight = navbar.outerHeight(); 
+        var width = Math.max($(window).width(), window.innerWidth);
+        var mobileTest = false;
 
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             mobileTest = true;
         }
 
         buildHomeSection(homeSection);
+        // Initial call to navbarAnimation to set the correct state on load
         navbarAnimation(navbar, homeSection, navHeight);
         navbarSubmenu(width);
         hoverDropdown(width, mobileTest);
@@ -45,11 +47,16 @@
         $(window).resize(function () {
             var width = Math.max($(window).width(), window.innerWidth);
             buildHomeSection(homeSection);
+            // Recalculate navHeight here as padding might change due to media queries or other factors
+            navHeight = navbar.outerHeight(); 
+            // Update navbar animation on resize
+            navbarAnimation(navbar, homeSection, navHeight);
             hoverDropdown(width, mobileTest);
         });
 
         $(window).scroll(function () {
             effectsHomeSection(homeSection, this);
+            // Update navbar animation on scroll
             navbarAnimation(navbar, homeSection, navHeight);
         });
 
@@ -115,16 +122,24 @@
         });
 
         /* ---------------------------------------------- /*
-         * Transparent navbar animation
+         * Transparent navbar animation (UPDATED)
          /* ---------------------------------------------- */
 
         function navbarAnimation(navbar, homeSection, navHeight) {
             var topScroll = $(window).scrollTop();
             if (navbar.length > 0 && homeSection.length > 0) {
-                if (topScroll >= navHeight) {
-                    navbar.removeClass('navbar-transparent');
+                // Use outerHeight for accurate calculation of the home section
+                var homeSHeight = homeSection.outerHeight(); 
+                // The threshold is when the user has scrolled past the home section, 
+                // adjusted by the initial navbar height so the transition happens
+                // as the bottom of the home section meets the top of the viewport.
+                // We're already accounting for the navbar's own height being fixed at the top.
+                var scrollThreshold = homeSHeight - navHeight; 
+
+                if (topScroll >= scrollThreshold) {
+                    navbar.removeClass('navbar-transparent').addClass('navbar-solid');
                 } else {
-                    navbar.addClass('navbar-transparent');
+                    navbar.removeClass('navbar-solid').addClass('navbar-transparent');
                 }
             }
         }

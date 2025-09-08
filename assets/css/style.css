@@ -225,7 +225,7 @@ a,
 
 .bg-gradient:before {
   position: absolute;
-  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk1JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjk1Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIyeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk1JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjk1Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
   /* FF3.6+ */
   /* Chrome,Safari4+ */
   /* Chrome10+,Safari5.1+ */
@@ -1423,4 +1423,129 @@ body, .navbar, .navbar a {
   background: #d13775;
   transform: scale(1.05);
   text-decoration: none;
+}
+
+/* Custom Navbar Styling for Transparent to Solid Effect */
+
+/* Ensure smooth transition for background, color, and padding */
+.navbar-custom {
+  transition: background-color 0.3s ease, padding 0.3s ease;
+  /* Default padding for the transparent state (larger) */
+  padding-top: 25px; 
+  padding-bottom: 25px;
+}
+
+/* Transparent state: Initial appearance at the top of the page */
+.navbar-custom.navbar-transparent {
+    background-color: transparent !important;
+    border-bottom: none !important; /* No border at the top */
+    padding-top: 25px !important; /* Keep larger padding */
+    padding-bottom: 25px !important;
+}
+
+.navbar-custom.navbar-transparent .navbar-nav > li > a {
+    color: rgba(255, 255, 255, 0.9) !important; /* White text, slightly transparent */
+}
+
+.navbar-custom.navbar-transparent .navbar-nav > li > a:hover,
+.navbar-custom.navbar-transparent .navbar-nav > li > a:focus {
+    color: var(--color-white) !important; /* Pure white on hover */
+}
+
+.navbar-custom.navbar-transparent .navbar-brand {
+    color: var(--color-white) !important; /* White logo text (if text-based) */
+}
+
+.navbar-custom.navbar-transparent .navbar-toggle .icon-bar {
+    background: var(--color-white) !important; /* White hamburger icon for mobile */
+}
+
+/* Scrolled state: Solid white background, dark text */
+.navbar-custom.navbar-solid {
+    background-color: var(--color-white) !important; /* Solid white background */
+    border-bottom: 1px solid var(--ui-border) !important; /* Subtle border at bottom */
+    padding-top: 15px !important; /* Reduced padding when scrolled */
+    padding-bottom: 15px !important;
+}
+
+.navbar-custom.navbar-solid .navbar-nav > li > a {
+    color: var(--text-primary) !important; /* Dark gray/black text */
+}
+
+.navbar-custom.navbar-solid .navbar-nav > li > a:hover,
+.navbar-custom.navbar-solid .navbar-nav > li > a:focus {
+    color: #2a8be0 !important; /* Blue on hover, consistent with your existing navbar-anim-link hover */
+}
+
+.navbar-custom.navbar-solid .navbar-brand {
+    color: var(--text-primary) !important; /* Dark logo text */
+}
+
+.navbar-custom.navbar-solid .navbar-toggle .icon-bar {
+    background: var(--text-primary) !important; /* Dark hamburger icon for mobile */
+}
+
+/* Dropdown menu adaptation for both states */
+.navbar-custom.navbar-transparent .dropdown-menu {
+  background: rgba(26, 26, 26, 0.9) !important; /* Dark semi-transparent background for dropdown */
+  border: none; /* No border for transparent state dropdown */
+}
+.navbar-custom.navbar-solid .dropdown-menu {
+  background: var(--color-white) !important; /* White background for dropdown */
+  border: 1px solid var(--ui-border); /* Subtle border for solid state dropdown */
+}
+.navbar-custom.navbar-solid .dropdown-menu > li > a {
+  color: var(--text-primary) !important; /* Dark text for links in solid state dropdown */
+}
+.navbar-custom.navbar-solid .dropdown-menu > li > a:hover {
+  background: var(--ui-background-light) !important; /* Light background on hover in solid state dropdown */
+}
+
+/* Ensure the appointment button text color remains white on its pink background in both states */
+.btn-programare {
+  color: #fff !important;
+}
+
+/* Logo specific adjustments for different states/screen sizes */
+.navbar-brand img {
+    transition: max-height 0.3s ease, margin-top 0.3s ease; /* Smooth transition for logo size */
+}
+
+/* Initial state logo size/position for desktop */
+.navbar-custom.navbar-transparent .navbar-brand.hidden-xs img {
+    max-height: 90px;
+    margin-top: -42px;
+}
+/* Initial state logo size/position for mobile */
+.navbar-custom.navbar-transparent .navbar-brand-center.visible-xs img {
+    max-height: 90px;
+    margin-top: -30px;
+}
+
+/* Scrolled state logo size/position for desktop */
+.navbar-custom.navbar-solid .navbar-brand.hidden-xs img {
+    max-height: 70px; /* Slightly smaller logo when scrolled */
+    margin-top: -32px; /* Adjust as needed */
+}
+/* Scrolled state logo size/position for mobile */
+.navbar-custom.navbar-solid .navbar-brand-center.visible-xs img {
+    max-height: 70px; /* Slightly smaller logo when scrolled */
+    margin-top: -20px; /* Adjust as needed */
+}
+
+/* Mobile navbar collapse menu background for transparent state */
+@media (max-width: 767px) {
+    .navbar-custom.navbar-transparent .navbar-collapse {
+        background-color: rgba(56, 53, 53, 0.9); /* Dark semi-transparent for mobile menu */
+    }
+    .navbar-custom.navbar-solid .navbar-collapse {
+        background-color: var(--color-white); /* White for mobile menu when scrolled */
+    }
+    .navbar-custom.navbar-solid .navbar-collapse .navbar-nav > li > a {
+        color: var(--text-primary) !important; /* Dark text for mobile menu links when scrolled */
+    }
+    .navbar-custom.navbar-solid .navbar-collapse .navbar-nav > li > a:hover {
+        background-color: var(--ui-background-light) !important;
+        color: #2a8be0 !important;
+    }
 }
