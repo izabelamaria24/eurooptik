@@ -17,8 +17,6 @@
     justify-content: center;
     gap: 12px ;
     margin-bottom: 30px;
-    /* Ensure the container has enough width to allow 4 items on the first row */
-    /* The max-width of 1100px from #our-services-container is usually sufficient for this */
 }
 
 #services-filter-container .filter-btn {
@@ -31,8 +29,6 @@
     font-size: 20px; 
     font-weight: 500; 
     transition: all 0.3s ease;
-    white-space: nowrap; /* Prevent text wrapping inside buttons, which could affect their calculated width */
-    flex-shrink: 0;      /* Prevent buttons from shrinking below their flex-basis, ensuring they stick to the calculated widths */
 }
 
 #services-filter-container .filter-btn.active {
@@ -43,30 +39,6 @@
 #services-filter-container .filter-btn:not(.active):hover {
     background-color: #e8d8e0;
 }
-
-/* Custom layout rules for filter buttons: 4 on first row, then 2 on subsequent rows */
-
-/* Rule for the first four buttons (on the first row) */
-#services-filter-container .filter-btn:nth-child(-n+4) {
-    /* Calculates width for 4 items, accounting for 3 gaps between them */
-    flex-basis: calc((100% - 3 * 12px) / 4);
-    max-width: calc((100% - 3 * 12px) / 4);
-}
-
-/* Rule for the next two buttons (5th and 6th, on the second row) */
-#services-filter-container .filter-btn:nth-child(n+5):nth-child(-n+6) {
-    /* Calculates width for 2 items, accounting for 1 gap between them */
-    flex-basis: calc((100% - 1 * 12px) / 2);
-    max-width: calc((100% - 1 * 12px) / 2);
-}
-
-/* Rule for the buttons from the 7th onwards (on the third row and any subsequent rows) */
-#services-filter-container .filter-btn:nth-child(n+7) {
-    /* Calculates width for 2 items, accounting for 1 gap between them */
-    flex-basis: calc((100% - 1 * 12px) / 2);
-    max-width: calc((100% - 1 * 12px) / 2);
-}
-
 
 #services-carousel-wrapper {
     background-color: #fbeff3;
@@ -202,24 +174,7 @@
 
 @media (max-width: 768px) {
     #our-services-section { padding: 40px 0; }
-    #services-filter-container .filter-btn { 
-        font-size: 14px; 
-        padding: 8px 16px; 
-        /* On smaller screens, revert to 2 buttons per row for all */
-        flex-basis: calc((100% - 1 * 12px) / 2);
-        max-width: calc((100% - 1 * 12px) / 2);
-        min-width: unset;
-        flex-shrink: 1; /* Allow shrinking on smaller screens */
-    }
-
-    /* Remove specific desktop nth-child rules for mobile */
-    #services-filter-container .filter-btn:nth-child(-n+4),
-    #services-filter-container .filter-btn:nth-child(n+5):nth-child(-n+6),
-    #services-filter-container .filter-btn:nth-child(n+7) {
-        flex-basis: calc((100% - 1 * 12px) / 2);
-        max-width: calc((100% - 1 * 12px) / 2);
-    }
-
+    #services-filter-container .filter-btn { font-size: 14px; padding: 8px 16px; }
     #services-carousel-slider .carousel-card { padding: 0 45px; }
 
     #services-carousel-container .carousel-arrow { 
