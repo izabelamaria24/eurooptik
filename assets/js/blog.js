@@ -1,5 +1,5 @@
 import { fetchServicesFromContentful, fetchArticlesFromContentful } from './contentful-service.js';
-import { documentToHtmlString } from 'https://cdn.jsdelivr.net/npm/@contentful/rich-text-html-renderer/+esm';
+import { documentToHtmlString } from 'https://esm.sh/@contentful/rich-text-html-renderer';
 
 document.addEventListener('DOMContentLoaded', () => {
     const filterContainer = document.getElementById('blog-filter-container');
@@ -118,7 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         articleTitleEl.textContent = article.title || 'Titlu indisponibil';
         articleAuthorEl.textContent = article.doctors && article.doctors.length > 0 ? `De ${article.doctors.join(', ')}` : '';
-        articleContentEl.innerHTML = article.content ? documentToHtmlString(article.content) : '<p>Conținut indisponibil.</p>';
+        
+        // Add a check here to ensure article.content is valid before rendering
+        if (article.content && article.content.nodeType === 'document') {
+             articleContentEl.innerHTML = documentToHtmlString(article.content);
+        } else {
+             articleContentEl.innerHTML = '<p>Conținut indisponibil.</p>';
+        }
 
         articleDisplayContainer.classList.remove('hidden');
         articleDisplayContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
