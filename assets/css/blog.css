@@ -16,7 +16,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
-    margin-bottom: 40px;
+    margin-bottom: 120px;
 }
 
 #blog-filter-container .filter-btn {
@@ -138,7 +138,7 @@
 }
 
 @media (max-width: 768px) {
-    #blog-section { padding-top: 40px; }
+    #blog-section { padding-top: 120px; }
     #blog-filter-container .filter-btn { font-size: 14px; padding: 8px 16px; }
     
     .blog-carousel-slide {
