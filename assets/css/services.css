@@ -6,9 +6,9 @@
 
 #our-services-container {
     text-align: center;
-    max-width: 1100px;
+    max-width: 100%; /* Changed from 1200px to 100% to span full screen */
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 20px; /* Keep some horizontal padding for content */
 }
 
 #services-filter-container {
@@ -17,8 +17,6 @@
     justify-content: center;
     gap: 12px ;
     margin-bottom: 30px;
-    /* Ensure the container has enough width to allow 4 items on the first row */
-    /* The max-width of 1100px from #our-services-container is usually sufficient for this */
 }
 
 #services-filter-container .filter-btn {
@@ -45,22 +43,18 @@
 }
 
 /* Custom layout rules for filter buttons: 4 on first row, then 2 on subsequent rows */
-
-/* Rule for the first four buttons (on the first row) */
 #services-filter-container .filter-btn:nth-child(-n+4) {
     /* Calculates width for 4 items, accounting for 3 gaps between them */
     flex-basis: calc((100% - 3 * 12px) / 4);
     max-width: calc((100% - 3 * 12px) / 4);
 }
 
-/* Rule for the next two buttons (5th and 6th, on the second row) */
 #services-filter-container .filter-btn:nth-child(n+5):nth-child(-n+6) {
     /* Calculates width for 2 items, accounting for 1 gap between them */
     flex-basis: calc((100% - 1 * 12px) / 2);
     max-width: calc((100% - 1 * 12px) / 2);
 }
 
-/* Rule for the buttons from the 7th onwards (on the third row and any subsequent rows) */
 #services-filter-container .filter-btn:nth-child(n+7) {
     /* Calculates width for 2 items, accounting for 1 gap between them */
     flex-basis: calc((100% - 1 * 12px) / 2);
@@ -76,7 +70,7 @@
 
 #services-carousel-container {
     position: relative;
-    max-width: 900px;
+    max-width: 100%; /* Changed from 900px to 100% to span full screen */
     margin: 0 auto;
     overflow: hidden;
 }
@@ -89,7 +83,7 @@
 #services-carousel-slider .carousel-card {
     min-width: 100%;
     box-sizing: border-box;
-    padding: 0 60px;
+    padding: 0 60px; /* Keep padding inside the card to prevent content from touching screen edges */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -285,4 +279,13 @@
         border-bottom: none;
         padding-bottom: 25px; 
     }
+}
+
+/* Add this new CSS block to a file that loads AFTER bootstrap.min.css,
+   such as your style.css or a new custom-overrides.css file. */
+.container {
+    width: 100% !important; /* Force width to 100% */
+    max-width: 100% !important; /* Override Bootstrap's max-width breakpoints */
+    padding-left: 20px; /* Add some default horizontal padding */
+    padding-right: 20px; /* Add some default horizontal padding */
 }
