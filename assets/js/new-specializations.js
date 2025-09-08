@@ -1,4 +1,6 @@
-import { documentToHtmlString } from 'https://cdn.jsdelivr.net/npm/@contentful/rich-text-html-renderer/+esm';
+import { documentToHtmlString } from 'https://esm.sh/@contentful/rich-text-html-renderer';
+import { BLOCKS } from 'https://esm.sh/@contentful/rich-text-types';
+
 import { fetchSpecializationsData } from './contentful-service.js';
 
 async function main() {
@@ -120,9 +122,26 @@ function initializeInteractivity(categories, specializations) {
             const specializationSlug = this.dataset.specialization;
             const articleData = specializations.find(spec => spec.slug === specializationSlug);
 
-            if (articleData && articleData.articleDescription) {
+            if (articleData) {
                 articleTitle.textContent = articleData.articleTitle;
-                articleText.innerHTML = documentToHtmlString(articleData.articleDescription);
+
+                if (articleData.articleDescription && articleData.articleDescription.nodeType === 'document') {
+                    const options = {
+                        renderNode: {
+                            [BLOCKS.EMBEDDED_ASSET]: (node) => {
+                                const { fields } = node.data.target;
+                                if (fields && fields.file) {
+                                    return `<img src="${fields.file.url}" alt="${fields.description || ''}"/>`;
+                                }
+                                return '';
+                            }
+                        }
+                    };
+                    articleText.innerHTML = documentToHtmlString(articleData.articleDescription, options);
+                } else {
+                    articleText.innerHTML = '';
+                }
+
                 articleImage.innerHTML = `<img src="${articleData.articleImage}" alt="${articleData.articleTitle}">`;
 
                 if (articleData.testimonialId && articleData.testimonialQuote) {
