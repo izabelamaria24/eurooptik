@@ -9,7 +9,6 @@ body {
 .specialization-card .card-title,
 .specialization-article-container .article-title,
 .pricing-card > div > div:first-child,
-.location-card-header h5,
 #programare-section h2,
 .footer-message h2,
 .footer-location-name,
@@ -68,12 +67,6 @@ p, li, blockquote, span, a {
 
 /* Ensure testimonial quote and author are regular */
 .testimonial-quote, .testimonial-author {
-    font-weight: 400;
-    text-transform: none;
-}
-
-/* Ensure location card details are regular */
-.location-card-details p {
     font-weight: 400;
     text-transform: none;
 }
