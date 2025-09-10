@@ -58,13 +58,6 @@ p, li, blockquote, span, a {
     /* The text-transform: lowercase is already set inline in HTML, so no need to repeat here */
 }
 
-/* Ensure the service section subtitle remains italic and regular */
-#our-services-section .section-subtitle i {
-    font-style: italic; /* Preserve italic */
-    font-weight: 400; /* Ensure it's regular */
-    text-transform: none; /* Ensure it's not capitalized */
-}
-
 /* Ensure testimonial quote and author are regular */
 .testimonial-quote, .testimonial-author {
     font-weight: 400;
