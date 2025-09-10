@@ -33,6 +33,7 @@
   <link href="assets/css/sponsors.css" rel="stylesheet">
   <link href="assets/css/custom-fonts.css" rel="stylesheet">
   <link href="assets/css/blog.css" rel="stylesheet">
+  <link href="assets/css/reviews.css" rel="stylesheet">
 
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
 </head>
@@ -91,23 +92,29 @@
   </div>
 </nav>
 
-    <section class="home-section home-full-height" id="home">
-      <img src="assets/images/background.png" alt="Background"
-      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
-      <div class="titan-caption">
-      <div class="caption-content">
+<section class="home-section home-full-height" id="home">
+  <img src="assets/images/background.png" alt="Background"
+  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+  <div class="titan-caption">
+    <div class="caption-content">
+
+      <div class="logo-and-review-wrapper">
+
         <div class="mb-20 text-center">
-        <img src="assets/images/logo-full.png" alt="Eurooptik"
-          style="max-width: 50%; height: auto; margin-bottom: -40px;">
+            <img src="assets/images/logo-full.png" alt="Eurooptik" style="max-width: 50%; height: auto; margin-bottom: 0;">
         </div>
 
-          <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button"
-            href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
-          <a class="section-scroll btn btn-border-w btn-round" href="#new-specializations" id="home-cine-suntem-button"> Specialitățile Noastre  </a>
+        <p id="google-reviews-display"></p>
 
-        </div>
       </div>
-    </section>
+
+      <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button"
+        href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
+      <a class="section-scroll btn btn-border-w btn-round" href="#new-specializations" id="home-cine-suntem-button"> Specialitățile Noastre  </a>
+
+    </div>
+  </div>
+</section>
 
     <div class="main">
 
@@ -578,6 +585,7 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/carousel.js"></script>
   <script src="assets/js/sponsors.js"></script>
+  <script src="assets/js/google-reviews.js"></script>
   <script type="module" src="assets/js/team.js"></script>
   <script type="module" src="assets/js/testimonials.js"></script>
   <script type="module" src="assets/js/services.js"></script>
