@@ -26,7 +26,6 @@
 
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/team.css" rel="stylesheet">
-  <link href="assets/css/contact.css" rel="stylesheet">
   <link href="assets/css/footer.css" rel="stylesheet">
   <link href="assets/css/prices.css" rel="stylesheet">
   <link href="assets/css/testimonials.css" rel="stylesheet">
@@ -34,9 +33,9 @@
   <link href="assets/css/new-specializations.css" rel="stylesheet">
   <link href="assets/css/locations.css" rel="stylesheet"> 
   <link href="assets/css/sponsors.css" rel="stylesheet">
-  <link href="assets/css/custom-fonts.css" rel="stylesheet">
   <link href="assets/css/blog.css" rel="stylesheet">
   <link href="assets/css/reviews.css" rel="stylesheet">
+  <link href="assets/css/appointments.css" rel="stylesheet">
 
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
 </head>
@@ -529,15 +528,15 @@
 </section>
 
 
-    <section id="programare-section" style="display:none; padding:40px 0; background:#f9f9f9;">
-      <button onclick="hideProgramareSection()"
-        style="float:right; margin:10px; font-size:22px; font-weight:bold; background:none; border:none; cursor:pointer;">×</button>
-      <h2>Programează-te online</h2>
-      <div style="width:100%; max-width:900px; margin:auto;">
-        <iframe src="https://eurooptik.ro.programarionline.sophtha.com/"
-          style="width:100%; min-height:600px; border:none;" title="Programare online"></iframe>
-      </div>
-    </section>
+  <section id="programare-section" style="display:none;">
+    <button class="appointments-close-btn" onclick="hideProgramareSection()">×</button> 
+    
+    <h2 class="appointments-title">PROGRAMEAZĂ-TE ONLINE</h2>
+    
+      <iframe src="https://eurooptik.ro.programarionline.sophtha.com/"
+        style="width:100%; min-height:600px; border:none;" title="Programare online"></iframe>
+    </div>
+  </section>
 
     <hr class="divider-d">
     <footer class="footer">
