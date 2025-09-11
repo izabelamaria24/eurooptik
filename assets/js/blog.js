@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (categories.length > 0) {
                 renderFilters();
-                setActiveCategory(categories[0].slug, false); 
+                // setActiveCategory(categories[0].slug, false); 
             }
 
             window.addEventListener('blogScroll', handleBlogScroll);

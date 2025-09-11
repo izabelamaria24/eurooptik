@@ -1,5 +1,14 @@
 #echipa-noastra {
-    padding: 80px 0;
+    background-color: #dceae7;
+    padding-top: 0; 
+    padding-bottom: 140px;
+}
+
+.team-header-container {
+    background-color: #fff;
+    padding: 80px 0 50px 0;
+    margin-bottom: 50px;
+    text-align: center;
 }
 
 .team-filters {
@@ -7,242 +16,187 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
-    margin-bottom: 50px;
 }
 
 .btn-filter {
-    background-color: #D13775;
-    color: #fff;
-    border: none;
-    padding: 12px 25px;
+    background-color: #dceae7;
+    color: #555;
+    border: 1px solid #dceae7;
+    padding: 12px 28px;
     border-radius: 50px;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s ease;
+    box-shadow: none;
 }
 
-.btn-filter:hover, .btn-filter.active {
-    background-color: #b82a63;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+.btn-filter:hover {
+    background-color: #e0e0e0;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-filter.active {
+    background-color: #3A8F8A;
+    color: #fff;
+    border-color: #3A8F8A;
+    transform: none;
+    box-shadow: none;
 }
 
 .team-carousel {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    padding: 0 20px;
+    position: relative; 
 }
 
 .team-carousel.slick-initialized {
     opacity: 1;
 }
 
-.team-member {
-    text-align: center;
+.team-carousel .slick-slide {
     margin: 0 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.team-member:hover {
-    transform: translateY(-5px);
+.team-member {
+    text-align: center;
+    padding: 30px 0 20px 0;
 }
 
 .team-member-photo {
-    width: 240px;
-    height: 240px;
+    width: 280px;  
+    height: 280px; 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-color: #fff;
     border-radius: 50%;
-    margin: 0 auto 25px auto;
+    margin: 0 auto 30px auto; 
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .team-member:hover .team-member-photo {
-    box-shadow: 0 10px 30px rgba(209, 55, 117, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .team-member-name {
-    font-size: 20px;
+    font-size: 28px; 
     font-weight: 700;
     color: #0D2C4B;
-    margin: 0 0 5px 0;
+    margin: 0 0 8px 0; 
 }
 
 .team-member-role {
-    font-size: 14px;
+    font-size: 18px;
     color: #555;
     margin-bottom: 15px;
 }
 
-.team-member-specialization-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 10px;
-}
-
 .team-member-specialization-list {
     list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 14px;
-    color: #555;
-    line-height: 1.6;
+    padding-left: 0;
 }
 
-.slick-prev:before, .slick-next:before {
-    color: #D13775;
-    font-size: 30px;
-}
-
-@media (max-width: 991px) {
-    .team-member-photo {
-        width: 200px;
-        height: 200px;
-    }
-}
-
-@media (max-width: 767px) {
-    .module-title { font-size: 28px; }
-    .team-filters { gap: 10px; }
-    .btn-filter { padding: 10px 20px; font-size: 13px; }
-    .team-member-photo {
-        width: 220px;
-        height: 220px;
-    }
-}
-
-.btn-filter {
-    background-color: #D13775; 
-    color: #fff;
+.slick-prev,
+.slick-next {
+    background: transparent;
     border: none;
-    padding: 12px 25px;
-    border-radius: 50px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    width: 40px;
+    height: 60px;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 10;
 }
 
-.btn-filter:hover, .btn-filter.active {
-    background-color: #b82a63; 
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+.slick-prev:not(.slick-disabled):hover,
+.slick-next:not(.slick-disabled):hover {
+    background: transparent;
+    opacity: 0.7;
 }
 
-.team-member {
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.slick-prev:before,
+.slick-next:before {
+    font-family: 'slick';
+    font-size: 40px;
+    color: #3A8F8A; 
+    opacity: 1;
 }
 
-.team-member:hover {
-    transform: translateY(-5px);
+.slick-arrow.slick-disabled {
+    visibility: hidden;
+    opacity: 0;
+    cursor: default;
 }
 
-.team-member-photo {
-    transition: box-shadow 0.3s ease;
-}
+.slick-prev { left: 15px; }
+.slick-next { right: 15px; }
 
-.team-member:hover .team-member-photo {
-    box-shadow: 0 10px 30px rgba(209, 55, 117, 0.3);
-}
 
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-
-.carousel-viewport {
-    width: 100%;
-}
-
-#team-carousel-nav {
-    display: none; 
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-#prev-doctor, #next-doctor {
-    background-color: transparent; 
-    border: 2px solid #D13775; 
-    color: #D13775;          
-    font-size: 24px;
-    font-weight: bold;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
+.slick-dots {
+    position: absolute;
+    bottom: -80px;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s, color 0.3s;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.carousel-btn:hover {
-    background-color: #D13775; 
-    color: #fff;         
+.slick-dots li button:before {
+    color: #3A8F8A;
+    font-size: 10px;
 }
 
-.team-member-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+.slick-dots li.slick-active button:before {
+    color: #3A8F8A;
+    opacity: 1;
 }
 
-@media (max-width: 991px) {
-    .team-grid { grid-template-columns: repeat(2, 1fr); }
-}
 
 @media (max-width: 767px) {
-    .team-grid { 
-        display: flex;
-        grid-template-columns: none;
-        gap: 0;
+    .team-header-container {
+        padding: 60px 15px 40px 15px;
     }
 
-    .team-member-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 15px; 
-        box-sizing: border-box;
+    .btn-filter {
+        padding: 10px 20px;
+        font-size: 14px;
     }
 
-    .module-title { font-size: 28px; }
-    .team-filters { gap: 10px; }
-    .btn-filter { padding: 10px 20px; font-size: 13px; }
+    .team-carousel {
+        padding: 0;
+    }
+
+    .team-carousel .slick-slide {
+        margin: 0 10px;
+    }
+
     .team-member-photo {
         width: 220px; 
         height: 220px;
     }
-}
 
-.team-member.doctor:hover .team-member-photo {
-    box-shadow: 0 10px 30px rgba(244, 66, 137, 0.3);
-}
+    .slick-prev,
+    .slick-next {
+        display: block !important;
+    }
 
-.team-member.asistenta-medicala:hover .team-member-photo {
-    box-shadow: 0 10px 30px rgba(69, 146, 233, 0.3);
-}
+    .slick-prev {
+        left: 5px;
+    }
+    
+    .slick-next {
+        right: 5px;
+    }
 
-.team-member.consilier:hover .team-member-photo {
-    box-shadow: 0 10px 30px rgba(94, 235, 162, 0.3);
-}
-
-.team-member.infirmiera:hover .team-member-photo {
-    box-shadow: 0 10px 30px rgba(210, 72, 235, 0.3);
-}
-
-.team-member.manager:hover .team-member-photo {
-    box-shadow: 0 10px 30px rgba(255, 136, 25, 0.3);
-}
-
-.team-member.optometrist:hover .team-member-photo {
-    box-shadow: 0 10px 30px rgba(106, 221, 232, 0.3);
+    .slick-dots {
+        position: static;
+        bottom: auto;
+        margin-top: 45px;
+    }
 }

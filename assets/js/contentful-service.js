@@ -92,6 +92,8 @@ export async function fetchTeamFromContentful() {
         (teamFields.listaOptometristi || []).forEach(member => {
             allTeamMembers.push(processMember(member, 'optometrist'));
         });
+
+        console.log(allTeamMembers);
         
         allTeamMembers = allTeamMembers.filter(Boolean);
 
