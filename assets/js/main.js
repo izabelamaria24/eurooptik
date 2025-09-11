@@ -23,6 +23,19 @@
             return false;
         });
 
+        $('section').each(function () {
+            var section = $(this);
+            var id = section.attr('id');
+            if (id) {
+                $('a[href="#' + id + '"]').on('click', function (e) {
+                    e.preventDefault();
+                    $('html, body').animate({
+                        scrollTop: section.offset().top - 50
+                    }, 800, 'swing');
+                });
+            }
+        });
+
         /* ---------------------------------------------- /*
          * Initialization General Scripts for all pages
          /* ---------------------------------------------- */
