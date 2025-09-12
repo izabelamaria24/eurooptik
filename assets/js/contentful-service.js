@@ -397,3 +397,37 @@ export async function fetchSpecializationsData() {
         return { categories: [], specializations: [] };
     }
 }
+
+export async function fetchCercetariFromContentful() {
+    await initializeContentful();
+    if (!client) return {};
+
+    try {
+        const response = await client.getEntries({
+            content_type: 'articolCercetareStiintifica',
+            include: 1
+        });
+
+        if (!response.items) return {};
+
+        const articles = response.items.reduce((acc, item) => {
+            const article = item.fields;
+            if (article.titlu && article.slug) {
+                acc[article.slug] = {
+                    title: article.titlu,
+                    slug: article.slug,
+                    content: article.continutArticol
+                };
+            }
+            return acc;
+        }, {});
+
+        console.log(articles)
+        
+        return articles;
+
+    } catch (error) {
+        console.error('Error fetching cercetari articles from Contentful:', error);
+        return {};
+    }
+}
