@@ -1,3 +1,6 @@
+#
+# This is the definitive, corrected workflow file.
+#
 name: Build and Deploy Eurooptik Website
 
 on:
@@ -11,46 +14,56 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
+    # These permissions are required for the official GitHub Pages deployment actions.
     permissions:
       contents: read
       pages: write
       id-token: write
 
+    # This specifies that the job will deploy to the GitHub Pages environment.
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      # Step 1: Check out a copy of your repository.
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Step 2: Set up the Node.js environment.
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
+      # Step 3: Install the necessary npm packages.
       - name: Install Dependencies
         run: npm install
 
+      # Step 4: Run your build script. This will create the `_site` directory.
       - name: Build Website
         run: node scripts/build.js
         env:
           CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
 
-      # --- THIS IS THE NEW DEBUGGING STEP ---
+      # Step 5 (DEBUG): List the contents of the generated `_site` directory.
+      # This is our proof that the /api folder was created correctly.
       - name: Verify build output
-        run: ls -R
-      # --- END OF NEW STEP ---
+        run: ls -R ./_site
 
+      # Step 6: Configure the GitHub Pages deployment.
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      # Step 7: Upload the `_site` directory as a deployment artifact.
       - name: Upload artifact
-        uses: actions-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v3 # <-- The typo is corrected here.
         with:
+          # This path MUST match the output directory from your build script.
           path: ./_site
 
+      # Step 8: Deploy the uploaded artifact to GitHub Pages.
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
