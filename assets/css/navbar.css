@@ -57,11 +57,11 @@ color: rgba(255, 255, 255, 0.7);
 .navbar-custom .nav .open > a:focus,
 .navbar-custom .nav .open > a:hover {
 background: none;
-color: #F5F3ED;
+color: #000;
 }
 
 .navbar-custom .navbar-toggle .icon-bar {
-background: #F5F3ED;
+background: #000;
 }
 
 /* Dropdown menu */
