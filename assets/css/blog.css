@@ -1,5 +1,5 @@
 #blog-section {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: white; 
     padding: 60px 0 0 0; 
     text-align: center;
@@ -227,7 +227,7 @@
 }
 
 #blog-article-display-container #article-display-title {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 32px;
     font-weight: 700;
     color: #000;
@@ -237,7 +237,7 @@
 }
 
 #blog-article-display-container #article-display-author {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-style: italic;
     color: #555;

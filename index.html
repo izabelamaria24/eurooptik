@@ -34,6 +34,7 @@
   <link href="assets/css/locations.css" rel="stylesheet"> 
   <link href="assets/css/sponsors.css" rel="stylesheet">
   <link href="assets/css/blog.css" rel="stylesheet">
+  <link href="assets/css/cercetari.css" rel="stylesheet">
   <link href="assets/css/reviews.css" rel="stylesheet">
   <link href="assets/css/appointments.css" rel="stylesheet">
 
@@ -145,29 +146,32 @@
 
           <div class="specialization-article-container" style="display: none;">
             <h3 class="article-title text-center"></h3>
-            <div class="article-content-wrapper">
-              <div class="article-image"></div>
-              <div class="article-text"></div>
-            </div>
-
-          <div class="article-testimonial" style="display: none;">
-            <div class="testimonial-content-wrapper">
-              <div class="testimonial-author-image">
-                <img src="" alt="Pacient">
+              <div class="article-content-wrapper">
+                <div class="article-image"></div>
+                
+                <div class="article-right-column">
+                  <div class="article-text"></div>
+                  
+                  <div class="article-testimonial" style="display: none;">
+                    <div class="testimonial-content-wrapper">
+                      <div class="testimonial-author-image">
+                        <img src="" alt="Pacient">
+                      </div>
+                      <div class="testimonial-text-content">
+                        <h5 class="testimonial-heading">Citește părerea pacienților noștri:</h5>
+                        <a href="#testimoniale" class="testimonial-scroll-link">
+                          <blockquote class="testimonial-quote"></blockquote>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="blog-links-container" style="display: none;">
+                      <h5 class="blog-links-heading">Citește mai mult pe blog:</h5>
+                      <div class="blog-links-list">
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="testimonial-text-content">
-                <h5 class="testimonial-heading">Citește părerea pacienților noștri:</h5>
-                <a href="#testimoniale" class="testimonial-scroll-link">
-                  <blockquote class="testimonial-quote"></blockquote>
-                </a>
-              </div>
-            </div>
-            <div class="blog-links-container" style="display: none;">
-              <h5 class="blog-links-heading">Citește mai mult pe blog:</h5>
-              <div class="blog-links-list">
-              </div>
-            </div>
-          </div>
           </div>
 
         </div>
@@ -379,6 +383,36 @@
               </div>
           </div>
       </section>
+
+      <section id="cercetari-section" class="module">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <h2 class="module-title font-alt">CERCETARI STIINTIFICE</h2>
+
+                    <div id="cercetari-cuprins-wrapper">
+                        <div id="cercetari-filter-container">
+                            <ul id="cercetari-cuprins-list">
+                            </ul>
+                        </div>
+                        <div id="cercetari-image-container">
+                            <img src="assets/images/scientific_research.jpeg" alt="Cercetari Stiintifice">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="cercetari-article-display-container" class="hidden">
+                        <div class="article-content-wrapper">
+                            <h3 id="cercetari-article-display-title"></h3>
+                            <div id="cercetari-article-display-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="adresses" class="module">
       <div class="container">
@@ -600,6 +634,7 @@
   <script type="module" src="assets/js/services.js"></script>
   <script type="module" src="assets/js/pricing.js"></script>
   <script type="module" src="assets/js/blog.js"></script>
+  <script type="module" src="assets/js/cercetari.js"></script>
   <script type="module" src="assets/js/new-specializations.js"></script>
   <script type="module" src="assets/js/config.js"></script>
   <script type="module" src="assets/js/contentful-service.js"></script>
