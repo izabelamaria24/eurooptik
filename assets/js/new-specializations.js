@@ -1,5 +1,6 @@
 import { documentToHtmlString } from 'https://esm.sh/@contentful/rich-text-html-renderer';
 import { BLOCKS } from 'https://esm.sh/@contentful/rich-text-types';
+
 import { fetchSpecializationsData } from './contentful-service.js';
 
 async function main() {
@@ -76,13 +77,10 @@ function initializeInteractivity(categories, specializations) {
                 return;
             }
 
-            if (!articleRightColumn.contains(testimonialContainer)) {
-                articleRightColumn.appendChild(testimonialContainer);
-            }
             contentWrapper.classList.remove('layout-float');
-
-            articleText.classList.remove('collapsed');
-            articleText.style.maxHeight = 'none';
+            articleText.classList.remove('collapsed', 'collapsed-mobile');
+            articleText.style.removeProperty('max-height');
+            
             const existingLink = articleRightColumn.querySelector('.see-more-link');
             if (existingLink) existingLink.remove();
 
@@ -120,19 +118,14 @@ function initializeInteractivity(categories, specializations) {
             const img = articleImage.querySelector('img');
 
             const setupTruncation = () => {
-                if (window.innerWidth <= 991) return;
-
-                const imageHeight = img.offsetHeight;
-                const testimonialHeight = testimonialContainer.offsetHeight;
                 const textScrollHeight = articleText.scrollHeight;
-                const totalRightColumnHeight = textScrollHeight + testimonialHeight;
+                
+                if (window.innerWidth <= 767) {
+                    const CHARACTER_LIMIT = 128;
+                    const textContent = articleText.textContent || articleText.innerText || "";
 
-                if (totalRightColumnHeight > imageHeight) {
-                    const maxAllowedTextHeight = imageHeight - testimonialHeight;
-
-                    if (maxAllowedTextHeight > 50) {
-                        articleText.style.maxHeight = `${maxAllowedTextHeight}px`;
-                        articleText.classList.add('collapsed');
+                    if (textContent.length > CHARACTER_LIMIT) {
+                        articleText.classList.add('collapsed-mobile');
 
                         const seeMoreLink = document.createElement('a');
                         seeMoreLink.className = 'see-more-link';
@@ -140,14 +133,35 @@ function initializeInteractivity(categories, specializations) {
                         articleRightColumn.appendChild(seeMoreLink);
 
                         seeMoreLink.addEventListener('click', () => {
-                            articleText.classList.remove('collapsed');
+                            articleText.classList.remove('collapsed-mobile');
                             articleText.style.maxHeight = `${textScrollHeight}px`;
-                            
-                            contentWrapper.insertAdjacentElement('afterend', testimonialContainer);
-                            contentWrapper.classList.add('layout-float');
-                            
                             seeMoreLink.remove();
                         }, { once: true });
+                    }
+                } else {
+                    const imageHeight = img.offsetHeight;
+                    const testimonialHeight = testimonialContainer.offsetHeight;
+                    const totalRightColumnHeight = textScrollHeight + testimonialHeight;
+
+                    if (totalRightColumnHeight > imageHeight) {
+                        const maxAllowedTextHeight = imageHeight - testimonialHeight;
+
+                        if (maxAllowedTextHeight > 50) {
+                            articleText.style.maxHeight = `${maxAllowedTextHeight}px`;
+                            articleText.classList.add('collapsed');
+
+                            const seeMoreLink = document.createElement('a');
+                            seeMoreLink.className = 'see-more-link';
+                            seeMoreLink.textContent = '...vezi mai mult';
+                            articleRightColumn.appendChild(seeMoreLink);
+
+                            seeMoreLink.addEventListener('click', () => {
+                                articleText.classList.remove('collapsed');
+                                articleText.style.maxHeight = `${textScrollHeight}px`;
+                                contentWrapper.classList.add('layout-float');
+                                seeMoreLink.remove();
+                            }, { once: true });
+                        }
                     }
                 }
             };
@@ -160,6 +174,7 @@ function initializeInteractivity(categories, specializations) {
         });
     });
     
+
     function showArticle() {
         articleContainer.style.display = 'block';
         setTimeout(() => articleContainer.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
