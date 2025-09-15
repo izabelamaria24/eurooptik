@@ -1,5 +1,3 @@
-import { fetchTestimonialsFromContentful } from "./contentful-service.js";
-
 const imageContainer = document.getElementById('image-container');
 const contentWrapper = document.getElementById('testimonial-content-wrapper');
 
@@ -7,20 +5,30 @@ if (!imageContainer || !contentWrapper) {
     console.warn("Container-ele necesare pentru secțiunea Testimoniale lipsesc. Modulul nu va rula.");
 } else {
     async function initializeTestimonials() {
-        const testimonials = await fetchTestimonialsFromContentful();
+        try {
+            const response = await fetch('/api/testimonials.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const testimonials = await response.json();
 
-        if (!testimonials || testimonials.length === 0) {
-            imageContainer.innerHTML = '<p style="color: #fff;">Nu există testimoniale disponibile.</p>';
-            return;
+            if (!testimonials || testimonials.length === 0) {
+                imageContainer.innerHTML = '<p style="color: #fff;">Nu există testimoniale disponibile.</p>';
+                return;
+            }
+
+            imageContainer.innerHTML = '';
+            contentWrapper.innerHTML = '';
+
+            renderTestimonialHTML(testimonials);
+            setupEventListeners();
+            
+            handleDeepLink();
+
+        } catch (error) {
+            console.error("Failed to initialize testimonials section:", error);
+            imageContainer.innerHTML = '<p style="color: #fff;">A apărut o eroare la încărcarea testimonialelor.</p>';
         }
-
-        imageContainer.innerHTML = '';
-        contentWrapper.innerHTML = '';
-
-        renderTestimonialHTML(testimonials);
-        setupEventListeners();
-        
-        handleDeepLink();
     }
 
     function renderTestimonialHTML(testimonials) {

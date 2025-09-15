@@ -1,4 +1,3 @@
-import { fetchServicesFromContentful, fetchArticlesFromContentful } from './contentful-service.js';
 import { documentToHtmlString } from 'https://esm.sh/@contentful/rich-text-html-renderer';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,9 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function initBlogSection() {
         try {
+            const [serviceFileResponse, articlesFileResponse] = await Promise.all([
+                fetch('/api/services.json'),
+                fetch('/api/articles.json')
+            ]);
+
+            if (!serviceFileResponse.ok || !articlesFileResponse.ok) {
+                throw new Error('Failed to fetch the necessary data files.');
+            }
+
             const [serviceResponse, articlesData] = await Promise.all([
-                fetchServicesFromContentful(),
-                fetchArticlesFromContentful()
+                serviceFileResponse.json(),
+                articlesFileResponse.json()
             ]);
 
             if (!serviceResponse || !serviceResponse.servicesData) {
@@ -47,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (categories.length > 0) {
                 renderFilters();
-                // setActiveCategory(categories[0].slug, false); 
             }
 
             window.addEventListener('blogScroll', handleBlogScroll);
@@ -76,6 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error("A apărut o eroare majoră în `initBlogSection`:", error);
+            const blogSection = document.getElementById('blog');
+            if (blogSection) {
+                blogSection.style.display = 'none';
+            }
         }
     }
 
@@ -119,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
         articleTitleEl.textContent = article.title || 'Titlu indisponibil';
         articleAuthorEl.textContent = article.doctors && article.doctors.length > 0 ? `De ${article.doctors.join(', ')}` : '';
         
-        // Add a check here to ensure article.content is valid before rendering
         if (article.content && article.content.nodeType === 'document') {
              articleContentEl.innerHTML = documentToHtmlString(article.content);
         } else {

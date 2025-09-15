@@ -1,5 +1,3 @@
-import { fetchTeamFromContentful } from "./contentful-service.js";
-
 $(document).ready(function() {
     const teamCarouselContainer = $('#team-grid');
     const filtersContainer = $('#team-filters-container');
@@ -103,7 +101,12 @@ $(document).ready(function() {
     async function initializeTeamSection() {
         if (!teamCarouselContainer.length || !filtersContainer.length) { return; }
         try {
-            const { members, locations } = await fetchTeamFromContentful();
+            const response = await fetch('/api/team.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const { members, locations } = await response.json();
+
             allTeamMembers = members;
             if (allTeamMembers.length === 0) { return; }
 
@@ -121,6 +124,7 @@ $(document).ready(function() {
             }
         } catch (error) {
             console.error("Failed to initialize team section:", error);
+            teamCarouselContainer.html('<div class="error-message">A apărut o eroare la încărcarea echipei.</div>');
         }
     }
 
