@@ -1,0 +1,5 @@
+.vscode/settings.json
+scripts/config.js
+api/
+
+node_modules/
