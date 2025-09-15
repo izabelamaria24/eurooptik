@@ -6,13 +6,11 @@ async function main() {
     if (!section) return;
 
     try {
-        // MODIFICATION: Fetch from the local JSON file instead of Contentful API
-        const response = await fetch('/api/specializations.json');
+        const response = await fetch('api/specializations.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const { categories, specializations } = await response.json();
-        // END MODIFICATION
 
         if (!categories || !categories.length || !specializations || !specializations.length) {
             section.style.display = 'none';

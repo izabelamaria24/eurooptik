@@ -101,7 +101,7 @@ $(document).ready(function() {
     async function initializeTeamSection() {
         if (!teamCarouselContainer.length || !filtersContainer.length) { return; }
         try {
-            const response = await fetch('/api/team.json');
+            const response = await fetch('api/team.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

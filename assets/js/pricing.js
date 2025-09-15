@@ -72,13 +72,11 @@ async function initPricingLogic(pricingSection) {
     };
 
     try {
-        // MODIFICATION: Fetch from the local JSON file instead of Contentful API
-        const response = await fetch('/api/pricing.json');
+        const response = await fetch('api/pricing.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         pricingData = await response.json();
-        // END MODIFICATION
 
         if (Object.keys(pricingData).length === 0) {
             throw new Error("No pricing data was loaded.");

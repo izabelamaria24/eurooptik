@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initBlogSection() {
         try {
             const [serviceFileResponse, articlesFileResponse] = await Promise.all([
-                fetch('/api/services.json'),
-                fetch('/api/articles.json')
+                fetch('api/services.json'),
+                fetch('api/articles.json')
             ]);
 
             if (!serviceFileResponse.ok || !articlesFileResponse.ok) {

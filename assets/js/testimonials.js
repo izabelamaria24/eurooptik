@@ -6,7 +6,7 @@ if (!imageContainer || !contentWrapper) {
 } else {
     async function initializeTestimonials() {
         try {
-            const response = await fetch('/api/testimonials.json');
+            const response = await fetch('api/testimonials.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

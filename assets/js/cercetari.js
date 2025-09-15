@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function initCercetariSection() {
         try {
-            const response = await fetch('/api/cercetari.json');
+            const response = await fetch('api/cercetari.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

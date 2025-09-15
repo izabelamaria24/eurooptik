@@ -128,13 +128,11 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
 
     async function initializeServices() {
         try {
-            // MODIFICATION: Fetch from the local JSON file instead of Contentful API
-            const response = await fetch('/api/services.json');
+            const response = await fetch('api/services.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const { servicesData, categories } = await response.json();
-            // END MODIFICATION
 
             if (!categories || categories.length === 0) {
                 servicesSection.style.display = 'none';
