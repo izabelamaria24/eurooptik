@@ -1,79 +1,94 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const sponsorsContainer = document.querySelector('.sponsors-cards-container');
-    if (!sponsorsContainer) return;
+// assets/js/sponsors.js
+$(document).ready(function() {
+    const sponsorsContainer = $('.sponsors-cards-container');
+    const sponsorCards = $('.sponsor-card');
+    const totalCards = sponsorCards.length;
+    let currentCardIndex = 0;
 
-    const sponsorCards = sponsorsContainer.querySelectorAll('.sponsor-card');
-    const sponsorsViewport = document.querySelector('.sponsors-carousel-viewport');
+    let startX = 0;
+    let currentTranslate = 0;
+    let isDragging = false;
 
-    // Target the single set of navigation buttons
-    const prevSponsorBtn = document.getElementById('prev-sponsor');
-    const nextSponsorBtn = document.getElementById('next-sponsor');
+    function showCard(index) {
+        if (index < 0) {
+            index = 0;
+        } else if (index >= totalCards) {
+            index = totalCards - 1;
+        }
+        currentCardIndex = index;
+        currentTranslate = -currentCardIndex * sponsorsContainer.width();
+        sponsorsContainer.css('transform', `translateX(${currentTranslate}px)`);
+        sponsorsContainer.css('transition', 'transform 0.5s ease-in-out');
+    }
 
-    let currentSponsorIndex = 0;
-    const cardsPerView = 1; // Always show one card at a time
+    function setTranslate(xPos) {
+        sponsorsContainer.css('transform', `translateX(${xPos}px)`);
+    }
 
-    function updateSponsorsCarousel() {
-        if (sponsorCards.length === 0) {
-            if (prevSponsorBtn) prevSponsorBtn.disabled = true;
-            if (nextSponsorBtn) nextSponsorBtn.disabled = true;
+    sponsorsContainer.on('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        sponsorsContainer.css('transition', 'none');
+    });
+
+    sponsorsContainer.on('touchmove', function(e) {
+        if (!isDragging) return;
+
+        const currentX = e.touches[0].clientX;
+        const deltaX = currentX - startX;
+
+        const newTranslate = currentTranslate + deltaX;
+
+        const maxTranslate = 0;
+        const minTranslate = -(totalCards - 1) * sponsorsContainer.width();
+
+        if (newTranslate > maxTranslate + 50 || newTranslate < minTranslate - 50) {
             return;
         }
 
-        // Calculate the width of a single card within the current view
-        const cardWidth = sponsorCards[0].offsetWidth; 
-        const offset = -currentSponsorIndex * cardWidth;
-        sponsorsContainer.style.transform = 'translateX(' + offset + 'px)';
-
-        const isPrevDisabled = (currentSponsorIndex === 0);
-        // For two cards and cardsPerView=1, next is disabled when current index is 1 (last card)
-        const isNextDisabled = (currentSponsorIndex >= sponsorCards.length - cardsPerView);
-
-        if (prevSponsorBtn) prevSponsorBtn.disabled = isPrevDisabled;
-        if (nextSponsorBtn) nextSponsorBtn.disabled = isNextDisabled;
-    }
-
-    function navigateSponsors(direction) {
-        if (direction === 'prev') {
-            if (currentSponsorIndex > 0) {
-                currentSponsorIndex--;
-                updateSponsorsCarousel();
-            }
-        } else if (direction === 'next') {
-            if (currentSponsorIndex < sponsorCards.length - cardsPerView) {
-                currentSponsorIndex++;
-                updateSponsorsCarousel();
-            }
-        }
-    }
-
-    // Add event listeners for navigation buttons
-    if (prevSponsorBtn) {
-        prevSponsorBtn.addEventListener('click', () => navigateSponsors('prev'));
-    }
-    if (nextSponsorBtn) {
-        nextSponsorBtn.addEventListener('click', () => navigateSponsors('next'));
-    }
-
-    // Swipe support (still on the viewport element)
-    let startX = null;
-    sponsorsViewport.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-    }, { passive: true });
-
-    sponsorsViewport.addEventListener('touchend', (e) => {
-        if (startX === null) return;
-        let endX = e.changedTouches[0].clientX;
-        let diffX = endX - startX;
-
-        if (diffX > 50) { // Swiped right
-            navigateSponsors('prev');
-        } else if (diffX < -50) { // Swiped left
-            navigateSponsors('next');
-        }
-        startX = null;
+        setTranslate(newTranslate);
+        e.preventDefault();
     });
 
-    // Initialize and update on resize
-    window.addEventListener('resize', updateSponsorsCarousel); 
-    updateSponsorsCarousel(); // Initial call
+    sponsorsContainer.on('touchend', function(e) {
+        if (!isDragging) return;
+        isDragging = false;
+
+        const endX = e.changedTouches[0].clientX;
+        const deltaX = endX - startX;
+
+        const threshold = sponsorsContainer.width() / 4;
+
+        if (deltaX > threshold) {
+            showCard(currentCardIndex - 1);
+        } else if (deltaX < -threshold) {
+            showCard(currentCardIndex + 1);
+        } else {
+            showCard(currentCardIndex);
+        }
+    });
+
+    $('.next-card-link').on('click', function(e) {
+        e.preventDefault();
+
+        const targetCardName = $(this).data('target-card');
+        if (targetCardName) {
+            let targetIndex = -1;
+            sponsorCards.each(function(idx) {
+                if ($(this).data('card-name') === targetCardName) {
+                    targetIndex = idx;
+                    return false;
+                }
+            });
+
+            if (targetIndex !== -1) {
+                showCard(targetIndex);
+            }
+        }
+    });
+
+    showCard(0);
+    $(window).on('resize', function() {
+        showCard(currentCardIndex);
+    });
 });

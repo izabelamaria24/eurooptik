@@ -97,7 +97,7 @@
 }
 
 .footer-logo img {
-  margin-top: 20%;
+  margin-top: 0px;
   width: 100vw;
   max-width: none;
   height: auto;
@@ -109,20 +109,20 @@
 
 @media (max-width: 1300px) {
   .footer-logo img {
-    margin-top: 10%;
+    margin-top: 10px;
     width: 100vw;
   }
 
   .footer-location {
-    font-size: 1.2em;
+    font-size: 12px;
   }
 
   .footer-location-name {
-    font-size: 1.2em;
+    font-size: 12px;
   }
 
   .footer-menu a {
-    font-size: 1.2em;
+    font-size: 12px;
   }
 }
 
@@ -163,10 +163,7 @@
   }
 
   .footer-logo img {
-    margin-top: 0;
     width: 100vw;
   }
 }
 
-@media (max-width: 768px) {
-}
