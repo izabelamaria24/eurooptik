@@ -38,11 +38,16 @@ jobs:
           CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
 
+      # --- THIS IS THE NEW DEBUGGING STEP ---
+      - name: Verify build output
+        run: ls -R
+      # --- END OF NEW STEP ---
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions-pages-artifact@v3
         with:
           path: ./_site
 
