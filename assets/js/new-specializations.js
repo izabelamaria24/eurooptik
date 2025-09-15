@@ -1,21 +1,25 @@
 import { documentToHtmlString } from 'https://esm.sh/@contentful/rich-text-html-renderer';
 import { BLOCKS } from 'https://esm.sh/@contentful/rich-text-types';
-
 import { fetchSpecializationsData } from './contentful-service.js';
 
 async function main() {
     const section = document.getElementById('new-specializations');
     if (!section) return;
 
-    const { categories, specializations } = await fetchSpecializationsData();
-    if (!categories || !categories.length || !specializations || !specializations.length) {
-        section.style.display = 'none';
-        return;
-    }
+    try {
+        const { categories, specializations } = await fetchSpecializationsData();
+        if (!categories || !categories.length || !specializations || !specializations.length) {
+            section.style.display = 'none';
+            return;
+        }
 
-    renderCategories(categories);
-    renderSpecializationCards(specializations);
-    initializeInteractivity(categories, specializations);
+        renderCategories(categories);
+        renderSpecializationCards(specializations);
+        initializeInteractivity(categories, specializations);
+    } catch (error) {
+        console.error("Failed to initialize specializations section:", error);
+        section.style.display = 'none';
+    }
 }
 
 function renderCategories(categories) {
@@ -38,22 +42,21 @@ function renderSpecializationCards(specializations) {
 }
 
 function initializeInteractivity(categories, specializations) {
+    const contentWrapper = document.querySelector('.article-content-wrapper');
+    const articleRightColumn = document.querySelector('.article-right-column');
     const categoryButtons = document.querySelectorAll('.specialization-category-buttons .category-btn');
     const allSpecializationCards = document.querySelectorAll('.specialization-carousel-container .specialization-card');
     const articleContainer = document.querySelector('.specialization-article-container');
     const articleTitle = articleContainer.querySelector('.article-title');
     const articleText = articleContainer.querySelector('.article-text');
     const articleImage = articleContainer.querySelector('.article-image');
-
     const testimonialContainer = articleContainer.querySelector('.article-testimonial');
     const testimonialContentWrapper = testimonialContainer.querySelector('.testimonial-content-wrapper');
     const authorImage = testimonialContainer.querySelector('.testimonial-author-image img');
     const testimonialLink = testimonialContainer.querySelector('.testimonial-scroll-link');
     const testimonialQuote = testimonialContainer.querySelector('.testimonial-quote');
-    
     const blogLinksContainer = articleContainer.querySelector('.blog-links-container');
     const blogLinksList = articleContainer.querySelector('.blog-links-list');
-
     const carouselContainer = document.querySelector('.specialization-carousel-container');
     const prevBtn = document.querySelector('.specialization-carousel-wrapper .prev-card');
     const nextBtn = document.querySelector('.specialization-carousel-wrapper .next-card');
@@ -61,6 +64,112 @@ function initializeInteractivity(categories, specializations) {
     let globalIndex = 0;
     let visibleCards = 3;
 
+    allSpecializationCards.forEach(card => {
+        card.addEventListener('click', function() {
+            allSpecializationCards.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            const specializationSlug = this.dataset.specialization;
+            const articleData = specializations.find(spec => spec.slug === specializationSlug);
+
+            if (!articleData) {
+                hideArticle();
+                return;
+            }
+
+            if (!articleRightColumn.contains(testimonialContainer)) {
+                articleRightColumn.appendChild(testimonialContainer);
+            }
+            contentWrapper.classList.remove('layout-float');
+
+            articleText.classList.remove('collapsed');
+            articleText.style.maxHeight = 'none';
+            const existingLink = articleRightColumn.querySelector('.see-more-link');
+            if (existingLink) existingLink.remove();
+
+            articleTitle.textContent = articleData.articleTitle;
+            articleImage.innerHTML = `<img src="${articleData.articleImage}" alt="${articleData.articleTitle}">`;
+
+            if (articleData.articleDescription?.nodeType === 'document') {
+                const options = { renderNode: { [BLOCKS.EMBEDDED_ASSET]: (node) => `<img src="${node.data.target.fields.file.url}" alt="${node.data.target.fields.description || ''}"/>` } };
+                articleText.innerHTML = documentToHtmlString(articleData.articleDescription, options);
+            } else {
+                articleText.innerHTML = '';
+            }
+
+            const hasTestimonial = articleData.testimonialId && articleData.testimonialQuote;
+            testimonialContentWrapper.style.display = hasTestimonial ? 'flex' : 'none';
+            if (hasTestimonial) {
+                testimonialQuote.textContent = `‘${articleData.testimonialQuote.substring(0, 120)}…’`;
+                testimonialLink.dataset.testimonialId = articleData.testimonialId;
+                authorImage.src = articleData.testimonialAuthorImage || '';
+                authorImage.parentElement.style.display = articleData.testimonialAuthorImage ? 'block' : 'none';
+            }
+
+            const hasBlogLinks = articleData.articles?.length > 0;
+            blogLinksContainer.style.display = hasBlogLinks ? 'block' : 'none';
+            if (hasBlogLinks) {
+                blogLinksList.innerHTML = articleData.articles.map(article =>
+                    article?.title && article?.slug && article?.categorySlug ?
+                    `<a href="#" class="blog-link-item" data-article-slug="${article.slug}" data-category-slug="${article.categorySlug}">${article.title}</a>` : ''
+                ).join('');
+            }
+            testimonialContainer.style.display = (hasTestimonial || hasBlogLinks) ? 'block' : 'none';
+
+            showArticle();
+            
+            const img = articleImage.querySelector('img');
+
+            const setupTruncation = () => {
+                if (window.innerWidth <= 991) return;
+
+                const imageHeight = img.offsetHeight;
+                const testimonialHeight = testimonialContainer.offsetHeight;
+                const textScrollHeight = articleText.scrollHeight;
+                const totalRightColumnHeight = textScrollHeight + testimonialHeight;
+
+                if (totalRightColumnHeight > imageHeight) {
+                    const maxAllowedTextHeight = imageHeight - testimonialHeight;
+
+                    if (maxAllowedTextHeight > 50) {
+                        articleText.style.maxHeight = `${maxAllowedTextHeight}px`;
+                        articleText.classList.add('collapsed');
+
+                        const seeMoreLink = document.createElement('a');
+                        seeMoreLink.className = 'see-more-link';
+                        seeMoreLink.textContent = '...vezi mai mult';
+                        articleRightColumn.appendChild(seeMoreLink);
+
+                        seeMoreLink.addEventListener('click', () => {
+                            articleText.classList.remove('collapsed');
+                            articleText.style.maxHeight = `${textScrollHeight}px`;
+                            
+                            contentWrapper.insertAdjacentElement('afterend', testimonialContainer);
+                            contentWrapper.classList.add('layout-float');
+                            
+                            seeMoreLink.remove();
+                        }, { once: true });
+                    }
+                }
+            };
+
+            if (img.complete) {
+                setupTruncation();
+            } else {
+                img.addEventListener('load', setupTruncation);
+            }
+        });
+    });
+    
+    function showArticle() {
+        articleContainer.style.display = 'block';
+        setTimeout(() => articleContainer.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+
+    function hideArticle() {
+        articleContainer.style.display = 'none';
+        allSpecializationCards.forEach(c => c.classList.remove('active'));
+    }
+    
     function updateVisibleCardsCount() {
         if (window.innerWidth <= 767) visibleCards = 1;
         else if (window.innerWidth <= 991) visibleCards = 2;
@@ -114,100 +223,14 @@ function initializeInteractivity(categories, specializations) {
             }
         });
     });
-    
-    allSpecializationCards.forEach(card => {
-        card.addEventListener('click', function() {
-            allSpecializationCards.forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
-            const specializationSlug = this.dataset.specialization;
-            const articleData = specializations.find(spec => spec.slug === specializationSlug);
-
-            if (articleData) {
-                articleTitle.textContent = articleData.articleTitle;
-
-                if (articleData.articleDescription && articleData.articleDescription.nodeType === 'document') {
-                    const options = {
-                        renderNode: {
-                            [BLOCKS.EMBEDDED_ASSET]: (node) => {
-                                const { fields } = node.data.target;
-                                if (fields && fields.file) {
-                                    return `<img src="${fields.file.url}" alt="${fields.description || ''}"/>`;
-                                }
-                                return '';
-                            }
-                        }
-                    };
-                    articleText.innerHTML = documentToHtmlString(articleData.articleDescription, options);
-                } else {
-                    articleText.innerHTML = '';
-                }
-
-                articleImage.innerHTML = `<img src="${articleData.articleImage}" alt="${articleData.articleTitle}">`;
-
-                if (articleData.testimonialId && articleData.testimonialQuote) {
-                    testimonialQuote.textContent = `‘${articleData.testimonialQuote.substring(0, 120)}…’`;
-                    testimonialLink.dataset.testimonialId = articleData.testimonialId;
-                    if (articleData.testimonialAuthorImage) {
-                        authorImage.src = articleData.testimonialAuthorImage;
-                        authorImage.parentElement.style.display = 'block';
-                    } else {
-                        authorImage.parentElement.style.display = 'none';
-                    }
-                    testimonialContentWrapper.style.display = 'flex';
-                } else {
-                    testimonialContentWrapper.style.display = 'none'; 
-                }
-                
-                blogLinksContainer.style.display = 'none';
-                blogLinksList.innerHTML = '';
-
-                if (articleData.articles && Array.isArray(articleData.articles) && articleData.articles.length > 0) {
-                    articleData.articles.forEach(article => {
-                        if (article && article.title && article.slug && article.categorySlug) {
-                            const link = document.createElement('a');
-                            link.href = '#';
-                            link.className = 'blog-link-item';
-                            link.textContent = article.title;
-                            link.dataset.articleSlug = article.slug;
-                            link.dataset.categorySlug = article.categorySlug;
-                            blogLinksList.appendChild(link);
-                        }
-                    });
-
-                    if (blogLinksList.children.length > 0) {
-                        blogLinksContainer.style.display = 'block';
-                    }
-                }
-
-                const hasTestimonial = testimonialContentWrapper.style.display !== 'none';
-                const hasBlogLinks = blogLinksContainer.style.display !== 'none';
-
-                if (hasTestimonial || hasBlogLinks) {
-                    testimonialContainer.style.display = 'block';
-                } else {
-                    testimonialContainer.style.display = 'none';
-                }
-                
-                showArticle();
-            } else {
-                hideArticle();
-            }
-        });
-    });
-
-    function showArticle() {
-        articleContainer.style.display = 'block';
-        setTimeout(() => articleContainer.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-    }
-
-    function hideArticle() {
-        articleContainer.style.display = 'none';
-        allSpecializationCards.forEach(c => c.classList.remove('active'));
-    }
 
     window.addEventListener('resize', () => {
         updateVisibleCardsCount();
         updateCarousel();
+        const activeCard = document.querySelector('.specialization-card.active');
+        if (activeCard && articleContainer.style.display === 'block') {
+            activeCard.click();
+        }
     });
 
     testimonialLink.addEventListener('click', function(event) {
@@ -228,15 +251,9 @@ function initializeInteractivity(categories, specializations) {
             const articleSlug = link.dataset.articleSlug;
             const categorySlug = link.dataset.categorySlug;
             const blogSection = document.getElementById('blog-section');
-
             if (articleSlug && categorySlug && blogSection) {
                 blogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                window.dispatchEvent(new CustomEvent('blogScroll', { 
-                    detail: { 
-                        articleSlug: articleSlug,
-                        categorySlug: categorySlug 
-                    } 
-                }));
+                window.dispatchEvent(new CustomEvent('blogScroll', { detail: { articleSlug: articleSlug, categorySlug: categorySlug } }));
             }
         }
     });
