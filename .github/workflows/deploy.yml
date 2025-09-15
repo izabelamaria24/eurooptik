@@ -11,13 +11,14 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
-    permissions:
-      pages: write
-      id-token: write
 
     steps:
       - name: Checkout code
@@ -31,7 +32,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Static Content
+      - name: Build Website
         run: node scripts/build.js
         env:
           CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
@@ -43,7 +44,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: . 
+          path: ./_site
 
       - name: Deploy to GitHub Pages
         id: deployment

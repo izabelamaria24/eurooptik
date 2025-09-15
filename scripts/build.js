@@ -1,19 +1,21 @@
 import * as contentful from './contentful-service.js';
-import fs from 'fs';
+import fs from 'fs-extra'; 
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const outputDir = path.join(__dirname, '..', 'api');
+
+const projectRoot = path.join(__dirname, '..');
+const outputDir = path.join(projectRoot, '_site');
+const apiDir = path.join(outputDir, 'api');
 
 async function build() {
     try {
-        console.log("🚀 Starting content fetch...");
-
-        if (!fs.existsSync(outputDir)) {
-            fs.mkdirSync(outputDir, { recursive: true });
-        }
+        console.log("🚀 Starting build process...");
+        console.log("Cleaning old build directory...");
+        await fs.emptyDir(outputDir);
+        await fs.mkdir(apiDir, { recursive: true });
 
         console.log("Fetching all data from Contentful...");
         const [
@@ -35,22 +37,42 @@ async function build() {
         ]);
         console.log("✅ All data fetched successfully.");
 
-        console.log("Writing data to /api folder...");
-        fs.writeFileSync(path.join(outputDir, 'team.json'), JSON.stringify(teamData, null, 2));
-        fs.writeFileSync(path.join(outputDir, 'services.json'), JSON.stringify(servicesData, null, 2));
-        fs.writeFileSync(path.join(outputDir, 'testimonials.json'), JSON.stringify(testimonialsData, null, 2));
-        fs.writeFileSync(path.join(outputDir, 'articles.json'), JSON.stringify(articlesData, null, 2));
-        fs.writeFileSync(path.join(outputDir, 'pricing.json'), JSON.stringify(pricingData, null, 2));
-        fs.writeFileSync(path.join(outputDir, 'specializations.json'), JSON.stringify(specializationsData, null, 2));
-        fs.writeFileSync(path.join(outputDir, 'cercetari.json'), JSON.stringify(cercetariData, null, 2));
+        console.log("Writing data to /_site/api folder...");
+        await Promise.all([
+            fs.writeJson(path.join(apiDir, 'team.json'), teamData),
+            fs.writeJson(path.join(apiDir, 'services.json'), servicesData),
+            fs.writeJson(path.join(apiDir, 'testimonials.json'), testimonialsData),
+            fs.writeJson(path.join(apiDir, 'articles.json'), articlesData),
+            fs.writeJson(path.join(apiDir, 'pricing.json'), pricingData),
+            fs.writeJson(path.join(apiDir, 'specializations.json'), specializationsData),
+            fs.writeJson(path.join(apiDir, 'cercetari.json'), cercetariData)
+        ]);
+        console.log("✅ API data written successfully.");
+
+        console.log("Copying static files to _site...");
+        const filesToCopy = [
+            'assets',
+            'pages',
+            'index.html',
+            'CNAME' 
+        ];
         
-        console.log("\n✨ Build complete! All files in /api are updated.");
+        await Promise.all(
+            filesToCopy.map(fileOrDir => {
+                const sourcePath = path.join(projectRoot, fileOrDir);
+                const destPath = path.join(outputDir, fileOrDir);
+                if (fs.existsSync(sourcePath)) {
+                    return fs.copy(sourcePath, destPath);
+                }
+            })
+        );
+        console.log("✅ Static files copied.");
+        
+        console.log("\n✨ Build complete! The '_site' folder is ready for deployment.");
 
     } catch (error) {
         console.error('\n❌ BUILD FAILED:', error.message);
-        console.error('No files were written. The /api folder remains unchanged from the last successful build.');
-        
-        process.exit(1); 
+        process.exit(1);
     }
 }
 

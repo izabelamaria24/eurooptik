@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/izabelamaria24/eurooptik#readme",
   "dependencies": {
-    "contentful": "^11.7.18"
+    "contentful": "^11.7.18",
+    "fs-extra": "^11.3.1"
   }
 }
