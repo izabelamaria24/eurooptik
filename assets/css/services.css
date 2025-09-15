@@ -1,12 +1,12 @@
 #our-services-section {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: white; 
     padding: 60px 0;
 }
 
 #our-services-container {
     text-align: center;
-    max-width: 1100px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -17,18 +17,25 @@
     justify-content: center;
     gap: 12px ;
     margin-bottom: 30px;
+    position: relative;
 }
 
 #services-filter-container .filter-btn {
     background-color: #f5eaf0;
     color: black;
     border: none;
-    padding: 5px 15px;
+    padding: 15px 15px;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 20px; 
+    font-size: 18px;
     font-weight: 500; 
     transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 #services-filter-container .filter-btn.active {
@@ -40,24 +47,54 @@
     background-color: #e8d8e0;
 }
 
+#services-filter-container .filter-btn {
+    flex-basis: calc((100% - 3 * 12px) / 4);
+    max-width: calc((100% - 3 * 12px) / 4);
+}
+
+.services-toggle-wrapper {
+    display: none;
+    width: 100%;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 30px;
+}
+
+.services-toggle-btn {
+    background-color: #d9538d;
+    color: white;
+    border: none;
+    width: 60px;
+    height: 35px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.services-toggle-btn .fa-chevron-down {
+    transition: transform 0.3s ease-in-out;
+}
+
+.services-toggle-btn.active .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
 #services-carousel-wrapper {
     background-color: #fbeff3;
     padding: 40px 0;
     text-align: center;
 }
-
 #services-carousel-container {
     position: relative;
-    max-width: 900px;
+    max-width: 100%;
     margin: 0 auto;
     overflow: hidden;
 }
-
 #services-carousel-slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
 }
-
 #services-carousel-slider .carousel-card {
     min-width: 100%;
     box-sizing: border-box;
@@ -66,65 +103,53 @@
     align-items: center;
     justify-content: center;
 }
-
 #services-carousel-slider .service-table {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr auto; 
-    background-image: linear-gradient(to right, white 70%, #f7f5fa 70%);
-
+    background-color: white;
     height: auto;
     min-height: 420px;
-    
     align-content: center;
     border-radius: 8px;
     overflow: hidden; 
 }
-
 #services-carousel-slider .service-table .table-row {
     display: contents;
 }
-
-#services-carousel-slider .service-table .table-row:not(:last-of-type) .name-cell {
+#services-carousel-slider .service-table .table-row:not(:last-of-type) .name-cell,
+#services-carousel-slider .service-table .table-row:not(:last-of-type) .price-cell {
     border-bottom: 1px solid #f2eaf0;
 }
-
 #services-carousel-slider .service-table .table-cell {
     padding: 20px 40px; 
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
-    
     font-size: 17px; 
-    
     color: #333;
 }
-
 #services-carousel-slider .service-table .price-cell {
     background-color: transparent; 
     font-weight: 700; 
     white-space: nowrap;
     text-align: right;
 }
-
 #services-carousel-slider .service-table .header-cell + .price-cell {
     text-align: center; 
     font-weight: 600; 
+    border-bottom: none;
 }
-
 #services-carousel-slider .service-table .header-cell .main-title {
     font-weight: 600;
     font-size: 18px;
 }
-
 #services-carousel-slider .service-table .header-cell .subtitle {
     font-size: 14px;
     color: #666;
     font-weight: 400;
 }
-
 #services-carousel-container .carousel-arrow {
     position: absolute;
     top: 50%;
@@ -133,21 +158,16 @@
     border: none;
     font-size: 30px;
     font-weight: bold;
-
     color: #d9538d; 
-    
     cursor: pointer;
     z-index: 10;
     transition: opacity 0.2s ease; 
 }
-
 #services-carousel-container .carousel-arrow:hover {
     opacity: 0.7;
 }
-
 #services-carousel-container .carousel-arrow.prev { left: 10px; }
 #services-carousel-container .carousel-arrow.next { right: 10px; }
-
 #services-carousel-dots {
     text-align: center;
     margin-top: 25px;
@@ -157,7 +177,6 @@
     border-radius: 30px; 
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
 }
-
 #services-carousel-dots .dot {
     display: inline-block;
     width: 9px;
@@ -167,51 +186,61 @@
     border-radius: 50%;
     cursor: pointer;
 }
-
 #services-carousel-dots .dot.active {
     background-color: #d9538d;
 }
 
 @media (max-width: 768px) {
     #our-services-section { padding: 40px 0; }
-    #services-filter-container .filter-btn { font-size: 14px; padding: 8px 16px; }
-    #services-carousel-slider .carousel-card { padding: 0 45px; }
+    
+    #services-filter-container .filter-btn { 
+        font-size: 17px;      
+        padding: 12px 16px;   
+        flex-basis: 100%;     
+        max-width: 100%;
+    }
+    
+    #services-filter-container .filter-btn:nth-child(n+3) {
+        display: none;
+    }
 
+    #services-filter-container.expanded .filter-btn {
+        display: flex;
+    }
+
+    .services-toggle-wrapper {
+        display: block;
+    }
+
+    #services-carousel-slider .carousel-card { padding: 0 45px; }
     #services-carousel-container .carousel-arrow { 
         font-size: 28px;
         padding: 10px;
     }
     #services-carousel-container .carousel-arrow.prev { left: 5px; }
     #services-carousel-container .carousel-arrow.next { right: 5px; }
-
     #services-carousel-slider .service-table {
         grid-template-columns: 1fr;
         background-image: none;
         background-color: white;
         height: auto;
-  
         min-height: 600px; 
-        
         padding-top: 25px;
         padding-bottom: 25px;
     }
-
     #services-carousel-slider .service-table .table-cell {
         text-align: center;
         padding-left: 10px;
         padding-right: 10px;
     }
-    
     #services-carousel-slider .service-table .table-row:not(:last-of-type) .name-cell {
         border-bottom: none;
     }
-    
     #services-carousel-slider .service-table .name-cell {
         font-size: 17px;
         font-weight: 500;
         padding-top: 15px; 
     }
-
     #services-carousel-slider .service-table .price-cell {
         font-size: 17px;
         font-weight: 700;
@@ -219,25 +248,28 @@
         padding-bottom: 15px;
         border-bottom: 1px solid #f2eaf0;
     }
-
     #services-carousel-slider .service-table .table-row:last-of-type .price-cell {
         border-bottom: none;
     }
-
     #services-carousel-slider .service-table .header-cell .main-title {
         font-size: 20px; 
         font-weight: 700;
         line-height: 1.3; 
     }
-    
     #services-carousel-slider .service-table .header-cell .subtitle {
         font-size: 14px;
         margin-top: 4px;
         font-weight: 400;
     }
-
     #services-carousel-slider .service-table .header-cell + .price-cell {
         border-bottom: none;
         padding-bottom: 25px; 
     }
+}
+
+.container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 20px;
+    padding-right: 20px;
 }

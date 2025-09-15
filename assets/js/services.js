@@ -6,7 +6,6 @@ const carouselSlider = document.getElementById('services-carousel-slider');
 const carouselContainer = document.getElementById('services-carousel-container');
 const dotsContainer = document.getElementById('services-carousel-dots');
 
-
 if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselContainer || !dotsContainer) {
     console.warn("One or more required elements for the Services section are missing. The module will not run.");
 } else {
@@ -16,6 +15,19 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
     let currentIndex = 0;
     let totalSlides = 0;
     let allServicesData = {};
+
+    // --- NEW FUNCTION: Sets up the "Show More" button functionality ---
+    function setupServicesToggle() {
+        const toggleBtn = document.getElementById('services-toggle-btn');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                // Toggles the 'expanded' class on the container to show/hide buttons via CSS
+                filterButtonsContainer.classList.toggle('expanded');
+                // Toggles the 'active' class on the button to rotate the arrow via CSS
+                toggleBtn.classList.toggle('active');
+            });
+        }
+    }
 
     function buildSimpleTableSlide(items) {
         const itemsHTML = items.map(([name, price]) => `
@@ -110,7 +122,8 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
             const button = document.createElement('button');
             button.className = 'filter-btn';
             button.dataset.category = category.slug;
-            button.textContent = category.name;
+            // --- NEW: Add the icon HTML directly ---
+            button.innerHTML = `<img src="${category.iconUrl}" alt="" class="btn-icon"> ${category.name}`;
             if (index === 0) {
                 button.classList.add('active');
             }
@@ -128,13 +141,28 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
 
         allServicesData = servicesData;
         populateFilterButtons(categories);
+
+        // --- NEW CODE: Inject the "Show More" button HTML after the filters ---
+        if (categories.length > 2) { // Only add the button if there are more than 2 categories
+            const toggleButtonHTML = `
+                <div class="services-toggle-wrapper">
+                    <button id="services-toggle-btn" class="services-toggle-btn">
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                </div>`;
+            filterButtonsContainer.insertAdjacentHTML('afterend', toggleButtonHTML);
+        }
+        // --- END NEW CODE ---
+
+        setupServicesToggle(); // Call the new function to activate the button
         updateCarousel(categories[0].slug);
 
         filterButtonsContainer.addEventListener('click', (e) => {
-            if (e.target.matches('.filter-btn')) {
+            const clickedButton = e.target.closest('.filter-btn');
+            if (clickedButton) {
                 filterButtonsContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                e.target.classList.add('active');
-                updateCarousel(e.target.dataset.category);
+                clickedButton.classList.add('active');
+                updateCarousel(clickedButton.dataset.category);
             }
         });
 

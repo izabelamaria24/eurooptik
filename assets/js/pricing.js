@@ -88,6 +88,12 @@ async function initPricingLogic(pricingSection) {
             });
         });
 
+        const firstLocationButton = pricingSection.querySelector('.location-btn:not([data-location="clear"])');
+        
+        if (firstLocationButton) {
+            firstLocationButton.click();
+        }
+
     } catch (error) {
         console.error("Failed to initialize pricing section:", error);
     }
