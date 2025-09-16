@@ -1,198 +1,128 @@
 import { fetchTeamFromContentful } from "./contentful-service.js";
 
-class CustomCarousel {
-    constructor(element, options = {}) {
-        this.viewport = element;
-        if (!this.viewport) {
-            console.error('Carousel viewport element not found.');
-            return;
+$(document).ready(function() {
+    const teamCarouselContainer = $('#team-grid');
+    const filtersContainer = $('#team-filters-container');
+    let allTeamMembers = [];
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
-        this.container = this.viewport.querySelector('.carousel-container');
-        this.nav = this.viewport.nextElementSibling;
-        this.prevBtn = this.nav ? this.nav.querySelector(options.prevBtnSelector || '.prev') : null;
-        this.nextBtn = this.nav ? this.nav.querySelector(options.nextBtnSelector || '.next') : null;
+        return array;
+    }
 
-        if (!this.container || !this.nav || !this.prevBtn || !this.nextBtn) {
-            console.warn('Carousel is missing some elements (container, nav, or buttons). It may not function correctly.');
-            return;
+    function initializeCarousel() {
+        if (teamCarouselContainer.hasClass('slick-initialized')) {
+            teamCarouselContainer.slick('unslick');
+        }
+        if (teamCarouselContainer.children().length > 0 && !teamCarouselContainer.find('.no-results-message').length) {
+            teamCarouselContainer.slick({
+                dots: true,
+                infinite: false,
+                speed: 300,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                arrows: true,
+                responsive: [
+                    {
+                        breakpoint: 992, 
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 768, 
+                        settings: {
+                            slidesToShow: 1,
+                            arrows: true 
+                        }
+                    }
+                ]
+            });
+        }
+    }
+
+    function filterAndDisplayTeam(filterId) {
+        if (!teamCarouselContainer.length) return;
+
+        const filteredMembers = filterId === 'all' 
+            ? allTeamMembers 
+            : allTeamMembers.filter(member => member.categories.includes(filterId));
+
+        shuffle(filteredMembers);
+        
+        teamCarouselContainer.css('opacity', 0);
+        if (teamCarouselContainer.hasClass('slick-initialized')) {
+            teamCarouselContainer.slick('unslick');
         }
 
-        this.isCarouselActive = false;
-        this.currentIndex = 0;
-        this.totalCards = 0;
-        this.breakpoint = options.breakpoint || 767;
-
-        this.handleNextClick = this.nextSlide.bind(this);
-        this.handlePrevClick = this.prevSlide.bind(this);
-        this.handleResize = this.handleResize.bind(this);
-
-        this.init();
+        setTimeout(() => {
+            let allCardsHTML = '';
+            if (filteredMembers.length === 0) {
+                allCardsHTML = `<div class="no-results-message">Niciun membru al echipei nu corespunde filtrului selectat.</div>`;
+            } else {
+                allCardsHTML = filteredMembers.map(member => {
+                    const { name, role, image, specializations } = member;
+                    const specializationsHTML = specializations.map(spec => `<li>${spec}</li>`).join('');
+                    return `
+                        <div>
+                            <div class="team-member">
+                                <div class="team-member-photo" style="background-image: url('${image}')"></div>
+                                <h4 class="team-member-name">${name}</h4>
+                                <p class="team-member-role">${role}</p>
+                                ${specializations.length > 0 ? `<h5 class="team-member-specialization-title">Specializări</h5><ul class="team-member-specialization-list">${specializationsHTML}</ul>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            teamCarouselContainer.html(allCardsHTML);
+            if (filteredMembers.length > 0) { initializeCarousel(); }
+            teamCarouselContainer.css('opacity', 1);
+        }, 300);
     }
 
-    init() {
-        window.addEventListener('resize', this.handleResize);
-        this.handleResize();
-    }
-
-    setup() {
-        if (this.isCarouselActive) return;
-        this.isCarouselActive = true;
-        this.viewport.style.overflow = 'hidden';
-        this.container.style.display = 'flex';
-        this.container.style.transition = 'transform 0.5s ease-in-out';
-        this.nextBtn.addEventListener('click', this.handleNextClick);
-        this.prevBtn.addEventListener('click', this.handlePrevClick);
-        this.update();
-    }
-
-    teardown() {
-        if (!this.isCarouselActive) return;
-        this.isCarouselActive = false;
-        this.container.style.transform = '';
-        this.container.style.display = '';
-        this.container.style.transition = '';
-        this.viewport.style.overflow = '';
-        this.nav.style.display = 'none';
-        this.nextBtn.removeEventListener('click', this.handleNextClick);
-        this.prevBtn.removeEventListener('click', this.handlePrevClick);
-    }
-
-    update() {
-        if (!this.isCarouselActive) return;
-        this.totalCards = this.container.children.length;
-        Array.from(this.container.children).forEach(card => {
-            card.style.flex = '0 0 100%';
+    function displayFilterButtons(locations) {
+        if (!filtersContainer.length) return;
+        let buttonsHTML = '<button type="button" class="btn-filter" data-filter="all">Toată Echipa</button>';
+        locations.forEach(location => {
+            buttonsHTML += `<button type="button" class="btn-filter" data-filter="${location.filterId}">${location.name}</button>`;
         });
-        this.nav.style.display = this.totalCards > 1 ? 'flex' : 'none';
-        this.goToSlide(0);
+        filtersContainer.html(buttonsHTML);
+
+        filtersContainer.on('click', '.btn-filter', function() {
+            filtersContainer.find('.btn-filter').removeClass('active');
+            $(this).addClass('active');
+            const filterValue = $(this).data('filter').toString();
+            filterAndDisplayTeam(filterValue);
+        });
     }
 
-    goToSlide(index) {
-        if (!this.isCarouselActive || this.totalCards === 0) return;
-        this.container.style.transform = `translateX(-${index * 100}%)`;
-        this.currentIndex = index;
-    }
+    async function initializeTeamSection() {
+        if (!teamCarouselContainer.length || !filtersContainer.length) { return; }
+        try {
+            const { members, locations } = await fetchTeamFromContentful();
+            allTeamMembers = members;
+            if (allTeamMembers.length === 0) { return; }
 
-    nextSlide() {
-        if (this.totalCards <= 1) return;
-        this.currentIndex = (this.currentIndex + 1) % this.totalCards;
-        this.goToSlide(this.currentIndex);
-    }
+            displayFilterButtons(locations);
 
-    prevSlide() {
-        if (this.totalCards <= 1) return;
-        this.currentIndex = (this.currentIndex - 1 + this.totalCards) % this.totalCards;
-        this.goToSlide(this.currentIndex);
-    }
+            const defaultFilterId = '1';
+            const defaultButton = filtersContainer.find(`[data-filter="${defaultFilterId}"]`);
 
-    handleResize() {
-        if (window.innerWidth <= this.breakpoint) {
-            this.setup();
-        } else {
-            this.teardown();
+            if (defaultButton.length) {
+                defaultButton.addClass('active');
+                filterAndDisplayTeam(defaultFilterId);
+            } else {
+                filtersContainer.find('[data-filter="all"]').addClass('active');
+                filterAndDisplayTeam('all');
+            }
+        } catch (error) {
+            console.error("Failed to initialize team section:", error);
         }
     }
-}
 
-
-const teamGrid = document.getElementById('team-grid');
-const filtersContainer = document.getElementById('team-filters-container');
-const viewport = document.getElementById('team-carousel-viewport');
-let teamCarousel;
-let allTeamMembers = [];
-
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
-function filterAndDisplayTeam(filter) {
-    if (!teamGrid) return;
-
-    const filteredMembers = filter === 'all' 
-        ? allTeamMembers 
-        : allTeamMembers.filter(member => member.categories.includes(filter));
-
-    shuffle(filteredMembers);
-
-    if (filteredMembers.length === 0) {
-        teamGrid.innerHTML = '<p>Niciun membru al echipei nu corespunde filtrului selectat.</p>';
-    } else {
-        const allCardsHTML = filteredMembers.map(member => {
-            const { name, role, image, specializations, type } = member;
-            const specializationsHTML = specializations.map(spec => `<li>${spec}</li>`).join('');
-            const memberTypeClass = type || 'default';
-
-            return `
-                <div class="team-member-wrapper">
-                    <div class="team-member ${memberTypeClass}">
-                        <div class="team-member-photo" style="background-image: url('${image}')"></div>
-                        <h4 class="team-member-name">${name}</h4>
-                        <p class="team-member-role">${role}</p>
-                        ${specializations.length > 0 ? `
-                            <h5 class="team-member-specialization-title">Specializări</h5>
-                            <ul class="team-member-specialization-list">
-                                ${specializationsHTML}
-                            </ul>
-                        ` : ''}
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        teamGrid.innerHTML = allCardsHTML;
-    }
-
-    if (teamCarousel) {
-        teamCarousel.update();
-    }
-}
-
-function displayFilterButtons(locations) {
-    if (!filtersContainer) return;
-
-    let buttonsHTML = '<button type="button" class="btn-filter active" data-filter="all">Toată echipa</button>';
-    locations.forEach(location => {
-        buttonsHTML += `<button type="button" class="btn-filter" data-filter="${location.filterId}">${location.name}</button>`;
-    });
-    filtersContainer.innerHTML = buttonsHTML;
-
-    filtersContainer.addEventListener('click', (event) => {
-        const button = event.target.closest('.btn-filter');
-        if (!button) return;
-
-        filtersContainer.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-
-        const filterValue = button.getAttribute('data-filter');
-        filterAndDisplayTeam(filterValue);
-    });
-}
-
-async function initializeTeamSection() {
-    const { members, locations } = await fetchTeamFromContentful();
-    allTeamMembers = members;
-
-    if (!teamGrid || !filtersContainer || !viewport) {
-        console.error("One or more required containers for the team section are missing from the DOM.");
-        return;
-    }
-
-    if (allTeamMembers.length === 0) {
-        teamGrid.innerHTML = '<p>Ne pare rău, lista membrilor echipei nu este disponibilă momentan.</p>';
-        return;
-    }
-
-    displayFilterButtons(locations);
-
-    teamCarousel = new CustomCarousel(viewport, {
-        prevBtnSelector: '#prev-doctor',
-        nextBtnSelector: '#next-doctor'
-    });
-
-    filterAndDisplayTeam('all'); 
-}
-
-initializeTeamSection();
+    initializeTeamSection();
+});

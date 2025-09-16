@@ -14,6 +14,9 @@
 
   <link href="assets/lib/animate.css/animate.css" rel="stylesheet">
 
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link href="assets/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <link href="assets/lib/et-line-font/et-line-font.css" rel="stylesheet">
@@ -23,17 +26,17 @@
 
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/team.css" rel="stylesheet">
-  <link href="assets/css/contact.css" rel="stylesheet">
   <link href="assets/css/footer.css" rel="stylesheet">
-  <link href="assets/css/contact.css" rel="stylesheet">
   <link href="assets/css/prices.css" rel="stylesheet">
   <link href="assets/css/testimonials.css" rel="stylesheet">
   <link href="assets/css/services.css" rel="stylesheet">
   <link href="assets/css/new-specializations.css" rel="stylesheet">
-  <link href="assets/css/location.css" rel="stylesheet"> 
+  <link href="assets/css/locations.css" rel="stylesheet"> 
   <link href="assets/css/sponsors.css" rel="stylesheet">
-  <link href="assets/css/custom-fonts.css" rel="stylesheet">
   <link href="assets/css/blog.css" rel="stylesheet">
+  <link href="assets/css/cercetari.css" rel="stylesheet">
+  <link href="assets/css/reviews.css" rel="stylesheet">
+  <link href="assets/css/appointments.css" rel="stylesheet">
   <link href="assets/css/navbar.css" rel="stylesheet">
 
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
@@ -88,23 +91,29 @@
   </div>
 </nav>
 
-    <section class="home-section home-full-height" id="home">
-      <img src="assets/images/background.png" alt="Background"
-      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
-      <div class="titan-caption">
-      <div class="caption-content">
+<section class="home-section home-full-height" id="home">
+  <img src="assets/images/background.png" alt="Background"
+  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+  <div class="titan-caption">
+    <div class="caption-content">
+
+      <div class="logo-and-review-wrapper">
+
         <div class="mb-20 text-center">
-        <img src="assets/images/logo-full.png" alt="Eurooptik"
-          style="max-width: 50%; height: auto; margin-bottom: -40px;">
+            <img src="assets/images/logo-full.png" alt="Eurooptik" style="max-width: 50%; height: auto; margin-bottom: 0;">
         </div>
 
-          <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button"
-            href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
-          <a class="section-scroll btn btn-border-w btn-round" href="#new-specializations" id="home-cine-suntem-button"> Specialitățile Noastre  </a>
+        <p id="google-reviews-display"></p>
 
-        </div>
       </div>
-    </section>
+
+      <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button"
+        href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
+      <a class="section-scroll btn btn-border-w btn-round" href="#new-specializations" id="home-cine-suntem-button"> Specialitățile Noastre  </a>
+
+    </div>
+  </div>
+</section>
 
     <div class="main">
 
@@ -133,59 +142,60 @@
 
           <div class="specialization-article-container" style="display: none;">
             <h3 class="article-title text-center"></h3>
-            <div class="article-content-wrapper">
-              <div class="article-text"></div>
-              <div class="article-image"></div>
-            </div>
-
-          <div class="article-testimonial" style="display: none;">
-            <div class="testimonial-content-wrapper">
-              <div class="testimonial-author-image">
-                <img src="" alt="Pacient">
+              <div class="article-content-wrapper">
+                <div class="article-image"></div>
+                
+                <div class="article-right-column">
+                  <div class="article-text"></div>
+                  
+                  <div class="article-testimonial" style="display: none;">
+                    <div class="testimonial-content-wrapper">
+                      <div class="testimonial-author-image">
+                        <img src="" alt="Pacient">
+                      </div>
+                      <div class="testimonial-text-content">
+                        <h5 class="testimonial-heading">Citește părerea pacienților noștri:</h5>
+                        <a href="#testimoniale" class="testimonial-scroll-link">
+                          <blockquote class="testimonial-quote"></blockquote>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="blog-links-container" style="display: none;">
+                      <h5 class="blog-links-heading">Citește mai mult pe blog:</h5>
+                      <div class="blog-links-list">
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="testimonial-text-content">
-                <h5 class="testimonial-heading">Citește părerea pacienților noștri:</h5>
-                <a href="#testimoniale" class="testimonial-scroll-link">
-                  <blockquote class="testimonial-quote"></blockquote>
-                </a>
-              </div>
-            </div>
-            <div class="blog-links-container" style="display: none;">
-              <h5 class="blog-links-heading">Citește mai mult pe blog:</h5>
-              <div class="blog-links-list">
-              </div>
-            </div>
-          </div>
           </div>
 
         </div>
       </section>
 
-      <section class="module" id="echipa-noastra">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <h2 class="module-title">ECHIPA NOASTRĂ</h2>
-                    <p class="module-subtitle" style="font-style: normal;">Selectați orașul pentru a vedea echipa noastră de profesioniști din fiecare locație.</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
 
-                    <div id="team-filters-container" class="team-filters">
+    <section class="module" id="echipa-noastra">
+        <div class="team-header-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <h2 class="module-title">ECHIPA NOASTRĂ</h2>
+                        <p class="module-subtitle" style="font-style: normal;">Selectați orașul pentru a vedea echipa noastră de profesioniști din fiecare locație.</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <div id="team-carousel-viewport" class="carousel-viewport">
-                        <div id="team-grid" class="team-grid carousel-container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="team-filters-container" class="team-filters">
                         </div>
                     </div>
-                    <div id="team-carousel-nav" class="carousel-nav" style="display: none;">
-                        <button id="prev-doctor" class="carousel-btn prev">‹</button>
-                        <button id="next-doctor" class="carousel-btn next">›</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="team-grid" class="team-carousel">
                     </div>
                 </div>
             </div>
@@ -288,26 +298,26 @@
       </div>
     </section>
 
-        <section id="our-services-section">
-            <div id="our-services-container">
-                <h2 class="module-title section-title">SERVICIILE NOASTRE</h2>
-                <p class="module-subtitle section-subtitle" style="font-style: normal;">Selectați categoria pentru a vedea serviciile aferente.</p>
+    <section id="our-services-section" class="services-layout-fix">
+        <div id="our-services-container">
+            <h2 class="module-title section-title">SERVICIILE NOASTRE</h2>
+            <p class="module-subtitle section-subtitle" style="font-style: normal;">Selectați categoria pentru a vedea serviciile aferente.</p>
 
-                <div id="services-filter-container">
-                </div>
+            <div id="services-filter-container">
             </div>
+        </div>
 
-            <div id="services-carousel-wrapper">
-                <div id="services-carousel-container">
-                    <div id="services-carousel-slider">
-                    </div>
-                    <button class="carousel-arrow prev" aria-label="Previous slide">❮</button>
-                    <button class="carousel-arrow next" aria-label="Next slide">❯</button>
+        <div id="services-carousel-wrapper">
+            <div id="services-carousel-container">
+                <div id="services-carousel-slider">
                 </div>
-                <div id="services-carousel-dots">
-                </div>
+                <button class="carousel-arrow prev" aria-label="Previous slide">❮</button>
+                <button class="carousel-arrow next" aria-label="Next slide">❯</button>
             </div>
-      </section>
+            <div id="services-carousel-dots">
+            </div>
+        </div>
+    </section>
 
       <section class="module" id="testimoniale" style="padding: 0;">
         <div class="testimonial-wrapper">
@@ -329,35 +339,70 @@
         </div>
       </section>
 
-    <section id="blog-section">
-        <div id="blog-container">
-            <h2 class="module-title section-title">BLOG - ARTICOLE MEDICALE</h2>
-            <p class="module-subtitle section-subtitle" style="font-style: normal;">
-              Selectați categoria pentru a citi articolele medicale scrise de doctorii noștri pentru fiecare dintre specialitățile oferite de clinica noastră.
-            </p>
+      <section id="blog-section">
+          <div id="blog-container">
+              <h2 class="module-title section-title">BLOG - ARTICOLE MEDICALE</h2>
+              <p class="module-subtitle section-subtitle" style="font-style: normal;">
+                Selectați categoria pentru a citi articolele medicale scrise de doctorii noștri pentru fiecare dintre specialitățile oferite de clinica noastră.
+              </p>
+              
+              <div id="cuprins-wrapper">
+                  <div id="blog-filter-container">
+                  </div>
+                  <div id="cuprins-image-container">
+                      <img src="https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Decorative image for medical articles section">
+                  </div>
+              </div>
+          </div>
 
-            <div id="blog-filter-container">
-            </div>
-        </div>
+          <div id="blog-carousel-wrapper">
+              <div id="blog-carousel-container">
+                  <div id="blog-carousel-slider">
+                  </div>
 
-        <div id="blog-carousel-wrapper">
-            <div id="blog-carousel-container">
-                <div id="blog-carousel-slider">
+                  <button class="carousel-arrow prev" id="blog-prev-arrow">&#10094;</button>
+                  <button class="carousel-arrow next" id="blog-next-arrow">&#10095;</button>
+              </div>
+              
+              <div id="blog-carousel-dots">
+              </div>
+          </div>
+
+          <div id="blog-article-display-container" class="hidden">
+              <div class="article-content-wrapper">
+                  <h3 id="article-display-title"></h3>
+                  <p id="article-display-author"></p>
+                  <div id="article-display-content"></div>
+              </div>
+          </div>
+      </section>
+
+      <section id="cercetari-section" class="module">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <h2 class="module-title font-alt">CERCETARI STIINTIFICE</h2>
+
+                    <div id="cercetari-cuprins-wrapper">
+                        <div id="cercetari-filter-container">
+                            <ul id="cercetari-cuprins-list">
+                            </ul>
+                        </div>
+                        <div id="cercetari-image-container">
+                            <img src="assets/images/scientific_research.jpeg" alt="Cercetari Stiintifice">
+                        </div>
+                    </div>
                 </div>
-
-                <button class="carousel-arrow prev" id="blog-prev-arrow">&#10094;</button>
-                <button class="carousel-arrow next" id="blog-next-arrow">&#10095;</button>
             </div>
-            
-            <div id="blog-carousel-dots">
-            </div>
-        </div>
-
-        <div id="blog-article-display-container" class="hidden">
-            <div class="article-content-wrapper">
-                <h3 id="article-display-title"></h3>
-                <p id="article-display-author"></p>
-                <div id="article-display-content"></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="cercetari-article-display-container" class="hidden">
+                        <div class="article-content-wrapper">
+                            <h3 id="cercetari-article-display-title"></h3>
+                            <div id="cercetari-article-display-content"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -377,7 +422,7 @@
 
           <a href="https://g.co/kgs/CF3ZXSp" target="_blank" rel="noopener noreferrer" class="location-card">
             <div class="location-card-header">
-              <h5>Clinica<br>Bacău</h5>
+              <h5>Clinica Bacău</h5>
             </div>
             <div class="location-card-image">
               <img src="assets/images/locations/eurooptik_clinica.png" alt="Clinica Bacau">
@@ -391,7 +436,7 @@
 
           <a href="https://g.co/kgs/kF5B3ia" target="_blank" rel="noopener noreferrer" class="location-card">
             <div class="location-card-header">
-              <h5>Cabinet<br>Bacău</h5>
+              <h5>Cabinet Bacău</h5>
             </div>
             <div class="location-card-image">
               <img src="assets/images/locations/eurooptik_razboieni.png" alt="Cabinet Bacau">
@@ -405,7 +450,7 @@
 
           <a href="https://g.co/kgs/5yqERUP" target="_blank" rel="noopener noreferrer" class="location-card">
             <div class="location-card-header">
-              <h5>Cabinet<br>Moinești</h5>
+              <h5>Cabinet Moinești</h5>
             </div>
             <div class="location-card-image">
               <img src="assets/images/locations/eurooptik_moinesti.png" alt="Cabinet Moinesti">
@@ -419,7 +464,7 @@
 
           <a href="https://g.co/kgs/c5HFjzz" target="_blank" rel="noopener noreferrer" class="location-card">
             <div class="location-card-header">
-              <h5>Cabinet<br>Comănești</h5>
+              <h5>Cabinet Comănești</h5>
             </div>
             <div class="location-card-image">
               <img src="assets/images/locations/eurooptik_comanesti.png" alt="Cabinet Comanesti">
@@ -433,7 +478,7 @@
 
           <a href="https://g.co/kgs/qbvbxa7" target="_blank" rel="noopener noreferrer" class="location-card">
             <div class="location-card-header">
-              <h5>Cabinet<br>Onești</h5>
+              <h5>Cabinet Onești</h5>
             </div>
             <div class="location-card-image">
               <img src="assets/images/locations/eurooptik_onesti.png" alt="Cabinet Onesti">
@@ -512,15 +557,15 @@
     </section>
 
 
-    <section id="programare-section" style="display:none; padding:40px 0; background:#f9f9f9;">
-      <button onclick="hideProgramareSection()"
-        style="float:right; margin:10px; font-size:22px; font-weight:bold; background:none; border:none; cursor:pointer;">×</button>
-      <h2>Programează-te online</h2>
-      <div style="width:100%; max-width:900px; margin:auto;">
-        <iframe src="https://eurooptik.ro.programarionline.sophtha.com/"
-          style="width:100%; min-height:600px; border:none;" title="Programare online"></iframe>
-      </div>
-    </section>
+  <section id="programare-section" style="display:none;">
+    <button class="appointments-close-btn" onclick="hideProgramareSection()">×</button> 
+    
+    <h2 class="appointments-title">PROGRAMEAZĂ-TE ONLINE</h2>
+    
+      <iframe src="https://eurooptik.ro.programarionline.sophtha.com/"
+        style="width:100%; min-height:600px; border:none;" title="Programare online"></iframe>
+    </div>
+  </section>
 
     <hr class="divider-d">
     <footer class="footer">
@@ -559,7 +604,8 @@
   </main>
 
 
-  <script src="assets/lib/jquery/dist/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="assets/lib/wow/dist/wow.js"></script>
   <script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
@@ -569,20 +615,25 @@
   <script src="assets/lib/smoothscroll.js"></script>
   <script src="assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
   <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
-  <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script> 
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
   <script src="assets/js/plugins.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js"></script> 
+
+  <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script> 
   <script src="assets/js/carousel.js"></script>
   <script src="assets/js/sponsors.js"></script>
-  <script type="module" src="assets/js/team.js"></script>
+  <script src="assets/js/google-reviews.js"></script>
+  <script type="module" src="assets/js/team.js"></script> 
   <script type="module" src="assets/js/testimonials.js"></script>
   <script type="module" src="assets/js/services.js"></script>
   <script type="module" src="assets/js/pricing.js"></script>
   <script type="module" src="assets/js/blog.js"></script>
+  <script type="module" src="assets/js/cercetari.js"></script>
   <script type="module" src="assets/js/new-specializations.js"></script>
   <script type="module" src="assets/js/config.js"></script>
   <script type="module" src="assets/js/contentful-service.js"></script>
-  
+    
   <script>
     function showProgramareSection() {
       const section = document.getElementById('programare-section');
