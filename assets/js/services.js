@@ -1,5 +1,3 @@
-import { fetchServicesFromContentful } from "./contentful-service.js";
-
 const servicesSection = document.getElementById('our-services-section');
 const filterButtonsContainer = document.getElementById('services-filter-container');
 const carouselSlider = document.getElementById('services-carousel-slider');
@@ -16,14 +14,11 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
     let totalSlides = 0;
     let allServicesData = {};
 
-    // --- NEW FUNCTION: Sets up the "Show More" button functionality ---
     function setupServicesToggle() {
         const toggleBtn = document.getElementById('services-toggle-btn');
         if (toggleBtn) {
             toggleBtn.addEventListener('click', () => {
-                // Toggles the 'expanded' class on the container to show/hide buttons via CSS
                 filterButtonsContainer.classList.toggle('expanded');
-                // Toggles the 'active' class on the button to rotate the arrow via CSS
                 toggleBtn.classList.toggle('active');
             });
         }
@@ -122,7 +117,7 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
             const button = document.createElement('button');
             button.className = 'filter-btn';
             button.dataset.category = category.slug;
-            // --- NEW: Add the icon HTML directly ---
+            // This assumes your build script will provide `iconUrl` in the JSON data
             button.innerHTML = `<img src="${category.iconUrl}" alt="" class="btn-icon"> ${category.name}`;
             if (index === 0) {
                 button.classList.add('active');
@@ -132,60 +127,68 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
     }
 
     async function initializeServices() {
-        const { servicesData, categories } = await fetchServicesFromContentful();
+        try {
+            const response = await fetch('api/services.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const { servicesData, categories } = await response.json();
 
-        if (categories.length === 0) {
+            if (!categories || categories.length === 0) {
+                servicesSection.style.display = 'none';
+                return;
+            }
+
+            allServicesData = servicesData;
+            populateFilterButtons(categories);
+
+            if (categories.length > 2) { 
+                const toggleButtonHTML = `
+                    <div class="services-toggle-wrapper">
+                        <button id="services-toggle-btn" class="services-toggle-btn">
+                            <i class="fa fa-chevron-down"></i>
+                        </button>
+                    </div>`;
+                filterButtonsContainer.insertAdjacentHTML('afterend', toggleButtonHTML);
+            }
+
+            setupServicesToggle();
+            updateCarousel(categories[0].slug);
+
+            filterButtonsContainer.addEventListener('click', (e) => {
+                const clickedButton = e.target.closest('.filter-btn');
+                if (clickedButton) {
+                    filterButtonsContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                    clickedButton.classList.add('active');
+                    updateCarousel(clickedButton.dataset.category);
+                }
+            });
+
+            if (prevArrow && nextArrow) {
+                prevArrow.addEventListener('click', () => {
+                    currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 1;
+                    updateSliderPosition();
+                    updateDots();
+                });
+                nextArrow.addEventListener('click', () => {
+                    currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
+                    updateSliderPosition();
+                    updateDots();
+                });
+            }
+
+            dotsContainer.addEventListener('click', (e) => {
+                if (e.target.matches('.dot')) {
+                    currentIndex = parseInt(e.target.dataset.index, 10);
+                    updateSliderPosition();
+                    updateDots();
+                }
+            });
+
+        } catch (error) {
+            console.error("Failed to initialize services section:", error);
             servicesSection.style.display = 'none';
-            return;
         }
-
-        allServicesData = servicesData;
-        populateFilterButtons(categories);
-
-        // --- NEW CODE: Inject the "Show More" button HTML after the filters ---
-        if (categories.length > 2) { // Only add the button if there are more than 2 categories
-            const toggleButtonHTML = `
-                <div class="services-toggle-wrapper">
-                    <button id="services-toggle-btn" class="services-toggle-btn">
-                        <i class="fa fa-chevron-down"></i>
-                    </button>
-                </div>`;
-            filterButtonsContainer.insertAdjacentHTML('afterend', toggleButtonHTML);
-        }
-        // --- END NEW CODE ---
-
-        setupServicesToggle(); // Call the new function to activate the button
-        updateCarousel(categories[0].slug);
-
-        filterButtonsContainer.addEventListener('click', (e) => {
-            const clickedButton = e.target.closest('.filter-btn');
-            if (clickedButton) {
-                filterButtonsContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                clickedButton.classList.add('active');
-                updateCarousel(clickedButton.dataset.category);
-            }
-        });
-
-        if (prevArrow && nextArrow) {
-            prevArrow.addEventListener('click', () => {
-                currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 1;
-                updateSliderPosition();
-                updateDots();
-            });
-            nextArrow.addEventListener('click', () => {
-                currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
-                updateSliderPosition();
-                updateDots();
-            });
-        }
-
-        dotsContainer.addEventListener('click', (e) => {
-            if (e.target.matches('.dot')) {
-                currentIndex = parseInt(e.target.dataset.index, 10);
-                updateSliderPosition();
-                updateDots();
-            }
-        });
     }
 
     initializeServices();

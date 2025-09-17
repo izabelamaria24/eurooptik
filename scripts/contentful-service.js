@@ -1,3 +1,5 @@
+import * as contentful from 'contentful';
+
 let client = null;
 
 async function initializeContentful() {
@@ -5,21 +7,24 @@ async function initializeContentful() {
         return client;
     }
 
-    let spaceId = "__CONTENTFUL_SPACE_ID__";
-    let accessToken = "__CONTENTFUL_ACCESS_TOKEN__";
+    let spaceId = process.env.CONTENTFUL_SPACE_ID;
+    let accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
 
-    try {
-        const config = await import('./config.js');
-        spaceId = config.CONTENTFUL_SPACE_ID;
-        accessToken = config.CONTENTFUL_ACCESS_TOKEN;
-        console.log("Loaded credentials from local config.js");
-    } catch (error) {
-        console.log("config.js not found. Using production placeholders.");
+    if (!spaceId || !accessToken) {
+        console.log("Environment variables not found. Trying local config.js...");
+        try {
+            const config = await import('./config.js'); 
+            spaceId = config.CONTENTFUL_SPACE_ID;
+            accessToken = config.CONTENTFUL_ACCESS_TOKEN;
+            console.log("Loaded credentials from local config.js");
+        } catch (error) {
+            console.log("Could not load local config.js. Error:", error.message);
+        }
     }
 
-    if (spaceId.startsWith("__")) {
-        console.warn("Contentful API keys are not set. API calls will fail.");
-        return null; 
+    if (!spaceId || !accessToken) {
+        console.error("Contentful API keys are not set. API calls will fail.");
+        return null;
     }
 
     client = contentful.createClient({
@@ -29,8 +34,6 @@ async function initializeContentful() {
     
     return client;
 }
-
-export { initializeContentful };
 
 
 function processMember(memberEntry, memberType) {
@@ -106,7 +109,7 @@ export async function fetchTeamFromContentful() {
 
     } catch (error) {
         console.error('Error at fetching team data from Contentful:', error);
-        return { members: [], locations: [] };
+        throw new Error('Failed to fetch team data.'); 
     }
 }
 
@@ -157,7 +160,7 @@ export async function fetchServicesFromContentful() {
 
     } catch (error) {
         console.error('Error fetching services from Contentful:', error);
-        return { servicesData: {}, categories: [] };
+        throw new Error('Failed to fetch services.'); 
     }
 }
 
@@ -194,7 +197,7 @@ export async function fetchArticlesFromContentful() {
 
     } catch (error) {
         console.error('Error fetching articles from Contentful:', error);
-        return {};
+        throw new Error('Failed to fetch articles.'); 
     }
 }
 
@@ -226,7 +229,7 @@ export async function fetchArticleBySlug(slug) {
 
     } catch (error) {
         console.error(`Error fetching article with slug ${slug}:`, error);
-        return null;
+        throw new Error('Failed to fetch article by slug.');
     }
 }
 
@@ -263,7 +266,7 @@ export async function fetchTestimonialsFromContentful() {
 
     } catch (error) {
         console.error('Error fetching testimonials from Contentful:', error);
-        return []; 
+        throw new Error('Failed to fetch testimonials.');
     }
 }
 
@@ -321,7 +324,7 @@ export async function fetchPricingData() {
 
     } catch (error) {
         console.error('Error fetching pricing data from Contentful:', error);
-        return {};
+        throw new Error('Failed to fetch pricing data.');
     }
 }
 
@@ -394,7 +397,7 @@ export async function fetchSpecializationsData() {
 
     } catch (error) {
         console.error('Error fetching specializations data from Contentful:', error);
-        return { categories: [], specializations: [] };
+        throw new Error('Failed to fetch specializations.');
     }
 }
 
@@ -428,6 +431,6 @@ export async function fetchCercetariFromContentful() {
 
     } catch (error) {
         console.error('Error fetching cercetari articles from Contentful:', error);
-        return {};
+        throw new Error('Failed to fetch cercetari.');
     }
 }

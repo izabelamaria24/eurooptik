@@ -1,5 +1,3 @@
-import { fetchPricingData } from './contentful-service.js';
-
 function initMobileCarousel(pricingSection) {
     const container = pricingSection.querySelector('.pricing-cards-container');
     const prevBtn = pricingSection.querySelector('.pricing-prev');
@@ -74,9 +72,14 @@ async function initPricingLogic(pricingSection) {
     };
 
     try {
-        pricingData = await fetchPricingData();
+        const response = await fetch('api/pricing.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        pricingData = await response.json();
+
         if (Object.keys(pricingData).length === 0) {
-            throw new Error("No pricing data was loaded from Contentful.");
+            throw new Error("No pricing data was loaded.");
         }
 
         locationButtons.forEach(button => {
@@ -96,6 +99,8 @@ async function initPricingLogic(pricingSection) {
 
     } catch (error) {
         console.error("Failed to initialize pricing section:", error);
+        // Hide the section or show an error message if data fails to load
+        pricingSection.innerHTML = '<p>A apărut o eroare la încărcarea tarifelor.</p>';
     }
 }
 

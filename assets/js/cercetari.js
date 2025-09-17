@@ -1,4 +1,3 @@
-import { fetchCercetariFromContentful } from './contentful-service.js';
 import { documentToHtmlString } from 'https://esm.sh/@contentful/rich-text-html-renderer';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,9 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function initCercetariSection() {
         try {
-            const articlesData = await fetchCercetariFromContentful();
-            if (!articlesData) {
+            const response = await fetch('api/cercetari.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const articlesData = await response.json();
+
+            if (!articlesData || Object.keys(articlesData).length === 0) {
                 console.error('Eroare: Nu s-au putut încărca articolele de cercetare.');
+                const cercetariSection = document.getElementById('cercetare-stiintifica');
+                if (cercetariSection) {
+                    cercetariSection.style.display = 'none';
+                }
                 return;
             }
 
@@ -42,6 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error("A apărut o eroare majoră în `initCercetariSection`:", error);
+            const cercetariSection = document.getElementById('cercetare-stiintifica');
+            if (cercetariSection) {
+                cercetariSection.style.display = 'none';
+            }
         }
     }
 
