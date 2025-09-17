@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eurooptik</title>
+  <link href="assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+  <link href="assets/lib/animate.css/animate.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="assets/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/lib/et-line-font/et-line-font.css" rel="stylesheet">
+  <link href="assets/lib/flexslider/flexslider.css" rel="stylesheet">
+  <link href="assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
+  <link href="assets/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
+
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/team.css" rel="stylesheet">
+  <link href="assets/css/footer.css" rel="stylesheet">
+  <link href="assets/css/prices.css" rel="stylesheet">
+  <link href="assets/css/testimonials.css" rel="stylesheet">
+  <link href="assets/css/services.css" rel="stylesheet">
+  <link href="assets/css/new-specializations.css" rel="stylesheet">
+  <link href="assets/css/locations.css" rel="stylesheet"> 
+  <link href="assets/css/sponsors.css" rel="stylesheet">
+  <link href="assets/css/blog.css" rel="stylesheet">
+  <link href="assets/css/cercetari.css" rel="stylesheet">
+  <link href="assets/css/reviews.css" rel="stylesheet">
+  <link href="assets/css/appointments.css" rel="stylesheet">
+  <link href="assets/css/navbar.css" rel="stylesheet">
+
+  <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
+</head>
+
+<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+  <main>
+    <div class="page-loader">
+      <div class="loader">Loading...</div>
+    </div>
+    <nav class="navbar navbar-custom navbar-transparent navbar-fixed-top one-page" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse" >
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar" style="background-color: #000 !important;"></span>
+        <span class="icon-bar" style="background-color: #000 !important;"></span>
+        <span class="icon-bar" style="background-color: #000 !important;"></span>
+      </button>
+
+      <div class="navbar-brand-center visible-xs">
+        <a class="navbar-brand" href="#totop">
+          <img src="assets/images/logo-full.png" alt="Eurooptik" style="max-height: 70px; margin-top: -25px;">
+        </a>
+      </div>
+
+      <div class="navbar-brand hidden-xs" style="float: left;">
+        <a class="navbar-brand" href="#totop">
+          <img src="assets/images/logo-full.png" alt="Eurooptik" style="max-height: 70px; margin-top: -40px;">
+        </a>
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="custom-collapse">
+      <ul class="nav navbar-nav navbar-left" style="color: #000 !important;">
+        <li><a class="section-scroll navbar-anim-link" href="#totop" style="color: #000 !important;"><b>Acasa</b></a></li>
+        <li><a class="section-scroll navbar-anim-link" href="#our-services-section" style="color: #000 !important;"><b>Servicii</b></a></li>
+        <li><a class="section-scroll navbar-anim-link" href="#echipa-noastra" style="color: #000 !important;"><b>Echipa</b></a></li>
+        <li><a class="section-scroll navbar-anim-link" href="#pricing" style="color: #000 !important;"><b>Tarife</b></a></li>
+        <li><a class="section-scroll navbar-anim-link" href="#blog-section" style="color: #000 !important;"><b>Blog</b></a></li>
+        <li><a class="section-scroll navbar-anim-link" href="#sponsors" style="color: #000 !important;"><b>Parteneri</b></a></li>
+        <li><a class="section-scroll navbar-anim-link" href="#adresses" style="color: #000 !important;"><b>Contact</b></a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a class="btn-programare" href="#"
+             onclick="showProgramareSection(); return false;"><b>Programează-te</b></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="home-section home-full-height" id="home">
+  <img src="assets/images/background.png" alt="Background"
+  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+  <div class="titan-caption">
+    <div class="caption-content">
+
+      <div class="logo-and-review-wrapper">
+
+        <div class="mb-20 text-center">
+            <img src="assets/images/logo-full.png" alt="Eurooptik" style="max-width: 50%; height: auto; margin-bottom: 0;">
+        </div>
+
+        <p id="google-reviews-display"></p>
+
+      </div>
+
+      <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button"
+        href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
+      <a class="section-scroll btn btn-border-w btn-round" href="#new-specializations" id="home-cine-suntem-button"> Specialitățile Noastre  </a>
+
+    </div>
+  </div>
+</section>
+
+    <div class="main">
+
+      <section class="module" id="new-specializations">
+        <div class="container">
+          <div class="row text-center mb-40">
+            <div class="col-sm-6 col-sm-offset-3">
+              <h3 class="module-title">SPECIALITĂȚILE NOASTRE</h3>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 text-center mb-40">
+              <div class="specialization-category-buttons">
+              </div>
+            </div>
+          </div>
+
+          <div class="specialization-carousel-wrapper">
+            <div class="specialization-carousel-container">
+            </div>
+ 
+            <button class="carousel-nav-btn prev-card"><i class="fa fa-chevron-left"></i></button>
+            <button class="carousel-nav-btn next-card"><i class="fa fa-chevron-right"></i></button>
+          </div>
+
+          <div class="specialization-article-container" style="display: none;">
+            <h3 class="article-title text-center"></h3>
+              <div class="article-content-wrapper">
+                <div class="article-image"></div>
+                
+                <div class="article-right-column">
+                  <div class="article-text"></div>
+                  
+                  <div class="article-testimonial" style="display: none;">
+                    <div class="testimonial-content-wrapper">
+                      <div class="testimonial-author-image">
+                        <img src="" alt="Pacient">
+                      </div>
+                      <div class="testimonial-text-content">
+                        <h5 class="testimonial-heading">Citește părerea pacienților noștri:</h5>
+                        <a href="#testimoniale" class="testimonial-scroll-link">
+                          <blockquote class="testimonial-quote"></blockquote>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="blog-links-container" style="display: none;">
+                      <h5 class="blog-links-heading">Citește mai mult pe blog:</h5>
+                      <div class="blog-links-list">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+        </div>
+      </section>
+
+
+    <section class="module" id="echipa-noastra">
+        <div class="team-header-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <h2 class="module-title">ECHIPA NOASTRĂ</h2>
+                        <p class="module-subtitle" style="font-style: normal;">Selectați orașul pentru a vedea echipa noastră de profesioniști din fiecare locație.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="team-filters-container" class="team-filters">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="team-grid" class="team-carousel">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="module" id="pricing">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                  <h5 class="module-title">TARIFELE NOASTRE</h5>
+                  <div class="module-subtitle">Selectați locația pentru a vedea prețurile consultațiilor disponibile în fiecare clinică.</div>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col-sm-12 text-center mb-40">
+                  <div class="location-buttons-container">
+                      <button type="button" class="btn btn-border-d btn-round location-btn" data-location="bacau-clinica">Clinica<br> Bacău</button>
+                      <button type="button" class="btn btn-border-d btn-round location-btn" data-location="bacau">Cabinet<br> Bacau</button>
+                      <button type="button" class="btn btn-border-d btn-round location-btn" data-location="comanesti">Cabinet<br> Comănești</button>
+                      <button type="button" class="btn btn-border-d btn-round location-btn" data-location="moinesti">Cabinet<br> Moinești</button>
+                      <button type="button" class="btn btn-border-d btn-round location-btn" data-location="onesti">Cabinet<br> Onești</button>
+                      <button type="button" class="btn btn-border-d btn-round location-btn" data-location="clear">Șterge <br> Selecția</button>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row price-row" id="pricing-tables">
+              <div class="pricing-carousel-component">
+                  <div class="pricing-carousel-viewport">
+                      <div class="pricing-cards-container">
+                        <div class="pricing-card">
+                            <div class="pricing-card-wrapper">
+                                <div class="pricing-card-header">Consultație Standard</div>
+                                <hr class="pricing-card-divider">
+                                <div class="pricing-card-price-body">
+                                    <span class="price-value" data-consultation-type="standard">- RON</span>
+                                </div>
+                                <hr class="pricing-card-divider">
+                                <ul class="pricing-card-features">
+                                    <li>stabilire dioptrii</li>
+                                    <li>tensiune oculară</li>
+                                    <li>fund de ochi</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="pricing-card">
+                            <div class="pricing-card-wrapper">
+                                <div class="pricing-card-header">Consultație Complexă</div>
+                                <hr class="pricing-card-divider">
+                                <div class="pricing-card-price-body">
+                                    <span class="price-value" data-consultation-type="complexa">- RON</span>
+                                </div>
+                                <hr class="pricing-card-divider">
+                                <ul class="pricing-card-features">
+                                    <li>stabilire dioptrii</li>
+                                    <li>tensiune oculara</li>
+                                    <li>fund de ochi</li>
+                                    <li class="feature-glaucom">glaucom</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="pricing-card">
+                            <div class="pricing-card-wrapper">
+                                <div class="pricing-card-header">Consultație Premium</div>
+                                <hr class="pricing-card-divider">
+                                <div class="pricing-card-price-body">
+                                    <span class="price-value" data-consultation-type="premium">- RON</span>
+                                </div>
+                                <hr class="pricing-card-divider">
+                                <ul class="pricing-card-features">
+                                    <li>stabilire dioptrii</li>
+                                    <li>tensiune oculara</li>
+                                    <li>fund de ochi</li>
+                                    <li class="feature-glaucom">glaucom</li>
+                                    <li class="feature-cataracta">cataracta</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                      </div>
+                  </div>
+
+                  <div class="pricing-nav-container">
+                      <div class="pricing-nav-buttons">
+                          <button type="button" class="btn-circle pricing-prev" aria-label="Previous" disabled>
+                              <i class="fa fa-chevron-left"></i>
+                          </button>
+                          <button type="button" class="btn-circle pricing-next" aria-label="Next">
+                              <i class="fa fa-chevron-right"></i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>
+
+    <section id="our-services-section" class="services-layout-fix">
+        <div id="our-services-container">
+            <h2 class="module-title section-title">SERVICIILE NOASTRE</h2>
+            <p class="module-subtitle section-subtitle" style="font-style: normal;">Selectați categoria pentru a vedea serviciile aferente.</p>
+
+            <div id="services-filter-container">
+            </div>
+        </div>
+
+        <div id="services-carousel-wrapper">
+            <div id="services-carousel-container">
+                <div id="services-carousel-slider">
+                </div>
+                <button class="carousel-arrow prev" aria-label="Previous slide">❮</button>
+                <button class="carousel-arrow next" aria-label="Next slide">❯</button>
+            </div>
+            <div id="services-carousel-dots">
+            </div>
+        </div>
+    </section>
+
+      <section class="module" id="testimoniale" style="padding: 0;">
+        <div class="testimonial-wrapper">
+          <div id="testimonial-text-area" class="testimonial-text-area">
+            <div class="testimonial-text-inner">
+              <div class="module-header text-center text-lg-left">
+                <h2 class="module-title">TESTIMONIALE</h2>
+                <p class="module-subtitle" style="font-style: normal;">Ce spun pacienții noștri</p>
+              </div>
+              <div id="testimonial-content-wrapper">
+              </div>
+            </div>
+          </div>
+          
+          <div id="image-container" class="image-container">
+            <div class="loader" style="color: #fff; text-align: center;">Loading testimonials...</div>
+          </div>
+          
+        </div>
+      </section>
+
+      <section id="blog-section">
+          <div id="blog-container">
+              <h2 class="module-title section-title">BLOG - ARTICOLE MEDICALE</h2>
+              <p class="module-subtitle section-subtitle" style="font-style: normal;">
+                Selectați categoria pentru a citi articolele medicale scrise de doctorii noștri pentru fiecare dintre specialitățile oferite de clinica noastră.
+              </p>
+              
+              <div id="cuprins-wrapper">
+                  <div id="blog-filter-container">
+                  </div>
+                  <div id="cuprins-image-container">
+                      <img src="https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Decorative image for medical articles section">
+                  </div>
+              </div>
+          </div>
+
+          <div id="blog-carousel-wrapper">
+              <div id="blog-carousel-container">
+                  <div id="blog-carousel-slider">
+                  </div>
+
+                  <button class="carousel-arrow prev" id="blog-prev-arrow">&#10094;</button>
+                  <button class="carousel-arrow next" id="blog-next-arrow">&#10095;</button>
+              </div>
+              
+              <div id="blog-carousel-dots">
+              </div>
+          </div>
+
+          <div id="blog-article-display-container" class="hidden">
+              <div class="article-content-wrapper">
+                  <h3 id="article-display-title"></h3>
+                  <p id="article-display-author"></p>
+                  <div id="article-display-content"></div>
+              </div>
+          </div>
+      </section>
+
+      <section id="cercetari-section" class="module">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <h2 class="module-title font-alt">CERCETARI STIINTIFICE</h2>
+
+                    <div id="cercetari-cuprins-wrapper">
+                        <div id="cercetari-filter-container">
+                            <ul id="cercetari-cuprins-list">
+                            </ul>
+                        </div>
+                        <div id="cercetari-image-container">
+                            <img src="assets/images/scientific_research.jpeg" alt="Cercetari Stiintifice">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="cercetari-article-display-container" class="hidden">
+                        <div class="article-content-wrapper">
+                            <h3 id="cercetari-article-display-title"></h3>
+                            <div id="cercetari-article-display-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="adresses" class="module">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <h2 class="module-title">LOCAȚIILE NOASTRE</h2>
+            <p class="module-subtitle" style="font-style: normal;">Găsește clinica Eurooptik cea mai apropiată de tine.</p>
+          </div>
+        </div>
+      </div> 
+
+      <div class="carousel-viewport">
+        <div class="location-cards-container">
+
+          <a href="https://g.co/kgs/CF3ZXSp" target="_blank" rel="noopener noreferrer" class="location-card">
+            <div class="location-card-header">
+              <h5>Clinica Bacău</h5>
+            </div>
+            <div class="location-card-image">
+              <img src="assets/images/locations/eurooptik_clinica.png" alt="Clinica Bacau">
+            </div>
+            <div class="location-card-details">
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Ștefan cel Mare Nr. 7</p>
+              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 303</p>
+              <p class="contact-info"><i class="fa fa-envelope"></i>eurooptik_bc@yahoo.com</p>
+            </div>
+          </a>
+
+          <a href="https://g.co/kgs/kF5B3ia" target="_blank" rel="noopener noreferrer" class="location-card">
+            <div class="location-card-header">
+              <h5>Cabinet Bacău</h5>
+            </div>
+            <div class="location-card-image">
+              <img src="assets/images/locations/eurooptik_razboieni.png" alt="Cabinet Bacau">
+            </div>
+            <div class="location-card-details">
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Războieni Nr. 7</p>
+              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 304</p>
+              <p class="contact-info"><i class="fa fa-envelope"></i>eurooptik_vest@yahoo.com</p>
+            </div>
+          </a>
+
+          <a href="https://g.co/kgs/5yqERUP" target="_blank" rel="noopener noreferrer" class="location-card">
+            <div class="location-card-header">
+              <h5>Cabinet Moinești</h5>
+            </div>
+            <div class="location-card-image">
+              <img src="assets/images/locations/eurooptik_moinesti.png" alt="Cabinet Moinesti">
+            </div>
+            <div class="location-card-details">
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. T. Vladimirescu Nr. 177</p>
+              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 308</p>
+              <p class="contact-info"><i class="fa fa-envelope"></i>eurooptik_moinesti2@yahoo.com</p>
+            </div>
+          </a>
+
+          <a href="https://g.co/kgs/c5HFjzz" target="_blank" rel="noopener noreferrer" class="location-card">
+            <div class="location-card-header">
+              <h5>Cabinet Comănești</h5>
+            </div>
+            <div class="location-card-image">
+              <img src="assets/images/locations/eurooptik_comanesti.png" alt="Cabinet Comanesti">
+            </div>
+            <div class="location-card-details">
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Nicolae Ghica Nr. 2</p>
+              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 309</p>
+              <p class="contact-info"><i class="fa fa-envelope"></i>eurooptik_comanesti@yahoo.com</p>
+            </div>
+          </a>
+
+          <a href="https://g.co/kgs/qbvbxa7" target="_blank" rel="noopener noreferrer" class="location-card">
+            <div class="location-card-header">
+              <h5>Cabinet Onești</h5>
+            </div>
+            <div class="location-card-image">
+              <img src="assets/images/locations/eurooptik_onesti.png" alt="Cabinet Onesti">
+            </div>
+            <div class="location-card-details">
+              <p class="location-address"><i class="fas fa-map-marker-alt"></i>str. Poștei Nr. 6</p>
+              <p class="contact-info"><i class="fa fa-phone"></i>0760 676 306</p>
+              <p class="contact-info"><i class="fa fa-envelope"></i>eurooptik_onesti@yahoo.com</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="container"> 
+        <div class="carousel-nav">
+          <button id="prev-location" class="carousel-btn"><i class="fa fa-chevron-left"></i></button>
+          <button id="next-location" class="carousel-btn"><i class="fa fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="sponsors" class="module">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <h2 class="module-title">COMUNITATEA NOASTRĂ</h2>
+            <p class="module-subtitle" style="font-style: normal;">Partenerii noștri care ne sprijină în oferirea celor mai bune servicii.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sponsors-main-carousel-container">
+        <div class="sponsors-carousel-viewport">
+          <div class="sponsors-cards-container">
+
+            <div class="sponsor-card" data-card-name="blood-foundation">
+              <div class="sponsor-left-content">
+                <h5 class="sponsor-name-link">
+                  <a href="https://bloodochallenge.com/" target="_blank" rel="noopener noreferrer">Blood Foundation</a>
+                </h5>
+                <div class="sponsor-textbox">
+                  <p class="sponsor-description">Partener pentru campaniile de donare de sânge. </p>
+                  <p class="sponsor-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt consectetur, nisi nisl aliquam enim, vitae facilisis velit sapien nec erat.</p>
+                </div>
+                <a href="#" class="next-card-link" data-target-card="luxor">Vezi Luxor</a>
+              </div>
+              <div class="sponsor-right-image">
+                <div class="sponsor-image-wrapper">
+                  <img src="assets/images/sponsors/blood.png" alt="Blood Sponsor">
+                </div>
+              </div>
+            </div>
+
+            <div class="sponsor-card" data-card-name="luxor">
+              <div class="sponsor-left-content">
+                <h5 class="sponsor-name-link">
+                  <a href="https://clinicaluxorolinic.ro/" target="_blank" rel="noopener noreferrer">Luxor</a>
+                </h5>
+                <div class="sponsor-textbox">
+                  <p class="sponsor-description">Partener de încredere pentru rame și accesorii de ochelari de calitate.</p>
+                  <p class="sponsor-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt consectetur, nisi nisl aliquam enim, vitae facilisis velit sapien nec erat.</p>
+                </div>
+                <a href="#" class="next-card-link" data-target-card="blood-foundation">Vezi Blood Foundation</a>
+              </div>
+              <div class="sponsor-right-image">
+                <div class="sponsor-image-wrapper">
+                  <img src="assets/images/sponsors/luxor.png" alt="Luxor Sponsor">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  <section id="programare-section" style="display:none;">
+    <button class="appointments-close-btn" onclick="hideProgramareSection()">×</button> 
+    
+    <h2 class="appointments-title">PROGRAMEAZĂ-TE ONLINE</h2>
+    
+      <iframe src="https://eurooptik.ro.programarionline.sophtha.com/"
+        style="width:100%; min-height:600px; border:none;" title="Programare online"></iframe>
+    </div>
+  </section>
+
+    <hr class="divider-d">
+    <footer class="footer">
+      <section class="footer-message">
+        <h2>Vă mai așteptăm la noi!</h2>
+        <button class="footer-appointment-btn" onclick="showProgramareSection()">Programează-te online</button>
+      </section>
+      <div class="footer-content">
+        <div class="footer-locations">
+          <div class="footer-location"><span class="footer-location-name"><b>Bacău - clinică</b></span><br>Luni - Vineri, 9 - 17<br>Str. Ștefan cel Mare, Nr. 7</div>
+          <div class="footer-location"><span class="footer-location-name"><b>Bacău</b></span><br>Luni - Vineri, 9 - 17<br>Str. Razboieni Nr. 7</div>
+          <div class="footer-location"><span class="footer-location-name"><b>Moinești</b></span><br>Luni - Vineri, 8 - 16<br>Str. T. Vladimirescu, nr. 177</div>
+          <div class="footer-location"><span class="footer-location-name"><b>Comănești</b></span><br>Luni - Vineri, 9 - 17<br>Str. N. Ghica, Nr. 2</div>
+          <div class="footer-location"><span class="footer-location-name"><b>Onești</b></span><br>Luni - Vineri, 9 - 17<br>Str. Postei, nr. 6</div>
+        </div>
+        <div class="footer-center">
+          <nav class="footer-menu">
+            <a href="#totop"><b>Acasă</b></a>
+            <a href="#our-services-section"><b>Serviciile Noastre</b></a>
+            <a href="#echipa-noastra"><b>Echipa Noastră</b></a>
+            <a href="#pricing"><b>Tarife</b></a>
+            <a href="#testimoniale"><b>Testimoniale</b></a>
+            <a href="#blog-section"><b>Blog</b></a>
+            <a href="#sponsors"><b>Parteneri</b></a>
+            <a href="#adresses"><b>Contact</b></a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-logo">
+            <img class="footer-logo-image" src="assets/images/logo-small.png" alt="eurooptik logo">
+          </div>
+    </footer>
+    </div>
+
+    <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
+  </main>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="assets/lib/wow/dist/wow.js"></script>
+  <script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+  <script src="assets/lib/isotope/dist/isotope.pkgd.js"></script>
+  <script src="assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+  <script src="assets/lib/flexslider/jquery.flexslider.js"></script>
+  <script src="assets/lib/smoothscroll.js"></script>
+  <script src="assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
+  <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <script src="assets/js/plugins.js"></script>
+  <script src="assets/js/main.js"></script> 
+
+  <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script> 
+  <script src="assets/js/carousel.js"></script>
+  <script src="assets/js/sponsors.js"></script>
+  <script src="assets/js/google-reviews.js"></script>
+  <script type="module" src="assets/js/team.js"></script> 
+  <script type="module" src="assets/js/testimonials.js"></script>
+  <script type="module" src="assets/js/services.js"></script>
+  <script type="module" src="assets/js/pricing.js"></script>
+  <script type="module" src="assets/js/blog.js"></script>
+  <script type="module" src="assets/js/cercetari.js"></script>
+  <script type="module" src="assets/js/new-specializations.js"></script>
+  <script type="module" src="assets/js/config.js"></script>
+    
+  <script>
+    function showProgramareSection() {
+      const section = document.getElementById('programare-section');
+      section.style.display = 'block';
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+    function hideProgramareSection() {
+      document.getElementById('programare-section').style.display = 'none';
+    }
+  </script>
+</body>
+
+</html>

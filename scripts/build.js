@@ -8,14 +8,17 @@ const __dirname = path.dirname(__filename);
 
 const projectRoot = path.join(__dirname, '..');
 const outputDir = path.join(projectRoot, '_site');
-const apiDir = path.join(outputDir, 'api');
+const deployApiDir = path.join(outputDir, 'api'); 
+
+const localApiDir = path.join(projectRoot, 'api');
 
 async function build() {
     try {
         console.log("🚀 Starting build process...");
-        console.log("Cleaning old build directory...");
+        console.log("Cleaning old build directory and ensuring API folders exist...");
         await fs.emptyDir(outputDir);
-        await fs.mkdir(apiDir, { recursive: true });
+        await fs.mkdir(deployApiDir, { recursive: true });
+        await fs.mkdir(localApiDir, { recursive: true });
 
         console.log("Fetching all data from Contentful...");
         const [
@@ -37,17 +40,25 @@ async function build() {
         ]);
         console.log("✅ All data fetched successfully.");
 
-        console.log("Writing data to /_site/api folder...");
+        console.log("Writing data to /_site/api (for deployment) and /api (for local dev)...");
         await Promise.all([
-            fs.writeJson(path.join(apiDir, 'team.json'), teamData),
-            fs.writeJson(path.join(apiDir, 'services.json'), servicesData),
-            fs.writeJson(path.join(apiDir, 'testimonials.json'), testimonialsData),
-            fs.writeJson(path.join(apiDir, 'articles.json'), articlesData),
-            fs.writeJson(path.join(apiDir, 'pricing.json'), pricingData),
-            fs.writeJson(path.join(apiDir, 'specializations.json'), specializationsData),
-            fs.writeJson(path.join(apiDir, 'cercetari.json'), cercetariData)
+            fs.writeJson(path.join(deployApiDir, 'team.json'), teamData),
+            fs.writeJson(path.join(deployApiDir, 'services.json'), servicesData),
+            fs.writeJson(path.join(deployApiDir, 'testimonials.json'), testimonialsData),
+            fs.writeJson(path.join(deployApiDir, 'articles.json'), articlesData),
+            fs.writeJson(path.join(deployApiDir, 'pricing.json'), pricingData),
+            fs.writeJson(path.join(deployApiDir, 'specializations.json'), specializationsData),
+            fs.writeJson(path.join(deployApiDir, 'cercetari.json'), cercetariData),
+
+            fs.writeJson(path.join(localApiDir, 'team.json'), teamData),
+            fs.writeJson(path.join(localApiDir, 'services.json'), servicesData),
+            fs.writeJson(path.join(localApiDir, 'testimonials.json'), testimonialsData),
+            fs.writeJson(path.join(localApiDir, 'articles.json'), articlesData),
+            fs.writeJson(path.join(localApiDir, 'pricing.json'), pricingData),
+            fs.writeJson(path.join(localApiDir, 'specializations.json'), specializationsData),
+            fs.writeJson(path.join(localApiDir, 'cercetari.json'), cercetariData)
         ]);
-        console.log("✅ API data written successfully.");
+        console.log("✅ API data written successfully to both locations.");
 
         console.log("Copying static files to _site...");
         const filesToCopy = [
@@ -68,7 +79,7 @@ async function build() {
         );
         console.log("✅ Static files copied.");
         
-        console.log("\n✨ Build complete! The '_site' folder is ready for deployment.");
+        console.log("\n✨ Build complete! The '_site' folder is ready for deployment and the '/api' folder is updated for local testing.");
 
     } catch (error) {
         console.error('\n❌ BUILD FAILED:', error.message);
