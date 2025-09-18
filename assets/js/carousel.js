@@ -1,6 +1,6 @@
 (function() {
     const container = document.querySelector('.location-cards-container');
-    if (!container) return; // Exit if the container doesn't exist
+    if (!container) return; 
 
     const cards = container.querySelectorAll('.location-card');
     const prevBtn = document.getElementById('prev-location');
@@ -9,24 +9,20 @@
 
     let currentIndex = 0;
     const totalCards = cards.length;
-    const desktopBreakpoint = 992; // Must match CSS breakpoint
+    const desktopBreakpoint = 992; 
 
     function updateCarousel() {
-        // Calculate offset based on current index
-        const offset = -currentIndex * 100; // Each card takes 100% of the viewport width
+        const offset = -currentIndex * 100;
         container.style.transform = 'translateX(' + offset + '%)';
 
-        // Update button states
         if (prevBtn) prevBtn.disabled = (currentIndex === 0);
         if (nextBtn) nextBtn.disabled = (currentIndex >= totalCards - 1);
     }
 
     function enableCarousel() {
-        // Reset index when enabling
         currentIndex = 0;
         updateCarousel();
 
-        // Add event listeners if not already added
         if (prevBtn && nextBtn && viewport && !prevBtn.hasAttribute('data-listener-added')) {
             prevBtn.addEventListener('click', handlePrevClick);
             nextBtn.addEventListener('click', handleNextClick);
@@ -37,8 +33,7 @@
     }
 
     function disableCarousel() {
-        // Reset transform and remove listeners
-        container.style.transform = 'none'; // Remove any active transform
+        container.style.transform = 'none';
         if (prevBtn && nextBtn && viewport && prevBtn.hasAttribute('data-listener-added')) {
             prevBtn.removeEventListener('click', handlePrevClick);
             nextBtn.removeEventListener('click', handleNextClick);
@@ -46,12 +41,10 @@
             viewport.removeEventListener('touchend', handleTouchEnd);
             prevBtn.removeAttribute('data-listener-added');
         }
-        // Ensure buttons are not disabled if they were hidden by JS (though CSS handles this now)
         if (prevBtn) prevBtn.disabled = false;
         if (nextBtn) nextBtn.disabled = false;
     }
 
-    // Event handlers (to be able to remove them)
     function handlePrevClick() {
         if (currentIndex > 0) {
             currentIndex--;
@@ -76,15 +69,15 @@
         let endX = e.changedTouches[0].clientX;
         let diffX = endX - startX;
 
-        if (diffX > 50) { // Swiped right
+        if (diffX > 50) { 
             handlePrevClick();
-        } else if (diffX < -50) { // Swiped left
+        } else if (diffX < -50) {
             handleNextClick();
         }
         startX = null;
     }
 
-    let isCarouselActive = false; // Track current state to prevent redundant calls
+    let isCarouselActive = false; 
 
     function checkScreenSize() {
         if (window.innerWidth < desktopBreakpoint) {
@@ -100,13 +93,9 @@
         }
     }
 
-    // Initial check
     checkScreenSize();
 
-    // Listen for resize events
     window.addEventListener('resize', checkScreenSize);
 
-    // Also call checkScreenSize on DOMContentLoaded to ensure it runs after elements are loaded
     document.addEventListener('DOMContentLoaded', checkScreenSize);
-
 })();

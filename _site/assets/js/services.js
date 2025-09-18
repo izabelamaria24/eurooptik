@@ -117,7 +117,6 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
             const button = document.createElement('button');
             button.className = 'filter-btn';
             button.dataset.category = category.slug;
-            // This assumes your build script will provide `iconUrl` in the JSON data
             button.innerHTML = `<img src="${category.iconUrl}" alt="" class="btn-icon"> ${category.name}`;
             if (index === 0) {
                 button.classList.add('active');

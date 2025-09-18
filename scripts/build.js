@@ -8,78 +8,81 @@ const __dirname = path.dirname(__filename);
 
 const projectRoot = path.join(__dirname, '..');
 const outputDir = path.join(projectRoot, '_site');
-const deployApiDir = path.join(outputDir, 'api'); 
-
 const localApiDir = path.join(projectRoot, 'api');
+
+const locales = ['ro', 'en'];
 
 async function build() {
     try {
-        console.log("🚀 Starting build process...");
-        console.log("Cleaning old build directory and ensuring API folders exist...");
+        console.log("Starting clean multi-language build...");
         await fs.emptyDir(outputDir);
-        await fs.mkdir(deployApiDir, { recursive: true });
-        await fs.mkdir(localApiDir, { recursive: true });
+        await fs.emptyDir(localApiDir);
 
-        console.log("Fetching all data from Contentful...");
-        const [
-            teamData,
-            servicesData,
-            testimonialsData,
-            articlesData,
-            pricingData,
-            specializationsData,
-            cercetariData
-        ] = await Promise.all([
-            contentful.fetchTeamFromContentful(),
-            contentful.fetchServicesFromContentful(),
-            contentful.fetchTestimonialsFromContentful(),
-            contentful.fetchArticlesFromContentful(),
-            contentful.fetchPricingData(),
-            contentful.fetchSpecializationsData(),
-            contentful.fetchCercetariFromContentful()
-        ]);
-        console.log("✅ All data fetched successfully.");
+        const mainHtmlPath = path.join(projectRoot, 'index.html');
+        if (!fs.existsSync(mainHtmlPath)) throw new Error('Main index.html not found!');
+        const htmlTemplate = await fs.readFile(mainHtmlPath, 'utf-8');
 
-        console.log("Writing data to /_site/api (for deployment) and /api (for local dev)...");
-        await Promise.all([
-            fs.writeJson(path.join(deployApiDir, 'team.json'), teamData),
-            fs.writeJson(path.join(deployApiDir, 'services.json'), servicesData),
-            fs.writeJson(path.join(deployApiDir, 'testimonials.json'), testimonialsData),
-            fs.writeJson(path.join(deployApiDir, 'articles.json'), articlesData),
-            fs.writeJson(path.join(deployApiDir, 'pricing.json'), pricingData),
-            fs.writeJson(path.join(deployApiDir, 'specializations.json'), specializationsData),
-            fs.writeJson(path.join(deployApiDir, 'cercetari.json'), cercetariData),
+        for (const locale of locales) {
+            const langCode = locale.split('-')[0];
+            console.log(`--- Building for locale: ${langCode} ---`);
 
-            fs.writeJson(path.join(localApiDir, 'team.json'), teamData),
-            fs.writeJson(path.join(localApiDir, 'services.json'), servicesData),
-            fs.writeJson(path.join(localApiDir, 'testimonials.json'), testimonialsData),
-            fs.writeJson(path.join(localApiDir, 'articles.json'), articlesData),
-            fs.writeJson(path.join(localApiDir, 'pricing.json'), pricingData),
-            fs.writeJson(path.join(localApiDir, 'specializations.json'), specializationsData),
-            fs.writeJson(path.join(localApiDir, 'cercetari.json'), cercetariData)
-        ]);
-        console.log("✅ API data written successfully to both locations.");
+            const langOutputDir = path.join(outputDir, langCode);
+            const deployApiDir = path.join(langOutputDir, 'api');
+            const localLangApiDir = path.join(localApiDir, langCode);
+            await fs.mkdir(deployApiDir, { recursive: true });
+            await fs.mkdir(localLangApiDir, { recursive: true });
 
-        console.log("Copying static files to _site...");
-        const filesToCopy = [
-            'assets',
-            'pages',
-            'index.html',
-            'CNAME' 
-        ];
+            const [
+                teamData, servicesData, testimonialsData, articlesData,
+                pricingData, specializationsData, cercetariData
+            ] = await Promise.all([
+                contentful.fetchTeamFromContentful({ locale }),
+                contentful.fetchServicesFromContentful({ locale }),
+                contentful.fetchTestimonialsFromContentful({ locale }),
+                contentful.fetchArticlesFromContentful({ locale }),
+                contentful.fetchPricingData({ locale }),
+                contentful.fetchSpecializationsData({ locale }),
+                contentful.fetchCercetariFromContentful({ locale })
+            ]);
+            
+            const apiFiles = { teamData, servicesData, testimonialsData, articlesData, pricingData, specializationsData, cercetariData };
+            const writePromises = [];
+            for (const [key, data] of Object.entries(apiFiles)) {
+                const fileName = `${key.replace('Data', '')}.json`;
+                writePromises.push(fs.writeJson(path.join(deployApiDir, fileName), data));
+                writePromises.push(fs.writeJson(path.join(localLangApiDir, fileName), data));
+            }
+            await Promise.all(writePromises);
+
+            let langHtml = htmlTemplate.replace(/<html lang="[^"]*">/, `<html lang="${langCode}">`);
+            
+            const domain = 'https://eurooptik.ro';
+            const hreflangTags = locales.map(l => `<link rel="alternate" hreflang="${l}" href="${domain}/${l}/" />`).join('\n  ');
+            const xDefaultTag = `<link rel="alternate" hreflang="x-default" href="${domain}/${locales[0]}/" />`;
+            langHtml = langHtml.replace('</head>', `  ${hreflangTags}\n  ${xDefaultTag}\n</head>`);
+            
+            await fs.writeFile(path.join(langOutputDir, 'index.html'), langHtml);
+        }
         
+        console.log("Copying shared static assets to _site root...");
+        const assetsToCopy = ['assets', 'pages', 'CNAME'];
         await Promise.all(
-            filesToCopy.map(fileOrDir => {
-                const sourcePath = path.join(projectRoot, fileOrDir);
-                const destPath = path.join(outputDir, fileOrDir);
+            assetsToCopy.map(dir => {
+                const sourcePath = path.join(projectRoot, dir);
+                const destPath = path.join(outputDir, dir);
                 if (fs.existsSync(sourcePath)) {
                     return fs.copy(sourcePath, destPath);
                 }
             })
         );
-        console.log("✅ Static files copied.");
+        console.log("✅ Shared assets copied.");
+
+        console.log("Creating root redirect file...");
+        const defaultLang = locales[0].split('-')[0];
+        const redirectHTML = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Redirecting...</title><link rel="canonical" href="/${defaultLang}/" /><meta http-equiv="refresh" content="0; url=/${defaultLang}/" /><script>window.location.replace('/${defaultLang}/');</script></head><body><p>Redirecting... <a href="/${defaultLang}/">Click here</a>.</p></body></html>`;
+        await fs.writeFile(path.join(outputDir, 'index.html'), redirectHTML.trim());
         
-        console.log("\n✨ Build complete! The '_site' folder is ready for deployment and the '/api' folder is updated for local testing.");
+        console.log("\nBuild complete! The clean '_site' folder is ready.");
 
     } catch (error) {
         console.error('\n❌ BUILD FAILED:', error.message);

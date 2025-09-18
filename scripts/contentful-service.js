@@ -35,7 +35,6 @@ async function initializeContentful() {
     return client;
 }
 
-
 function processMember(memberEntry, memberType) {
     if (!memberEntry || !memberEntry.fields) {
         return null;
@@ -59,44 +58,30 @@ function processMember(memberEntry, memberType) {
 }
 
 
-export async function fetchTeamFromContentful() {
+export async function fetchTeamFromContentful({ locale = 'ro' } = {}) {
     await initializeContentful();
-    if (!client) return { members: [], locations: [] };
+    if (!client) throw new Error("Contentful client failed to initialize.");
 
     try {
         const [teamPageResponse, locationResponse] = await Promise.all([
-            client.getEntries({ content_type: 'team', include: 3 }), 
-            client.getEntries({ content_type: 'locatie', order: 'fields.idFiltru' })
+            client.getEntries({ content_type: 'team', include: 3, locale: locale }), 
+            client.getEntries({ content_type: 'locatie', order: 'fields.idFiltru', locale: locale })
         ]);
 
         if (!teamPageResponse.items.length) {
-            console.error("Team was not found in Contentful.");
+            console.error(`Team page entry not found in Contentful for locale ${locale}.`);
             return { members: [], locations: [] };
         }
 
         const teamFields = teamPageResponse.items[0].fields;
         let allTeamMembers = [];
 
-        (teamFields.listaDoctori || []).forEach(member => {
-            allTeamMembers.push(processMember(member, 'doctor'));
-        });
-        (teamFields.listaAsistenteMedicale || []).forEach(member => {
-            allTeamMembers.push(processMember(member, 'asistenta-medicala'));
-        });
-        (teamFields.listaInfirmiere || []).forEach(member => {
-            allTeamMembers.push(processMember(member, 'infirmiera'));
-        });
-        (teamFields.listaConsilieri || []).forEach(member => {
-            allTeamMembers.push(processMember(member, 'consilier'));
-        });
-        (teamFields.listaManageri || []).forEach(member => {
-            allTeamMembers.push(processMember(member, 'manager'));
-        });
-        (teamFields.listaOptometristi || []).forEach(member => {
-            allTeamMembers.push(processMember(member, 'optometrist'));
-        });
-
-        console.log(allTeamMembers);
+        (teamFields.listaDoctori || []).forEach(member => allTeamMembers.push(processMember(member, 'doctor')));
+        (teamFields.listaAsistenteMedicale || []).forEach(member => allTeamMembers.push(processMember(member, 'asistenta-medicala')));
+        (teamFields.listaInfirmiere || []).forEach(member => allTeamMembers.push(processMember(member, 'infirmiera')));
+        (teamFields.listaConsilieri || []).forEach(member => allTeamMembers.push(processMember(member, 'consilier')));
+        (teamFields.listaManageri || []).forEach(member => allTeamMembers.push(processMember(member, 'manager')));
+        (teamFields.listaOptometristi || []).forEach(member => allTeamMembers.push(processMember(member, 'optometrist')));
         
         allTeamMembers = allTeamMembers.filter(Boolean);
 
@@ -108,36 +93,32 @@ export async function fetchTeamFromContentful() {
         return { members: allTeamMembers, locations };
 
     } catch (error) {
-        console.error('Error at fetching team data from Contentful:', error);
-        throw new Error('Failed to fetch team data.'); 
+        console.error(`Error fetching team data for locale ${locale}:`, error.message);
+        throw new Error(`Failed to fetch team data for locale ${locale}.`);
     }
 }
 
 
-export async function fetchServicesFromContentful() {
+export async function fetchServicesFromContentful({ locale = 'ro' } = {}) {
     await initializeContentful();
-    if (!client) return { servicesData: {}, categories: [] };
+    if (!client) throw new Error("Contentful client failed to initialize.");
 
     try {
         const [serviceEntries, categoryEntries] = await Promise.all([
-            client.getEntries({ content_type: 'serviciu', include: 2, limit: 1000 }),
-            client.getEntries({ content_type: 'categorieServiciu', order: 'fields.idServiciu' }) 
+            client.getEntries({ content_type: 'serviciu', include: 2, limit: 1000, locale: locale }),
+            client.getEntries({ content_type: 'categorieServiciu', order: 'fields.idServiciu', locale: locale }) 
         ]);
 
         const servicesData = serviceEntries.items.reduce((acc, item) => {
             const service = item.fields;
             const categorySlug = service.categorie?.fields?.idServiciu; 
-
-            if (!categorySlug || !service.numeServiciu || !service.pretServiciu) {
-                return acc;
-            }
+            if (!categorySlug || !service.numeServiciu || !service.pretServiciu) return acc;
             
             const serviceName = service.numeServiciu;
             const servicePrice = service.pretServiciu;
             const subCategory = service.subcategorie;
 
             if (!acc[categorySlug]) acc[categorySlug] = {};
-
             if (subCategory?.fields?.numeSubcategorieServiciu) {
                 const subCategoryName = subCategory.fields.numeSubcategorieServiciu;
                 if (!acc[categorySlug][subCategoryName]) acc[categorySlug][subCategoryName] = {};
@@ -154,34 +135,31 @@ export async function fetchServicesFromContentful() {
             slug: item.fields.idServiciu?.toString() || null 
         })).filter(cat => cat.slug && cat.name);
 
-        console.log("Services integration successful!");
-
         return { servicesData, categories };
 
     } catch (error) {
-        console.error('Error fetching services from Contentful:', error);
-        throw new Error('Failed to fetch services.'); 
+        console.error(`Error fetching services for locale ${locale}:`, error.message);
+        throw new Error(`Failed to fetch services for locale ${locale}.`); 
     }
 }
 
 
-export async function fetchArticlesFromContentful() {
+export async function fetchArticlesFromContentful({ locale = 'ro' } = {}) {
     await initializeContentful(); 
-    if (!client) return {};
+    if (!client) throw new Error("Contentful client failed to initialize.");
 
     try {
         const articleEntries = await client.getEntries({
             content_type: 'articol',
-            include: 3 
+            include: 3,
+            locale: locale
         });
 
         const articlesData = articleEntries.items.reduce((acc, entry) => {
             const article = entry.fields;
             const relatedService = article.serviciu?.fields;
-
             if (relatedService && relatedService.numeServiciu) {
                 const serviceName = relatedService.numeServiciu;
-                
                 acc[serviceName] = {
                     title: article.denumireArticol,
                     slug: article.slug,
@@ -191,18 +169,17 @@ export async function fetchArticlesFromContentful() {
             }
             return acc;
         }, {});
-
-        console.log("Articles integration successful!");
+        
         return articlesData;
 
     } catch (error) {
-        console.error('Error fetching articles from Contentful:', error);
-        throw new Error('Failed to fetch articles.'); 
+        console.error(`Error fetching articles for locale ${locale}:`, error.message);
+        throw new Error(`Failed to fetch articles for locale ${locale}.`); 
     }
 }
 
 
-export async function fetchArticleBySlug(slug) {
+export async function fetchArticleBySlug({ slug, locale = 'ro' } = {}) {
     await initializeContentful();
     if (!client || !slug) return null;
 
@@ -211,16 +188,16 @@ export async function fetchArticleBySlug(slug) {
             content_type: 'articol',
             'fields.slug': slug, 
             include: 3,
-            limit: 1 
+            limit: 1,
+            locale: locale
         });
 
         if (entry.items.length === 0) {
-            console.warn(`No article found with slug: ${slug}`);
+            console.warn(`No article found with slug: ${slug} for locale ${locale}`);
             return null;
         }
 
         const article = entry.items[0].fields;
-        
         return {
             title: article.denumireArticol,
             doctors: (article.doctori || []).map(doc => doc.fields.nume).filter(Boolean),
@@ -228,32 +205,29 @@ export async function fetchArticleBySlug(slug) {
         };
 
     } catch (error) {
-        console.error(`Error fetching article with slug ${slug}:`, error);
-        throw new Error('Failed to fetch article by slug.');
+        console.error(`Error fetching article with slug ${slug} for locale ${locale}:`, error.message);
+        throw new Error(`Failed to fetch article by slug for locale ${locale}.`);
     }
 }
 
 
-export async function fetchTestimonialsFromContentful() {
+export async function fetchTestimonialsFromContentful({ locale = 'ro' } = {}) {
     await initializeContentful();
-    if (!client) return [];
+    if (!client) throw new Error("Contentful client failed to initialize.");
 
     try {
         const response = await client.getEntries({
             content_type: 'testimonial', 
             limit: 6,                   
-            order: '-sys.createdAt',  
+            order: '-sys.createdAt',
+            locale: locale
         });
 
         if (!response.items) return [];
 
         const testimonials = response.items.map(item => {
             const { numeClient, continutTestimonial, pozaTestimonial } = item.fields;
-            
-            if (!numeClient || !continutTestimonial || !pozaTestimonial?.fields?.file?.url) {
-                return null;
-            }
-
+            if (!numeClient || !continutTestimonial || !pozaTestimonial?.fields?.file?.url) return null;
             return {
                 id: item.sys.id,
                 author: numeClient,
@@ -265,87 +239,62 @@ export async function fetchTestimonialsFromContentful() {
         return testimonials;
 
     } catch (error) {
-        console.error('Error fetching testimonials from Contentful:', error);
-        throw new Error('Failed to fetch testimonials.');
+        console.error(`Error fetching testimonials for locale ${locale}:`, error.message);
+        throw new Error(`Failed to fetch testimonials for locale ${locale}.`);
     }
 }
 
 
-export async function fetchPricingData() {
+export async function fetchPricingData({ locale = 'ro' } = {}) {
     await initializeContentful();
-    if (!client) return {};
+    if (!client) throw new Error("Contentful client failed to initialize.");
 
     try {
         const response = await client.getEntries({
             content_type: 'tarif',
             include: 2,
-            limit: 1000
+            limit: 1000,
+            locale: locale
         });
 
         if (!response.items) return {};
 
         const pricingData = response.items.reduce((acc, item) => {
             const tarif = item.fields;
-
             const locationName = tarif.locatie?.fields?.numeLocatie;
             const consultationTypeName = tarif.tipConsultatie?.fields?.tipConsultatie;
             const price = tarif.pret;
-
-            const createKey = (str) => {
-                if (!str) return null;
-                return str
-                    .toLowerCase()
-                    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                    .replace(/[^a-z0-9]+/g, '-')
-                    .replace(/^-+|-+$/g, '');
-            };
-
+            const createKey = (str) => str ? str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') : null;
             const locationKey = createKey(locationName);
             const consultationKey = createKey(consultationTypeName);
 
             if (locationKey && consultationKey && typeof price !== 'undefined') {
-                if (!acc[locationKey]) {
-                    acc[locationKey] = {};
-                }
+                if (!acc[locationKey]) acc[locationKey] = {};
                 acc[locationKey][consultationKey] = price;
-            } else {
-                console.warn('Skipping a tarif entry due to missing data.', {
-                    item,
-                    derivedLocationKey: locationKey,
-                    derivedConsultationKey: consultationKey
-                });
             }
-
             return acc;
         }, {});
 
-        console.log("Pricing data fetched and processed successfully:", pricingData);
         return pricingData;
 
     } catch (error) {
-        console.error('Error fetching pricing data from Contentful:', error);
-        throw new Error('Failed to fetch pricing data.');
+        console.error(`Error fetching pricing data for locale ${locale}:`, error.message);
+        throw new Error(`Failed to fetch pricing data for locale ${locale}.`);
     }
 }
 
 
-export async function fetchSpecializationsData() {
+export async function fetchSpecializationsData({ locale = 'ro' } = {}) {
     await initializeContentful();
-    if (!client) return { categories: [], specializations: [] };
+    if (!client) throw new Error("Contentful client failed to initialize.");
 
     try {
         const [categoryResponse, specializationResponse] = await Promise.all([
-            client.getEntries({ content_type: 'categorieSpecialitate', order: 'fields.idFiltru' }),
-            client.getEntries({ content_type: 'specialitate', include: 3, order: 'sys.createdAt' })
+            client.getEntries({ content_type: 'categorieSpecialitate', order: 'fields.idFiltru', locale: locale }),
+            client.getEntries({ content_type: 'specialitate', include: 3, order: 'sys.createdAt', locale: locale })
         ]);
 
-        const createKey = (str) => {
-            if (!str) return null;
-            return str.toLowerCase()
-                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/^-+|-+$/g, '');
-        };
+        const createKey = (str) => str ? str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') : null;
 
         const categories = categoryResponse.items.map(item => ({
             id: item.fields.idFiltru.toString(),
@@ -364,14 +313,10 @@ export async function fetchSpecializationsData() {
             const articles = (fields.articles || []).map(articleEntry => {
                 const articleFields = articleEntry?.fields;
                 if (!articleFields) return null;
-
                 const title = articleFields.denumireArticol;
                 const slug = articleFields.slug;
                 const categorySlug = articleFields.serviciu?.fields?.categorie?.fields?.idServiciu?.toString() || null;
-
-                if (title && slug && categorySlug) {
-                    return { title, slug, categorySlug };
-                }
+                if (title && slug && categorySlug) return { title, slug, categorySlug };
                 return null;
             }).filter(Boolean); 
 
@@ -383,32 +328,30 @@ export async function fetchSpecializationsData() {
                 articleTitle: fields.titluSpecialitate,
                 articleDescription: fields.descriereSpecialitate,
                 articleImage: `https:${fields.pozaSpecialitate?.fields?.file?.url || ''}`,
-                
                 testimonialId,
                 testimonialQuote,
                 testimonialAuthorImage,
-                
                 articles: articles
             };
         }).filter(Boolean);
 
-        console.log("Specializations data fetched successfully:", { categories, specializations });
         return { categories, specializations };
 
     } catch (error) {
-        console.error('Error fetching specializations data from Contentful:', error);
-        throw new Error('Failed to fetch specializations.');
+        console.error(`Error fetching specializations for locale ${locale}:`, error.message);
+        throw new Error(`Failed to fetch specializations for locale ${locale}.`);
     }
 }
 
-export async function fetchCercetariFromContentful() {
+export async function fetchCercetariFromContentful({ locale = 'ro' } = {}) {
     await initializeContentful();
-    if (!client) return {};
+    if (!client) throw new Error("Contentful client failed to initialize.");
 
     try {
         const response = await client.getEntries({
             content_type: 'articolCercetareStiintifica',
-            include: 1
+            include: 1,
+            locale: locale
         });
 
         if (!response.items) return {};
@@ -424,13 +367,11 @@ export async function fetchCercetariFromContentful() {
             }
             return acc;
         }, {});
-
-        console.log(articles)
         
         return articles;
 
     } catch (error) {
-        console.error('Error fetching cercetari articles from Contentful:', error);
-        throw new Error('Failed to fetch cercetari.');
+        console.error(`Error fetching cercetari articles for locale ${locale}:`, error.message);
+        throw new Error(`Failed to fetch cercetari for locale ${locale}.`);
     }
 }

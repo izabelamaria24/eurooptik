@@ -287,7 +287,13 @@ max-height: 70px;
 margin-top: -20px;
 }
 
-/* Mobile navbar collapse menu background for transparent state */
+.language-switcher .lang-link.active {
+  font-weight: bold;
+  text-decoration: underline;
+  pointer-events: none;
+  color: #ad2e61;
+}
+
 @media (max-width: 767px) {
 .navbar-custom.navbar-transparent .navbar-collapse {
 background-color: rgba(56, 53, 53, 0.9);

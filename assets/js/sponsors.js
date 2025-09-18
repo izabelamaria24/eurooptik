@@ -1,4 +1,3 @@
-// assets/js/sponsors.js
 $(document).ready(function() {
     const sponsorsContainer = $('.sponsors-cards-container');
     const sponsorCards = $('.sponsor-card');
