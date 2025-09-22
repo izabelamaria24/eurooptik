@@ -38,6 +38,7 @@
   <link href="assets/css/reviews.css" rel="stylesheet">
   <link href="assets/css/appointments.css" rel="stylesheet">
   <link href="assets/css/navbar.css" rel="stylesheet">
+  <link href="assets/css/reels.css" rel="stylesheet">
 
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
 </head>
@@ -204,6 +205,37 @@
                     <div id="team-grid" class="team-carousel">
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="module reels-section" id="reels-section-wrapper">
+        <div class="container">
+            <h2>REELS</h2>
+            <p>Selectați medicul oftalmolog sau subiectul medical pentru a viziona videoclipurile Eurooptik.</p>
+            
+            <div class="reels-filters">
+                <div class="custom-select-wrapper">
+                    <select id="doctor-filter">
+                        <option value="">Selectați medicul oftalmolog</option>
+                    </select>
+                </div>
+                <div class="custom-select-wrapper">
+                    <select id="category-filter">
+                        <option value="">Selectați subiectul</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="reels-carousel-wrapper">
+                <button class="carousel-nav-btn prev-btn" aria-label="Previous slide"></button>
+                
+                <div class="reels-carousel-viewport">
+                    <div class="reels-container" id="reels-container">
+                    </div>
+                </div>
+
+                <button class="carousel-nav-btn next-btn" aria-label="Next slide"></button>
             </div>
         </div>
     </section>
@@ -637,6 +669,7 @@
   <script type="module" src="assets/js/blog.js"></script>
   <script type="module" src="assets/js/cercetari.js"></script>
   <script type="module" src="assets/js/new-specializations.js"></script>
+  <script type="module" src="assets/js/reels.js"></script>
   <script type="module" src="assets/js/config.js"></script>
     
   <script>

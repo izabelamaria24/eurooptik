@@ -375,3 +375,56 @@ export async function fetchCercetariFromContentful({ locale = 'ro' } = {}) {
         throw new Error(`Failed to fetch cercetari for locale ${locale}.`);
     }
 }
+
+
+export async function fetchReelsFromContentful({ locale = 'ro' } = {}) {
+    await initializeContentful();
+    if (!client) throw new Error("Contentful client failed to initialize.");
+
+    try {
+        const response = await client.getEntries({
+            content_type: 'reel', 
+            include: 2,           
+            locale: locale
+        });
+
+        if (!response.items) return { reels: [], doctors: [], categories: [] };
+
+        const createKey = (str) => str ? str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') : null;
+
+        const allReels = response.items.map(item => {
+            const fields = item.fields;
+            const videoAsset = fields.linkVideo?.fields?.file?.url;
+            
+            if (!videoAsset || !fields.doctor?.fields || !fields.categorie?.fields) {
+                return null;
+            }
+            
+            const doctorName = fields.doctor.fields.nume;
+            const doctorSlug = createKey(doctorName);
+            
+            return {
+                id: item.sys.id,
+                title: fields.titlu || '',
+                videoUrl: `https:${videoAsset}`, 
+                doctorName: doctorName,
+                doctorSlug: doctorSlug,
+                categoryName: fields.categorie.fields.numeCategorieReel,
+                categorySlug: fields.categorie.fields.slug, 
+            };
+        }).filter(Boolean);
+
+        const uniqueDoctors = [...new Map(allReels.map(item => [item.doctorSlug, { name: item.doctorName, slug: item.doctorSlug }])).values()];
+        const uniqueCategories = [...new Map(allReels.map(item => [item.categorySlug, { name: item.categoryName, slug: item.categorySlug }])).values()];
+
+        return {
+            reels: allReels,
+            doctors: uniqueDoctors,
+            categories: uniqueCategories
+        };
+
+    } catch (error) {
+        console.error(`Error fetching reels for locale ${locale}:`, error.message);
+        throw new Error(`Failed to fetch reels for locale ${locale}.`);
+    }
+}
