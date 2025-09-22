@@ -30,19 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function populateFilters(doctors, categories) {
-        const populate = (select, items, defaultTextKey) => {
-            const lang = window.location.pathname.split('/')[1] || 'ro';
-            const defaultTexts = {
-                ro: { doctor: 'Selectați medicul oftalmolog', category: 'Selectați subiectul' },
-                en: { doctor: 'Select ophthalmologist', category: 'Select subject' }
-            };
-            select.innerHTML = `<option value="">${defaultTexts[lang][defaultTextKey]}</option>`;
+        const populate = (select, items, defaultText) => {
+            select.innerHTML = `<option value="">${defaultText}</option>`;
             items.forEach(item => {
                 select.add(new Option(item.name, item.slug));
             });
         };
-        populate(doctorFilter, doctors, 'doctor');
-        populate(categoryFilter, categories, 'category');
+        populate(doctorFilter, doctors, 'Selectați medicul oftalmolog');
+        populate(categoryFilter, categories, 'Selectați subiectul');
     }
     
     function getVideoHtml(url) {
@@ -61,9 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderReels(reelsToRender) {
         reelsContainer.innerHTML = '';
-        if (reelsToRender.length === 0) {
-            const lang = window.location.pathname.split('/')[1] || 'ro';
-            const message = lang === 'ro' ? 'Nu s-au găsit videoclipuri.' : 'No videos found.';
+        if (!reelsToRender || reelsToRender.length === 0) {
+            const message = 'Nu s-au găsit videoclipuri.';
             reelsContainer.innerHTML = `<p style="width: 100%; text-align: center;">${message}</p>`;
         } else {
             reelsToRender.forEach(reel => {
