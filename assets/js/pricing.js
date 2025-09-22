@@ -99,7 +99,6 @@ async function initPricingLogic(pricingSection) {
 
     } catch (error) {
         console.error("Failed to initialize pricing section:", error);
-        // Hide the section or show an error message if data fails to load
         pricingSection.innerHTML = '<p>A apărut o eroare la încărcarea tarifelor.</p>';
     }
 }
