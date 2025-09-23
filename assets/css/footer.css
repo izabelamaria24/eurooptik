@@ -1,11 +1,6 @@
-/* ================================
-   FOOTER STYLES
-   ================================ */
-
-/* Base Footer Styles */
 .footer {
   color: black;
-  font-family: inherit;
+  font-family: 'Roboto', sans-serif;
   background: #eaf0ef;
 }
 

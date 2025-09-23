@@ -1,3 +1,7 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 .testimonial-wrapper {
   width: 100%;
   background-color: #fbeff3;
@@ -26,8 +30,20 @@
   transform: translateY(0);
 }
 
-.testimonial-quote { font-family: 'Volkhov', serif; font-size: 20px; font-style: italic; border-left: 3px solid #4aa190; padding-left: 20px; margin-bottom: 20px; }
-.testimonial-author { font-weight: 700; font-size: 16px; color: black; }
+.testimonial-quote { 
+  font-family: 'Volkhov', serif; 
+  font-size: 20px; 
+  font-style: italic; 
+  border-left: 3px solid #4aa190; 
+  padding-left: 20px; 
+  margin-bottom: 20px; 
+}
+
+.testimonial-author { 
+  font-weight: 700; 
+  font-size: 16px; 
+  color: black; 
+}
 
 .image-container {
   display: flex;
