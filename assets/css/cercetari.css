@@ -5,10 +5,25 @@
     text-align: center;
 }
 
-#cercetari-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
+#cercetari-section .container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#cercetari-section .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#cercetari-section .col-sm-10,
+#cercetari-section .col-sm-offset-1,
+#cercetari-section .col-sm-12 {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #cercetari-cuprins-wrapper {
@@ -17,7 +32,9 @@
     align-items: stretch;
     gap: 40px;
     margin: 50px auto 120px auto;
-    max-width: 1100px;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 #cercetari-image-container {
@@ -46,6 +63,7 @@
 
 #cercetari-filter-container::before {
     content: 'Cuprins';
+    font-family: 'Roboto', sans-serif;
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 25px;
@@ -62,6 +80,7 @@
     background-color: transparent;
     color: #333;
     border: none;
+    border-bottom: 1px solid #f0f0f0;
     border-radius: 0;
     padding: 18px 0;
     font-size: 18px;
@@ -69,11 +88,12 @@
     text-align: left;
     width: 100%;
     position: relative;
-    display: flex; 
+    display: flex;
     align-items: center;
     gap: 15px;
     text-decoration: none;
-    transition: color 0.3s ease; 
+    transition: color 0.3s ease;
+    font-family: 'Roboto', sans-serif;
 }
 
 #cercetari-cuprins-list li:last-child .cercetare-btn {
@@ -88,18 +108,18 @@
 
 #cercetari-cuprins-list .cercetare-btn.active {
     background-color: transparent;
-    color: #d9538d; 
+    color: #d9538d;
     font-weight: 700;
 }
 
 #cercetari-cuprins-list .cercetare-btn:not(.active):hover {
     background-color: transparent;
-    color: #d9538d; 
+    color: #d9538d;
 }
 
 #cercetari-cuprins-list .cercetare-btn::after {
     content: '↓';
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     position: absolute;
     right: 5px;
     top: 50%;
@@ -159,7 +179,7 @@
 }
 
 #cercetari-article-display-container #cercetari-article-display-content p {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 17px;
     line-height: 1.8;
     color: #333;
@@ -170,6 +190,7 @@
     #cercetari-cuprins-wrapper {
         flex-direction: column;
         align-items: center;
+        padding: 0 20px;
     }
 
     #cercetari-image-container {

@@ -6,7 +6,7 @@
 }
 
 #blog-container {
-    max-width: 1100px;
+    width: 100%; /* Changed from max-width to width: 100% for page-wide */
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -17,7 +17,9 @@
     align-items: stretch; 
     gap: 40px;
     margin: 50px auto 120px auto;
-    max-width: 1100px;
+    width: 100%; /* Changed from max-width to width: 100% for page-wide */
+    padding: 0 20px; /* Added padding for inner spacing */
+    box-sizing: border-box; /* Ensure padding is included in width */
 }
 
 #cuprins-image-container {
@@ -47,6 +49,7 @@
 
 #blog-filter-container::before {
     content: 'Cuprins';
+    font-family: 'Roboto', sans-serif; /* Added font-family */
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 25px;
@@ -68,6 +71,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    font-family: 'Roboto', sans-serif; /* Added font-family */
 }
 
 #blog-filter-container .filter-btn:last-child {
@@ -88,7 +92,7 @@
 
 #blog-filter-container .filter-btn::after {
     content: '↓';
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif; /* Changed font-family for consistency */
     position: absolute;
     right: 5px;
     top: 50%;
@@ -109,9 +113,11 @@
 
 #blog-carousel-container {
     position: relative;
-    max-width: 1100px;
+    width: 100%; /* Changed from max-width to width: 100% for page-wide */
     margin: 0 auto;
     overflow: hidden;
+    padding: 0 20px; /* Added padding for inner spacing */
+    box-sizing: border-box; /* Ensure padding is included in width */
 }
 
 #blog-carousel-slider {
@@ -153,6 +159,7 @@
     font-weight: 600;
     color: #d9538d;
     line-height: 1.4;
+    font-family: 'Roboto', sans-serif; /* Added font-family */
 }
 
 #blog-carousel-container .carousel-arrow {
@@ -166,6 +173,7 @@
     color: #333; 
     cursor: pointer;
     z-index: 10;
+    font-family: 'Roboto', sans-serif; /* Changed font-family for consistency */
 }
 
 #blog-carousel-container .carousel-arrow.prev { left: 10px; }
@@ -255,7 +263,7 @@
 }
 
 #blog-article-display-container #article-display-content p {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Changed font-family */
     font-size: 17px;
     line-height: 1.8;
     color: #333;
@@ -266,10 +274,11 @@
     list-style-position: outside;
     padding-left: 25px;
     margin-bottom: 25px;
+    font-family: 'Roboto', sans-serif; /* Added font-family */
 }
 
 #blog-article-display-container #article-display-content li {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Changed font-family */
     font-size: 17px;
     line-height: 1.8;
     color: #333;
@@ -288,6 +297,7 @@
     #cuprins-wrapper {
         flex-direction: column;
         align-items: center;
+        padding: 0 20px; /* Ensure padding is maintained */
     }
 
     #cuprins-image-container {
