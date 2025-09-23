@@ -190,7 +190,7 @@
     background-color: #d9538d;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) { /* Changed from 768px to 992px to apply small screen layout to medium screens */
     #our-services-section { padding: 40px 0; }
     
     #services-filter-container .filter-btn { 
