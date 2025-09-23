@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0px;
+  gap: 24px; /* Added space between elements */
   flex-wrap: wrap;
 }
 
@@ -42,9 +42,9 @@
   background: #eaf0ef;
   padding: 60px 5vw;
   display: grid;
-  grid-template-columns: 1fr 0.9fr 0.4fr; /* ✅ reduced spacing */
+  grid-template-columns: 1fr 0.9fr 0.4fr;
   align-items: start;
-  gap: 20px; /* ✅ small space between columns */
+  gap: 20px;
   overflow-x: hidden;
   text-align: left;
 }
@@ -86,8 +86,8 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  align-items: flex-start;   /* ✅ text inside aligned left */
-  justify-self: end;         /* ✅ column block aligned right */
+  align-items: flex-start;
+  justify-self: end;
 }
 
 .footer-bacau-locations-wrapper {
@@ -103,7 +103,7 @@
   max-width: unset;
   font-size: 1.1em;
   line-height: 1.4;
-  text-align: left; /* ✅ left aligned text */
+  text-align: left;
 }
 
 .footer-location-name {
@@ -134,7 +134,7 @@
 
 @media (max-width: 1300px) {
   .footer-content {
-    gap: 15px; /* ✅ slightly tighter on medium screens */
+    gap: 15px;
     padding: 50px 3vw;
   }
 
@@ -157,7 +157,7 @@
   /* Footer Message - Mobile */
   .footer-message {
     flex-direction: column;
-    gap: 0;
+    gap: 16px; /* Added space between elements for mobile */
     text-align: center;
   }
 
