@@ -1549,3 +1549,64 @@ body, .navbar, .navbar a {
         color: #2a8be0 !important;
     }
 }
+
+.home-main-elements-wrapper {
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.home-main-elements-wrapper .main-home-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+#google-reviews-display {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  width: 100%; /* Ensure it spans the wrapper width */
+}
+
+.home-buttons-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.home-buttons-wrapper .btn {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 180px;
+  padding: 12px 20px;
+}
+
+@media (max-width: 767px) {
+  .home-main-elements-wrapper {
+    width: 95%;
+  }
+
+  #google-reviews-display {
+    margin-top: 15px;
+    margin-bottom: 25px;
+  }
+
+  .home-buttons-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .home-buttons-wrapper .btn {
+    width: 100%;
+    max-width: 300px;
+    min-width: unset;
+  }
+}
