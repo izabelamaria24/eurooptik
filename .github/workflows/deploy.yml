@@ -35,14 +35,10 @@ jobs:
       - name: Deploy to Staging server via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
+          protocol: ftps
           server: ${{ secrets.FTP_SERVER_STAGING }}
-          
           username: ${{ secrets.FTP_USERNAME_STAGING }}
-          
           password: ${{ secrets.FTP_PASSWORD_STAGING }}
-
           port: 21021
-          
           local-dir: ./_site/
-          
           dangerous-clean-slate: true
