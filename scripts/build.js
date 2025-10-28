@@ -24,7 +24,8 @@ async function processHtmlFile(filePath, langCode, relativePathPrefix) {
 async function fetchAllContentfulData(locale) {
     const [
         teamData, servicesData, testimonialsData, articlesData,
-        pricingData, specializationsData, cercetariData, reelsData 
+        pricingData, specializationsData, cercetariData, reelsData,
+        sponsorsData 
     ] = await Promise.all([
         contentful.fetchTeamFromContentful({ locale }),
         contentful.fetchServicesFromContentful({ locale }),
@@ -33,7 +34,8 @@ async function fetchAllContentfulData(locale) {
         contentful.fetchPricingData({ locale }),
         contentful.fetchSpecializationsData({ locale }),
         contentful.fetchCercetariFromContentful({ locale }),
-        contentful.fetchReelsFromContentful({ locale })
+        contentful.fetchReelsFromContentful({ locale }),
+        contentful.fetchSponsorsFromContentful({ locale }) 
     ]);
 
     return {
@@ -44,7 +46,8 @@ async function fetchAllContentfulData(locale) {
         pricing: pricingData,
         specializations: specializationsData,
         cercetari: cercetariData,
-        reels: reelsData 
+        reels: reelsData,
+        sponsors: sponsorsData 
     };
 }
 
@@ -53,11 +56,17 @@ async function writeApiFiles(data, deployDir, localDir) {
     await fs.ensureDir(localDir);
 
     for (const [key, content] of Object.entries(data)) {
-        const fileName = `${key}.json`;
-        await fs.writeJson(path.join(deployDir, fileName), content);
-        await fs.writeJson(path.join(localDir, fileName), content);
+        const hasContent = Array.isArray(content) ? content.length > 0 : content && Object.keys(content).length > 0;
+        if (hasContent) {
+            const fileName = `${key}.json`;
+            await fs.writeJson(path.join(deployDir, fileName), content);
+            await fs.writeJson(path.join(localDir, fileName), content);
+        } else {
+            console.log(`- Skipped writing empty file for '${key}'.`);
+        }
     }
 }
+
 
 async function buildHtmlForLocale(langCode, langOutputDir) {
     const mainHtmlPath = path.join(CONFIG.PROJECT_ROOT, 'index.html');
@@ -91,10 +100,16 @@ async function build() {
 
             const langOutputDir = path.join(CONFIG.OUTPUT_DIR, langCode);
             const deployApiDir = path.join(langOutputDir, 'api');
-            const localLangApiDir = path.join(CONFIG.LOCAL_API_DIR, langCode);
+            const localApiDir = CONFIG.LOCAL_API_DIR;
 
             const allData = await fetchAllContentfulData(locale);
-            await writeApiFiles(allData, deployApiDir, localLangApiDir);
+            
+            if (langCode === 'ro') {
+                await writeApiFiles(allData, deployApiDir, localApiDir);
+            } else {
+                await writeApiFiles(allData, deployApiDir, localApiDir);
+            }
+
             console.log(`✅ API data written for ${langCode}.`);
 
             await buildHtmlForLocale(langCode, langOutputDir);
