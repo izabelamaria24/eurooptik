@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sponsorsWrapper = document.querySelector('.sponsors-cards-container');
     const prevBtn = document.querySelector('#sponsors .prev-btn');
     const nextBtn = document.querySelector('#sponsors .next-btn');
-    
     const modal = document.getElementById('sponsor-modal');
     const modalTitle = document.getElementById('sponsor-modal-title');
     const modalDescription = document.getElementById('sponsor-modal-description');
@@ -12,34 +11,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!sponsorsSection || !sponsorsWrapper || !modal) return;
 
-    async function initSponsorsSection() {
-        try {
-            const response = await fetch('api/sponsors.json');
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            const sponsors = await response.json();
-            
-            if (sponsors && sponsors.length > 0) {
-                renderSponsorSlides(sponsors);
-                initializeCarousel(sponsors.length);
-            } else {
-                sponsorsSection.style.display = 'none';
-            }
-        } catch (error) {
-            console.error("Error initializing sponsors section:", error);
-            sponsorsSection.style.display = 'none';
-        }
+    let allSponsors = [];
+    let currentSlide = 0;
+
+    function getItemsPerPage() {
+        return window.innerWidth <= 1500 ? 1 : 5;
     }
     
-    function renderSponsorSlides(sponsors) {
+    function renderSponsorSlides() {
         sponsorsWrapper.innerHTML = '';
-        const itemsPerPage = 5;
-        const totalSlides = Math.ceil(sponsors.length / itemsPerPage);
+        const itemsPerPage = getItemsPerPage();
+        const totalSlides = Math.ceil(allSponsors.length / itemsPerPage);
 
         for (let i = 0; i < totalSlides; i++) {
             const slide = document.createElement('div');
             slide.className = 'sponsor-slide';
             
-            const slideSponsors = sponsors.slice(i * itemsPerPage, (i + 1) * itemsPerPage);
+            const slideSponsors = allSponsors.slice(i * itemsPerPage, (i + 1) * itemsPerPage);
             
             slideSponsors.forEach(sponsor => {
                 const card = document.createElement('div');
@@ -57,37 +45,62 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function initializeCarousel(totalItems) {
-        let currentIndex = 0;
-        const itemsPerPage = 5;
-        const totalPages = Math.ceil(totalItems / itemsPerPage);
+    function updateCarousel() {
+        const itemsPerPage = getItemsPerPage();
+        const totalPages = Math.ceil(allSponsors.length / itemsPerPage);
 
-        function updateCarousel() {
-            sponsorsWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-            prevBtn.disabled = currentIndex === 0;
-            nextBtn.disabled = currentIndex >= totalPages - 1;
-        }
+        if (currentSlide >= totalPages) currentSlide = totalPages - 1;
+        if (currentSlide < 0) currentSlide = 0;
 
-        nextBtn.addEventListener('click', () => {
-            if (currentIndex < totalPages - 1) {
-                currentIndex++;
-                updateCarousel();
-            }
-        });
+        sponsorsWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide >= totalPages - 1;
 
-        prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
-        });
-
-        if (totalPages <= 1) {
-            document.querySelector('.sponsors-nav').style.display = 'none';
-        }
-
-        updateCarousel();
+        const nav = document.querySelector('.sponsors-nav');
+        if(nav) nav.style.display = totalPages > 1 ? 'flex' : 'none';
     }
+
+    async function initSponsorsSection() {
+        try {
+            const response = await fetch('api/sponsors.json');
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            allSponsors = await response.json();
+            
+            if (allSponsors.length > 0) {
+                renderSponsorSlides(); 
+                updateCarousel(); 
+            } else {
+                sponsorsSection.style.display = 'none';
+            }
+        } catch (error) {
+            console.error("Error initializing sponsors section:", error);
+            sponsorsSection.style.display = 'none';
+        }
+    }
+
+    nextBtn.addEventListener('click', () => {
+        const totalPages = Math.ceil(allSponsors.length / getItemsPerPage());
+        if (currentSlide < totalPages - 1) {
+            currentSlide++;
+            updateCarousel();
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateCarousel();
+        }
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            renderSponsorSlides();
+            updateCarousel(); 
+        }, 100);
+    });
 
     sponsorsWrapper.addEventListener('click', (event) => {
         const card = event.target.closest('.sponsor-card');
@@ -95,12 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function openModal(card) {
-        const name = card.dataset.name;
-        const description = card.dataset.description;
+        modalTitle.textContent = card.dataset.name;
+        modalDescription.textContent = card.dataset.description;
         const url = card.dataset.url;
-
-        modalTitle.textContent = name;
-        modalDescription.textContent = description;
         
         if (url && url !== '#') {
             modalLink.href = url;
