@@ -1,30 +1,16 @@
-name: Build and Deploy Eurooptik Website
+name: Build and Deploy to Staging
 
 on:
   push:
     branches:
-      - master
+      - test-deploy
+      
   workflow_dispatch:
-  repository_dispatch:
-    types: [ contentful-update ]
 
 jobs:
-  build-and-deploy:
-    concurrency:
-      group: "pages"
-      cancel-in-progress: true
-      
+  build-and-deploy-staging:
     runs-on: ubuntu-latest
     
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -46,14 +32,13 @@ jobs:
       - name: Verify build output
         run: ls -R ./_site
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to Staging server via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          path: ./_site
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          protocol: ftps
+          server: ${{ secrets.FTP_SERVER_STAGING }}
+          username: ${{ secrets.FTP_USERNAME_STAGING }}
+          password: ${{ secrets.FTP_PASSWORD_STAGING }}
+          port: 21021
+          local-dir: ./_site/
+          dangerous-clean-slate: true

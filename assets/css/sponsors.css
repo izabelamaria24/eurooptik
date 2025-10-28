@@ -1,193 +1,78 @@
 #sponsors {
-    padding-top: 60px;
-    padding-bottom: 60px;
-    background-color: white;
-}
-
-#sponsors .module-title {
-    margin-bottom: 40px;
-    color: #333;
-}
-
-.sponsors-main-carousel-container {
     position: relative;
-    width: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    padding-left: 15px;
-    padding-right: 15px;
-    box-sizing: border-box;
+    background-color: #fff;
+    padding: 80px 0;
 }
 
-.sponsors-carousel-viewport {
-    width: 100%;
+.sponsors-container {
+    max-width: 1600px;
+    margin: 0 auto;
     overflow: hidden;
-    position: relative;
 }
 
 .sponsors-cards-container {
     display: flex;
     transition: transform 0.5s ease-in-out;
+}
+
+.sponsor-slide {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
     flex-wrap: nowrap;
-    width: 100%;
+    gap: 35px;
+    padding: 0 15px;
+    box-sizing: border-box;
 }
 
 .sponsor-card {
-    flex: 0 0 100%;
-    padding: 15px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    text-align: center;
-    min-height: 300px;
-    flex-direction: row;
-    width: 100%;
-}
-
-.sponsor-left-content {
-    flex: 1;
-    padding: 20px;
-    text-align: left;
+    flex: 1 1 0;
+    max-width: 290px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    outline: 1px solid green;
-}
-
-.sponsor-right-image {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.sponsor-name-link {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.sponsor-name-link a {
-    color: #333;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.sponsor-name-link a:hover {
-    color: #D13775;
-    text-decoration: underline;
-}
-
-.sponsor-textbox {
-    background-color: #e6ffe6;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.sponsor-description {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.6;
-    margin: 0;
-}
-
-.next-card-link {
-    font-size: 16px;
-    color: #D13775;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-    display: inline-block;
-}
-
-.next-card-link:hover {
-    color: #0056b3;
-    text-decoration: underline;
-}
-
-.sponsor-image-wrapper {
-    position: relative;
-    width: 100%;
-    padding-top: 75%;
-    overflow: hidden;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    border: 3px solid #e0b0c2;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.sponsor-image-wrapper img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    padding: 10px;
-    box-sizing: border-box;
+.sponsor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.sponsors-carousel-nav {
-    display: none !important;
+.sponsor-card-header {
+    padding: 20px 10px; text-align: center; flex-shrink: 0; height: 64px;
+    box-sizing: border-box; display: flex; align-items: center; justify-content: center;
 }
+.sponsor-card-header h5 { margin: 0; font-size: 20px; font-weight: 600; color: #333; }
+.sponsor-card-logo {
+    height: 170px; padding: 15px; box-sizing: border-box;
+    display: flex; align-items: center; justify-content: center;
+}
+.sponsor-card-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-@media (max-width: 991px) {
-    .sponsors-main-carousel-container {
-        padding-left: 10px;
-        padding-right: 10px;
+.sponsors-nav {
+    display: flex; justify-content: center; gap: 20px; margin-top: 40px;
+}
+.sponsors-nav-btn {
+    background: #ccc; color: #fff; border: none; border-radius: 50%;
+    width: 45px; height: 45px; font-size: 20px; cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.sponsors-nav-btn:not(:disabled) { background-color: #d13775; }
+.sponsors-nav-btn:disabled { cursor: not-allowed; }
+
+.sponsor-modal-backdrop{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}.sponsor-modal-backdrop.visible{opacity:1;visibility:visible}.sponsor-modal-content{background-color:#fff;padding:30px 40px;border-radius:8px;max-width:600px;width:90%;position:relative;box-shadow:0 5px 15px rgba(0,0,0,.3);transform:scale(.95);transition:transform .3s ease}.sponsor-modal-backdrop.visible .sponsor-modal-content{transform:scale(1)}.sponsor-modal-close-btn{position:absolute;top:10px;right:15px;background:none;border:none;font-size:28px;color:#888;cursor:pointer}#sponsor-modal-title{margin-top:0;margin-bottom:20px;font-size:24px;color:#333}#sponsor-modal-description{font-size:16px;line-height:1.6;color:#555;margin-bottom:30px;white-space:pre-wrap}.sponsor-modal-button{display:inline-block;padding:12px 25px;background-color:#d13775;color:#fff;text-decoration:none;border-radius:5px;font-weight:700;transition:background-color .3s ease}.sponsor-modal-button:hover{background-color:#b92a63}
+
+@media (max-width: 1500px) {
+    .sponsor-slide {
+        padding: 0 20px;
     }
     .sponsor-card {
-        padding: 10px;
-        flex-direction: row;
-    }
-    .sponsor-left-content {
-        padding: 15px 10px;
-        flex: 1;
-        align-items: flex-start;
-        text-align: left;
-    }
-    .sponsor-right-image {
-        padding: 15px 10px;
-        flex: 0 0 250px;
-        max-width: 250px;
-    }
-    .sponsor-image-wrapper {
-        width: 100%;
-        padding-top: 75%;
-    }
-}
-
-@media (max-width: 767px) {
-    .sponsors-main-carousel-container {
-        padding-left: 0;
-        padding-right: 0;
-    }
-    .sponsor-card {
-        flex-direction: column;
-        text-align: center;
-        padding: 0;
-    }
-
-    .sponsor-left-content {
-        align-items: center;
-        text-align: center;
-        padding: 20px 15px 0 15px;
-    }
-
-    .sponsor-right-image {
-        width: 100%;
         max-width: 100%;
-        margin: 0 auto;
-        padding: 0;
-    }
-
-    .sponsor-image-wrapper {
-        border-radius: 0;
-        box-shadow: none;
     }
 }

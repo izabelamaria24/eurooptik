@@ -428,3 +428,44 @@ export async function fetchReelsFromContentful({ locale = 'ro' } = {}) {
         throw new Error(`Failed to fetch reels for locale ${locale}.`);
     }
 }
+
+export async function fetchSponsorsFromContentful({ locale = 'ro' } = {}) {
+    await initializeContentful();
+    if (!client) throw new Error("Contentful client failed to initialize.");
+
+    try {
+        const response = await client.getEntries({
+            content_type: 'sponsor', 
+            include: 1,
+            locale: locale,
+            order: 'sys.createdAt' 
+        }); 
+
+        if (!response.items) {
+            console.warn(`No sponsors found in Contentful for locale ${locale}.`);
+            return [];
+        }
+
+        const sponsors = response.items.map(item => {
+            const { fields } = item;
+            
+            if (!fields.nume || !fields.logo?.fields?.file?.url) {
+                return null;
+            }
+
+            return {
+                id: item.sys.id,
+                name: fields.nume,
+                description: fields.descriere || '', 
+                logoUrl: `https:${fields.logo.fields.file.url}`,
+            };
+        }).filter(Boolean); 
+
+        console.log(sponsors)
+        return sponsors;
+
+    } catch (error) {
+        console.error(`Error fetching sponsors for locale ${locale}:`, error.message);
+        throw new Error(`Failed to fetch sponsors for locale ${locale}.`);
+    }
+}

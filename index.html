@@ -539,61 +539,35 @@
       </div>
     </section>
 
-    <section id="sponsors" class="module">
+  <section id="sponsors">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-6 col-sm-offset-3">
-            <h2 class="module-title">COMUNITATEA NOASTRĂ</h2>
-            <p class="module-subtitle" style="font-style: normal;">Partenerii noștri care ne sprijină în oferirea celor mai bune servicii.</p>
+          <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                  <h2 class="module-title">COMUNITATEA NOASTRĂ</h2>
+                  <p class="module-subtitle" style="font-style: normal;">Partenerii noștri care ne sprijină în oferirea celor mai bune servicii.</p>
+              </div>
           </div>
+      </div>
+
+      <div class="sponsors-container">
+        <div class="sponsors-cards-container">
         </div>
       </div>
 
-      <div class="sponsors-main-carousel-container">
-        <div class="sponsors-carousel-viewport">
-          <div class="sponsors-cards-container">
-
-            <div class="sponsor-card" data-card-name="blood-foundation">
-              <div class="sponsor-left-content">
-                <h5 class="sponsor-name-link">
-                  <a href="https://bloodochallenge.com/" target="_blank" rel="noopener noreferrer">Blood Foundation</a>
-                </h5>
-                <div class="sponsor-textbox">
-                  <p class="sponsor-description">Partener pentru campaniile de donare de sânge. </p>
-                  <p class="sponsor-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt consectetur, nisi nisl aliquam enim, vitae facilisis velit sapien nec erat.</p>
-                </div>
-                <a href="#" class="next-card-link" data-target-card="luxor">Vezi Luxor</a>
-              </div>
-              <div class="sponsor-right-image">
-                <div class="sponsor-image-wrapper">
-                  <img src="assets/images/sponsors/blood.png" alt="Blood Sponsor">
-                </div>
-              </div>
-            </div>
-
-            <div class="sponsor-card" data-card-name="luxor">
-              <div class="sponsor-left-content">
-                <h5 class="sponsor-name-link">
-                  <a href="https://clinicaluxorolinic.ro/" target="_blank" rel="noopener noreferrer">Luxor</a>
-                </h5>
-                <div class="sponsor-textbox">
-                  <p class="sponsor-description">Partener de încredere pentru rame și accesorii de ochelari de calitate.</p>
-                  <p class="sponsor-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt consectetur, nisi nisl aliquam enim, vitae facilisis velit sapien nec erat.</p>
-                </div>
-                <a href="#" class="next-card-link" data-target-card="blood-foundation">Vezi Blood Foundation</a>
-              </div>
-              <div class="sponsor-right-image">
-                <div class="sponsor-image-wrapper">
-                  <img src="assets/images/sponsors/luxor.png" alt="Luxor Sponsor">
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
+      <div class="sponsors-nav">
+        <button class="sponsors-nav-btn prev-btn" aria-label="Previous Sponsors">&lt;</button>
+        <button class="sponsors-nav-btn next-btn" aria-label="Next Sponsors">&gt;</button>
       </div>
-    </section>
+  </section>
 
+  <div id="sponsor-modal" class="sponsor-modal-backdrop">
+    <div class="sponsor-modal-content">
+      <button id="sponsor-modal-close" class="sponsor-modal-close-btn" aria-label="Close">&times;</button>
+      <h3 id="sponsor-modal-title"></h3>
+      <div id="sponsor-modal-description"></div>
+      <a href="#" id="sponsor-modal-link" class="sponsor-modal-button" target="_blank" rel="noopener noreferrer">Vizitează Website</a>
+    </div>
+  </div>
 
   <section id="programare-section" style="display:none;">
     <button class="appointments-close-btn" onclick="hideProgramareSection()">×</button> 
@@ -660,7 +634,7 @@
 
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script> 
   <script src="assets/js/carousel.js"></script>
-  <script src="assets/js/sponsors.js"></script>
+  <script type="module" src="assets/js/sponsors.js"></script>
   <script src="assets/js/google-reviews.js"></script>
   <script type="module" src="assets/js/team.js"></script> 
   <script type="module" src="assets/js/testimonials.js"></script>

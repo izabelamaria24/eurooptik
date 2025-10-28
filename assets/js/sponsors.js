@@ -1,93 +1,134 @@
-$(document).ready(function() {
-    const sponsorsContainer = $('.sponsors-cards-container');
-    const sponsorCards = $('.sponsor-card');
-    const totalCards = sponsorCards.length;
-    let currentCardIndex = 0;
+document.addEventListener('DOMContentLoaded', () => {
+    const sponsorsSection = document.getElementById('sponsors');
+    const sponsorsWrapper = document.querySelector('.sponsors-cards-container');
+    const prevBtn = document.querySelector('#sponsors .prev-btn');
+    const nextBtn = document.querySelector('#sponsors .next-btn');
+    const modal = document.getElementById('sponsor-modal');
+    const modalTitle = document.getElementById('sponsor-modal-title');
+    const modalDescription = document.getElementById('sponsor-modal-description');
+    const modalLink = document.getElementById('sponsor-modal-link');
+    const closeModalBtn = document.getElementById('sponsor-modal-close');
 
-    let startX = 0;
-    let currentTranslate = 0;
-    let isDragging = false;
+    if (!sponsorsSection || !sponsorsWrapper || !modal) return;
 
-    function showCard(index) {
-        if (index < 0) {
-            index = 0;
-        } else if (index >= totalCards) {
-            index = totalCards - 1;
-        }
-        currentCardIndex = index;
-        currentTranslate = -currentCardIndex * sponsorsContainer.width();
-        sponsorsContainer.css('transform', `translateX(${currentTranslate}px)`);
-        sponsorsContainer.css('transition', 'transform 0.5s ease-in-out');
+    let allSponsors = [];
+    let currentSlide = 0;
+
+    function getItemsPerPage() {
+        return window.innerWidth <= 1500 ? 1 : 5;
     }
+    
+    function renderSponsorSlides() {
+        sponsorsWrapper.innerHTML = '';
+        const itemsPerPage = getItemsPerPage();
+        const totalSlides = Math.ceil(allSponsors.length / itemsPerPage);
 
-    function setTranslate(xPos) {
-        sponsorsContainer.css('transform', `translateX(${xPos}px)`);
-    }
-
-    sponsorsContainer.on('touchstart', function(e) {
-        startX = e.touches[0].clientX;
-        isDragging = true;
-        sponsorsContainer.css('transition', 'none');
-    });
-
-    sponsorsContainer.on('touchmove', function(e) {
-        if (!isDragging) return;
-
-        const currentX = e.touches[0].clientX;
-        const deltaX = currentX - startX;
-
-        const newTranslate = currentTranslate + deltaX;
-
-        const maxTranslate = 0;
-        const minTranslate = -(totalCards - 1) * sponsorsContainer.width();
-
-        if (newTranslate > maxTranslate + 50 || newTranslate < minTranslate - 50) {
-            return;
-        }
-
-        setTranslate(newTranslate);
-        e.preventDefault();
-    });
-
-    sponsorsContainer.on('touchend', function(e) {
-        if (!isDragging) return;
-        isDragging = false;
-
-        const endX = e.changedTouches[0].clientX;
-        const deltaX = endX - startX;
-
-        const threshold = sponsorsContainer.width() / 4;
-
-        if (deltaX > threshold) {
-            showCard(currentCardIndex - 1);
-        } else if (deltaX < -threshold) {
-            showCard(currentCardIndex + 1);
-        } else {
-            showCard(currentCardIndex);
-        }
-    });
-
-    $('.next-card-link').on('click', function(e) {
-        e.preventDefault();
-
-        const targetCardName = $(this).data('target-card');
-        if (targetCardName) {
-            let targetIndex = -1;
-            sponsorCards.each(function(idx) {
-                if ($(this).data('card-name') === targetCardName) {
-                    targetIndex = idx;
-                    return false;
-                }
+        for (let i = 0; i < totalSlides; i++) {
+            const slide = document.createElement('div');
+            slide.className = 'sponsor-slide';
+            
+            const slideSponsors = allSponsors.slice(i * itemsPerPage, (i + 1) * itemsPerPage);
+            
+            slideSponsors.forEach(sponsor => {
+                const card = document.createElement('div');
+                card.className = 'sponsor-card';
+                card.setAttribute('data-name', sponsor.name);
+                card.setAttribute('data-description', sponsor.description);
+                card.setAttribute('data-url', sponsor.websiteUrl || '#');
+                card.innerHTML = `
+                    <div class="sponsor-card-header"><h5>${sponsor.name}</h5></div>
+                    <div class="sponsor-card-logo"><img src="${sponsor.logoUrl}" alt="${sponsor.name} Logo"></div>
+                `;
+                slide.appendChild(card);
             });
+            sponsorsWrapper.appendChild(slide);
+        }
+    }
 
-            if (targetIndex !== -1) {
-                showCard(targetIndex);
+    function updateCarousel() {
+        const itemsPerPage = getItemsPerPage();
+        const totalPages = Math.ceil(allSponsors.length / itemsPerPage);
+
+        if (currentSlide >= totalPages) currentSlide = totalPages - 1;
+        if (currentSlide < 0) currentSlide = 0;
+
+        sponsorsWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide >= totalPages - 1;
+
+        const nav = document.querySelector('.sponsors-nav');
+        if(nav) nav.style.display = totalPages > 1 ? 'flex' : 'none';
+    }
+
+    async function initSponsorsSection() {
+        try {
+            const response = await fetch('api/sponsors.json');
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            allSponsors = await response.json();
+            
+            if (allSponsors.length > 0) {
+                renderSponsorSlides(); 
+                updateCarousel(); 
+            } else {
+                sponsorsSection.style.display = 'none';
             }
+        } catch (error) {
+            console.error("Error initializing sponsors section:", error);
+            sponsorsSection.style.display = 'none';
+        }
+    }
+
+    nextBtn.addEventListener('click', () => {
+        const totalPages = Math.ceil(allSponsors.length / getItemsPerPage());
+        if (currentSlide < totalPages - 1) {
+            currentSlide++;
+            updateCarousel();
         }
     });
 
-    showCard(0);
-    $(window).on('resize', function() {
-        showCard(currentCardIndex);
+    prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateCarousel();
+        }
     });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            renderSponsorSlides();
+            updateCarousel(); 
+        }, 100);
+    });
+
+    sponsorsWrapper.addEventListener('click', (event) => {
+        const card = event.target.closest('.sponsor-card');
+        if (card) openModal(card);
+    });
+
+    function openModal(card) {
+        modalTitle.textContent = card.dataset.name;
+        modalDescription.textContent = card.dataset.description;
+        const url = card.dataset.url;
+        
+        if (url && url !== '#') {
+            modalLink.href = url;
+            modalLink.style.display = 'inline-block';
+        } else {
+            modalLink.style.display = 'none';
+        }
+        modal.classList.add('visible');
+    }
+
+    function closeModal() {
+        modal.classList.remove('visible');
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) closeModal();
+    });
+
+    initSponsorsSection();
 });
