@@ -3,7 +3,7 @@ name: Build and Deploy to Staging
 on:
   push:
     branches:
-      - test-deploy
+      - master
       
   repository_dispatch:
     types: [contentful-update]
