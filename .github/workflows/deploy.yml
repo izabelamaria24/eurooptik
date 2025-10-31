@@ -5,6 +5,9 @@ on:
     branches:
       - test-deploy
       
+  repository_dispatch:
+    types: [contentful-update]
+      
   workflow_dispatch:
 
 jobs:
