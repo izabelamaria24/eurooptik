@@ -3,12 +3,14 @@ name: Build and Deploy to Staging
 on:
   push:
     branches:
-      - master
-      
+      - test-deploy
   repository_dispatch:
     types: [contentful-update]
-      
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy-staging:
@@ -45,3 +47,9 @@ jobs:
           port: 21021
           local-dir: ./_site/
           dangerous-clean-slate: true
+          
+          disable-epsv: true
+          
+          # 2. This slows down the upload to avoid triggering rate limits.
+          # It uploads one file at a time.
+          concurrency: 1```
