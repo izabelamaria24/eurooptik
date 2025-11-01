@@ -37,6 +37,7 @@ jobs:
       - name: Verify build output
         run: ls -R ./_site
 
+      # --- THIS IS THE FINAL, CORRECTED STEP ---
       - name: Deploy to Staging server via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
@@ -46,3 +47,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_STAGING }}
           port: 21021
           local-dir: ./_site/
+
+          server-dir: test.eurooptik.ro/
+          
