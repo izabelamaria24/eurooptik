@@ -47,8 +47,3 @@ jobs:
           port: 21021
           
           local-dir: ./_site/
-          
-          server-dir: test.eurooptik.ro/
-          
-          # This brings back the clean deployment you had before
-          dangerous-clean-slate: true
