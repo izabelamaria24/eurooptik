@@ -7,7 +7,6 @@ Navbar Items
 border: 0;
 border-radius: 0;
 z-index: 1000;
-font-family: "Roboto", sans-serif;
 font-weight: bold;
 letter-spacing: 3px;
 font-size: 15px;
@@ -138,7 +137,6 @@ padding-bottom: 0;
 margin-top: 5px;
 font-style: normal;
 color: #e9e7e3;
-font-family: "Roboto";
 font-size: 17px;
 letter-spacing: -0.1px;
 }
@@ -154,7 +152,6 @@ line-height: 30px;
 margin-top: 10px;
 font-style: normal;
 color: #e9e7e3;
-font-family: "Roboto";
 font-size: 17px;
 letter-spacing: -0.1px;
 display: inline-block;

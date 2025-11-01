@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Merriweather:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
   --color-primary: #d9538d;
@@ -36,9 +36,13 @@ html {
 
 body {
   background: var(--ui-background-body);
-  font: 400 14px/1.8 "Roboto", sans-serif; 
+  font-family: "Inter", sans-serif;
   color: var(--text-secondary);
   -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: "Inter", sans-serif;
 }
 
 img {
@@ -569,7 +573,6 @@ a,
 
 .btn {
   border-radius: 0;
-  font-family: "Roboto", sans-serif;
   font-style: normal;
   letter-spacing: 2px;
   font-size: 25px;
@@ -710,9 +713,7 @@ a,
   color: var(--text-on-dark-bg);
 }
 
-/* Forms common style */
 .form-control {
-  font-family: "Roboto Condensed", sans-serif;
   letter-spacing: 2px;
   font-size: 17px;
   height: 33px;
@@ -777,32 +778,27 @@ h5,
 h6 {
   line-height: 1.4;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
 }
 
 p,
 ol,
 ul {
-  font-family: "Merriweather", serif;
   font-style: italic;
   margin: 0 0 20px;
 }
 
 blockquote {
   border: 0;
-  font-family: "Merriweather", serif;
   font-style: italic;
   font-size: 69px;
   padding: 0;
 }
 
 .font-alt {
-  font-family: "Roboto", sans-serif;
   letter-spacing: 2px;
 }
 
 .font-serif {
-  font-family: "Merriweather", serif;
   font-style: italic;
 }
 
@@ -1012,7 +1008,6 @@ General Styles - Owlcarousel
   margin-top: 5px;
   font-style: normal;
   color: #e9e7e3;
-  font-family: "Roboto";
   font-size: 17px;
   letter-spacing: -0.1px;
 }
@@ -1028,7 +1023,6 @@ General Styles - Owlcarousel
   margin-top: 10px;
   font-style: normal;
   color: #e9e7e3;
-  font-family: "Roboto";
   font-size: 17px;
   letter-spacing: -0.1px;
   display: inline-block;
@@ -1042,7 +1036,6 @@ General Styles - Owlcarousel
   border: 0;
   border-radius: 0;
   z-index: 1000;
-  font-family: "Roboto", sans-serif;
   font-weight: bold;
   letter-spacing: 3px;
   font-size: 15px;
@@ -1393,7 +1386,6 @@ General Styles - Owlcarousel
 }
 
 body, .navbar, .navbar a {
-  font-family: 'Roboto', sans-serif !important;
   font-style: normal !important;
 }
 

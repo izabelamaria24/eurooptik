@@ -13,20 +13,6 @@
     text-align: center;
 }
 
-.reels-section h2 {
-    font-size: 2.2rem;
-    font-weight: 500;
-    color: #222;
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-}
-
-.reels-section p {
-    font-size: 1rem;
-    color: #666666;
-    margin-bottom: 50px;
-}
-
 .reels-section .reels-filters {
     display: flex;
     justify-content: center;
@@ -36,6 +22,7 @@
 }
 
 .reels-section .custom-select-wrapper {
+    font-size: 2.5rem;
     position: relative;
     min-width: 280px;
 }
@@ -64,7 +51,7 @@
     border: none;
     border-radius: 30px;
     color: #D91A8B;
-    font-size: 1rem;
+    font-size: 1.8rem;
     font-weight: 500;
     cursor: pointer;
 }

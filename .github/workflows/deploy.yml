@@ -46,10 +46,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_STAGING }}
           port: 21021
           local-dir: ./_site/
-          dangerous-clean-slate: true
           
-          disable-epsv: true
-          
-          # 2. This slows down the upload to avoid triggering rate limits.
-          # It uploads one file at a time.
-          concurrency: 1```
