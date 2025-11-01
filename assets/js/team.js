@@ -49,7 +49,7 @@ $(document).ready(function() {
             ? allTeamMembers 
             : allTeamMembers.filter(member => member.categories.includes(filterId));
 
-        shuffle(filteredMembers);
+        // shuffle(filteredMembers);
         
         teamCarouselContainer.css('opacity', 0);
         if (teamCarouselContainer.hasClass('slick-initialized')) {

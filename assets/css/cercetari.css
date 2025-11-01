@@ -1,5 +1,4 @@
 #cercetari-section {
-    font-family: 'Roboto', sans-serif;
     background-color: white;
     padding: 60px 0;
     text-align: center;
@@ -99,7 +98,6 @@
 
 #cercetari-cuprins-list .cercetare-btn::after {
     content: '↓';
-    font-family: sans-serif;
     position: absolute;
     right: 5px;
     top: 50%;
@@ -139,7 +137,6 @@
 }
 
 #cercetari-article-display-container #cercetari-article-display-title {
-    font-family: 'Roboto', sans-serif;
     font-size: 32px;
     font-weight: 700;
     color: #000;
@@ -159,7 +156,6 @@
 }
 
 #cercetari-article-display-container #cercetari-article-display-content p {
-    font-family: 'Open Sans', sans-serif;
     font-size: 17px;
     line-height: 1.8;
     color: #333;

@@ -4,11 +4,13 @@ on:
   push:
     branches:
       - test-deploy
-      
   repository_dispatch:
     types: [contentful-update]
-      
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy-staging:
@@ -44,4 +46,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_STAGING }}
           port: 21021
           local-dir: ./_site/
-          dangerous-clean-slate: true
+          

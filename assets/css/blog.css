@@ -1,5 +1,4 @@
 #blog-section {
-    font-family: 'Roboto', sans-serif;
     background-color: white; 
     padding: 60px 0 0 0; 
     text-align: center;
@@ -88,7 +87,6 @@
 
 #blog-filter-container .filter-btn::after {
     content: '↓';
-    font-family: sans-serif;
     position: absolute;
     right: 5px;
     top: 50%;
@@ -227,7 +225,6 @@
 }
 
 #blog-article-display-container #article-display-title {
-    font-family: 'Roboto', sans-serif;
     font-size: 32px;
     font-weight: 700;
     color: #000;
@@ -237,7 +234,6 @@
 }
 
 #blog-article-display-container #article-display-author {
-    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-style: italic;
     color: #555;
@@ -255,7 +251,6 @@
 }
 
 #blog-article-display-container #article-display-content p {
-    font-family: 'Open Sans', sans-serif;
     font-size: 17px;
     line-height: 1.8;
     color: #333;
@@ -269,7 +264,6 @@
 }
 
 #blog-article-display-container #article-display-content li {
-    font-family: 'Open Sans', sans-serif;
     font-size: 17px;
     line-height: 1.8;
     color: #333;
