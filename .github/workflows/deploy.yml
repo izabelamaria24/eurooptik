@@ -47,8 +47,3 @@ jobs:
           port: 21021
           local-dir: ./_site/
           
-          concurrency: 1
-          
-          disable-epsv: true
-          
-          timeout: 30000 # 30 seconds
