@@ -1,6 +1,5 @@
 .footer {
   color: black;
-  font-family: inherit;
   background: #eaf0ef;
 }
 
@@ -91,9 +90,6 @@
 
 .footer-menu a:hover {
   color: #d13c7a;
-}
-
-.footer-logo {
 }
 
 .footer-logo img {
