@@ -83,7 +83,7 @@ color: #999;
 
 .navbar-custom .dropdown-menu > li > a:focus,
 .navbar-custom .dropdown-menu > li > a:hover {
-background: rgba(255, 255, 255, 0.1) !important;
+background: white !important;
 color: #F5F3ED;
 }
 
@@ -293,7 +293,7 @@ margin-top: -20px;
 
 @media (max-width: 767px) {
 .navbar-custom.navbar-transparent .navbar-collapse {
-background-color: rgba(56, 53, 53, 0.9);
+background-color: white;
 }
 .navbar-custom.navbar-solid .navbar-collapse {
 background-color: var(--color-white);

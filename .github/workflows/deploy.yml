@@ -1,9 +1,10 @@
-name: Build and Deploy to Staging
+name: Build and Deploy
 
 on:
   push:
     branches:
       - test-deploy
+      - main
   repository_dispatch:
     types: [contentful-update]
   workflow_dispatch:
@@ -14,8 +15,9 @@ concurrency:
 
 jobs:
   build-and-deploy-staging:
+    if: github.ref == 'refs/heads/test-deploy'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,15 +36,44 @@ jobs:
           CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
 
-      - name: Verify build output
-        run: ls -R ./_site
-
-      - name: Deploy to Staging server via FTP
+      - name: Deploy to STAGING (test.eurooptik.ro)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           protocol: ftps
           server: ${{ secrets.FTP_SERVER_STAGING }}
           username: ${{ secrets.FTP_USERNAME_STAGING }}
           password: ${{ secrets.FTP_PASSWORD_STAGING }}
+          port: 21021
+          local-dir: ./_site/
+
+  build-and-deploy-production:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Website
+        run: node scripts/build.js
+        env:
+          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+
+      - name: Deploy to PRODUCTION (eurooptik.ro)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          protocol: ftps
+          server: ${{ secrets.FTP_SERVER_PROD }}
+          username: ${{ secrets.FTP_USERNAME_PROD }}
+          password: ${{ secrets.FTP_PASSWORD_PROD }}
           port: 21021
           local-dir: ./_site/
