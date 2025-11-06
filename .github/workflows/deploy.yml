@@ -14,13 +14,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # ============================
+  # STAGING DEPLOYMENT
+  # ============================
   build-and-deploy-staging:
-    if: github.ref == 'refs/heads/test-deploy'
+    if: github.ref == 'refs/heads/test-deploy' || github.event.action == 'contentful-update'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout staging branch code
         uses: actions/checkout@v4
+        with:
+          ref: 'test-deploy'
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -46,6 +51,9 @@ jobs:
           port: 21021
           local-dir: ./_site/
 
+  # ============================
+  # PRODUCTION DEPLOYMENT
+  # ============================
   build-and-deploy-production:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
