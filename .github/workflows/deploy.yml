@@ -14,9 +14,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # ============================
-  # STAGING DEPLOYMENT
-  # ============================
   build-and-deploy-staging:
     if: github.ref == 'refs/heads/test-deploy' || github.event.action == 'contentful-update'
     runs-on: ubuntu-latest
@@ -49,12 +46,9 @@ jobs:
           username: ${{ secrets.FTP_USERNAME_STAGING }}
           password: ${{ secrets.FTP_PASSWORD_STAGING }}
           port: 21021
-          
           local-dir: ./_site/
+          server-dir: ./test.eurooptik.ro/
 
-  # ============================
-  # PRODUCTION DEPLOYMENT
-  # ============================
   build-and-deploy-production:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -86,3 +80,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_PROD }}
           port: 21021
           local-dir: ./_site/
+          server-dir: ./public_html/
