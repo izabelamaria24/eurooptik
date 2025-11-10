@@ -47,7 +47,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_STAGING }}
           port: 21021
           local-dir: ./_site/
-          server-dir: ./test.eurooptik.ro/
+          server-dir: ./
 
   build-and-deploy-production:
     if: github.ref == 'refs/heads/main'
@@ -80,4 +80,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_PROD }}
           port: 21021
           local-dir: ./_site/
-          server-dir: ./public_html/
+          server-dir: ./
