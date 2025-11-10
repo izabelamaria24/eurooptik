@@ -19,14 +19,6 @@ padding-bottom: 25px;
 transition: color 0.125s ease-in-out 0s;
 }
 
-/* Center logo in navbar */
-.navbar-brand-center {
-position: absolute;
-left: 50%;
-transform: translateX(-50%);
-z-index: 1001;
-}
-
 /* Toggle button to the left */
 .navbar-toggle {
 float: left;
@@ -83,7 +75,7 @@ color: #999;
 
 .navbar-custom .dropdown-menu > li > a:focus,
 .navbar-custom .dropdown-menu > li > a:hover {
-background: rgba(255, 255, 255, 0.1) !important;
+background: white !important;
 color: #F5F3ED;
 }
 
@@ -160,12 +152,11 @@ width: auto;
 }
 
 #home-cine-suntem-button {
-margin-right: 20px;
-margin-bottom: 20px;
-background-color: #d13775;
-border: none;
-border-radius: 30px;
-color: #F5F3ED;
+  margin-bottom: 20px;
+  background-color: #d13775;
+  border: none;
+  border-radius: 30px;
+  color: #F5F3ED;
 }
 
 #home-cine-suntem-button:hover {
@@ -173,16 +164,15 @@ background-color: #ad2e61;
 }
 
 #home-appointment-button {
-margin-right: 20px;
-margin-bottom: 20px;
-background-color: #d13775;
-border: none;
-border-radius: 30px;
-color: #F5F3ED;
+  margin-bottom: 20px;
+  background-color: #d13775;
+  border: none;
+  border-radius: 30px;
+  color: #F5F3ED;
 }
 
 #home-appointment-button:hover {
-background-color: #ad2e61;
+  background-color: #ad2e61;
 }
 
 .btn-programare {
@@ -234,7 +224,7 @@ padding-bottom: 15px !important;
 }
 
 .navbar-custom.navbar-solid .navbar-nav > li > a {
-color: var(--text-primary) !important;
+color: white !important;
 }
 
 .navbar-custom.navbar-solid .navbar-nav > li > a:hover,
@@ -271,19 +261,6 @@ background: var(--ui-background-light) !important;
 transition: max-height 0.3s ease, margin-top 0.3s ease;
 }
 
-
-.navbar-custom.navbar-transparent .navbar-brand-center.visible-xs img {
-max-height: 90px;
-margin-top: -30px;
-}
-
-
-
-.navbar-custom.navbar-solid .navbar-brand-center.visible-xs img {
-max-height: 70px;
-margin-top: -20px;
-}
-
 .language-switcher .lang-link.active {
   font-weight: bold;
   text-decoration: underline;
@@ -293,7 +270,7 @@ margin-top: -20px;
 
 @media (max-width: 767px) {
 .navbar-custom.navbar-transparent .navbar-collapse {
-background-color: rgba(56, 53, 53, 0.9);
+background-color: white;
 }
 .navbar-custom.navbar-solid .navbar-collapse {
 background-color: var(--color-white);

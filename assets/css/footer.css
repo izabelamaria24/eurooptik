@@ -130,7 +130,9 @@
   }
 
   .footer-message h2 {
-    font-size: 1.2em;
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 10px;
   }
 
   .footer-content {

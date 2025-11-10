@@ -1048,6 +1048,7 @@ General Styles - Owlcarousel
   left: 50%;
   transform: translateX(-50%);
   z-index: 1001;
+  margin-top: -2%;
 }
 
 /* Toggle button to the left */
@@ -1158,19 +1159,6 @@ General Styles - Owlcarousel
 }
 
 #home-cine-suntem-button:hover {
-  background-color: #ad2e61;
-}
-
-#home-appointment-button {
-  margin-right: 20px;
-  margin-bottom: 20px;
-  background-color: #d13775;
-  border: none;
-  border-radius: 30px;
-  color: #F5F3ED;
-}
-
-#home-appointment-button:hover {
   background-color: #ad2e61;
 }
 
@@ -1508,22 +1496,14 @@ body, .navbar, .navbar a {
     max-height: 90px;
     margin-top: -42px;
 }
-/* Initial state logo size/position for mobile */
-.navbar-custom.navbar-transparent .navbar-brand-center.visible-xs img {
-    max-height: 90px;
-    margin-top: -30px;
-}
+
 
 /* Scrolled state logo size/position for desktop */
 .navbar-custom.navbar-solid .navbar-brand.hidden-xs img {
     max-height: 70px; /* Slightly smaller logo when scrolled */
     margin-top: -32px; /* Adjust as needed */
 }
-/* Scrolled state logo size/position for mobile */
-.navbar-custom.navbar-solid .navbar-brand-center.visible-xs img {
-    max-height: 70px; /* Slightly smaller logo when scrolled */
-    margin-top: -20px; /* Adjust as needed */
-}
+
 
 /* Mobile navbar collapse menu background for transparent state */
 @media (max-width: 767px) {
@@ -1539,5 +1519,81 @@ body, .navbar, .navbar a {
     .navbar-custom.navbar-solid .navbar-collapse .navbar-nav > li > a:hover {
         background-color: var(--ui-background-light) !important;
         color: #2a8be0 !important;
+    }
+}
+
+/* ==========================================================================
+   Homepage Button Alignment (Mobile)
+   ========================================================================== */
+
+@media (max-width: 767px) {
+
+    /* Make the main hero content a flex container */
+    .caption-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* This vertically centers everything */
+        height: 100%; /* Ensure it takes up the full height of its parent */
+        padding: 0 20px; /* Add some side padding to prevent text from touching the edges */
+    }
+
+    /* Ensure the logo and review wrapper is centered and has proper spacing */
+    .logo-and-review-wrapper {
+        text-align: center;
+        margin-bottom: 30px; /* Increase space between the reviews and the first button */
+    }
+
+    /* Adjust the logo image size for better proportion on mobile */
+    .hero-logo-img {
+        max-width: 90%; /* Prevent the logo from being too wide */
+    }
+
+    /* Style the Google reviews text */
+    #google-reviews-display {
+        color: #333; /* A darker color for better readability */
+        font-size: 16px;
+        margin-top: 10px; /* Add space below the logo */
+    }
+
+    /* This is the container for your two buttons */
+    .home-buttons-container {
+        display: flex;
+        flex-direction: column; /* Stacks the buttons vertically */
+        align-items: center;   /* Centers them horizontally */
+        gap: 15px;             /* Creates a clean space between the buttons */
+        width: 100%;           /* Ensure the container takes full width */
+    }
+
+    /* This styles BOTH of your hero buttons for a consistent look */
+    #home-appointment-button,
+    #home-cine-suntem-button {
+        width: 90%; /* Makes the buttons wide and easy to tap */
+        max-width: 400px; /* Prevents them from getting too wide on larger mobile screens */
+        text-align: center;
+        margin: 0; /* Reset any default margins */
+        padding: 14px 20px; /* A more generous, modern padding */
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        border-radius: 30px; /* A fully rounded "pill" shape */
+        border: none; /* Remove the default border */
+        color: #fff !important; /* Ensure text is always white */
+        background-color: #d13775; /* The primary pink color */
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    /* A subtle hover/active effect for when a user taps the button */
+    #home-appointment-button:hover,
+    #home-cine-suntem-button:hover {
+        background-color: #ad2e61; /* A slightly darker pink */
+        transform: scale(1.03); /* A slight pop effect */
+    }
+}
+
+/* This rule is for larger screens, keep it as is */
+@media (min-width: 768px) {
+    .hero-logo-img {
+      max-width: 50%;
+      padding: 0;
     }
 }
