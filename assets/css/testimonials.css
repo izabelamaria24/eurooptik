@@ -54,16 +54,15 @@
 .testimonial-grid-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: contain; 
   display: block;
   filter: grayscale(80%);
   transition: all 0.3s ease;
 }
 
-.testimonial-trigger.active img,
 .testimonial-trigger:hover img {
   filter: grayscale(0%);
-  transform: scale(1.05);
+  /* transform: scale(1.05); */
   z-index: 10;
 }
 
