@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const API_KEY = 'AIzaSyDWOVjCHF1yjvURvWPPMRgAdaXmxLCNhF0'; 
-    
+    const API_KEY = 'AIzaSyDWOVjCHF1yjvURvWPPMRgAdaXmxLCNhF0';
+
     const PLACES_IDS = {
         "Clinica Bacău": "ChIJb2SJxiVwtUARCUeoB78IhLA",
         "Cabinet Bacău": "ChIJK9n9-yZwtUARlZel3LYNgsk",
@@ -10,69 +10,66 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const reviewElementId = 'google-reviews-display';
-
     const reviewContainer = document.getElementById(reviewElementId);
-    if (!reviewContainer) {
-        return;
+    if (!reviewContainer) return;
+
+    const LAST_FETCH_KEY = "google_reviews_last_fetch";
+    const CACHE_KEY = "google_reviews_cache";
+
+    const now = Date.now();
+    const lastFetch = localStorage.getItem(LAST_FETCH_KEY);
+
+    const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+
+    if (lastFetch && (now - Number(lastFetch)) < THIRTY_DAYS) {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+            const bestLocation = JSON.parse(cached);
+            renderResult(bestLocation);
+            return;
+        }
     }
 
-    function createFetchRequest(name, placeId) {
-        const url = `https://places.googleapis.com/v1/places/${placeId}?fields=rating,userRatingCount,displayName&key=${API_KEY}`;
-        return fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    console.warn(`Could not fetch data for ${name}. Status: ${response.status}`);
-                    return null;
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data) {
-                    data.locationName = name; 
-                }
-                return data;
-            })
-            .catch(error => {
-                 console.error(`Error fetching for ${name}:`, error);
-                 return null; 
-            });
-    }
-
-    const promises = Object.entries(PLACES_IDS).map(([name, id]) => createFetchRequest(name, id));
-
-    Promise.all(promises)
-        .then(results => {
-            const validResults = results.filter(data => data && data.rating && data.userRatingCount);
-
-            if (validResults.length === 0) {
-                reviewContainer.style.display = 'none'; 
-                return;
-            }
-
-            let bestLocation = validResults[0];
-            for (let i = 1; i < validResults.length; i++) {
-                const currentLocation = validResults[i];
-                if (currentLocation.rating > bestLocation.rating) {
-                    bestLocation = currentLocation;
-                } else if (currentLocation.rating === bestLocation.rating && currentLocation.userRatingCount > bestLocation.userRatingCount) {
-                    bestLocation = currentLocation;
-                }
-            }
-
-            const rating = bestLocation.rating.toFixed(1);
-            const totalReviews = bestLocation.userRatingCount;
-
-            const reviewHtml = `
-                <i class="fas fa-star"></i> 
-                <strong>${rating} stele</strong> 
-                din ${totalReviews} recenzii pe Google
-            `;
-            
-            reviewContainer.innerHTML = reviewHtml;
-            reviewContainer.style.opacity = 1; // Fade in
-        })
-        .catch(error => {
-            console.error('An overall error occurred while fetching reviews:', error);
-            reviewContainer.style.display = 'none'; 
+    function fetchReviews() {
+        const requests = Object.entries(PLACES_IDS).map(([name, placeId]) => {
+            const url = `https://places.googleapis.com/v1/places/${placeId}?fields=rating,userRatingCount,displayName&key=${API_KEY}`;
+            return fetch(url)
+                .then(res => res.ok ? res.json() : null)
+                .then(data => {
+                    if (data) data.locationName = name;
+                    return data;
+                })
+                .catch(() => null);
         });
+
+        Promise.all(requests).then(results => {
+            const valid = results.filter(r => r && r.rating && r.userRatingCount);
+            if (!valid.length) return reviewContainer.style.display = "none";
+
+            let best = valid.reduce((a, b) => 
+                (b.rating > a.rating) ||
+                (b.rating === a.rating && b.userRatingCount > a.userRatingCount)
+                ? b : a
+            );
+
+            localStorage.setItem(LAST_FETCH_KEY, now.toString());
+            localStorage.setItem(CACHE_KEY, JSON.stringify(best));
+
+            renderResult(best);
+        });
+    }
+
+    function renderResult(bestLocation) {
+        const rating = bestLocation.rating.toFixed(1);
+        const total = bestLocation.userRatingCount;
+
+        reviewContainer.innerHTML = `
+            <i class="fas fa-star"></i> 
+            <strong>${rating} stele</strong>
+            din ${total} recenzii pe Google
+        `;
+        reviewContainer.style.opacity = 1;
+    }
+
+    fetchReviews();
 });
