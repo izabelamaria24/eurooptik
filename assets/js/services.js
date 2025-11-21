@@ -24,26 +24,37 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
         }
     }
 
+    // --- UPDATED FUNCTION ---
     function buildSimpleTableSlide(items) {
-        const itemsHTML = items.map(([name, price]) => `
+        const itemsHTML = items.map(([name, data]) => {
+            // Check if data is the new object format {price, id} or old string format
+            const price = (data && typeof data === 'object' && data.price) ? data.price : data;
+            
+            return `
             <div class="table-row">
                 <div class="table-cell name-cell">${name}</div>
                 <div class="table-cell price-cell">${price}</div>
             </div>
-        `).join('');
+        `}).join('');
         return `<div class="carousel-card"><div class="service-table">${itemsHTML}</div></div>`;
     }
 
+    // --- UPDATED FUNCTION ---
     function buildSubcategorySlide(subCategoryName, itemsChunk) {
         const titleMatch = subCategoryName.match(/([^(]+)\s*(\(.*\))?/);
         const mainTitle = titleMatch ? titleMatch[1].trim() : subCategoryName;
         const subtitle = titleMatch && titleMatch[2] ? titleMatch[2] : '';
 
-        const itemsHTML = itemsChunk.map(([name, price]) => `
+        const itemsHTML = itemsChunk.map(([name, data]) => {
+            // Check if data is the new object format {price, id} or old string format
+            const price = (data && typeof data === 'object' && data.price) ? data.price : data;
+
+            return `
             <div class="table-row">
                 <div class="table-cell name-cell">${name}</div>
                 <div class="table-cell price-cell">${price}</div>
-            </div>`).join('');
+            </div>`
+        }).join('');
 
         const headerHTML = `
             <div class="table-row">
@@ -116,8 +127,14 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
         categories.forEach((category, index) => {
             const button = document.createElement('button');
             button.className = 'filter-btn';
+            // Handle missing iconUrl gracefully if needed
+            const iconHTML = category.iconUrl ? `<img src="${category.iconUrl}" alt="" class="btn-icon">` : '';
+            
             button.dataset.category = category.slug;
-            button.innerHTML = `<img src="${category.iconUrl}" alt="" class="btn-icon"> ${category.name}`;
+            button.innerHTML = `${iconHTML} ${category.name}`;
+            
+            // IMPORTANT: Match the slug from the JSON with the button's dataset
+            // Some JSONs use 'id' or 'slug' fields, ensure this matches your API output
             if (index === 0) {
                 button.classList.add('active');
             }
@@ -148,11 +165,19 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
                             <i class="fa fa-chevron-down"></i>
                         </button>
                     </div>`;
-                filterButtonsContainer.insertAdjacentHTML('afterend', toggleButtonHTML);
+                
+                // Only add toggle button if it doesn't exist yet
+                if (!document.getElementById('services-toggle-btn')) {
+                    filterButtonsContainer.insertAdjacentHTML('afterend', toggleButtonHTML);
+                }
             }
 
             setupServicesToggle();
-            updateCarousel(categories[0].slug);
+            
+            // Initialize with the first category
+            if (categories.length > 0) {
+                updateCarousel(categories[0].slug);
+            }
 
             filterButtonsContainer.addEventListener('click', (e) => {
                 const clickedButton = e.target.closest('.filter-btn');
@@ -183,6 +208,13 @@ if (!servicesSection || !filterButtonsContainer || !carouselSlider || !carouselC
                     updateDots();
                 }
             });
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetCat = urlParams.get('serviceCategory');
+            if (targetCat) {
+                 const btn = filterButtonsContainer.querySelector(`button[data-category="${targetCat}"]`);
+                 if (btn) btn.click();
+            }
 
         } catch (error) {
             console.error("Failed to initialize services section:", error);

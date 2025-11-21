@@ -112,20 +112,27 @@ export async function fetchServicesFromContentful({ locale = 'ro' } = {}) {
         const servicesData = serviceEntries.items.reduce((acc, item) => {
             const service = item.fields;
             const categorySlug = service.categorie?.fields?.idServiciu; 
+            
             if (!categorySlug || !service.numeServiciu || !service.pretServiciu) return acc;
             
             const serviceName = service.numeServiciu;
             const servicePrice = service.pretServiciu;
+            const serviceId = item.sys.id; 
             const subCategory = service.subcategorie;
 
+            const serviceObject = { price: servicePrice, id: serviceId };
+
             if (!acc[categorySlug]) acc[categorySlug] = {};
+            
             if (subCategory?.fields?.numeSubcategorieServiciu) {
                 const subCategoryName = subCategory.fields.numeSubcategorieServiciu;
                 if (!acc[categorySlug][subCategoryName]) acc[categorySlug][subCategoryName] = {};
-                acc[categorySlug][subCategoryName][serviceName] = servicePrice;
+                
+                acc[categorySlug][subCategoryName][serviceName] = serviceObject;
             } else {
                 if (!acc[categorySlug].items) acc[categorySlug].items = {};
-                acc[categorySlug].items[serviceName] = servicePrice;
+                
+                acc[categorySlug].items[serviceName] = serviceObject;
             }
             return acc;
         }, {});
