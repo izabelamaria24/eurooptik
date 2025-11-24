@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fcfafc;
+  --foreground: #051320;
+  --primary: #e4007f;
+  --primary-strong: #bf0066;
+  --secondary: #00a886;
+  --mint: #c8ece3;
+  --deep-emerald: #004d3b;
+  --muted: #4d5e69;
+  --card-bg: #ffffff;
+  --accent: #fce3ef;
+  --hero-glow-start: #f9d8ea;
+  --hero-glow-end: #d3f3eb;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-card: var(--card-bg);
+  --color-sand: #f9f7f4;
+  --color-ink: #151515;
+  --font-sans: var(--font-geist-sans), "Inter", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), "JetBrains Mono", monospace;
+  --radius-sm: 0.4rem;
+  --radius-md: 0.8rem;
+  --radius-lg: 1.4rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(228, 0, 127, 0.15), transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(0, 168, 134, 0.25), transparent 35%),
+    var(--color-sand);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+main {
+  width: 100%;
+}
+
+section {
+  padding: 4.5rem 0;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 3.5rem 0;
+  }
+}
+
+.section-shell {
+  width: min(1400px, 100%);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 55px rgba(15, 23, 42, 0.08);
+}
+
+.card-animated {
+  border-radius: 1.8rem;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 25px 85px rgba(6, 16, 35, 0.14);
+  transition: transform 350ms ease, box-shadow 350ms ease;
+}
+
+.card-animated:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 35px 110px rgba(6, 16, 35, 0.2);
+}
+
+.glass-panel {
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 20px 80px rgba(8, 23, 53, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(24px);
+}
+
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.15) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(
+    circle at 30% 20%,
+    rgba(0, 0, 0, 0.45),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.stat-pill {
+  border-radius: 50px;
+  padding: 0.65rem 1.25rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(8, 17, 38, 0.08);
+  box-shadow: 0 12px 30px rgba(8, 17, 38, 0.1);
+}
+
+.grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.soft-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.soft-scroll::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.25);
+  border-radius: 999px;
+}
+
+video:fullscreen,
+video:-webkit-full-screen,
+video:-moz-full-screen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.tag-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--rose), var(--secondary));
+}
+
+.fade-slide {
+  animation: fade-slide 500ms ease both;
+}
+
+@keyframes fade-slide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
