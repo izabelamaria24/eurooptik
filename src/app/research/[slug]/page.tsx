@@ -2,9 +2,9 @@ import { notFound } from "next/navigation";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { fetchResearch, getResearchBySlug } from "@/lib/contentful";
 
-type Params = {
+type Params = Promise<{
   slug: string;
-};
+}>;
 
 export async function generateStaticParams() {
   const research = await fetchResearch();
@@ -12,7 +12,8 @@ export async function generateStaticParams() {
 }
 
 export default async function ResearchArticlePage({ params }: { params: Params }) {
-  const article = await getResearchBySlug(params.slug);
+  const { slug } = await params;
+  const article = await getResearchBySlug(slug);
 
   if (!article) {
     notFound();
