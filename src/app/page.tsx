@@ -14,7 +14,7 @@ import { SponsorsSection } from "@/components/sections/SponsorsSection";
 import { LocationsSection } from "@/components/sections/LocationsSection";
 import { AppointmentSection } from "@/components/sections/AppointmentSection";
 
-export const revalidate = 60 * 60;
+export const revalidate = 3600;
 
 export default async function Home() {
   const data = await getLandingData();
