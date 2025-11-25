@@ -491,10 +491,6 @@ export async function fetchReels(locale = "ro"): Promise<ReelsPayload> {
   };
 }
 
-// ---------------------------------------------------------------------------
-// SPONSORS
-// ---------------------------------------------------------------------------
-
 export async function fetchSponsors(locale = "ro"): Promise<Sponsor[]> {
   if (!hasContentfulCredentials) {
     return mockSponsors;
