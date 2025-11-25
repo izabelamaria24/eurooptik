@@ -1,4 +1,5 @@
 import type { Document } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import type {
   BlogArticle,
   LandingData,
@@ -13,11 +14,11 @@ import type {
 } from "./types";
 
 const richText = (text: string): Document => ({
-  nodeType: "document",
+  nodeType: BLOCKS.DOCUMENT, // <-- CORECȚIE AICI
   data: {},
   content: [
     {
-      nodeType: "paragraph",
+      nodeType: BLOCKS.PARAGRAPH, // De asemenea, tipați BLOCKS.PARAGRAPH
       data: {},
       content: [
         {
