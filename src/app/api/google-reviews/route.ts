@@ -10,7 +10,7 @@ const PLACES = [
 
 const FIELDS = "rating,userRatingCount,displayName";
 
-export const revalidate = 60 * 60 * 24;
+export const revalidate = 60 * 60 * 24; // 24 hours
 
 export async function GET() {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
@@ -27,7 +27,7 @@ export async function GET() {
       PLACES.map(async (place) => {
         const response = await fetch(
           `https://places.googleapis.com/v1/places/${place.placeId}?fields=${FIELDS}&key=${apiKey}`,
-          { next: { revalidate } }
+          { next: { revalidate: 60 * 60 * 24 } }
         );
         if (!response.ok) return null;
         const data = await response.json();
