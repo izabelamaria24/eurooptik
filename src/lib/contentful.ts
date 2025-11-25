@@ -18,6 +18,7 @@ import type {
   Sponsor,
   TeamPayload,
   Testimonial,
+  TeamMember,
 } from "./types";
 import {
   mockBlogArticles,
@@ -68,6 +69,11 @@ const slugify = (value?: string | number | null) =>
 const isRichTextDocument = (content: Document | undefined): content is Document =>
   Boolean(content && content.nodeType === "document");
 
+
+// ---------------------------------------------------------------------------
+// TEAM
+// ---------------------------------------------------------------------------
+
 export async function fetchTeam(locale = "ro"): Promise<TeamPayload> {
   if (!hasContentfulCredentials) {
     return mockTeam;
@@ -82,23 +88,25 @@ export async function fetchTeam(locale = "ro"): Promise<TeamPayload> {
     }),
     client.getEntries({
       content_type: "locatie",
-      order: "fields.idFiltru",
+      order: ["fields.idFiltru"],
       locale,
     }),
   ]);
 
   const teamFields = teamRes.items[0]?.fields as any;
 
-  const collectMembers = (list: any[] | undefined, type: string) =>
+  const collectMembers = (list: any[] | undefined, type: string): TeamMember[] =>
     (list || [])
-      .map((entry) => {
+      .map((entry): TeamMember | null => {
         const fields = entry?.fields;
         if (!fields) return null;
-        const categories = []
+
+        const categories: string[] = [] 
           .concat(fields.categorie)
           .filter(Boolean)
           .map((item: any) => item.fields?.idFiltru?.toString())
           .filter(Boolean);
+
         return {
           name: fields.nume || "",
           role: fields.titlu || "",
@@ -106,11 +114,11 @@ export async function fetchTeam(locale = "ro"): Promise<TeamPayload> {
           specializations: fields.specializari || [],
           categories,
           type,
-        };
+        } as TeamMember;
       })
-      .filter(Boolean);
+      .filter((m): m is TeamMember => m !== null);
 
-  const members = [
+  const members: TeamMember[] = [
     ...collectMembers(teamFields?.listaDoctori, "doctor"),
     ...collectMembers(teamFields?.listaAsistenteMedicale, "asistenta-medicala"),
     ...collectMembers(teamFields?.listaInfirmiere, "infirmiera"),
@@ -131,6 +139,10 @@ export async function fetchTeam(locale = "ro"): Promise<TeamPayload> {
   };
 }
 
+// ---------------------------------------------------------------------------
+// SERVICES
+// ---------------------------------------------------------------------------
+
 export async function fetchServices(locale = "ro"): Promise<ServicesPayload> {
   if (!hasContentfulCredentials) {
     return mockServices;
@@ -146,7 +158,7 @@ export async function fetchServices(locale = "ro"): Promise<ServicesPayload> {
     }),
     client.getEntries({
       content_type: "categorieServiciu",
-      order: "fields.idServiciu",
+      order: ["fields.idServiciu"],
       locale,
     }),
   ]);
@@ -204,6 +216,10 @@ export async function fetchServices(locale = "ro"): Promise<ServicesPayload> {
   return { categories };
 }
 
+// ---------------------------------------------------------------------------
+// ARTICLES
+// ---------------------------------------------------------------------------
+
 export async function fetchArticles(locale = "ro"): Promise<BlogArticle[]> {
   if (!hasContentfulCredentials) {
     return mockBlogArticles;
@@ -224,15 +240,19 @@ export async function fetchArticles(locale = "ro"): Promise<BlogArticle[]> {
       return {
         title: fields.denumireArticol,
         slug: fields.slug,
-        doctors: (fields.doctori || []).map((doc: any) => doc.fields?.nume),
+        doctors: (fields.doctori || []).map((doc: any) => doc.fields?.nume).filter(Boolean),
         serviceName,
         content: isRichTextDocument(content) ? content : null,
       };
     })
-    .filter(Boolean);
+    .filter((a): a is BlogArticle => a !== null);
 
   return articles;
 }
+
+// ---------------------------------------------------------------------------
+// TESTIMONIALS
+// ---------------------------------------------------------------------------
 
 export async function fetchTestimonials(locale = "ro"): Promise<Testimonial[]> {
   if (!hasContentfulCredentials) {
@@ -242,7 +262,7 @@ export async function fetchTestimonials(locale = "ro"): Promise<Testimonial[]> {
   const res = await client.getEntries({
     content_type: "testimonial",
     limit: 12,
-    order: "-sys.createdAt",
+    order: ["-sys.createdAt"],
     locale,
   });
 
@@ -262,8 +282,12 @@ export async function fetchTestimonials(locale = "ro"): Promise<Testimonial[]> {
         imageUrl,
       };
     })
-    .filter(Boolean);
+    .filter((t): t is Testimonial => t !== null);
 }
+
+// ---------------------------------------------------------------------------
+// PRICING
+// ---------------------------------------------------------------------------
 
 export async function fetchPricing(locale = "ro"): Promise<PricingTable> {
   if (!hasContentfulCredentials) {
@@ -291,6 +315,10 @@ export async function fetchPricing(locale = "ro"): Promise<PricingTable> {
   }, {});
 }
 
+// ---------------------------------------------------------------------------
+// SPECIALIZATIONS
+// ---------------------------------------------------------------------------
+
 export async function fetchSpecializations(
   locale = "ro",
 ): Promise<SpecializationsPayload> {
@@ -302,13 +330,13 @@ export async function fetchSpecializations(
   const [categoryRes, specRes] = await Promise.all([
     client.getEntries({
       content_type: "categorieSpecialitate",
-      order: "fields.idFiltru",
+      order: ["fields.idFiltru"],
       locale,
     }),
     client.getEntries({
       content_type: "specialitate",
       include: 3,
-      order: "sys.createdAt",
+      order: ["sys.createdAt"],
       locale,
     }),
   ]);
@@ -329,7 +357,7 @@ export async function fetchSpecializations(
         return null;
       }
       const articles: SpecializationArticleLink[] = (fields.articles || [])
-        .map((article: any) => {
+        .map((article: any): SpecializationArticleLink | null => {
           if (
             !article?.fields?.denumireArticol ||
             !article?.fields?.slug ||
@@ -344,7 +372,7 @@ export async function fetchSpecializations(
               article.fields.serviciu.fields.categorie.fields.idServiciu.toString(),
           };
         })
-        .filter(Boolean);
+        .filter((a: SpecializationArticleLink | null): a is SpecializationArticleLink => a !== null);
 
       const articleDescription = fields.descriereSpecialitate as Document;
 
@@ -368,10 +396,14 @@ export async function fetchSpecializations(
         articles,
       } as SpecializationCard;
     })
-    .filter(Boolean);
+    .filter((s): s is SpecializationCard => s !== null);
 
   return { categories, specializations };
 }
+
+// ---------------------------------------------------------------------------
+// RESEARCH
+// ---------------------------------------------------------------------------
 
 export async function fetchResearch(locale = "ro"): Promise<ResearchArticle[]> {
   if (!hasContentfulCredentials) {
@@ -396,8 +428,12 @@ export async function fetchResearch(locale = "ro"): Promise<ResearchArticle[]> {
           : null,
       };
     })
-    .filter(Boolean);
+    .filter((a): a is ResearchArticle => a !== null);
 }
+
+// ---------------------------------------------------------------------------
+// REELS
+// ---------------------------------------------------------------------------
 
 export async function fetchReels(locale = "ro"): Promise<ReelsPayload> {
   if (!hasContentfulCredentials) {
@@ -433,10 +469,10 @@ export async function fetchReels(locale = "ro"): Promise<ReelsPayload> {
         categorySlug: fields.categorie.fields.slug,
       };
     })
-    .filter(Boolean);
+    .filter((r): r is Reel => r !== null);
 
   const unique = <T extends { slug: string }>(items: T[]) =>
-    Array.from(new Map(items.map((item) => [item.slug, item])).values());
+    Array.from(new Map(items.map((item: T) => [item.slug, item])).values()); // CORECTAT: Am tipat explicit 'item: T'
 
   return {
     reels,
@@ -455,6 +491,10 @@ export async function fetchReels(locale = "ro"): Promise<ReelsPayload> {
   };
 }
 
+// ---------------------------------------------------------------------------
+// SPONSORS
+// ---------------------------------------------------------------------------
+
 export async function fetchSponsors(locale = "ro"): Promise<Sponsor[]> {
   if (!hasContentfulCredentials) {
     return mockSponsors;
@@ -464,23 +504,31 @@ export async function fetchSponsors(locale = "ro"): Promise<Sponsor[]> {
     content_type: "sponsor",
     include: 1,
     locale,
-    order: "sys.createdAt",
+    order: ["sys.createdAt"],
   });
 
   return res.items
     .map((item) => {
       const fields = item.fields as any;
       if (!fields.nume || !fields.logo?.fields?.file?.url) return null;
+      
+      const websiteUrlValue = fields.linkWebsite ?? null; // Folosim ?? în loc de || pentru a păstra null
+
       return {
         id: item.sys.id,
         name: fields.nume,
         description: fields.descriere || "",
         logoUrl: assetUrl(fields.logo),
-        websiteUrl: fields.linkWebsite || null,
-      };
+        // Schimbare: Folosim websiteUrlValue
+        websiteUrl: websiteUrlValue, 
+      } as Sponsor; // Assertarea tipului în map
     })
-    .filter(Boolean);
+    .filter((s): s is Sponsor => s !== null); // Tipul de destinație este acum Sponsor, nu obiectul anonim
 }
+
+// ---------------------------------------------------------------------------
+// LANDING DATA
+// ---------------------------------------------------------------------------
 
 export async function getLandingData(locale = "ro"): Promise<LandingData> {
   if (!hasContentfulCredentials) {
@@ -521,6 +569,10 @@ export async function getLandingData(locale = "ro"): Promise<LandingData> {
   };
 }
 
+// ---------------------------------------------------------------------------
+// GET ARTICLE BY SLUG
+// ---------------------------------------------------------------------------
+
 export async function getArticleBySlug(
   slug: string,
   locale = "ro",
@@ -543,13 +595,17 @@ export async function getArticleBySlug(
   return {
     title: fields.denumireArticol,
     slug: fields.slug,
-    doctors: (fields.doctori || []).map((doc: any) => doc.fields?.nume),
+    doctors: (fields.doctori || []).map((doc: any) => doc.fields?.nume).filter(Boolean),
     serviceName: fields.serviciu?.fields?.numeServiciu || "",
     content: isRichTextDocument(fields.continutArticol)
       ? fields.continutArticol
       : null,
   };
 }
+
+// ---------------------------------------------------------------------------
+// GET RESEARCH BY SLUG
+// ---------------------------------------------------------------------------
 
 export async function getResearchBySlug(
   slug: string,
@@ -577,4 +633,3 @@ export async function getResearchBySlug(
       : null,
   };
 }
-
