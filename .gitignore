@@ -2,5 +2,6 @@
 scripts/config.js
 api/
 _site/
+.env
 
 node_modules/
