@@ -151,30 +151,6 @@ padding: 4px 10px;
 width: auto;
 }
 
-#home-cine-suntem-button {
-  margin-bottom: 20px;
-  background-color: #d13775;
-  border: none;
-  border-radius: 30px;
-  color: #F5F3ED;
-}
-
-#home-cine-suntem-button:hover {
-background-color: #ad2e61;
-}
-
-#home-appointment-button {
-  margin-bottom: 20px;
-  background-color: #d13775;
-  border: none;
-  border-radius: 30px;
-  color: #F5F3ED;
-}
-
-#home-appointment-button:hover {
-  background-color: #ad2e61;
-}
-
 .btn-programare {
 background: #d13775;
 color: #fff !important;
