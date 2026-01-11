@@ -19,6 +19,11 @@ padding-bottom: 25px;
 transition: color 0.125s ease-in-out 0s;
 }
 
+/* Navbar header relative positioning for mobile logo */
+.navbar-header {
+position: relative;
+}
+
 /* Toggle button to the left */
 .navbar-toggle {
 float: left;

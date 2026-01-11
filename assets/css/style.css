@@ -1046,9 +1046,22 @@ General Styles - Owlcarousel
 .navbar-brand-center {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%; /* Position vertically in the middle of navbar */
+  transform: translate(-50%, -50%); /* Center both vertically and horizontally */
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   z-index: 1001;
-  margin-top: -2%;
+  width: auto;
+  text-align: center;
+  margin: 0 !important; /* Remove negative margins */
+  padding: 0 !important;
+}
+
+.navbar-brand-center .navbar-brand {
+    padding: 0 !important;
+    margin: 0 !important; 
+    float: none !important;
+    display: block; /* Ensure it behaves as a block for the image */
 }
 
 /* Toggle button to the left */
@@ -1480,15 +1493,17 @@ body, .navbar, .navbar a {
 
 /* Initial state logo size/position for desktop */
 .navbar-custom.navbar-transparent .navbar-brand.hidden-xs img {
-    max-height: 90px;
-    margin-top: -42px;
+    max-height: 60px;
+    margin-top: -28px;
+    margin-left: 0;
 }
 
 
 /* Scrolled state logo size/position for desktop */
 .navbar-custom.navbar-solid .navbar-brand.hidden-xs img {
-    max-height: 70px; /* Slightly smaller logo when scrolled */
-    margin-top: -32px; /* Adjust as needed */
+    max-height: 60px; /* Logo remains same size when scrolled */
+    margin-top: -28px; /* Position matches transparent state */
+    margin-left: 0;
 }
 
 
@@ -1506,6 +1521,14 @@ body, .navbar, .navbar a {
     .navbar-custom.navbar-solid .navbar-collapse .navbar-nav > li > a:hover {
         background-color: var(--ui-background-light) !important;
         color: #2a8be0 !important;
+    }
+
+    /* Fixed size for mobile logo to prevent overflow */
+    .navbar-brand-center img {
+        max-height: 50px;
+        width: auto;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 }
 
