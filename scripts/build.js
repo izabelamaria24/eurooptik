@@ -11,7 +11,7 @@ const CONFIG = {
     OUTPUT_DIR: path.join(__dirname, '..', '_site'),
     LOCAL_API_DIR: path.join(__dirname, '..', 'api'),
     LOCALES: ['ro', 'en'],
-    ASSETS_TO_COPY: ['assets', 'CNAME', 'programare-confirmata.html']
+    ASSETS_TO_COPY: ['assets', 'CNAME']
 };
 
 async function processHtmlFile(filePath, langCode, relativePathPrefix) {
@@ -123,6 +123,18 @@ async function build() {
                 await fs.copy(srcPath, path.join(CONFIG.OUTPUT_DIR, asset));
                 console.log(`✅ Copied '${asset}'.`);
             }
+        }
+
+        const confirmationPagePath = path.join(CONFIG.PROJECT_ROOT, 'programare-confirmata.html');
+        if (fs.existsSync(confirmationPagePath)) {
+            const confirmDir = path.join(CONFIG.OUTPUT_DIR, 'programare-confirmata');
+            await fs.ensureDir(confirmDir);
+            
+            let html = await fs.readFile(confirmationPagePath, 'utf-8');
+            html = html.replace(/(href|src)="assets\//g, '$1="../assets/');
+            
+            await fs.writeFile(path.join(confirmDir, 'index.html'), html);
+            console.log("✅ Created clean URL for 'programare-confirmata' (moved to directory index).");
         }
 
         const defaultLang = CONFIG.LOCALES[0].split('-')[0];
