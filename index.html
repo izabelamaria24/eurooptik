@@ -91,8 +91,7 @@
           </div>
         </li> -->
         <li>
-          <a class="btn-programare" href="#"
-             onclick="showProgramareSection(); return false;"><b>Programează-te</b></a>
+          <a class="btn-programare" href="https://eurooptik.ro.programarionline.sophtha.com/" target="_blank"><b>Programează-te</b></a>
         </li>
       </ul>
     </div>
@@ -113,7 +112,7 @@
 
       <div class="home-buttons-container">
         <a class="section-scroll btn btn-border-w btn-round" class="btn-programare" id="home-appointment-button"
-          href="#" onclick="showProgramareSection(); return false;">Programează-te</a>
+          href="https://eurooptik.ro.programarionline.sophtha.com/" target="_blank">Programează-te</a>
         <a class="section-scroll btn btn-border-w btn-round" href="#new-specializations" id="home-cine-suntem-button"> Specialitățile Noastre  </a>
       </div>
 
@@ -572,21 +571,11 @@
     </div>
   </div>
 
-  <section id="programare-section" style="display:none;">
-    <button class="appointments-close-btn" onclick="hideProgramareSection()">×</button> 
-    
-    <h2 class="appointments-title">PROGRAMEAZĂ-TE ONLINE</h2>
-    
-      <iframe src="https://eurooptik.ro.programarionline.sophtha.com/"
-        style="width:100%; min-height:600px; border:none;" title="Programare online"></iframe>
-    </div>
-  </section>
-
     <hr class="divider-d">
     <footer class="footer">
       <section class="footer-message">
         <h2>Vă mai așteptăm la noi!</h2>
-        <button class="footer-appointment-btn" onclick="showProgramareSection()">Programează-te online</button>
+        <a class="footer-appointment-btn" href="https://eurooptik.ro.programarionline.sophtha.com/" target="_blank">Programează-te online</a>
       </section>
       <div class="footer-content">
         <div class="footer-locations">
@@ -647,17 +636,6 @@
   <script type="module" src="assets/js/new-specializations.js"></script>
   <script type="module" src="assets/js/reels.js"></script>
   <script type="module" src="assets/js/config.js"></script>
-    
-  <script>
-    function showProgramareSection() {
-      const section = document.getElementById('programare-section');
-      section.style.display = 'block';
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-    function hideProgramareSection() {
-      document.getElementById('programare-section').style.display = 'none';
-    }
-  </script>
 </body>
 
 </html>
