@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ro" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Programare Confirmată | Eurooptik</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/website-image.png">
+  <link href="assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+  <link href="assets/lib/animate.css/animate.css" rel="stylesheet">
+  <link href="assets/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/lib/et-line-font/et-line-font.css" rel="stylesheet">
+  <link href="assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
+
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/navbar.css" rel="stylesheet">
+  <link href="assets/css/footer.css" rel="stylesheet">
+  
+  <style>
+      #confirmation-navbar {
+          background-color: #fff !important;
+          border-bottom: 1px solid #eaeaea;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+          height: 90px;
+          padding: 0;
+          display: flex;
+          align-items: center;
+      }
+
+      #confirmation-navbar .container {
+          display: flex;
+          height: 100%;
+      }
+
+      #confirmation-navbar .navbar-header {
+          float: none !important;
+          display: flex;
+          align-items: center;
+          margin-left: -25%; 
+      }
+
+      #confirmation-navbar .navbar-brand {
+          float: none !important;
+          padding: 0;
+          height: auto;
+          line-height: normal;
+          display: flex;
+          align-items: center;
+      }
+
+      #confirmation-navbar .navbar-brand img {
+          max-height: 45px;
+          width: auto;
+      }
+
+      .success-message-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-height: 70vh;
+          text-align: center;
+          padding-top: 130px; 
+          padding-bottom: 80px;
+          padding-left: 15px;
+          padding-right: 15px;
+      }
+
+      .success-icon {
+          font-size: 80px;
+          color: #28a745;
+          margin-bottom: 35px; 
+          display: block; 
+      }
+
+      .module-title {
+          font-size: 32px;
+          color: #333;
+          margin-top: 10px;
+          margin-bottom: 35px; 
+          line-height: 1.4; 
+          font-weight: 700;
+      }
+
+      .module-subtitle {
+          font-size: 18px;
+          color: #666;
+          line-height: 1.8; 
+          max-width: 700px;
+          margin: 0 auto 50px auto;
+      }
+
+      .home-btn-container {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+      }
+
+      .btn-pink-outline {
+          background: transparent;
+          border: 2px solid #d9538d;
+          color: #d9538d;
+          padding: 15px 40px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          transition: all 0.3s ease;
+          border-radius: 0; 
+      }
+
+      .btn-pink-outline:hover, 
+      .btn-pink-outline:focus {
+          background: #d9538d;
+          color: #fff;
+          border-color: #d9538d;
+          box-shadow: 0 5px 15px rgba(217, 83, 141, 0.4);
+      }
+
+      @media (max-width: 767px) {
+          #confirmation-navbar {
+              height: 70px;
+          }
+          
+          #confirmation-navbar .container {
+              justify-content: center;
+          }
+
+          #confirmation-navbar .navbar-brand img {
+              max-height: 35px;
+          }
+
+          #confirmation-navbar .navbar-header {
+              margin-left: 0;
+              margin-right: 0;
+          }
+          
+          .module-title {
+              font-size: 24px;
+              word-wrap: break-word;
+          }
+          
+          .module-subtitle {
+              font-size: 16px;
+          }
+
+          .btn-pink-outline {
+              padding: 12px 15px; 
+              font-size: 12px;
+              white-space: normal; 
+              max-width: 100%; 
+          }
+      }
+  </style>
+</head>
+
+<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+  <main>
+    <div class="page-loader">
+      <div class="loader">Loading...</div>
+    </div>
+    
+    <nav id="confirmation-navbar" class="navbar navbar-custom navbar-fixed-top navbar-solid" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+              <img src="assets/images/logo-full.png" alt="Eurooptik">
+            </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main">
+      <section class="module success-message-container">
+        <div class="container">
+            <div class="wow fadeInUp" data-wow-delay="0.1s">
+                <i class="fa fa-check-circle success-icon"></i>
+            </div>
+            
+            <h1 class="module-title font-alt wow fadeInUp" data-wow-delay="0.2s">
+                Programare Confirmată!
+            </h1>
+            
+            <p class="module-subtitle wow fadeInUp" data-wow-delay="0.3s">
+                Vă mulțumim! Programarea dumneavoastră a fost înregistrată cu succes.<br>
+                Vă așteptăm cu drag la clinică!
+            </p>
+            
+            <div class="home-btn-container wow fadeInUp" data-wow-delay="0.4s">
+                <a href="/" class="btn btn-pink-outline btn-round">Înapoi la Pagina Principală</a>
+            </div>
+        </div>
+      </section>
+
+      <hr class="divider-d">
+      
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-locations">
+            <div class="footer-location"><span class="footer-location-name"><b>Bacău - clinică</b></span><br>Luni - Vineri, 9 - 17<br>Str. Ștefan cel Mare, Nr. 7</div>
+            <div class="footer-location"><span class="footer-location-name"><b>Bacău</b></span><br>Luni - Vineri, 9 - 17<br>Str. Razboieni Nr. 7</div>
+            <div class="footer-location"><span class="footer-location-name"><b>Moinești</b></span><br>Luni - Vineri, 8 - 16<br>Str. T. Vladimirescu, nr. 177</div>
+            <div class="footer-location"><span class="footer-location-name"><b>Comănești</b></span><br>Luni - Vineri, 9 - 17<br>Str. N. Ghica, Nr. 2</div>
+            <div class="footer-location"><span class="footer-location-name"><b>Onești</b></span><br>Luni - Vineri, 9 - 17<br>Str. Postei, nr. 6</div>
+          </div>
+        </div>
+        <div class="footer-logo">
+              <img class="footer-logo-image" src="assets/images/logo-small.png" alt="eurooptik logo">
+        </div>
+      </footer>
+    </div>
+
+    <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="assets/lib/wow/dist/wow.js"></script>
+  <script src="assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script>
+  <script src="assets/lib/isotope/dist/isotope.pkgd.js"></script>
+  <script src="assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+  <script src="assets/lib/flexslider/jquery.flexslider.js"></script>
+  <script src="assets/lib/smoothscroll.js"></script>
+  <script src="assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
+  <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+  <script src="assets/js/plugins.js"></script>
+  <script src="assets/js/main.js"></script> 
+</body>
+</html>

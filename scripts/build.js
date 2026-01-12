@@ -11,7 +11,7 @@ const CONFIG = {
     OUTPUT_DIR: path.join(__dirname, '..', '_site'),
     LOCAL_API_DIR: path.join(__dirname, '..', 'api'),
     LOCALES: ['ro', 'en'],
-    ASSETS_TO_COPY: ['assets', 'CNAME']
+    ASSETS_TO_COPY: ['assets', 'CNAME', 'programare-confirmata.html']
 };
 
 async function processHtmlFile(filePath, langCode, relativePathPrefix) {
