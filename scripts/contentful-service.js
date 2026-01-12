@@ -1,4 +1,5 @@
 import * as contentful from 'contentful';
+import { optimizeImage } from './utils.js';
 
 let client = null;
 
@@ -50,7 +51,7 @@ function processMember(memberEntry, memberType) {
     return {
         name: fields.nume || '', 
         role: fields.titlu || '', 
-        image: fields.fotografie?.fields?.file?.url ? `https:${fields.fotografie.fields.file.url}` : '',
+        image: fields.fotografie?.fields?.file?.url ? optimizeImage(fields.fotografie.fields.file.url, 300) : '',
         specializations: fields.specializari || [],
         categories: finalCategories,
         type: memberType 
@@ -239,7 +240,7 @@ export async function fetchTestimonialsFromContentful({ locale = 'ro' } = {}) {
                 id: item.sys.id,
                 author: numeClient,
                 quote: continutTestimonial,
-                imageUrl: `https:${pozaTestimonial.fields.file.url}?w=400&h=400&fit=crop&fm=jpg&q=80`
+                imageUrl: optimizeImage(pozaTestimonial.fields.file.url, 400, 'h=400&fit=crop')
             };
         }).filter(Boolean); 
 
@@ -315,7 +316,7 @@ export async function fetchSpecializationsData({ locale = 'ro' } = {}) {
 
             const testimonialId = fields.testimonial?.sys?.id || null;
             const testimonialQuote = fields.testimonial?.fields?.continutTestimonial || null;
-            const testimonialAuthorImage = fields.testimonial?.fields?.pozaTestimonial?.fields?.file?.url ? `https:${fields.testimonial.fields.pozaTestimonial.fields.file.url}` : null;
+            const testimonialAuthorImage = fields.testimonial?.fields?.pozaTestimonial?.fields?.file?.url ? optimizeImage(fields.testimonial.fields.pozaTestimonial.fields.file.url, 200, 'h=200&fit=crop') : null;
             
             const articles = (fields.articles || []).map(articleEntry => {
                 const articleFields = articleEntry?.fields;
@@ -330,11 +331,11 @@ export async function fetchSpecializationsData({ locale = 'ro' } = {}) {
             return {
                 slug: createKey(fields.numeSpecialitate),
                 cardTitle: fields.numeSpecialitate,
-                cardImage: `https:${fields.pozaSpecialitate?.fields?.file?.url || ''}`,
+                cardImage: optimizeImage(fields.pozaSpecialitate?.fields?.file?.url, 400),
                 categorySlug: createKey(fields.categorieSpecialitate.fields.numeCategorieSpecialitate),
                 articleTitle: fields.titluSpecialitate,
                 articleDescription: fields.descriereSpecialitate,
-                articleImage: `https:${fields.pozaSpecialitate?.fields?.file?.url || ''}`,
+                articleImage: optimizeImage(fields.pozaSpecialitate?.fields?.file?.url, 1200),
                 testimonialId,
                 testimonialQuote,
                 testimonialAuthorImage,
@@ -410,10 +411,20 @@ export async function fetchReelsFromContentful({ locale = 'ro' } = {}) {
             const doctorName = fields.doctor.fields.nume;
             const doctorSlug = createKey(doctorName);
             
+            let videoUrl = `https:${videoAsset}`;
+
+            if (videoUrl.includes('FAQ_Dr.Motoc_1.mp4')) {
+                 videoUrl = 'https://eurooptik.ro/media/videos/FAQ_Dr.Motoc_1.mp4';
+            } else if (videoUrl.includes('FAQ_Dr.Motoc_3.mp4')) {
+                 videoUrl = 'https://eurooptik.ro/media/videos/FAQ_Dr.Motoc_3.mp4';
+            } else if (videoUrl.includes('1758527785605.publer.com.mp4')) {
+                 videoUrl = 'https://eurooptik.ro/media/videos/FAQ_Dr.Motoc_2.mp4';
+            }
+            
             return {
                 id: item.sys.id,
                 title: fields.titlu || '',
-                videoUrl: `https:${videoAsset}`, 
+                videoUrl: videoUrl, 
                 doctorName: doctorName,
                 doctorSlug: doctorSlug,
                 categoryName: fields.categorie.fields.numeCategorieReel,
@@ -464,7 +475,7 @@ export async function fetchSponsorsFromContentful({ locale = 'ro' } = {}) {
                 id: item.sys.id,
                 name: fields.nume,
                 description: fields.descriere || '', 
-                logoUrl: `https:${fields.logo.fields.file.url}`,
+                logoUrl: optimizeImage(fields.logo.fields.file.url, 200),
             };
         }).filter(Boolean); 
 
