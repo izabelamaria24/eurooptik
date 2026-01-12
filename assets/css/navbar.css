@@ -158,7 +158,7 @@ width: auto;
 
 .btn-programare {
 background: #d13775;
-color: #fff !important;
+color: #fff !important; /* Forces white text */
 padding: 8px 18px;
 border-radius: 25px;
 font-weight: 500;
@@ -169,6 +169,7 @@ display: inline-block;
 background: #d13775;
 transform: scale(1.05);
 text-decoration: none;
+color: #fff !important; /* Hover text color */
 }
 
 /* Transparent state: Initial appearance at the top of the page */
@@ -396,4 +397,10 @@ white-space: normal;
 padding: 0;
 margin-left: 0;
 }
+}
+/* Force white text for the programare button even on mobile/solid navbar */
+.navbar-custom.navbar-solid .navbar-nav > li > a.btn-programare,
+.navbar-custom .navbar-nav > li > a.btn-programare,
+.navbar-custom.navbar-solid .navbar-collapse .navbar-nav > li > a.btn-programare {
+    color: #fff !important;
 }

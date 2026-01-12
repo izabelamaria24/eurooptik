@@ -11,16 +11,41 @@
 }
 
 #programare-section div {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
 #programare-section iframe {
     width: 100%;
-    min-height: 80vh;
+    height: 620px; /* Fixed height to fit the form content tightly */
     border: 1px solid #ddd; 
     border-radius: 8px; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+}
+
+/* --- Mobile Adjustments --- */
+@media (max-width: 767px) {
+    #programare-section {
+        padding: 40px 15px; /* Reduced outer padding */
+    }
+
+    .appointments-title {
+        font-size: 30px; /* Balanced size */
+        line-height: 1.2;
+        margin-bottom: 25px;
+        padding-right: 20px; /* Avoid overlap with close button */
+    }
+
+    #programare-section .appointments-close-btn {
+        top: 0px; 
+        right: 15px;
+        font-size: 20px; /* Much smaller close button */
+        padding: 5px; /* Increase touch target */
+    }
+
+    #programare-section iframe {
+        height: 650px; /* Slightly taller for mobile stack */
+    }
 }
 
 #programare-section .appointments-close-btn {

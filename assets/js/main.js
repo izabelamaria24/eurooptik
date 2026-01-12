@@ -239,3 +239,31 @@
         });
     });
 })(jQuery);
+/* ---------------------------------------------- /*
+ * Appointment Section Logic
+ /* ---------------------------------------------- */
+(function($){
+    $(document).ready(function(){
+        // Handlers for showing the appointment section
+        // Note: We use href="#" and data-target="#programare-section" now to avoid generic link handlers
+        $('#nav-appointment-btn, #home-appointment-button, #footer-appointment-btn, .btn-programare').on('click', function(e) {
+            e.preventDefault();
+            
+            var targetId = $(this).attr('data-target') || '#programare-section';
+            var $section = $(targetId);
+            
+            // Show the section with CSS first to ensure it has height
+            $section.css('display', 'block');
+            
+            $('html, body').animate({
+                scrollTop: $section.offset().top - 50
+            }, 1000);
+        });
+
+        // Handler for closing the appointment section
+        $('#appointments-close-btn').on('click', function(e) {
+            e.preventDefault();
+            $('#programare-section').slideUp(800);
+        });
+    });
+})(jQuery);

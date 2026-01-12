@@ -1529,6 +1529,24 @@ body, .navbar, .navbar a {
         width: auto;
         margin: 0 !important;
         padding: 0 !important;
+        transition: max-height 0.3s ease;
+    }
+
+    /* Reset absolute centering to standard for solid mobile navbar */
+    .navbar-custom.navbar-solid .navbar-brand-center {
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        -webkit-transform: translate(-50%, -50%) !important;
+        -ms-transform: translate(-50%, -50%) !important;
+        margin: 0 !important;
+    }
+
+    /* Reduce logo size on mobile scroll only to fit within reduced header height */
+    .navbar-custom.navbar-solid .navbar-brand-center img {
+        max-height: 40px !important; 
+        margin: 0 !important;
+        padding: 0 !important;
     }
 }
 
