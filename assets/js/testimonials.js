@@ -10,19 +10,22 @@ if (!imageContainer || !contentWrapper) {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            const testimonials = await response.json();
+
+            let testimonials = await response.json();
 
             if (!testimonials || testimonials.length === 0) {
                 imageContainer.innerHTML = '<p style="color: #fff;">Nu există testimoniale disponibile.</p>';
                 return;
             }
 
+            // Shuffle and pick 6 random testimonials
+            testimonials = testimonials.sort(() => Math.random() - 0.5).slice(0, 6);
+
             imageContainer.innerHTML = '';
             contentWrapper.innerHTML = '';
 
             renderTestimonialHTML(testimonials);
             setupEventListeners();
-            
             handleDeepLink();
 
         } catch (error) {

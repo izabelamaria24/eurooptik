@@ -226,7 +226,7 @@ export async function fetchTestimonialsFromContentful({ locale = 'ro' } = {}) {
     try {
         const response = await client.getEntries({
             content_type: 'testimonial', 
-            limit: 6,                   
+            limit: 100, 
             order: '-sys.createdAt',
             locale: locale
         });
@@ -240,7 +240,7 @@ export async function fetchTestimonialsFromContentful({ locale = 'ro' } = {}) {
                 id: item.sys.id,
                 author: numeClient,
                 quote: continutTestimonial,
-                imageUrl: optimizeImage(pozaTestimonial.fields.file.url, 400, 'h=400&fit=crop')
+                imageUrl: optimizeImage(pozaTestimonial.fields.file.url, 400, 'h=400&fit=scale') 
             };
         }).filter(Boolean); 
 
