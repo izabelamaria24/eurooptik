@@ -13,6 +13,10 @@
     text-align: center;
 }
 
+.reels-section .module-subtitle {
+    font-style: normal;
+}
+
 .reels-section .reels-filters {
     display: flex;
     justify-content: center;

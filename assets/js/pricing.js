@@ -64,7 +64,7 @@ async function initPricingLogic(pricingSection) {
             if (locationSlug === 'clear') {
                 el.textContent = '- RON'; 
             } else if (pricesForLocation && typeof pricesForLocation[consultationType] !== 'undefined') {
-                el.textContent = 'RON ' + pricesForLocation[consultationType];
+                el.textContent = pricesForLocation[consultationType] + ' RON';
             } else {
                 el.textContent = 'N/A';
             }

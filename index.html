@@ -40,6 +40,7 @@
   <link href="assets/css/appointments.css" rel="stylesheet">
   <link href="assets/css/navbar.css" rel="stylesheet">
   <link href="assets/css/reels.css" rel="stylesheet">
+  <link href="assets/css/landing.css" rel="stylesheet">
 
   <script src="https://unpkg.com/contentful@latest/dist/contentful.browser.min.js"></script>
 </head>
@@ -98,31 +99,39 @@
   </div>
 </nav>
 
-<section class="home-section home-full-height" id="home">
-  <img src="assets/images/hero.png" alt="Background"
-  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
-  <div class="titan-caption">
-    <div class="caption-content">
+  <section class="hero-section-wrapper" id="home">
+  <div class="hero-bg-container">
+    <img src="assets/images/hero.png" alt="Background Clinica Eurooptik" class="hero-bg-image">
+    <div class="hero-overlay"></div>
+  </div>
 
-      <div class="logo-and-review-wrapper">
-        <div class="mb-20 text-center">
-            <img class="hero-logo-img" src="assets/images/logo-full.png" alt="Eurooptik" style="margin-bottom: 0;">
-        </div>
+  <div class="hero-content-container">
+    <div class="hero-invisible-wrapper">
+      
+      <div class="hero-logo-wrapper">
+        <img src="assets/images/logo-full.png" alt="Eurooptik Logo" class="hero-logo-img">
       </div>
 
-      <div class="home-buttons-container">
-        <a class="btn btn-border-w btn-round" id="home-appointment-button"
-          href="#" data-target="#programare-section">Programează-te</a>
-        <a class="section-scroll btn btn-border-w btn-round" href="#new-specializations" id="home-cine-suntem-button"> Specialitățile Noastre  </a>
+      <div class="hero-actions">
+        <a href="#" class="hero-btn btn-pink" data-target="#programare-section">
+            Programează-te Online
+        </a>
+        <a href="#new-specializations" class="hero-btn btn-transparent">
+            Specialitățile Noastre
+        </a>
       </div>
 
-      <div id="google-reviews-display">
-          <div id="featurable-2aa9158f-c33e-43c7-8d9e-a523d3d75251" data-featurable-async ></div><script src="https://featurable.com/assets/v2/badge_default.min.js" defer charset="UTF-8"></script>
+      <!-- REVIEWS WIDGET (COMENTAT) -->
+      <!-- 
+      <div class="hero-reviews-wrapper">
+        <div id="featurable-2aa9158f-c33e-43c7-8d9e-a523d3d75251" data-featurable-async></div>
+        <script src="https://featurable.com/assets/v2/badge_default.min.js" defer charset="UTF-8"></script>
       </div>
-    
+      -->
+
     </div>
   </div>
-</section>
+</section>>
 
     <div class="main">
 

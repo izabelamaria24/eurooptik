@@ -2,17 +2,16 @@
 Navbar Items
 ========================================================================== */
 
-/* Navbar common styles */
 .navbar-custom {
-border: 0;
-border-radius: 0;
-z-index: 1000;
-font-weight: bold;
-letter-spacing: 3px;
-font-size: 15px;
-transition: background-color 0.3s ease, padding 0.3s ease;
-padding-top: 25px;
-padding-bottom: 25px;
+    border: 0;
+    border-radius: 0;
+    z-index: 1000;
+    font-weight: 400; /* A fost 'bold', schimbat in 400 (normal) */
+    letter-spacing: 1px; /* A fost '3px', redus pentru un aspect mai compact */
+    font-size: 15px;
+    transition: background-color 0.3s ease, padding 0.3s ease;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 .navbar a {
@@ -157,19 +156,25 @@ width: auto;
 }
 
 .btn-programare {
-background: #d13775;
-color: #fff !important; /* Forces white text */
-padding: 8px 18px;
-border-radius: 25px;
-font-weight: 500;
-transition: background 0.3s, transform 0.2s;
-display: inline-block;
+    background: #d13775;
+    color: #fff !important;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease; /* Am schimbat tranzitia pentru a fi mai fluida pe toate proprietatile */
+    display: inline-block;
+    border: 1px solid transparent; /* Adaugat pentru a preveni miscarea la hover daca se adauga border */
 }
-.btn-programare:hover {
-background: #d13775;
-transform: scale(1.05);
-text-decoration: none;
-color: #fff !important; /* Hover text color */
+
+/* Aici este modificarea principala pentru HOVER */
+.btn-programare:hover,
+.btn-programare:focus,
+.btn-programare:active {
+    background: #0f5c53 !important; /* Codul HEX pentru verdele inchis din imagine */
+    transform: scale(1.05);
+    text-decoration: none;
+    color: #fff !important;
+    box-shadow: 0 4px 10px rgba(15, 92, 83, 0.3); /* Optional: adauga o mica umbra verde pentru efect 3D */
 }
 
 /* Transparent state: Initial appearance at the top of the page */

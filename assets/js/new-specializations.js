@@ -10,6 +10,7 @@ async function main() {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
         const { categories, specializations } = await response.json();
 
         if (!categories || !categories.length || !specializations || !specializations.length) {
@@ -17,22 +18,41 @@ async function main() {
             return;
         }
 
+        specializations.sort((a, b) => {
+            const indexA = categories.findIndex(cat => cat.slug === a.categorySlug);
+            const indexB = categories.findIndex(cat => cat.slug === b.categorySlug);
+            return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB);
+        });
         renderCategories(categories);
         renderSpecializationCards(specializations);
         initializeInteractivity(categories, specializations);
+
     } catch (error) {
         console.error("Failed to initialize specializations section:", error);
         section.style.display = 'none';
     }
 }
 
+function capitalizeWords(str) {
+    return str
+        .toLowerCase()
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
 function renderCategories(categories) {
     const container = document.querySelector('.specialization-category-buttons');
     if (!container) return;
+
     container.innerHTML = categories.map((cat, index) => `
-        <button class="btn btn-round category-btn ${index === 0 ? 'active' : ''}" data-category="${cat.slug}">${cat.name}</button>
+        <button class="btn btn-round category-btn ${index === 0 ? 'active' : ''}"
+                data-category="${cat.slug}">
+            ${capitalizeWords(cat.name)}
+        </button>
     `).join('');
 }
+
 
 function renderSpecializationCards(specializations) {
     const container = document.querySelector('.specialization-carousel-container');

@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         articleAuthorEl.textContent = article.doctors && article.doctors.length > 0 ? `De ${article.doctors.join(', ')}` : '';
         
         if (article.content && article.content.nodeType === 'document') {
-             const renderOptions = {
+            const renderOptions = {
                 renderNode: {
                     [INLINES.ENTRY_HYPERLINK]: (node, next) => {
                         const linkText = next(node.content);
@@ -150,17 +150,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         const categorySlug = serviceIdToCategoryMap[targetId];
 
                         return `<a href="#" 
-                                   class="js-service-trigger" 
-                                   style="color: var(--primary-color); text-decoration: underline; font-weight: 600; cursor: pointer;" 
-                                   data-cat-slug="${categorySlug || ''}">
-                                   ${linkText}
+                                class="js-service-trigger" 
+                                style="color: var(--primary-color); text-decoration: underline; font-weight: 600; cursor: pointer;" 
+                                data-cat-slug="${categorySlug || ''}">
+                                ${linkText}
                                 </a>`;
                     }
                 }
             };
             articleContentEl.innerHTML = documentToHtmlString(article.content, renderOptions);
         } else {
-             articleContentEl.innerHTML = '<p>Conținut indisponibil.</p>';
+            articleContentEl.innerHTML = '<p>Conținut indisponibil.</p>';
         }
 
         articleDisplayContainer.classList.remove('hidden');
@@ -217,26 +217,120 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderFilters() {
         filterContainer.innerHTML = '';
+        
         categories.forEach(category => {
-            const button = document.createElement('button');
-            button.className = 'filter-btn';
-            button.textContent = category.name;
-            button.dataset.slug = category.slug;
-            button.addEventListener('click', () => setActiveCategory(category.slug, true));
-            filterContainer.appendChild(button);
+            const groupWrapper = document.createElement('div');
+            groupWrapper.className = 'category-group-wrapper';
+
+            const catBtn = document.createElement('button');
+            catBtn.className = 'filter-btn';
+            catBtn.textContent = category.name; 
+            catBtn.dataset.slug = category.slug;
+
+            const subMenu = document.createElement('div');
+            subMenu.className = 'blog-sub-menu';
+            subMenu.id = `submenu-${category.slug}`;
+
+            const items = servicesByCategory[category.slug] || [];
+
+            if (items.length === 0) {
+                const empty = document.createElement('div');
+                empty.textContent = "Nu există articole.";
+                empty.style.padding = "10px 0 10px 30px";
+                empty.style.color = "#999";
+                subMenu.appendChild(empty);
+            } else {
+                items.forEach(item => {
+                    const title = item.title;
+                    const articleData = allArticlesData[title];
+                    const hasArticle = articleData && articleData.slug;
+
+                    const link = document.createElement('a');
+                    link.className = 'blog-sub-link';
+                    link.textContent = title;
+
+                    if (hasArticle) {
+                        link.href = `pages/articol.html?slug=${articleData.slug}`;
+                        
+                        link.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            
+                            document.querySelectorAll('.blog-sub-link').forEach(l => l.classList.remove('active-article'));
+                            link.classList.add('active-article');
+
+                            displayArticle(articleData, true);
+
+                            if (articleDisplayContainer) {
+                                setTimeout(() => {
+                                    const offset = 100; 
+                                    const bodyRect = document.body.getBoundingClientRect().top;
+                                    const elementRect = articleDisplayContainer.getBoundingClientRect().top;
+                                    const elementPosition = elementRect - bodyRect;
+                                    const offsetPosition = elementPosition - offset;
+
+                                    window.scrollTo({
+                                        top: offsetPosition,
+                                        behavior: "smooth"
+                                    });
+                                }, 100);
+                            }
+                        });
+                    } else {
+                        link.classList.add('disabled');
+                        link.addEventListener('click', (e) => e.preventDefault());
+                    }
+
+                    subMenu.appendChild(link);
+                });
+            }
+
+            catBtn.addEventListener('click', () => {
+                const isActive = catBtn.classList.contains('active');
+                
+                if (!isActive) {
+                    catBtn.classList.add('active');
+                    subMenu.classList.add('open');
+                } else {
+                    catBtn.classList.remove('active');
+                    subMenu.classList.remove('open');
+                }
+            });
+
+            groupWrapper.appendChild(catBtn);
+            groupWrapper.appendChild(subMenu);
+            filterContainer.appendChild(groupWrapper);
         });
+    }
+    function toggleCategory(clickedBtn, targetSubMenu) {
+        const isActive = clickedBtn.classList.contains('active');
+
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.blog-sub-menu').forEach(menu => menu.classList.remove('open'));
+        
+        if (!isActive) {
+            clickedBtn.classList.add('active');
+            targetSubMenu.classList.add('open');
+        } else {
+            clickedBtn.classList.remove('active');
+            targetSubMenu.classList.remove('open');
+        }
     }
 
     function setActiveCategory(slug, shouldScroll = true) {
-        if (activeCategorySlug === slug && !shouldScroll) return; 
-        activeCategorySlug = slug;
-        document.querySelectorAll('#blog-filter-container .filter-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.slug === slug);
-        });
-        renderCarousel(servicesByCategory[slug] || []);
-        if (shouldScroll) {
-            const blogSection = document.getElementById('blog'); 
-            if (blogSection) blogSection.scrollIntoView({ behavior: 'smooth' });
+        const btn = filterContainer.querySelector(`.filter-btn[data-slug="${slug}"]`);
+        const subMenu = document.getElementById(`submenu-${slug}`);
+        
+        if (btn && subMenu) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.blog-sub-menu').forEach(m => m.classList.remove('open'));
+
+            btn.classList.add('active');
+            subMenu.classList.add('open');
+
+            if (shouldScroll) {
+                const blogSection = document.getElementById('blog-section');
+                if (blogSection) blogSection.scrollIntoView({ behavior: 'smooth' });
+            }
         }
     }
 

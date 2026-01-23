@@ -68,64 +68,78 @@
 }
 
 .pricing-card-wrapper {
-    border: 2px solid #333;
     background-color: #fff;
     height: 100%;
     display: flex;
     flex-direction: column;
     padding: 20px;
+    border: 2px solid #000; 
+    transition: transform 0.3s ease;
 }
 
 .pricing-card-header {
-    background-color: transparent; 
-    color: #000; 
+    background-color: transparent;
     padding: 10px 0;
     text-align: center;
-    font-size: 1.8em;
-    font-weight: bold;
+    font-size: 1.6em;
+    font-weight: 600; 
+    color: #000; 
 }
 
 .pricing-card-price-body {
     text-align: center;
-    padding: 15px 0;
+    padding: 10px 0;
 }
 
 .price-value {
     font-size: 1.8em;
-    font-weight: 600;
-    color: #333;
+    font-weight: 700;
+    color: #000;
 }
 
 .pricing-card-divider {
     border: 0;
-    height: 2px;
+    height: 1px;
     width: 100%;
-    background: #333;
-    margin: 5px 0;
+    background: #000; 
+    margin: 10px 0;
 }
 
 .pricing-card-features {
     list-style: disc inside;
     margin: 15px 0 0 0;
     padding-left: 10px;
-    font-size: 1.5em; 
-    flex-grow: 1;
 }
 
 .pricing-card-features li {
     font-style: normal;
     text-transform: lowercase;
-    color: black;
-    margin-bottom: 12px;
+    color: #000;
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-size: 1.25em; 
+    line-height: 1.4;
 }
 
-.feature-glaucom {
-    color: #16987e; 
-    font-weight: 500;
+.pricing-card:nth-child(2) .pricing-card-header {
+    color: #16987e; /* Titlu Verde */
 }
-.feature-cataracta {
-    color: #d13775; 
-    font-weight: 500;
+.pricing-card:nth-child(2) .pricing-card-features li:nth-child(4) {
+    color: #16987e;
+    font-weight: 700;
+}
+
+
+.pricing-card:nth-child(3) .pricing-card-header {
+    color: #d13775; /* Titlu Roz */
+}
+.pricing-card:nth-child(3) .pricing-card-features li:nth-child(4) {
+    color: #16987e;
+    font-weight: 700;
+}
+.pricing-card:nth-child(3) .pricing-card-features li:nth-child(5) {
+    color: #d13775;
+    font-weight: 700;
 }
 
 .pricing-nav-container {
