@@ -80,21 +80,22 @@
   }
 
   .footer-content {
-    gap: 30px;
+    gap: 20px;
     padding: 50px 24px 0 24px;
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr 1fr; 
   }
 
   .footer-locations {
     justify-self: start;
     text-align: left;
+    grid-column: 1 / 2;
   }
 
   .footer-center {
     justify-self: end;
     align-items: flex-end;
     height: auto; 
-    grid-column: 1 / -1; 
+    grid-column: 2 / 3; 
     width: 100%;
   }
 
@@ -103,7 +104,7 @@
     align-items: flex-end;
     height: auto; 
     justify-content: flex-start;
-    gap: 15px; 
+    gap: 8px; 
   }
 
   .footer-menu a {

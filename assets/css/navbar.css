@@ -30,6 +30,30 @@ margin-left: 15px;
 margin-right: 0;
 }
 
+/* Center logo vertically on mobile */
+@media (max-width: 767px) {
+.navbar-brand-center {
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+display: flex;
+align-items: center;
+}
+
+.navbar-brand-center .navbar-brand {
+padding: 0;
+margin: 0;
+display: flex;
+align-items: center;
+}
+
+.navbar-header {
+min-height: 50px;
+position: relative;
+}
+}
+
 .navbar-custom .navbar-brand {
 letter-spacing: 0px;
 font-weight: 400;
@@ -256,6 +280,11 @@ transition: max-height 0.3s ease, margin-top 0.3s ease;
 }
 
 @media (max-width: 767px) {
+/* Opaque white background for navbar on mobile */
+.navbar-custom {
+background-color: white !important;
+}
+
 .navbar-custom.navbar-transparent .navbar-collapse {
 background-color: white;
 }
