@@ -246,7 +246,7 @@
     $(document).ready(function(){
         // Handlers for showing the appointment section
         // Note: We use href="#" and data-target="#programare-section" now to avoid generic link handlers
-        $('#nav-appointment-btn, #home-appointment-button, #footer-appointment-btn, .btn-programare').on('click', function(e) {
+        $('#nav-appointment-btn, #hero-appointment-btn, #footer-appointment-btn, .btn-programare').on('click', function(e) {
             e.preventDefault();
             
             var targetId = $(this).attr('data-target') || '#programare-section';
