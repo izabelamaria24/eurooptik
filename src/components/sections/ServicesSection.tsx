@@ -19,8 +19,8 @@ export function ServicesSection({ data }: Props) {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Servicii"
-          title="Selectează categoria pentru a vedea tarifele și intervențiile"
-          description="Colectăm toate serviciile medicale în funcție de complexitate pentru a-ți fi ușor să găsești investigațiile potrivite."
+          title="Serviciile noastre"
+          description="Selectați categoria pentru a vedea serviciile aferente."
         />
 
         <div className="mb-8 flex flex-wrap gap-3">
@@ -28,7 +28,7 @@ export function ServicesSection({ data }: Props) {
             <button
               key={category.slug}
               onClick={() => setActiveSlug(category.slug)}
-              className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
+              className={`rounded-full border px-5 py-2 text-sm font-semibold transition ${
                 activeSlug === category.slug
                   ? "border-primary bg-primary text-white"
                   : "border-slate-200 bg-white text-slate-700 hover:border-primary"
@@ -44,7 +44,7 @@ export function ServicesSection({ data }: Props) {
             {activeCategory.groups.map((group) => (
               <div key={group.title} className="card overflow-hidden">
                 <div className="border-b border-slate-100 bg-slate-50 px-4 py-3">
-                  <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+                  <p className="text-base font-semibold uppercase tracking-wide text-slate-500">
                     {group.title}
                   </p>
                 </div>
@@ -54,10 +54,10 @@ export function ServicesSection({ data }: Props) {
                       key={item.name}
                       className="flex flex-wrap items-center justify-between px-5 py-3"
                     >
-                      <p className="text-base font-medium text-slate-800">
+                      <p className="text-lg font-medium text-slate-800">
                         {item.name}
                       </p>
-                      <p className="text-sm font-semibold text-primary">
+                      <p className="text-base font-semibold text-primary">
                         {item.price ? `RON ${item.price}` : "La cerere"}
                       </p>
                     </div>

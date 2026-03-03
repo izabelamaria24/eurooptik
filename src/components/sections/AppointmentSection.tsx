@@ -6,8 +6,8 @@ export function AppointmentSection() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Programări"
-          title="Rezervă o consultație online"
-          description="Conectează-te la platforma noastră Sophtha și alege ziua potrivită pentru investigația dorită."
+          title="Programează-te online"
+          description="Conectează-te la platforma noastră și alege ziua potrivită pentru consultația oftalmologică dorită."
         />
 
         <div className="card overflow-hidden">

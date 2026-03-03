@@ -18,24 +18,24 @@ export function HeroSection() {
         <Image
           src="/images/logo-full.png"
           alt="Clinica Eurooptik"
-          width={560}
-          height={160}
+          width={800}
+          height={220}
           priority
-          className="w-full max-w-[640px]"
+          className="w-full max-w-[800px]"
         />
 
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex w-full max-w-[800px] flex-col items-stretch gap-4 sm:flex-row sm:justify-between">
           <Link
             href="#appointment"
-            className="rounded-full bg-primary px-8 py-3 text-base font-semibold text-white shadow-xl shadow-primary/40 transition hover:-translate-y-0.5 hover:bg-primary-strong"
+            className="rounded-full bg-primary px-8 py-3 text-center text-lg font-semibold text-white shadow-xl shadow-primary/40 transition hover:-translate-y-0.5 hover:bg-primary-strong"
           >
-            Rezervă o consultație
+            Programează-te Online
           </Link>
           <Link
             href="#specializations"
-            className="rounded-full border border-rose-200 bg-white/80 px-8 py-3 text-base font-semibold text-rose-500 transition hover:border-rose-400 hover:text-rose-600"
+            className="rounded-full border border-rose-200 bg-white/80 px-8 py-3 text-center text-lg font-semibold text-rose-500 transition hover:border-rose-400 hover:text-rose-600"
           >
-            Specialitățile noastre
+            Specialitățile Noastre
           </Link>
         </div>
 

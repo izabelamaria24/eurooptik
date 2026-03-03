@@ -63,11 +63,13 @@ export const clinicLocations: ClinicLocation[] = [
 ];
 
 export const footerLinks = [
-  { label: "Servicii", href: "#services" },
-  { label: "Specialități", href: "#specializations" },
+  { label: "Acasă", href: "#hero" },
+  { label: "Serviciile Noastre", href: "#services" },
+  { label: "Echipa Noastră", href: "#team" },
+  { label: "Tarife", href: "#pricing" },
   { label: "Testimoniale", href: "#testimonials" },
   { label: "Blog", href: "#blog" },
-  { label: "Reels", href: "#reels" },
+  { label: "Parteneri", href: "#sponsors" },
   { label: "Contact", href: "#locations" },
 ];
 

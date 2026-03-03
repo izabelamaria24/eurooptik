@@ -20,8 +20,8 @@ export function TestimonialsSection({ data }: Props) {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Testimoniale"
-          title="Ce spun pacienții noștri"
-          description="Fotografii reale din clinicile Eurooptik și mesajele care ne motivează zi de zi."
+          title="Testimoniale"
+          description="Ce spun pacienții noștri"
         />
 
         {current ? (
@@ -61,7 +61,7 @@ export function TestimonialsSection({ data }: Props) {
                 <p className="text-2xl font-semibold text-slate-900">
                   “{current.quote}”
                 </p>
-                <p className="text-sm font-semibold text-rose-500">
+                <p className="text-base font-semibold text-rose-500">
                   {current.author}
                 </p>
               </div>

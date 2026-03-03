@@ -9,11 +9,14 @@ type Props = {
   data: PricingTable;
 };
 
+const baseFeatures = ["stabilire dioptrii", "tensiune oculară", "fund de ochi"];
+
 const consultations = [
   {
     label: "Consultație Standard",
     priceKeys: ["consultatie-standard", "standard"],
     features: ["stabilire dioptrii", "tensiune oculară", "fund de ochi"],
+    highlighted: [] as string[],
   },
   {
     label: "Consultație Complexă",
@@ -24,6 +27,7 @@ const consultations = [
       "fund de ochi",
       "screening glaucom",
     ],
+    highlighted: ["screening glaucom"],
   },
   {
     label: "Consultație Premium",
@@ -35,6 +39,7 @@ const consultations = [
       "screening glaucom",
       "monitorizare cataractă",
     ],
+    highlighted: ["screening glaucom", "monitorizare cataractă"],
   },
 ];
 
@@ -51,8 +56,8 @@ export function PricingSection({ data }: Props) {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Tarife"
-          title="Planuri transparente pentru fiecare clinică"
-          description="Selectează locația pentru a vedea tarifele practicate de echipa locală."
+          title="Tarifele noastre"
+          description="Selectați locația pentru a vedea prețurile consultațiilor disponibile în fiecare clinică."
         />
 
         <div className="mb-8 flex flex-wrap gap-3">
@@ -60,7 +65,7 @@ export function PricingSection({ data }: Props) {
             <button
               key={location.id}
               onClick={() => setActiveLocation(location.id)}
-              className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+              className={`rounded-full border px-5 py-2 text-sm font-semibold transition ${
                 activeLocation === location.id
                   ? "border-primary bg-primary text-white"
                   : "border-slate-200 bg-white text-slate-700 hover:border-primary"
@@ -88,15 +93,27 @@ export function PricingSection({ data }: Props) {
               <p className="mt-1 text-3xl font-bold text-slate-900">
                     {price ? `RON ${price}` : "La cerere"}
               </p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-600">
-                {consultation.features.map((feature) => (
-                  <li key={feature}>• {feature}</li>
-                ))}
+              <ul className="mt-4 space-y-2 text-base text-slate-600">
+                {consultation.features.map((feature) => {
+                  const isHighlighted = consultation.highlighted.includes(feature);
+                  return (
+                    <li
+                      key={feature}
+                      className={
+                        isHighlighted
+                          ? "font-semibold text-primary"
+                          : ""
+                      }
+                    >
+                      {isHighlighted ? "★" : "•"} {feature}
+                    </li>
+                  );
+                })}
               </ul>
               <div className="mt-auto pt-4">
                 <a
                   href="#appointment"
-                  className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-800 transition hover:border-primary hover:text-primary"
+                  className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-base font-semibold text-slate-800 transition hover:border-primary hover:text-primary"
                 >
                   Programează-te
                 </a>

@@ -25,9 +25,9 @@
   --color-card: var(--card-bg);
   --color-sand: #f9f7f4;
   --color-ink: #151515;
-  --font-sans: var(--font-geist-sans), "Inter", system-ui, -apple-system,
+  --font-sans: var(--font-inter), "Inter", system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: var(--font-geist-mono), "JetBrains Mono", monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --radius-sm: 0.4rem;
   --radius-md: 0.8rem;
   --radius-lg: 1.4rem;
@@ -47,6 +47,8 @@ body {
     var(--color-sand);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
   min-height: 100vh;
 }
 
@@ -65,9 +67,15 @@ section {
 }
 
 .section-shell {
-  width: min(1400px, 100%);
+  width: 100%;
   margin-inline: auto;
-  padding-inline: 1rem;
+  padding-inline: 6rem;
+}
+
+@media (max-width: 768px) {
+  .section-shell {
+    padding-inline: 1.5rem;
+  }
 }
 
 .card {

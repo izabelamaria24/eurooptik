@@ -17,16 +17,16 @@ export function SectionHeading({
   return (
     <div id={id} className={`mb-14 space-y-4 ${alignmentClass} fade-slide`}>
       {eyebrow && (
-        <div className="inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.4em] text-primary">
+        <div className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.4em] text-primary">
           <span className="tag-dot" />
           <span>{eyebrow}</span>
         </div>
       )}
-      <h2 className="text-balance text-3xl font-semibold leading-tight text-slate-900 md:text-[3rem]">
+      <h2 className="text-balance text-3xl font-semibold leading-tight text-slate-900 md:text-[2.75rem]">
         {title}
       </h2>
       {description && (
-        <p className={`mx-auto text-balance text-base text-slate-600 md:text-lg ${descriptionWidth}`}>
+        <p className={`mx-auto text-balance text-lg text-slate-600 md:text-xl ${descriptionWidth}`}>
           {description}
         </p>
       )}

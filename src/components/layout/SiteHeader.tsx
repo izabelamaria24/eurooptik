@@ -8,7 +8,9 @@ const navigation = [
   { label: "Acasă", href: "#hero" },
   { label: "Servicii", href: "#services" },
   { label: "Echipă", href: "#team" },
-  { label: "Testimoniale", href: "#testimonials" },
+  { label: "Tarife", href: "#pricing" },
+  { label: "Blog", href: "#blog" },
+  { label: "Parteneri", href: "#sponsors" },
   { label: "Contact", href: "#locations" },
 ];
 
@@ -17,7 +19,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/40 bg-[#fdfafc]/95 backdrop-blur-xl">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 md:py-4">
+      <div className="relative mx-auto flex w-full items-center justify-between px-[6rem] py-3 max-md:px-6 md:py-4">
         <Link href="#hero" className="flex items-center gap-4">
           <Image
             src="/images/logo-small.png"
@@ -37,12 +39,12 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-4 rounded-full border border-rose-50 bg-white/90 px-5 py-2 shadow-sm lg:flex">
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-4 rounded-full border border-rose-50 bg-white/90 px-5 py-2 shadow-sm lg:flex">
           {navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-semibold text-slate-600 transition hover:text-primary"
+              className="text-base font-semibold text-slate-600 transition hover:text-primary"
             >
               {item.label}
             </Link>
@@ -52,7 +54,7 @@ export function SiteHeader() {
         <div className="hidden md:flex">
           <Link
             href="#appointment"
-            className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-primary/40 transition hover:bg-primary-strong"
+            className="rounded-full bg-primary px-6 py-2.5 text-base font-semibold text-white shadow-lg shadow-primary/40 transition hover:bg-primary-strong"
           >
             Programări online
           </Link>

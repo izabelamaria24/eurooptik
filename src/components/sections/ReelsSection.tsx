@@ -9,11 +9,42 @@ type Props = {
 };
 
 const filterButtonClasses = (isActive: boolean) =>
-  `rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-wide transition ${
+  `rounded-full border px-5 py-2 text-sm font-semibold transition ${
     isActive
-      ? "border-[#e4007f] bg-[#e4007f] text-white"
-      : "border-[#ffd5ea] bg-white text-[#e4007f] hover:border-[#f7a6cf]"
+      ? "border-primary bg-primary text-white"
+      : "border-slate-200 bg-white text-slate-700 hover:border-primary"
   }`;
+
+function VideoPlayer({ src }: { src: string }) {
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center gap-3 p-4 text-center text-white">
+        <p className="text-xs text-red-300">Nu s-a putut încărca videoclipul.</p>
+        <a
+          href={src}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-full bg-white/20 px-4 py-2 text-xs font-semibold text-white underline-offset-2 hover:bg-white/30 hover:underline"
+        >
+          Deschide direct ↗
+        </a>
+        <p className="break-all px-2 text-[10px] text-white/50">{src}</p>
+      </div>
+    );
+  }
+
+  return (
+    <video
+      src={src}
+      controls
+      playsInline
+      className="h-full w-full object-cover"
+      onError={() => setError(true)}
+    />
+  );
+}
 
 export function ReelsSection({ data }: Props) {
   const [doctorFilter, setDoctorFilter] = useState("");
@@ -36,8 +67,8 @@ export function ReelsSection({ data }: Props) {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Studio Reels"
-          title="Clipuri educaționale filmate direct în cabinete"
-          description="Selectează medicul sau categoria pentru a urmări protocoalele chirurgicale, exercițiile de recuperare și sfaturile pentru pacienți."
+          title="Reels"
+          description="Selectați medicul oftalmolog sau subiectul medical pentru a viziona videoclipurile Eurooptik."
         />
 
         <div className="mb-8 space-y-4">
@@ -85,19 +116,14 @@ export function ReelsSection({ data }: Props) {
             sau subiect.
           </p>
         ) : (
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
             {filteredReels.map((reel) => (
               <div
                 key={reel.id}
-                className="card-animated fade-slide w-full max-w-[320px] space-y-3 p-4 transition hover:-translate-y-1"
+                className="card-animated fade-slide w-full space-y-3 p-4 transition hover:-translate-y-1"
               >
                 <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[2rem] bg-black">
-                  <video
-                    src={reel.videoUrl}
-                    controls
-                    playsInline
-                    className="h-full w-full object-cover"
-                  />
+                  <VideoPlayer src={reel.videoUrl} />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
                   <span className="absolute right-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-900">
                     {reel.categoryName}
@@ -110,9 +136,9 @@ export function ReelsSection({ data }: Props) {
                   <p className="text-lg font-semibold text-slate-900">
                     {reel.title || "Clip educațional"}
                   </p>
-                  <p className="text-sm text-slate-600">
-                    Analizăm procedurile și pașii de recuperare pentru pacienții
-                    Eurooptik.
+                  <p className="text-base text-slate-600">
+                    Videoclipuri educaționale despre sănătatea ochilor, proceduri
+                    oftalmologice și sfaturi de prevenție.
                   </p>
                 </div>
               </div>

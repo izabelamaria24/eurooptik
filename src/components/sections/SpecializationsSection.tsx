@@ -43,8 +43,8 @@ export function SpecializationsSection({ data }: Props) {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Specialități"
-          title="Selectează categoria pentru a vedea echipele dedicate"
-          description="Planurile chirurgicale, pediatrice și de recuperare sunt grupate pe clinici, astfel încât să găsești rapid specializarea potrivită."
+          title="Specialitățile noastre"
+          description="Selectați specializarea oftalmologică pentru a afla mai multe despre investigațiile și tratamentele disponibile."
         />
 
         <div className="mb-8 flex flex-wrap justify-center gap-3">
@@ -58,7 +58,7 @@ export function SpecializationsSection({ data }: Props) {
                 );
                 if (firstSpec) setActiveSlug(firstSpec.slug);
               }}
-              className={`rounded-full border px-5 py-2 text-sm font-semibold transition ${
+              className={`rounded-full border px-5 py-2 text-base font-semibold transition ${
                 selectedCategory === category.slug
                   ? "border-[#e4007f] bg-[#e4007f] text-white"
                   : "border-[#ffd5ea] bg-white text-[#e4007f] hover:border-[#f7a6cf]"
@@ -112,7 +112,7 @@ export function SpecializationsSection({ data }: Props) {
                 <h3 className="text-2xl font-semibold text-slate-900">
                   {activeSpecialization.articleTitle}
                 </h3>
-                <div className="space-y-3 text-sm leading-relaxed text-slate-600">
+                <div className="space-y-3 text-base leading-relaxed text-slate-600">
                   {activeSpecialization.articleDescription
                     ? documentToReactComponents(
                         activeSpecialization.articleDescription,

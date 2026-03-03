@@ -19,8 +19,8 @@ export function ResearchSection({ data }: Props) {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Cercetare"
-          title="Studiile științifice Eurooptik"
-          description="Proiecte dezvoltate împreună cu societăți oftalmologice și centre universitare din țară."
+          title="Cercetări științifice"
+          description="Proiecte de cercetare dezvoltate împreună cu societăți oftalmologice și centre universitare."
         />
 
         <div className="grid gap-6 md:grid-cols-[0.9fr_1.1fr]">
@@ -29,7 +29,7 @@ export function ResearchSection({ data }: Props) {
               <button
                 key={article.slug}
                 onClick={() => setActiveSlug(article.slug)}
-                className={`w-full rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition hover:border-primary ${
+                className={`w-full rounded-2xl border px-4 py-3 text-left text-base font-semibold transition hover:border-primary ${
                   article.slug === activeSlug
                     ? "border-primary bg-primary/5 text-primary"
                     : "border-slate-200 bg-white text-slate-800"
@@ -46,7 +46,7 @@ export function ResearchSection({ data }: Props) {
                 <h3 className="text-2xl font-semibold text-slate-900">
                   {activeArticle.title}
                 </h3>
-                <div className="space-y-3 text-sm leading-relaxed text-slate-700">
+                <div className="space-y-3 text-base leading-relaxed text-slate-700">
                   {activeArticle.content
                     ? documentToReactComponents(activeArticle.content)
                     : "Conținut indisponibil."}

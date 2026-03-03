@@ -449,24 +449,30 @@ export async function fetchReels(locale = "ro"): Promise<ReelsPayload> {
   const reels: Reel[] = res.items
     .map((item) => {
       const fields = item.fields as any;
-      const videoUrl = assetUrl(fields.linkVideo);
-      if (
-        !videoUrl ||
-        !fields.doctor?.fields?.nume ||
-        !fields.categorie?.fields?.slug
-      ) {
-        return null;
-      }
-      const doctorName = fields.doctor.fields.nume;
+
+      // The Contentful field "Nume Fisier Video" → API field ID "videoFileName"
+      // stores just the filename without extension, e.g. "FAQ_Dr.Motoc_3"
+      const numeFisier: string =
+        fields.videoFileName || fields.numeFisierVideo || fields.numeFisier || fields.linkVideo || "";
+      if (!numeFisier) return null;
+
+      // Strip any accidental extension then re-add .mp4
+      const filename = numeFisier.toString().replace(/\.mp4$/i, "");
+      const resolvedVideoUrl = `https://eurooptik.ro/media/videos/${filename}.mp4`;
+
+      const doctorName: string = fields.doctor?.fields?.nume ?? fields.doctor?.fields?.name ?? "Eurooptik";
       const doctorSlug = slugify(doctorName);
+      const categoryName: string = fields.categorie?.fields?.numeCategorieReel ?? fields.categorie?.fields?.name ?? "General";
+      const categorySlug: string = fields.categorie?.fields?.slug ?? slugify(categoryName);
+
       return {
         id: item.sys.id,
-        title: fields.titlu || "",
-        videoUrl,
+        title: fields.titlu || fields.title || "",
+        videoUrl: resolvedVideoUrl,
         doctorName,
         doctorSlug,
-        categoryName: fields.categorie.fields.numeCategorieReel,
-        categorySlug: fields.categorie.fields.slug,
+        categoryName,
+        categorySlug,
       };
     })
     .filter((r): r is Reel => r !== null);

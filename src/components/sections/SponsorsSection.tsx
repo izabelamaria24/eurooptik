@@ -30,53 +30,54 @@ export function SponsorsSection({ data }: Props) {
   return (
     <section
       id="sponsors"
-      className="bg-gradient-to-b from-white to-[#fce3ef]/40"
+      className="overflow-x-hidden bg-gradient-to-b from-white to-[#fce3ef]/40"
     >
       <div className="section-shell">
         <SectionHeading
           eyebrow="Parteneri"
-          title="Comunitatea care susține Eurooptik"
-          description="Organizații medicale, ONG-uri și startup-uri cu care dezvoltăm programe educaționale și sociale."
+          title="Comunitatea noastră"
+          description="Partenerii noștri care ne sprijină în oferirea celor mai bune servicii."
         />
 
-        <div className="rounded-[2.5rem] bg-white/90 p-8 shadow-2xl fade-slide">
-          <div className="grid gap-10">
+        <div className="overflow-hidden rounded-2xl bg-white/90 p-4 shadow-2xl fade-slide sm:rounded-[2.5rem] sm:p-8">
+          <div className="grid gap-8 sm:gap-10">
             <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-secondary">
+              <p className="text-sm font-semibold uppercase tracking-widest text-secondary">
                 Rețea strategică
               </p>
-              <p className="text-3xl font-semibold text-slate-900">
+              <p className="text-xl font-semibold text-slate-900 sm:text-3xl">
                 +{data.length} parteneri medicali și ONG-uri
               </p>
-              <p className="text-sm text-slate-600">
-                De la campanii de donare de sânge până la screeninguri
-                itinerante, parteneriatele noastre accelerează prevenția și
-                accesul la tratamente moderne.
+              <p className="text-base text-slate-600">
+                De la campanii de screeninguri oftalmologice până la proiecte
+                educaționale, parteneriatele noastre accelerează prevenția și
+                accesul la tratamente oftalmologice moderne.
               </p>
 
               <div className="grid grid-cols-2 gap-3 text-sm font-semibold text-slate-700">
-                <div className="rounded-2xl bg-[#fce3ef]/70 p-4 text-center">
-                  <p className="text-2xl text-primary">15+</p>
+                <div className="rounded-2xl bg-[#fce3ef]/70 p-3 text-center sm:p-4">
+                  <p className="text-xl text-primary sm:text-2xl">15+</p>
                   <p>campanii anuale</p>
                 </div>
-                <div className="rounded-2xl bg-[#d9f5ee]/70 p-4 text-center">
-                  <p className="text-2xl text-secondary">6</p>
+                <div className="rounded-2xl bg-[#d9f5ee]/70 p-3 text-center sm:p-4">
+                  <p className="text-xl text-secondary sm:text-2xl">6</p>
                   <p>orașe implicate</p>
                 </div>
               </div>
 
-              <div className="soft-scroll mt-6 flex gap-4 overflow-x-auto">
+              {/* Logo scroll — flex on desktop, 2-col grid on mobile */}
+              <div className="mt-6 grid grid-cols-2 gap-3 sm:flex sm:gap-4 sm:overflow-x-auto sm:pb-2 soft-scroll">
                 {data.map((sponsor) => (
                   <div
                     key={sponsor.id}
-                    className="flex min-w-[160px] items-center justify-center rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow"
+                    className="flex items-center justify-center rounded-2xl border border-white/70 bg-white/80 px-3 py-2 shadow sm:min-w-[140px] sm:px-4 sm:py-3"
                   >
                     <Image
                       src={sponsor.logoUrl}
                       alt={sponsor.name}
                       width={180}
                       height={80}
-                      className="h-16 w-auto object-contain"
+                      className="h-12 w-auto object-contain sm:h-16"
                     />
                   </div>
                 ))}
@@ -115,7 +116,7 @@ export function SponsorsSection({ data }: Props) {
               )}
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
               {visiblePartners.map((sponsor) => {
                 const fullText =
                   sponsor.description || "Partener strategic Eurooptik.";
@@ -128,7 +129,7 @@ export function SponsorsSection({ data }: Props) {
                     key={`desc-${sponsor.id}`}
                     className="fade-slide rounded-2xl border border-white/60 bg-white/95 p-5 text-sm text-slate-600 shadow"
                   >
-                    <div className="mb-3 flex items-center gap-3">
+                    <div className="mb-3 flex flex-col gap-2">
                       <Image
                         src={sponsor.logoUrl}
                         alt={sponsor.name}

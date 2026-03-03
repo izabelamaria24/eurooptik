@@ -9,8 +9,8 @@ export function LocationsSection() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Contact"
-          title="Alege cea mai apropiată clinică"
-          description="Cabinetele noastre sunt localizate în Bacău, Comănești, Onești și Moinești."
+          title="Locațiile noastre"
+          description="Găsește clinica Eurooptik cea mai apropiată de tine."
         />
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -29,7 +29,7 @@ export function LocationsSection() {
                   {location.name}
                 </p>
               </div>
-              <div className="space-y-2 px-5 py-5 text-sm text-slate-600">
+              <div className="space-y-2 px-5 py-5 text-base text-slate-600">
                 <p className="font-semibold text-slate-900">{location.address}</p>
                 <p>{location.schedule}</p>
                 <p>
@@ -54,7 +54,7 @@ export function LocationsSection() {
                   href={location.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                  className="inline-flex items-center text-base font-semibold text-primary underline-offset-4 hover:underline"
                 >
                   Deschide în Google Maps →
                 </Link>

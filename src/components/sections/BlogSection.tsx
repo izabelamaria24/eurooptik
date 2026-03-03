@@ -62,8 +62,8 @@ export function BlogSection({ data }: Props) {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Blog medical"
-          title="Articole scrise de medicii noștri"
-          description="Filtrează articolele după serviciu sau medic și citește tot conținutul fără a părăsi pagina."
+          title="Blog - Articole medicale"
+          description="Selectați categoria pentru a citi articolele medicale scrise de doctorii noștri pentru fiecare dintre specialitățile oferite de clinica noastră."
         />
 
         <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -72,9 +72,9 @@ export function BlogSection({ data }: Props) {
             placeholder="Caută după serviciu sau medic..."
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            className="w-full rounded-full border border-slate-200 px-4 py-2 text-sm outline-none focus:border-primary md:w-80"
+            className="w-full rounded-full border border-slate-200 px-4 py-2 text-base outline-none focus:border-primary md:w-80"
           />
-          <p className="text-sm text-slate-500">
+          <p className="text-base text-slate-500">
             {filteredArticles.length} articole disponibile
           </p>
         </div>
@@ -98,7 +98,7 @@ export function BlogSection({ data }: Props) {
                   {article.title}
                 </h3>
                 {article.doctors.length > 0 && (
-                  <p className="text-sm text-slate-500">
+                  <p className="text-base text-slate-500">
                     {article.doctors.join(", ")}
                   </p>
                 )}
@@ -128,7 +128,7 @@ export function BlogSection({ data }: Props) {
                     de {activeArticle.doctors.join(", ")}
                   </p>
                 )}
-                <div className="space-y-3 text-sm leading-relaxed text-slate-700">
+                <div className="space-y-3 text-base leading-relaxed text-slate-700">
                   {activeArticle.content
                     ? documentToReactComponents(activeArticle.content)
                     : "Conținut indisponibil pentru moment."}
