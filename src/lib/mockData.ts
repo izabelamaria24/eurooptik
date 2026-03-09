@@ -14,11 +14,11 @@ import type {
 } from "./types";
 
 const richText = (text: string): Document => ({
-  nodeType: BLOCKS.DOCUMENT, // <-- CORECȚIE AICI
+  nodeType: BLOCKS.DOCUMENT, 
   data: {},
   content: [
     {
-      nodeType: BLOCKS.PARAGRAPH, // De asemenea, tipați BLOCKS.PARAGRAPH
+      nodeType: BLOCKS.PARAGRAPH,
       data: {},
       content: [
         {
