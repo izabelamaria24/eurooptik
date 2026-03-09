@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cache } from "react";
 import { createClient } from "contentful";
 import type { Document } from "@contentful/rich-text-types";
@@ -32,6 +31,7 @@ import {
   mockTeam,
   mockTestimonials,
 } from "./mockData";
+import { fetchFiveStarReviewTexts } from "./googleReviews";
 
 const hasContentfulCredentials =
   Boolean(process.env.CONTENTFUL_SPACE_ID && process.env.CONTENTFUL_ACCESS_TOKEN);
@@ -68,11 +68,6 @@ const slugify = (value?: string | number | null) =>
 
 const isRichTextDocument = (content: Document | undefined): content is Document =>
   Boolean(content && content.nodeType === "document");
-
-
-// ---------------------------------------------------------------------------
-// TEAM
-// ---------------------------------------------------------------------------
 
 export async function fetchTeam(locale = "ro"): Promise<TeamPayload> {
   if (!hasContentfulCredentials) {
@@ -138,10 +133,6 @@ export async function fetchTeam(locale = "ro"): Promise<TeamPayload> {
     locations,
   };
 }
-
-// ---------------------------------------------------------------------------
-// SERVICES
-// ---------------------------------------------------------------------------
 
 export async function fetchServices(locale = "ro"): Promise<ServicesPayload> {
   if (!hasContentfulCredentials) {
@@ -216,10 +207,6 @@ export async function fetchServices(locale = "ro"): Promise<ServicesPayload> {
   return { categories };
 }
 
-// ---------------------------------------------------------------------------
-// ARTICLES
-// ---------------------------------------------------------------------------
-
 export async function fetchArticles(locale = "ro"): Promise<BlogArticle[]> {
   if (!hasContentfulCredentials) {
     return mockBlogArticles;
@@ -250,44 +237,45 @@ export async function fetchArticles(locale = "ro"): Promise<BlogArticle[]> {
   return articles;
 }
 
-// ---------------------------------------------------------------------------
-// TESTIMONIALS
-// ---------------------------------------------------------------------------
-
 export async function fetchTestimonials(locale = "ro"): Promise<Testimonial[]> {
   if (!hasContentfulCredentials) {
     return mockTestimonials;
   }
   const client = getClient();
-  const res = await client.getEntries({
-    content_type: "testimonial",
-    limit: 12,
-    order: ["-sys.createdAt"],
-    locale,
-  });
 
-  return res.items
+  const [res, googleTexts] = await Promise.all([
+    client.getEntries({
+      content_type: "testimonial",
+      limit: 12,
+      order: ["-sys.createdAt"],
+      locale,
+    }),
+    fetchFiveStarReviewTexts(),
+  ]);
+
+  const testimonials = res.items
     .map((item) => {
       const fields = item.fields as any;
       const imageUrl = fields.pozaTestimonial?.fields?.file?.url
         ? `https:${fields.pozaTestimonial.fields.file.url}?w=500&h=500&fit=thumb`
         : "";
-      if (!fields.numeClient || !fields.continutTestimonial || !imageUrl) {
+      if (!fields.numeClient || !imageUrl) {
         return null;
       }
       return {
         id: item.sys.id,
         author: fields.numeClient,
-        quote: fields.continutTestimonial,
+        quote: fields.continutTestimonial ?? "",
         imageUrl,
       };
     })
     .filter((t): t is Testimonial => t !== null);
-}
 
-// ---------------------------------------------------------------------------
-// PRICING
-// ---------------------------------------------------------------------------
+  return testimonials.map((testimonial, index) => ({
+    ...testimonial,
+    quote: googleTexts[index] ?? testimonial.quote,
+  }));
+}
 
 export async function fetchPricing(locale = "ro"): Promise<PricingTable> {
   if (!hasContentfulCredentials) {
@@ -314,10 +302,6 @@ export async function fetchPricing(locale = "ro"): Promise<PricingTable> {
     return acc;
   }, {});
 }
-
-// ---------------------------------------------------------------------------
-// SPECIALIZATIONS
-// ---------------------------------------------------------------------------
 
 export async function fetchSpecializations(
   locale = "ro",
@@ -401,10 +385,6 @@ export async function fetchSpecializations(
   return { categories, specializations };
 }
 
-// ---------------------------------------------------------------------------
-// RESEARCH
-// ---------------------------------------------------------------------------
-
 export async function fetchResearch(locale = "ro"): Promise<ResearchArticle[]> {
   if (!hasContentfulCredentials) {
     return mockResearchArticles;
@@ -431,10 +411,6 @@ export async function fetchResearch(locale = "ro"): Promise<ResearchArticle[]> {
     .filter((a): a is ResearchArticle => a !== null);
 }
 
-// ---------------------------------------------------------------------------
-// REELS
-// ---------------------------------------------------------------------------
-
 export async function fetchReels(locale = "ro"): Promise<ReelsPayload> {
   if (!hasContentfulCredentials) {
     return mockReels;
@@ -450,13 +426,10 @@ export async function fetchReels(locale = "ro"): Promise<ReelsPayload> {
     .map((item) => {
       const fields = item.fields as any;
 
-      // The Contentful field "Nume Fisier Video" → API field ID "videoFileName"
-      // stores just the filename without extension, e.g. "FAQ_Dr.Motoc_3"
       const numeFisier: string =
         fields.videoFileName || fields.numeFisierVideo || fields.numeFisier || fields.linkVideo || "";
       if (!numeFisier) return null;
 
-      // Strip any accidental extension then re-add .mp4
       const filename = numeFisier.toString().replace(/\.mp4$/i, "");
       const resolvedVideoUrl = `https://eurooptik.ro/media/videos/${filename}.mp4`;
 
@@ -478,7 +451,7 @@ export async function fetchReels(locale = "ro"): Promise<ReelsPayload> {
     .filter((r): r is Reel => r !== null);
 
   const unique = <T extends { slug: string }>(items: T[]) =>
-    Array.from(new Map(items.map((item: T) => [item.slug, item])).values()); // CORECTAT: Am tipat explicit 'item: T'
+    Array.from(new Map(items.map((item: T) => [item.slug, item])).values());
 
   return {
     reels,
@@ -514,23 +487,18 @@ export async function fetchSponsors(locale = "ro"): Promise<Sponsor[]> {
       const fields = item.fields as any;
       if (!fields.nume || !fields.logo?.fields?.file?.url) return null;
       
-      const websiteUrlValue = fields.linkWebsite ?? null; // Folosim ?? în loc de || pentru a păstra null
+      const websiteUrlValue = fields.linkWebsite ?? null; 
 
       return {
         id: item.sys.id,
         name: fields.nume,
         description: fields.descriere || "",
         logoUrl: assetUrl(fields.logo),
-        // Schimbare: Folosim websiteUrlValue
         websiteUrl: websiteUrlValue, 
-      } as Sponsor; // Assertarea tipului în map
+      } as Sponsor; 
     })
-    .filter((s): s is Sponsor => s !== null); // Tipul de destinație este acum Sponsor, nu obiectul anonim
+    .filter((s): s is Sponsor => s !== null); 
 }
-
-// ---------------------------------------------------------------------------
-// LANDING DATA
-// ---------------------------------------------------------------------------
 
 export async function getLandingData(locale = "ro"): Promise<LandingData> {
   if (!hasContentfulCredentials) {
@@ -571,10 +539,6 @@ export async function getLandingData(locale = "ro"): Promise<LandingData> {
   };
 }
 
-// ---------------------------------------------------------------------------
-// GET ARTICLE BY SLUG
-// ---------------------------------------------------------------------------
-
 export async function getArticleBySlug(
   slug: string,
   locale = "ro",
@@ -604,10 +568,6 @@ export async function getArticleBySlug(
       : null,
   };
 }
-
-// ---------------------------------------------------------------------------
-// GET RESEARCH BY SLUG
-// ---------------------------------------------------------------------------
 
 export async function getResearchBySlug(
   slug: string,

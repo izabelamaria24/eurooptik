@@ -1,3 +1,0 @@
-export const CONTENTFUL_ACCESS_TOKEN = "zf2sW81cbRAKQOGnDJVgLwDEuksoo7YI8OQbsrpg4WY";
-export const GOOGLE_PLACES_API_KEY = "AIzaSyDWOVjCHF1yjvURvWPPMRgAdaXmxLCNhF0";
-export const CONTENTFUL_SPACE_ID = "ysja7jwc5kk2";

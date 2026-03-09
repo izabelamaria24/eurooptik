@@ -65,7 +65,6 @@ export function SponsorsSection({ data }: Props) {
                 </div>
               </div>
 
-              {/* Logo scroll — flex on desktop, 2-col grid on mobile */}
               <div className="mt-6 grid grid-cols-2 gap-3 sm:flex sm:gap-4 sm:overflow-x-auto sm:pb-2 soft-scroll">
                 {data.map((sponsor) => (
                   <div

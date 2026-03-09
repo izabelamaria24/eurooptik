@@ -35,7 +35,6 @@ const socialLinks = [
 export function SiteFooter() {
   return (
     <footer className="mt-16 border-t border-white/60">
-      {/* CTA banner */}
       <div className="flex flex-wrap items-center justify-center gap-8 bg-secondary/15 px-6 py-8 text-center md:gap-16">
         <h2 className="text-2xl font-normal tracking-wide text-slate-800 md:text-4xl">
           Vă mai așteptăm la noi!
@@ -48,10 +47,8 @@ export function SiteFooter() {
         </Link>
       </div>
 
-      {/* Main footer content — 2-column grid like eurooptik.ro */}
       <div className="px-[6rem] py-14 max-md:px-6">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-0">
-          {/* Left column — Locations */}
           <div className="flex flex-col gap-1 text-left">
             {clinicLocations.map((location) => (
               <div key={location.id} className="text-base leading-relaxed text-slate-700 md:text-lg">
@@ -66,7 +63,6 @@ export function SiteFooter() {
             ))}
           </div>
 
-          {/* Right column — Nav links + Social */}
           <div className="flex flex-col items-start gap-6 md:items-end">
             <nav className="flex h-full flex-col justify-between gap-2 md:items-end">
               {footerLinks.map((link) => (
@@ -98,7 +94,6 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* Full-width bottom logo */}
       <div className="py-10 text-center">
         <Image
           src="/images/logo-small.png"
