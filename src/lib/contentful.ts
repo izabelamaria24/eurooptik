@@ -431,7 +431,7 @@ export async function fetchReels(locale = "ro"): Promise<ReelsPayload> {
       if (!numeFisier) return null;
 
       const filename = numeFisier.toString().replace(/\.mp4$/i, "");
-      const resolvedVideoUrl = `https://eurooptik.ro/media/videos/${filename}.mp4`;
+      const resolvedVideoUrl = `https://media.eurooptik.ro/${filename}.mp4`;
 
       const doctorName: string = fields.doctor?.fields?.nume ?? fields.doctor?.fields?.name ?? "Eurooptik";
       const doctorSlug = slugify(doctorName);
